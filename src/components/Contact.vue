@@ -1,10 +1,11 @@
 <template class="form">
-  <v-card class="contactForm">
-    <v-toolbar flat justify="center" max-width="450px">
+<v-container class="contactCard">
+<v-toolbar color="orange" dark flat justify="center" max-width="450px">
       <v-row justify="center">
-        <v-toolbar-title><h1>Let's get in touch</h1></v-toolbar-title>
+        <v-toolbar-title><h1>Contact Specialty Stars</h1></v-toolbar-title>
       </v-row>
     </v-toolbar>
+  <v-card class="contactForm">
     <form class="col-12" id="contactForm">
       <v-row align="center" justify="center">
         <v-col cols="12" sm="10" md="6">
@@ -33,12 +34,13 @@
             required
           ></v-textarea>
 
-          <v-btn class="mr-4" @click="submit">submit</v-btn>
-          <v-btn @click="clear">clear</v-btn>
+          <v-btn class="mr-4" color="orange" tile dark @click="submit">submit</v-btn>
+          <v-btn color="orange" tile dark @click="clear">clear</v-btn>
         </v-col>
       </v-row>
     </form>
   </v-card>
+</v-container>
 </template>
 
 <script>

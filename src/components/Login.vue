@@ -1,32 +1,44 @@
 <template>
-  <v-container class="my-6">
-    <v-row justify="space-around">
-      <v-card class="mx-auto">
-        <v-card-title
-          class="headline amber lighten-3"
-          primary-title
-        >Specialty Stars Login</v-card-title>
-        <v-card-text>
-          <v-form @submit.prevent="login" class="card-panel">
-            <v-text-field v-model="email" :rules="emailRules" label="E-mail:" required></v-text-field>
-            <v-text-field type="password" v-model="password" label="Password:" required></v-text-field>
-            <p class="red-text text-center" v-if="feedback">{{ feedback }}</p>
-            <v-card-actions class="text-center">
-              <div class="flex-grow-1"></div>
-              <button
-                type="submit"
-                class="white--text v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--light elevation-13 v-size--default green--text text--accent-4"
-                null="true"
-              >
-                <span class="v-btn__content">
-                  <span>Log Me In!</span>
-                </span>
-              </button>
-            </v-card-actions>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-row>
+  <v-container class="loginCard">
+    <v-toolbar color="orange" dark justify="center" max-width="450px" flat>
+      <v-row justify="space-around">
+        <v-toolbar-title><h1>Specialty Stars: Login</h1></v-toolbar-title>
+      </v-row>
+    </v-toolbar>
+    <v-card class="loginTitle">
+      <v-card-text>
+        <v-form @submit.prevent="login" class="card-panel">
+          <v-row align="center" justify="center">
+            <v-col cols="12" sm="10" md="6">
+              <v-text-field
+                v-model="email"
+                :rules="emailRules"
+                label="E-mail:"
+                required
+              ></v-text-field>
+              <v-text-field
+                type="password"
+                v-model="password"
+                label="Password:"
+                required
+              ></v-text-field>
+              <p class="red-text text-center" v-if="feedback">{{ feedback }}</p>
+              <br />
+              <div>
+              <a> Forgot your password? </a>
+              </div>
+              <br />
+              <v-card-actions class="text-center">
+                <!-- <div class="flex-grow-1"></div> -->
+                <v-btn @click="submit" color="orange" dark tile null="true">
+                  Log Me In!
+                </v-btn>
+              </v-card-actions>
+            </v-col>
+          </v-row>
+        </v-form>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
@@ -70,7 +82,7 @@ export default {
                           isLoggedIn: true,
                           isAdmin: doc.data().isAdmin
                         });
-                        this.$router.push({name: 'Timeline'});
+                        this.$router.push({ name: "Timeline" });
                       }
                     });
                 });
@@ -98,5 +110,8 @@ export default {
 }
 .login .field {
   margin-bottom: 16px;
+}
+.loginTitle {
+  margin-top: 0px;
 }
 </style>
