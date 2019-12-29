@@ -34,24 +34,26 @@
           >
           <v-spacer></v-spacer>
           <v-col cols="2">
-          <v-overflow-btn
-          class="my-2"
+          <v-select
+          class=" pt-6 my-2"
           :items="dropdown"
           label="Services"
           target="#dropdown"
+          dense
+          outlined
         >
-        </v-overflow-btn>
+        </v-select>
         </v-col>
           <router-link :to="{ name: 'Login' }">
-            <v-btn outlined v-if="!user.isLoggedIn">{{ this.loginText }}</v-btn>
+            <v-btn color="white" v-if="!user.isLoggedIn">{{ this.loginText }}</v-btn>
           </router-link>
-          <v-btn v-if="user.isLoggedIn" outlined @click="logout">{{
+          <v-btn v-if="user.isLoggedIn" color="white" @click="logout">{{
             this.logoutText
           }}</v-btn>
           <router-link
           to="/Signup"
           >
-            <v-btn outlined>
+            <v-btn color="white">
               <span class="text-center">Sign Up</span>
             </v-btn>
           </router-link>

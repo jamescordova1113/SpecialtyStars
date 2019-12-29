@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Profiles from '@/components/Profiles'
+import WorkersPage from '@/components/WorkersPage'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -46,8 +47,12 @@ const router = new Router({
       path: '/Profiles',
       name: 'Profiles',
       component: Profiles
+    },
+    {
+      path: '/WorkersPage',
+      name: 'WorkersPage',
+      component: WorkersPage
     }
-   
   ]
 })
 
