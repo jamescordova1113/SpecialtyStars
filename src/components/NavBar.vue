@@ -132,6 +132,7 @@ export default {
           route: "/login"
         },
         { icon: "mdi-contact-mail-outline", text: "Contact", route: "/contact" }
+        
       ],
       memberLinks: [
         { icon: "mdi-home-import-outline", text: "Projects", route: "/Projects" },

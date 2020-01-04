@@ -7,6 +7,8 @@ import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Profiles from '@/components/Profiles'
 import WorkersPage from '@/components/WorkersPage'
+import WhatsYourSpec from '@/components/WhatsYourSpec'
+
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -52,6 +54,11 @@ const router = new Router({
       path: '/WorkersPage',
       name: 'WorkersPage',
       component: WorkersPage
+    },
+    {
+      path: '/WhatsYourSpec',
+      name: 'WhatsYourSpec',
+      component: WhatsYourSpec
     }
   ]
 })
