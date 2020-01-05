@@ -8,6 +8,9 @@ import Contact from '@/components/Contact'
 import Profiles from '@/components/Profiles'
 import WorkersPage from '@/components/WorkersPage'
 import WhatsYourSpec from '@/components/WhatsYourSpec'
+import NeedWorkers from '@/components/NeedWorkers'
+import SpecialistProfile from '@/components/SpecialistProfile'
+
 
 import firebase from 'firebase'
 
@@ -59,6 +62,16 @@ const router = new Router({
       path: '/WhatsYourSpec',
       name: 'WhatsYourSpec',
       component: WhatsYourSpec
+    },
+    {
+      path: '/NeedWorkers',
+      name: 'NeedWorkers',
+      component: NeedWorkers
+    },
+    {
+      path: '/SpecialistProfile',
+      name: 'SpecialistProfile',
+      component: SpecialistProfile
     }
   ]
 })

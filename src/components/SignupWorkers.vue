@@ -13,11 +13,14 @@
             label="Full Name:"
             required
           ></v-text-field>
-          <v-text-field
-            v-model="Specialty"
-            label="Specialty: (only one)"
-            required
-          ></v-text-field>
+          <v-select
+            v-model="select"
+      v-validate="'required'"
+      :items="items"
+      label="Specialty"
+      data-vv-name="select"
+      required
+          ></v-select>
           <v-text-field v-model="Phone" label="Phone#:" required></v-text-field>
           <v-text-field
             v-model="email"
@@ -64,7 +67,55 @@ export default {
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ]
+      ],
+      items: [
+      'Agricultural',
+      'Air Conditioning',
+      'Auto Paint & Body',
+      'Auto Mechanics',
+      'Auto Detailing',
+      'Brick Pavers',
+      'Brick & Block Masonry',
+      'Carpentry (rough and finish)',
+      'Cabinetry',
+      'Construction Cleaning',
+      'Concrete Cutting and Drilling',
+      'Concrete Placing & Finishing',
+      'Dishwashing',
+      'Demolition',
+      'Delivery/Driver',
+      'Drywall',
+      'Electrical',
+      'Flooring',
+      'Fence',
+      'Fire & Security Alarm',
+      'Fire Protection',
+      'Glass & Windows',
+      'General Construction',
+      'Granite & Stone Fabrication',
+      'Golf Course and Greens keeper',
+      'Handyman',
+      'Home Remodeling',
+      'Housekeeping/ Maid service',
+      'Irrigation/Sprinkler',
+      'Insulation',
+      'Janitorial',
+      'Landscaping',
+      'Marine',
+      'Mechanical Systems',
+      'Moving',
+      'Painting',
+      'Paving & Roadwork',
+      'Pest Control',
+      'Plumbing',
+      'Pool Service',
+      'Pool & Spa installation',
+      'Roofing',
+      'Stucco & Plastering',
+      'Tile & Marble',
+      'Tree Work',
+      'Warehouse',
+    ],
     };
   },
   methods: {

@@ -124,7 +124,7 @@ export default {
       drawer: false,
       links: [
         { icon: "mdi-home-outline", text: "Home", route: "/" },
-        { icon: "mdi-account-badge-outline", text: "Profiles", route: "/Profiles" },
+        { icon: "mdi-account-badge-outline", text: "Find a Workers", route: "/Profiles" },
         { icon: "mdi-pencil-plus-outline", text: "Signup", route: "/Signup" },
         {
           icon: "mdi-login-variant",

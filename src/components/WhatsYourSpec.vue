@@ -16,8 +16,8 @@
     </v-row>
     <br />
     <v-row justify="center" align="center" no-gutters>
-      <v-flex xs3 class="list">
-        <v-list>
+      <v-flex xs3>
+        <v-list class="list">
           <li>Agricultural</li>
           <li>Air Conditioning</li>
           <li>Auto Paint & Body</li>
@@ -92,5 +92,8 @@ export default {
 }
 .text {
   display: inline-block;
+}
+.list {
+  background: lightgrey;
 }
 </style>
