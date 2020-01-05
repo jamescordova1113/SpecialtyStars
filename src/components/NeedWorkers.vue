@@ -12,7 +12,11 @@
         </v-col>
         <v-col lg="3">
           <div>
+             <router-link
+          to="/Signup"
+          >
             <v-btn color="orange" tile dark> Sign up FREE! </v-btn>
+             </router-link>
           </div>
         </v-col>
       </v-row>

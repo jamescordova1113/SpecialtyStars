@@ -71,11 +71,18 @@
             <v-flex text-xs-center>
               <v-col class="MainInfo text-center" xs-12>
                 <div class="max-width: 100%">
-                  
+                   <router-link
+          to="/WorkersPage"
+          >
                   <v-btn class="mr-10" color="orange" dark tile> I need work
                   </v-btn>
+                   </router-link>
+                    <router-link
+          to="/NeedWorkers"
+          >
                   <v-btn color="orange" dark tile> I need worker
                   </v-btn>
+                    </router-link>
                 </div>
               </v-col>
             </v-flex>

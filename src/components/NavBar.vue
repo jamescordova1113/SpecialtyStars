@@ -33,16 +33,21 @@
             </v-label
           >
           <v-spacer></v-spacer>
-          <v-col cols="2">
-          <v-select
-          class=" pt-6 my-2"
-          :items="dropdown"
-          label="Services"
-          target="#dropdown"
-          dense
-          outlined
-        >
-        </v-select>
+          <v-col cols="3">
+            <router-link
+          to="/WorkersPage"
+          >
+            <v-btn color="white">
+              <span class="text-center">Need Work</span>
+            </v-btn>
+            </router-link>
+            <router-link
+          to="/NeedWorkers"
+          >
+            <v-btn color="white">
+              <span class="text-center">Need Worker</span>
+            </v-btn>
+            </router-link>
         </v-col>
           <router-link :to="{ name: 'Login' }">
             <v-btn color="white" v-if="!user.isLoggedIn">{{ this.loginText }}</v-btn>
@@ -143,7 +148,7 @@ export default {
       loginText: "Login",
       logoutText: "Logout",
       signupText: "Signup",
-      dropdown: ['Looking for Work', 'Looking to Hire'],    
+       
     };
      
   },

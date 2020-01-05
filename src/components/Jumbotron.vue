@@ -25,9 +25,13 @@
             </h3>
             <br />
             <div class="text-center">
+               <router-link
+          to="/Signup"
+          >
               <v-btn class="ma-2" tile color="orange" dark>
                 Sign up for free
               </v-btn>
+               </router-link>
             </div>
           </div>
         </v-flex>
