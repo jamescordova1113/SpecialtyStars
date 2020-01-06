@@ -1,5 +1,5 @@
 <template>
-  <container>
+  <v-container>
     <v-flex text-xs-center>
       <v-row class="mb-6" justify="center" align="center" no-gutters>
         <v-col lg="3"> </v-col>
@@ -21,7 +21,7 @@
         </v-col>
       </v-row>
     </v-flex>
-    <v-div>
+    <div>
       <v-flex text-xs-center>
         <v-row class="mb-6" justify="center" align="center" no-gutters>
           <v-col lg="8">
@@ -65,8 +65,8 @@
           </v-col>
         </v-row>
       </v-flex>
-    </v-div>
-    <v-div>
+    </div>
+    <div>
       <v-flex text-xs-center>
         <v-row class="mb-6" justify="center" align="center" no-gutters>
           <v-col lg="8">
@@ -98,8 +98,8 @@
           </v-col>
         </v-row>
       </v-flex>
-    </v-div>
-    <v-div>
+    </div>
+    <div>
       <v-flex text-xs-center>
         <v-row class="mb-6" justify="left" align="center" no-gutters>
           <v-col lg="8">
@@ -145,8 +145,8 @@
           </v-col>
         </v-row>
       </v-flex>
-    </v-div>
-  </container>
+    </div>
+  </v-container>
 </template>
 
 <script>

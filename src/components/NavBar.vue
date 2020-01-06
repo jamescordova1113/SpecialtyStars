@@ -2,13 +2,7 @@
   <nav>
     <v-toolbar elevation="2">
       <div class="myNav">
-        <v-app-bar
-          app
-          absolute
-          flat
-          width="100%"
-          permanent
-        >
+        <v-app-bar app absolute flat width="100%" permanent>
           <template v-slot:img="{ props }">
             <v-img
               v-bind="props"
@@ -19,45 +13,45 @@
             class="darkgrey--text"
             @click="drawer = !drawer"
           ></v-app-bar-nav-icon>
-         
-          <router-link to="/" tag="span" style="cursor: pointer" class="myAnchor">
-             <img
-            class="mr-3"
-            :src="require('../assets/sslogo.png')"
-            height="75"
-          />
+
+          <router-link
+            to="/"
+            tag="span"
+            style="cursor: pointer"
+            class="myAnchor"
+          >
+            <img
+              class="mr-3"
+              :src="require('../assets/sslogo.png')"
+              height="75"
+            />
           </router-link>
           <v-spacer class="d-none d-lg-block"></v-spacer>
           <v-label class="mr-4 d-none d-lg-block">
             Welcome, {{ this.user.alias }}
-            </v-label
-          >
+          </v-label>
           <v-spacer></v-spacer>
           <v-col cols="3">
-            <router-link
-          to="/WorkersPage"
-          >
-            <v-btn color="white">
-              <span class="text-center">Need Work</span>
-            </v-btn>
+            <router-link to="/WorkersPage">
+              <v-btn color="white" @click="setCookie('worker')">
+                <span class="text-center">Need Work</span>
+              </v-btn>
             </router-link>
-            <router-link
-          to="/NeedWorkers"
-          >
-            <v-btn color="white">
-              <span class="text-center">Need Worker</span>
-            </v-btn>
+            <router-link to="/NeedWorkers">
+              <v-btn color="white" @click="setCookie('employer')">
+                <span class="text-center">Need Worker</span>
+              </v-btn>
             </router-link>
-        </v-col>
+          </v-col>
           <router-link :to="{ name: 'Login' }">
-            <v-btn color="white" v-if="!user.isLoggedIn">{{ this.loginText }}</v-btn>
+            <v-btn color="white" v-if="!user.isLoggedIn">{{
+              this.loginText
+            }}</v-btn>
           </router-link>
           <v-btn v-if="user.isLoggedIn" color="white" @click="logout">{{
             this.logoutText
           }}</v-btn>
-          <router-link
-          to="/Signup"
-          >
+          <router-link to="/Signup">
             <v-btn color="white">
               <span class="text-center">Sign Up</span>
             </v-btn>
@@ -71,7 +65,6 @@
       @click="drawer = !drawer"
       temporary
     >
-      
       <v-list dense nav>
         <v-list-item
           v-for="link in links"
@@ -129,7 +122,11 @@ export default {
       drawer: false,
       links: [
         { icon: "mdi-home-outline", text: "Home", route: "/" },
-        { icon: "mdi-account-badge-outline", text: "Find a Workers", route: "/Profiles" },
+        {
+          icon: "mdi-account-badge-outline",
+          text: "Find a Workers",
+          route: "/Profiles"
+        },
         { icon: "mdi-pencil-plus-outline", text: "Signup", route: "/Signup" },
         {
           icon: "mdi-login-variant",
@@ -137,20 +134,28 @@ export default {
           route: "/login"
         },
         { icon: "mdi-contact-mail-outline", text: "Contact", route: "/contact" }
-        
       ],
       memberLinks: [
-        { icon: "mdi-home-import-outline", text: "Projects", route: "/Projects" },
-        { icon: "mdi-account-circle-outline", text: "Profile", route: "/Profile" },
-        { icon: "mdi-view-dashboard-outline", text: "Portfolio", route: "/Portfolio" }
-
+        {
+          icon: "mdi-home-import-outline",
+          text: "Projects",
+          route: "/Projects"
+        },
+        {
+          icon: "mdi-account-circle-outline",
+          text: "Profile",
+          route: "/Profile"
+        },
+        {
+          icon: "mdi-view-dashboard-outline",
+          text: "Portfolio",
+          route: "/Portfolio"
+        }
       ],
       loginText: "Login",
       logoutText: "Logout",
-      signupText: "Signup",
-       
+      signupText: "Signup"
     };
-     
   },
   methods: {
     logout() {
@@ -165,6 +170,13 @@ export default {
           });
           this.$router.push({ name: "Login" });
         });
+    },
+     setCookie(userType) {
+      if (userType == 'employer') {
+        document.cookie = 'userType=employer; expires=Fri, 31 Dec 9999 23:59:59 GMT"'
+      } else {
+        document.cookie = 'userType=worker; expires=Fri, 31 Dec 9999 23:59:59 GMT'
+      }
     }
   },
   computed: {
