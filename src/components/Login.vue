@@ -30,7 +30,7 @@
               <br />
               <v-card-actions class="text-center">
                 <!-- <div class="flex-grow-1"></div> -->
-                <v-btn @click="submit" color="orange" dark tile null="true">
+                <v-btn type="submit" color="orange" dark tile null="true">
                   Log Me In!
                 </v-btn>
               </v-card-actions>
@@ -82,7 +82,7 @@ export default {
                           isLoggedIn: true,
                           isAdmin: doc.data().isAdmin
                         });
-                        this.$router.push({ name: "Timeline" });
+                        this.$router.push({ name: "SpecialistProfile" });
                       }
                     });
                 });

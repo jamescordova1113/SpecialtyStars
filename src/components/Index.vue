@@ -23,6 +23,13 @@ export default {
     Whatis,
     HowImg,
     HowText
+  },
+  beforeCreate() {
+    if (!document.cookie.userType) {
+      alert('Not user Type selected yet')
+    } else {
+      alert('Welcome Back: ' + document.cookie.userType)
+    }
   }
 };
 </script>
