@@ -65,6 +65,11 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(cred => {
+            // Check to see if email has been verified
+            if(!cred.user.emailVerified) {
+              this.feedback ='Email Not Verified' 
+              return;
+            }
             // find the user record and then update geocoords
             db.collection("users")
               .where("user_id", "==", cred.user.uid)

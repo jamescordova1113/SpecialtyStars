@@ -1,5 +1,5 @@
 <template>
-  <container>
+  <v-container>
     <v-flex text-xs-center>
       <v-row class="mb-6" justify="center" align="center" no-gutters>
         <v-col lg="3"> </v-col>
@@ -21,7 +21,7 @@
         </v-col>
       </v-row>
     </v-flex>
-    <v-div>
+    <div>
       <v-flex text-xs-center>
         <v-row class="mb-6" justify="center" align="center" no-gutters>
           <v-col lg="6">
@@ -64,8 +64,8 @@
           </v-col>
         </v-row>
       </v-flex>
-    </v-div>
-      <layout>
+    </div>
+      <v-layout>
         <v-row class="mb-6" justify="center" align="center" no-gutters>
           <v-flex xs3>
               <v-img src="../assets/images/painter.jpg" max-width="400px">
@@ -80,8 +80,8 @@
               </v-img>
           </v-flex>
         </v-row>
-      </layout>
-  </container>
+      </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -9,28 +9,28 @@
       <v-card-text>
         <v-form @submit.prevent="signup" class="card-panel">
           <v-text-field
-            v-model="FullName"
+            v-model="fullName"
             label="Full Name:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="Business"
+            v-model="business"
             label="Legal Name of your Business:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="BusinessType"
+            v-model="businessType"
             label="Type of Business:"
             required
           ></v-text-field>
-          <v-text-field v-model="License" label="License #:"></v-text-field>
+          <v-text-field v-model="license" label="License #:"></v-text-field>
           <v-text-field
-            v-model="BusinessPhone"
+            v-model="businessPhone"
             label="Business Phone #:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="BusinessAddress"
+            v-model="businessAddress"
             label="Business Street Address:"
             required
           ></v-text-field>
@@ -53,7 +53,7 @@
           ></v-text-field>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
-            <v-btn type="submit" color="orange" dark tile @click="submit">
+            <v-btn type="submit" color="orange" dark tile>
               Sign Me Up!
             </v-btn>
           </v-card-actions>
@@ -71,6 +71,12 @@ export default {
   name: "Signup",
   data() {
     return {
+      businessType: null,
+      license: null,
+      business: null,
+      businessPhone: null,
+      businessAddress: null,
+      fullName: null,
       email: null,
       password: null,
       alias: null,

@@ -9,19 +9,18 @@
       <v-card-text>
         <v-form @submit.prevent="signup" class="card-panel">
           <v-text-field
-            v-model="FullName"
+            v-model="fullName"
             label="Full Name:"
             required
           ></v-text-field>
           <v-select
             v-model="select"
-      v-validate="'required'"
-      :items="items"
-      label="Specialty"
-      data-vv-name="select"
-      required
+            :items="items"
+            label="Specialty"
+            data-vv-name="select"
+            required
           ></v-select>
-          <v-text-field v-model="Phone" label="Phone#:" required></v-text-field>
+          <v-text-field v-model="phone" label="Phone#:" required></v-text-field>
           <v-text-field
             v-model="email"
             :rules="emailRules"
@@ -41,7 +40,7 @@
           ></v-text-field>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
-            <v-btn type="submit" color="orange" dark tile @click="submit">
+            <v-btn type="submit" color="orange" dark tile>
               Sign Me Up!
             </v-btn>
           </v-card-actions>
@@ -59,6 +58,9 @@ export default {
   name: "Signup",
   data() {
     return {
+      phone: null,
+      fullName: null,
+      select: null,
       email: null,
       password: null,
       alias: null,
@@ -69,53 +71,53 @@ export default {
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
       items: [
-      'Agricultural',
-      'Air Conditioning',
-      'Auto Paint & Body',
-      'Auto Mechanics',
-      'Auto Detailing',
-      'Brick Pavers',
-      'Brick & Block Masonry',
-      'Carpentry (rough and finish)',
-      'Cabinetry',
-      'Construction Cleaning',
-      'Concrete Cutting and Drilling',
-      'Concrete Placing & Finishing',
-      'Dishwashing',
-      'Demolition',
-      'Delivery/Driver',
-      'Drywall',
-      'Electrical',
-      'Flooring',
-      'Fence',
-      'Fire & Security Alarm',
-      'Fire Protection',
-      'Glass & Windows',
-      'General Construction',
-      'Granite & Stone Fabrication',
-      'Golf Course and Greens keeper',
-      'Handyman',
-      'Home Remodeling',
-      'Housekeeping/ Maid service',
-      'Irrigation/Sprinkler',
-      'Insulation',
-      'Janitorial',
-      'Landscaping',
-      'Marine',
-      'Mechanical Systems',
-      'Moving',
-      'Painting',
-      'Paving & Roadwork',
-      'Pest Control',
-      'Plumbing',
-      'Pool Service',
-      'Pool & Spa installation',
-      'Roofing',
-      'Stucco & Plastering',
-      'Tile & Marble',
-      'Tree Work',
-      'Warehouse',
-    ],
+        "Agricultural",
+        "Air Conditioning",
+        "Auto Paint & Body",
+        "Auto Mechanics",
+        "Auto Detailing",
+        "Brick Pavers",
+        "Brick & Block Masonry",
+        "Carpentry (rough and finish)",
+        "Cabinetry",
+        "Construction Cleaning",
+        "Concrete Cutting and Drilling",
+        "Concrete Placing & Finishing",
+        "Dishwashing",
+        "Demolition",
+        "Delivery/Driver",
+        "Drywall",
+        "Electrical",
+        "Flooring",
+        "Fence",
+        "Fire & Security Alarm",
+        "Fire Protection",
+        "Glass & Windows",
+        "General Construction",
+        "Granite & Stone Fabrication",
+        "Golf Course and Greens keeper",
+        "Handyman",
+        "Home Remodeling",
+        "Housekeeping/ Maid service",
+        "Irrigation/Sprinkler",
+        "Insulation",
+        "Janitorial",
+        "Landscaping",
+        "Marine",
+        "Mechanical Systems",
+        "Moving",
+        "Painting",
+        "Paving & Roadwork",
+        "Pest Control",
+        "Plumbing",
+        "Pool Service",
+        "Pool & Spa installation",
+        "Roofing",
+        "Stucco & Plastering",
+        "Tile & Marble",
+        "Tree Work",
+        "Warehouse"
+      ]
     };
   },
   methods: {
@@ -136,6 +138,13 @@ export default {
               .auth()
               .createUserWithEmailAndPassword(this.email, this.password)
               .then(cred => {
+                cred.user.sendEmailVerification()
+                  .then(function() {
+                    console.log("Verification Sent")
+                  })
+                  .catch(function(error) {
+                    console.log(error.message)
+                  });
                 ref.set({
                   alias: this.alias,
                   geolocation: null,
