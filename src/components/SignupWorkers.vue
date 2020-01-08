@@ -38,6 +38,19 @@
             label="Username:"
             required
           ></v-text-field>
+          <v-container fluid>
+            Who can contact me:
+    <v-checkbox v-model="checkbox1" :label="`Homeowners: ${checkbox1.toString()}`"></v-checkbox>
+    <v-checkbox v-model="checkbox2" :label="`Contractors: ${checkbox2.toString()}`"></v-checkbox>
+    <v-checkbox v-model="checkbox3" :label="`Employers: ${checkbox3.toString()}`"></v-checkbox>
+  </v-container>
+  <v-container fluid>
+            How to contact me:
+    <v-checkbox v-model="checkbox4" :label="`Message: ${checkbox4.toString()}`"></v-checkbox>
+    <v-checkbox v-model="checkbox5" :label="`Text: ${checkbox5.toString()}`"></v-checkbox>
+    <v-checkbox v-model="checkbox6" :label="`Phone Call: ${checkbox6.toString()}`"></v-checkbox>
+    <v-checkbox v-model="checkbox7" :label="`Email: ${checkbox7.toString()}`"></v-checkbox>
+  </v-container>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
             <v-btn type="submit" color="orange" dark tile>
@@ -58,6 +71,13 @@ export default {
   name: "Signup",
   data() {
     return {
+      checkbox1: true,
+      checkbox2: false,
+      checkbox3: false,
+      checkbox4: true,
+      checkbox5: false,
+      checkbox6: false,
+      checkbox7: false,
       phone: null,
       fullName: null,
       select: null,
