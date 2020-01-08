@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
     config: {
       contactEmail: null,
       eventEmail: null,
-      sendVerify: true,
+      sendVerify: false,
       newEmail: null,
       newPassword: null,
     }
