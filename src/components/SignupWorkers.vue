@@ -223,19 +223,19 @@ export default {
                   .sendEmailVerification()
                   .then(function() {})
                   .catch(err => {
-                    this.feedback = err.message;
+                    console.log(err.message)
                   });
               })
               .then(function() {
-                
+
               })
               .catch(err => {
-                this.feedback = err.message;
+                console.log(err.message)
               });
           }
         });
       } else {
-        this.feedback = "Please enter data in all fields";
+        console.log("Please enter data in all fields")
       }
     },
     gotoLogin() {
