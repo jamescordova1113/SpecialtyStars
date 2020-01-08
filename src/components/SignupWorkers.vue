@@ -40,18 +40,61 @@
           ></v-text-field>
           <v-container fluid>
             Who can contact me:
-    <v-checkbox v-model="checkbox1" :label="`Homeowners: ${checkbox1.toString()}`"></v-checkbox>
-    <v-checkbox v-model="checkbox2" :label="`Contractors: ${checkbox2.toString()}`"></v-checkbox>
-    <v-checkbox v-model="checkbox3" :label="`Employers: ${checkbox3.toString()}`"></v-checkbox>
-  </v-container>
-  <v-container fluid>
+            <v-checkbox
+              v-model="checkbox1"
+              :label="`Homeowners: ${checkbox1.toString()}`"
+            ></v-checkbox>
+            <v-checkbox
+              v-model="checkbox2"
+              :label="`Contractors: ${checkbox2.toString()}`"
+            ></v-checkbox>
+            <v-checkbox
+              v-model="checkbox3"
+              :label="`Employers: ${checkbox3.toString()}`"
+            ></v-checkbox>
+          </v-container>
+          <v-container fluid>
             How to contact me:
-    <v-checkbox v-model="checkbox4" :label="`Message: ${checkbox4.toString()}`"></v-checkbox>
-    <v-checkbox v-model="checkbox5" :label="`Text: ${checkbox5.toString()}`"></v-checkbox>
-    <v-checkbox v-model="checkbox6" :label="`Phone Call: ${checkbox6.toString()}`"></v-checkbox>
-    <v-checkbox v-model="checkbox7" :label="`Email: ${checkbox7.toString()}`"></v-checkbox>
-  </v-container>
+            <v-checkbox
+              v-model="checkbox4"
+              :label="`Message: ${checkbox4.toString()}`"
+            ></v-checkbox>
+            <v-checkbox
+              v-model="checkbox5"
+              :label="`Text: ${checkbox5.toString()}`"
+            ></v-checkbox>
+            <v-checkbox
+              v-model="checkbox6"
+              :label="`Phone Call: ${checkbox6.toString()}`"
+            ></v-checkbox>
+            <v-checkbox
+              v-model="checkbox7"
+              :label="`Email: ${checkbox7.toString()}`"
+            ></v-checkbox>
+          </v-container>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
+          <v-dialog v-model="dialog" width="500">
+            <v-card>
+              <v-card-title class="headline grey lighten-2" primary-title>
+                Thank you for Signing Up!
+              </v-card-title>
+
+              <v-card-text>
+                Check your email address and click the verify link to finish
+                creating your login Thank you for your interest in Specialty
+                Stars. Have an amazing Day.
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="gotoLogin">
+                  Sounds Good!
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-card-actions class="text-center">
             <v-btn type="submit" color="orange" dark tile>
               Sign Me Up!
@@ -137,7 +180,8 @@ export default {
         "Tile & Marble",
         "Tree Work",
         "Warehouse"
-      ]
+      ],
+      dialog: false
     };
   },
   methods: {
@@ -158,21 +202,21 @@ export default {
               .auth()
               .createUserWithEmailAndPassword(this.email, this.password)
               .then(cred => {
-                cred.user.sendEmailVerification()
-                  .then(function() {
-                    console.log("Verification Sent")
-                  })
-                  .catch(function(error) {
-                    console.log(error.message)
-                  });
                 ref.set({
                   alias: this.alias,
                   geolocation: null,
                   user_id: cred.user.uid
                 });
+                cred.user
+                  .sendEmailVerification()
+                  .then(function() {})
+                  .catch(err => {
+                    this.feedback = err.message;
+                  });
               })
-              .then(() => {
-                this.$router.push({ name: "Login" });
+              .then(function() {
+                console.log("fire dialog");
+                this.dialog = true;
               })
               .catch(err => {
                 this.feedback = err.message;
@@ -182,6 +226,9 @@ export default {
       } else {
         this.feedback = "Please enter data in all fields";
       }
+    },
+    gotoLogin() {
+      this.$router.push({ name: "Login" });
     }
   }
 };
