@@ -25,7 +25,7 @@
               <p class="red-text text-center" v-if="feedback">{{ feedback }}</p>
               <br />
               <div>
-              <a> Forgot your password? </a>
+                <a> Forgot your password? </a>
               </div>
               <br />
               <v-card-actions class="text-center">
@@ -39,31 +39,31 @@
         </v-form>
       </v-card-text>
       <v-layout>
-            <v-flex>
-              <v-dialog width="500" v-model="dialog">
-                <v-card>
-                  <v-card-title class="headline grey lighten-2" primary-title>
-                    Thank you for Signing Up!
-                  </v-card-title>
+        <v-flex>
+          <v-dialog width="500" v-model="config.sendVerify">
+            <v-card>
+              <v-card-title class="headline grey lighten-2" primary-title>
+                Thank you for Signing Up!
+              </v-card-title>
 
-                  <v-card-text>
-                    Check your email address and click the verify link to finish
-                    creating your login Thank you for your interest in Specialty
-                    Stars. Have an amazing Day.
-                  </v-card-text>
+              <v-card-text>
+                Check your email address and click the verify link to finish
+                creating your login Thank you for your interest in Specialty
+                Stars. Have an amazing Day.
+              </v-card-text>
 
-                  <v-divider></v-divider>
+              <v-divider></v-divider>
 
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" text @click="dialog = false">
-                      Sounds Good!
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-flex>
-          </v-layout>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="closeDialog">
+                  Sounds Good!
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-flex>
+      </v-layout>
     </v-card>
   </v-container>
 </template>
@@ -84,7 +84,11 @@ export default {
       ]
     };
   },
-  props: ['dialog'],
+  computed: {
+    config() {
+      return this.$store.state.config;
+    }
+  },
   methods: {
     login() {
       if (this.email && this.password) {
@@ -93,8 +97,8 @@ export default {
           .signInWithEmailAndPassword(this.email, this.password)
           .then(cred => {
             // Check to see if email has been verified
-            if(!cred.user.emailVerified) {
-              this.feedback ='Email Not Verified' 
+            if (!cred.user.emailVerified) {
+              this.feedback = "Email Not Verified";
               return;
             }
             // find the user record and then update geocoords
@@ -127,6 +131,11 @@ export default {
       } else {
         this.feedback = "Please enter data in all fields";
       }
+    },
+    closeDialog() {
+      this.$store.commit("setConfig", {
+        sendVerify: false
+      });
     }
   }
 };

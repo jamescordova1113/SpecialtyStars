@@ -191,7 +191,13 @@ export default {
                 this.myCred.user
                   .sendEmailVerification()
                   .then(() => {
-                    this.$router.push({ name: "Login", props: {dialog : true} });
+                    // Go to login page and set configuration in vuex store
+                        this.$store.commit("setConfig", {
+                          sendVerify: true,
+                          newEmail: this.email,
+                          newPassword: this.password
+                        });
+                    this.$router.push({ name: "Login"});
                   })
                   .catch(err => {
                     this.feedback = err.message;
@@ -206,6 +212,17 @@ export default {
         this.feedback = "Please enter data in all fields";
       }
     }
+  },
+  beforeCreate() {
+    firebase
+      .auth()
+      .signInAnonymously()
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert('ErrorCode: ' + errorCode +'\n' + 'ErrorMessage: ' + errorMessage)
+      });
   }
 };
 </script>

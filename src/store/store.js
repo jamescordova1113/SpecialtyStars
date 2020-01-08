@@ -12,8 +12,10 @@ export const store = new Vuex.Store({
     },
     config: {
       contactEmail: null,
-      eventEmail: null
-
+      eventEmail: null,
+      sendVerify: true,
+      newEmail: null,
+      newPassword: null,
     }
   },
   getters: {
@@ -28,6 +30,9 @@ export const store = new Vuex.Store({
     setConfig (state, payload) {
       state.config.contactEmail = payload.contactEmail;
       state.config.eventEmail = payload.eventEmail;
+      state.config.sendVerify = payload.sendVerify;
+      state.config.newEmail = payload.newEmail;
+      state.config.newPassword = payload.newPassword
     }
   }
 });

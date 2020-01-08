@@ -9,7 +9,7 @@
 
 <script>
 // @ is an alias to /src
-
+import firebase from "firebase";
 import Jumbotron from "@/components/Jumbotron.vue";
 import Whatis from "@/components/Whatis.vue";
 import HowImg from "@/components/HowImg.vue";
@@ -22,6 +22,17 @@ export default {
     Whatis,
     HowImg,
     HowText
+  },
+  beforeCreate() {
+    firebase
+      .auth()
+      .signInAnonymously()
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert('ErrorCode: ' + errorCode +'\n' + 'ErrorMessage: ' + errorMessage)
+      });
   },
   created() {
     var userType = this.readCookie("userType");
