@@ -38,6 +38,32 @@
           </v-row>
         </v-form>
       </v-card-text>
+      <v-layout>
+            <v-flex>
+              <v-dialog width="500" v-model="dialog">
+                <v-card>
+                  <v-card-title class="headline grey lighten-2" primary-title>
+                    Thank you for Signing Up!
+                  </v-card-title>
+
+                  <v-card-text>
+                    Check your email address and click the verify link to finish
+                    creating your login Thank you for your interest in Specialty
+                    Stars. Have an amazing Day.
+                  </v-card-text>
+
+                  <v-divider></v-divider>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" text @click="dialog = false">
+                      Sounds Good!
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-flex>
+          </v-layout>
     </v-card>
   </v-container>
 </template>
@@ -58,6 +84,7 @@ export default {
       ]
     };
   },
+  props: ['dialog'],
   methods: {
     login() {
       if (this.email && this.password) {

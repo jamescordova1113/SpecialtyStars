@@ -7,7 +7,7 @@
     </v-toolbar>
     <v-card class="loginTitle">
       <v-card-text>
-        <v-form @submit.prevent="signup" class="card-panel">
+        <v-form class="card-panel" v-model="valid">
           <v-text-field
             v-model="fullName"
             label="Full Name:"
@@ -73,45 +73,9 @@
             ></v-checkbox>
           </v-container>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
-          <v-layout>
-            <v-flex>
-              <v-dialog v-model="dialog" width="500">
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    type="submit"
-                    color="orange"
-                    dark
-                    tile
-                    v-on="on"
-                    right
-                    @click.stop="dialog = true"
-                  >
-                    Sign Me Up!
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-card-title class="headline grey lighten-2" primary-title>
-                    Thank you for Signing Up!
-                  </v-card-title>
-
-                  <v-card-text>
-                    Check your email address and click the verify link to finish
-                    creating your login Thank you for your interest in Specialty
-                    Stars. Have an amazing Day.
-                  </v-card-text>
-
-                  <v-divider></v-divider>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" text @click="gotoLogin">
-                      Sounds Good!
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-flex>
-          </v-layout>
+          <v-btn @click="signup" color="orange" dark tile :disabled="!valid">
+              Sign Me Up!
+            </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
@@ -139,7 +103,7 @@ export default {
       email: null,
       password: null,
       alias: null,
-      feedback: null,
+      feedback: "",
       slug: null,
       emailRules: [
         v => !!v || "E-mail is required",
@@ -193,7 +157,9 @@ export default {
         "Tree Work",
         "Warehouse"
       ],
-      dialog: false
+      dialog: false,
+      valid: true,
+      myCred: null
     };
   },
   methods: {
@@ -214,32 +180,31 @@ export default {
               .auth()
               .createUserWithEmailAndPassword(this.email, this.password)
               .then(cred => {
+                this.myCred = cred;
                 ref.set({
                   alias: this.alias,
                   geolocation: null,
                   user_id: cred.user.uid
                 });
-                cred.user
+              })
+              .then(() => {
+                this.myCred.user
                   .sendEmailVerification()
-                  .then(function() {})
+                  .then(() => {
+                    this.$router.push({ name: "Login", props: {dialog : true} });
+                  })
                   .catch(err => {
-                    console.log(err.message)
+                    this.feedback = err.message;
                   });
               })
-              .then(function() {
-
-              })
               .catch(err => {
-                console.log(err.message)
+                this.feedback = err.message;
               });
           }
         });
       } else {
-        console.log("Please enter data in all fields")
+        this.feedback = "Please enter data in all fields";
       }
-    },
-    gotoLogin() {
-      this.$router.push({ name: "Login" });
     }
   }
 };
