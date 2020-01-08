@@ -75,40 +75,41 @@
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-layout>
             <v-flex>
-          <v-dialog v-model="dialog" width="500">
-            <template v-slot:activator="{ on }">
-              <v-btn 
-              type="submit" 
-              color="orange" 
-              dark 
-              tile 
-              v-on="on"
-              right
-              @click.stop="dialog = true">
-              Sign Me Up!
-            </v-btn>
-            </template>
-            <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>
-                Thank you for Signing Up!
-              </v-card-title>
+              <v-dialog v-model="dialog" width="500">
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    type="submit"
+                    color="orange"
+                    dark
+                    tile
+                    v-on="on"
+                    right
+                    @click.stop="dialog = true"
+                  >
+                    Sign Me Up!
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title class="headline grey lighten-2" primary-title>
+                    Thank you for Signing Up!
+                  </v-card-title>
 
-              <v-card-text>
-                Check your email address and click the verify link to finish
-                creating your login Thank you for your interest in Specialty
-                Stars. Have an amazing Day.
-              </v-card-text>
+                  <v-card-text>
+                    Check your email address and click the verify link to finish
+                    creating your login Thank you for your interest in Specialty
+                    Stars. Have an amazing Day.
+                  </v-card-text>
 
-              <v-divider></v-divider>
+                  <v-divider></v-divider>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="gotoLogin">
-                  Sounds Good!
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" text @click="gotoLogin">
+                      Sounds Good!
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-flex>
           </v-layout>
         </v-form>
@@ -226,8 +227,7 @@ export default {
                   });
               })
               .then(function() {
-                console.log("fire dialog");
-                this.dialog = true;
+                
               })
               .catch(err => {
                 this.feedback = err.message;
