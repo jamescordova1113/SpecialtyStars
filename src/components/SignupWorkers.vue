@@ -73,7 +73,21 @@
             ></v-checkbox>
           </v-container>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
+          <v-layout>
+            <v-flex>
           <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on }">
+              <v-btn 
+              type="submit" 
+              color="orange" 
+              dark 
+              tile 
+              v-on="on"
+              right
+              @click.stop="dialog = true">
+              Sign Me Up!
+            </v-btn>
+            </template>
             <v-card>
               <v-card-title class="headline grey lighten-2" primary-title>
                 Thank you for Signing Up!
@@ -95,11 +109,8 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-card-actions class="text-center">
-            <v-btn type="submit" color="orange" dark tile>
-              Sign Me Up!
-            </v-btn>
-          </v-card-actions>
+            </v-flex>
+          </v-layout>
         </v-form>
       </v-card-text>
     </v-card>
