@@ -150,7 +150,13 @@ export default {
           icon: "mdi-view-dashboard-outline",
           text: "Portfolio",
           route: "/Portfolio"
-        }
+        },
+        {
+          icon: "mdi-view-dashboard-outline",
+          text: "Message Board",
+          route: "/MessageBoard"
+        },
+        
       ],
       loginText: "Login",
       logoutText: "Logout",

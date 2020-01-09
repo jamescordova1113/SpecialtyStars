@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Profiles from '@/components/Profiles'
+import MessageBoard from '@/components/MessageBoard'
 import WorkersPage from '@/components/WorkersPage'
 import WhatsYourSpec from '@/components/WhatsYourSpec'
 import NeedWorkers from '@/components/NeedWorkers'
@@ -47,6 +48,11 @@ const router = new Router({
       path: '/Contact',
       name: 'Contact',
       component: Contact
+    },
+    {
+      path: '/MessageBoard',
+      name: 'MessageBoard',
+      component: MessageBoard
     },
     {
       path: '/Profiles',
