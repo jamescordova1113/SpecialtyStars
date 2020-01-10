@@ -51,11 +51,11 @@
           <v-row justify="space-around">
             <div v-for="pro in pros" :key="pro.id">
               <v-flex style="width: 250px">
-              <v-card outlined class="profileCard" width="230px" height="330px">
-                <v-card-title class="headline justify-center" primary-title>{{
+              <v-card outlined class="profileCard" width="230px" height="340px">
+                <v-card-title class="headline primary lighten-2 white--text" primary-title>{{
                   pro.title
                 }}</v-card-title>
-                <v-avatar class="ml-5" size="100px">
+                <v-avatar class="ml-5 mt-1" size="100px">
                   <v-img class="white--text" v-bind:src="`${pro.image}`">
                   </v-img>
                 </v-avatar>
@@ -75,6 +75,7 @@
                 <v-layout class="explorelist">
                   <v-flex>
                     <!-- modal -->
+                    <v-card-actions class="justify-center">
                     <v-dialog v-model="dialog" width="500">
                       <template v-slot:activator="{ on }">
                         <v-btn
@@ -197,6 +198,7 @@
                         </v-card-text>
                       </v-card>
                     </v-dialog>
+                    </v-card-actions>
                   </v-flex>
                 </v-layout>
 
@@ -308,7 +310,7 @@ export default {
 
 <style>
 .avatar {
-  margin: 10px;
+  margin-left: 10px;
 }
 .event {
   margin-left: 5px;
@@ -322,7 +324,6 @@ export default {
   word-break: keep-all;
 }
 .proCards {
-  margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   
