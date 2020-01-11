@@ -5,18 +5,18 @@
       dark
       flat
       justify="center"
-      max-width="450px"
+      max-width="350px"
     >
       <v-row justify="center">
-        <v-toolbar-title><h3>Home>Specialties</h3></v-toolbar-title>
+        <v-toolbar-title><h3>Search for Specialist</h3></v-toolbar-title>
       </v-row>
     </v-toolbar>
 
-    <v-container>
-      <v-row>
-        <v-flex>
-          <v-col>
-            <v-card class="filterCard" max-width="350px">
+    
+        
+        <v-container class="my-4 proCards">
+          <v-row justify="center">
+            <v-card class="filterCard" width="300px" height="350px">
               <v-card-title>
                 Filter results
               </v-card-title>
@@ -58,17 +58,14 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
-          </v-col>
-        </v-flex>
-        <container class="proCards">
-          <v-row justify="space-around">
             <div v-for="pro in pros" :key="pro.id">
-              <v-flex style="width: 250px">
+              <v-flex style="width: 350px">
+                
                 <v-card
+                  class="mx-auto profileCard"
                   outlined
-                  class="profileCard"
-                  width="230px"
-                  height="340px"
+                  width="300px"
+                  height="350px"
                 >
                   <v-card-title
                     class="headline primary lighten-2 white--text"
@@ -229,9 +226,8 @@
               </v-flex>
             </div>
           </v-row>
-        </container>
-      </v-row>
-    </v-container>
+        </v-container>
+      
   </v-container>
 </template>
 
@@ -335,17 +331,16 @@ export default {
   color: darkslategray;
 }
 .filterButton {
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .myTitle {
   word-break: keep-all;
 }
 .proCards {
   margin-left: 10px;
-  margin-right: 10px;
 }
 .profileCard {
-  margin-top: 0px;
+  margin-bottom: 20px;
 }
 .profileCard:hover {
   border-top-left-radius: 0px;
