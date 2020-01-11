@@ -1,153 +1,235 @@
 <template>
   <v-container class="profileTitle">
-    <v-toolbar color="primary lighten-2" dark flat justify="center" max-width="450px">
+    <v-toolbar
+      color="primary lighten-2"
+      dark
+      flat
+      justify="center"
+      max-width="450px"
+    >
       <v-row justify="center">
-        <v-toolbar-title><h3>Home>Specialties>Tile&Marble>CDA </h3></v-toolbar-title>
+        <v-toolbar-title><h3>Home>Specialties</h3></v-toolbar-title>
       </v-row>
     </v-toolbar>
 
-    <v-container class="my-0">
-      <v-row justify="space-around">
-        <div v-for="pro in pros" :key="pro.id">
-          <v-card outlined class="profileCard" width="250px" height="330px">
-            <v-card-title class="headline justify-center" primary-title>{{
-              pro.title
-            }}</v-card-title>
-            <v-avatar size="100px">
-              <v-img class="white--text" v-bind:src="`${pro.image}`"> </v-img>
-            </v-avatar>
-            <v-card-text class="proCards">
-              <span class="event">City: {{ pro.cityzip }}</span>
-              <br />
-              <span class="event"
-                >Experience: {{ pro.yrsexperience }} Years</span
+    <v-container>
+      <v-row>
+        <v-flex>
+          <v-col>
+            <v-card class="filterCard" max-width="350px">
+              <v-card-title>
+                Filter results
+              </v-card-title>
+              <v-select
+                class="select"
+                v-model="select"
+                :items="specialty"
+                label="Specialty"
+                data-vv-name="select"
               >
-              <br />
-              <span class="event"
-                >Min cost per hour: ${{ pro.minperhour }}</span
+              </v-select>
+              <v-select
+                class="select"
+                v-model="select"
+                :items="location"
+                label="Location"
+                data-vv-name="select"
               >
-            </v-card-text>
-            <v-layout class="explorelist">
-              <v-flex>
-                <!-- modal -->
-                <v-dialog v-model="dialog" width="500">
-                  <template v-slot:activator="{ on }">
-                      <v-btn
-                        class="explorebutton"
-                        color="primary lighten-2"
-                        v-on="on"
-                        dark
-                        tile
-                        right
-                        @click.stop="dialog = true"
-                      >
-                        View Profile
-                      </v-btn>
-                  </template>
-
-                  <v-card>
-                    <v-card-title
-                      class="headline primary lighten-2 white--text"
-                      primary-title
+              </v-select>
+              <v-select
+                class="select"
+                v-model="select"
+                :items="items"
+                label="Helper/Mechanic"
+                data-vv-name="select"
+              >
+              </v-select>
+              <v-card-actions class="justify-center">
+                <v-btn
+                  class="filterButton"
+                  color="primary lighten-2"
+                  v-on="on"
+                  dark
+                  tile
+                  right
+                  @click.stop="dialog = true"
+                >
+                  Submit
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-flex>
+        <container class="proCards">
+          <v-row justify="space-around">
+            <div v-for="pro in pros" :key="pro.id">
+              <v-flex style="width: 250px">
+                <v-card
+                  outlined
+                  class="profileCard"
+                  width="230px"
+                  height="340px"
+                >
+                  <v-card-title
+                    class="headline primary lighten-2 white--text"
+                    primary-title
+                    >{{ pro.title }}</v-card-title
+                  >
+                  <v-avatar class="ml-5 mt-1" size="100px">
+                    <v-img class="white--text" v-bind:src="`${pro.image}`">
+                    </v-img>
+                  </v-avatar>
+                  <v-card-text class="proCards">
+                    <span class="event">City: {{ pro.city }}</span>
+                    <br />
+                    <span class="event"> Specialty: {{ pro.specialty }}</span>
+                    <br />
+                    <span class="event"
+                      >Experience: {{ pro.yrsexperience }} Years</span
                     >
-                      Specialist Profile: {{ pro.title }}
-                    </v-card-title>
+                    <br />
+                    <span class="event"
+                      >Min cost per hour: ${{ pro.minperhour }}</span
+                    >
+                  </v-card-text>
+                  <v-layout class="explorelist">
+                    <v-flex>
+                      <!-- modal -->
+                      <v-card-actions class="justify-center">
+                        <v-dialog v-model="dialog" width="500">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="explorebutton"
+                              color="primary lighten-2"
+                              v-on="on"
+                              dark
+                              tile
+                              right
+                              @click.stop="dialog = true"
+                            >
+                              View Profile
+                            </v-btn>
+                          </template>
 
-                    <v-avatar class="avatar" size="100px">
-                      <v-img class="white--text" v-bind:src="`${pro.image}`">
-                      </v-img>
-                    </v-avatar>
-                    <v-card-text>
-                      <div>
-                        <h3>General Info</h3>
-                      </div>
+                          <v-card>
+                            <v-card-title
+                              class="headline primary lighten-2 white--text"
+                              primary-title
+                            >
+                              Specialist Profile: {{ pro.title }}
+                            </v-card-title>
 
-                      <div class="event">First Name: {{ pro.firstname }}</div>
-                      <div class="event">Specialty: {{ pro.specialty }}</div>
-                      <div class="event">
-                        Transportion to work: {{ pro.transportation }}
-                      </div>
-                      <div class="event">
-                        Looking for: {{ pro.workduration }}
-                      </div>
-                      <div class="event">I Live in: {{ pro.speccity }}</div>
-                      <div class="event">
-                        My minimum per hour: {{ pro.minperhour }}
-                      </div>
-                      <div class="event">
-                        I will travel {{ pro.traveldistance }} to work.
-                      </div>
-                      <h3>Trade specific Info:</h3>
-                      <div class="event">
-                        Mechanic or helper: {{ pro.helper }}
-                      </div>
-                      <div class="event">Have own tools: {{ pro.tools }}</div>
-                      <div class="event">
-                        (Helpers) I can make cuts and grout:
-                        {{ pro.Helpgroutcut }}
-                      </div>
-                      <div class="event">My strenghts: {{ pro.strengths }}</div>
-                      <div class="event">
-                        Specific experience: {{ pro.specworktypes }}
-                      </div>
-                      <div class="event">
-                        (Mechanics) I can install walls and floors:
-                        {{ pro.wallfloors }}
-                      </div>
-                      <div class="event">
-                        Can produce a level floor: {{ pro.levelfloors }}
-                      </div>
-                      <div class="event">
-                        Can produce a plumb wall: {{ pro.plumbwalls }}
-                      </div>
+                            <v-avatar class="avatar" size="100px">
+                              <v-img
+                                class="white--text"
+                                v-bind:src="`${pro.image}`"
+                              >
+                              </v-img>
+                            </v-avatar>
+                            <v-card-text>
+                              <div>
+                                <h3>General Info</h3>
+                              </div>
 
-                      <br />
-                      <div class="carousel">
-                        <v-carousel
-    cycle
-    height="350"
-    hide-delimiter-background
-    show-arrows-on-hover
-  >
-    <v-carousel-item
-      v-for="(slide, i) in slides"
-      :key="i"
-    >
-      <v-sheet
-        :color="colors[i]"
-        height="100%"
-      >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
-          <div class="display-3">{{ slide }} Slide</div>
-        </v-row>
-      </v-sheet>
-    </v-carousel-item>
-  </v-carousel>
-                      </div>
-                      <br />
-                      <div class="text--center">
-                        <v-btn
-                          class="explore"
-                          color="primary lighten-2"
-                          dark
-                          tile
-                          v-bind:href="`${pro.contact}`"
-                          >[ Message Me ]
-                        </v-btn>
-                      </div>
-                    </v-card-text>
-                  </v-card>
-                </v-dialog>
+                              <div class="event">
+                                First Name: {{ pro.firstname }}
+                              </div>
+                              <div class="event">
+                                Specialty: {{ pro.specialty }}
+                              </div>
+                              <div class="event">
+                                Transportion to work: {{ pro.transportation }}
+                              </div>
+                              <div class="event">
+                                Looking for: {{ pro.workduration }}
+                              </div>
+                              <div class="event">
+                                I Live in: {{ pro.speccity }}
+                              </div>
+                              <div class="event">
+                                My minimum per hour: {{ pro.minperhour }}
+                              </div>
+                              <div class="event">
+                                I will travel {{ pro.traveldistance }} to work.
+                              </div>
+                              <h3>Trade specific Info:</h3>
+                              <div class="event">
+                                Mechanic or helper: {{ pro.helper }}
+                              </div>
+                              <div class="event">
+                                Have own tools: {{ pro.tools }}
+                              </div>
+                              <div class="event">
+                                (Helpers) I can make cuts and grout:
+                                {{ pro.Helpgroutcut }}
+                              </div>
+                              <div class="event">
+                                My strenghts: {{ pro.strengths }}
+                              </div>
+                              <div class="event">
+                                Specific experience: {{ pro.specworktypes }}
+                              </div>
+                              <div class="event">
+                                (Mechanics) I can install walls and floors:
+                                {{ pro.wallfloors }}
+                              </div>
+                              <div class="event">
+                                Can produce a level floor: {{ pro.levelfloors }}
+                              </div>
+                              <div class="event">
+                                Can produce a plumb wall: {{ pro.plumbwalls }}
+                              </div>
+
+                              <br />
+                              <div class="carousel">
+                                <v-carousel
+                                  cycle
+                                  height="350"
+                                  hide-delimiter-background
+                                  show-arrows-on-hover
+                                >
+                                  <v-carousel-item
+                                    v-for="(slide, i) in slides"
+                                    :key="i"
+                                  >
+                                    <v-sheet :color="colors[i]" height="100%">
+                                      <v-row
+                                        class="fill-height"
+                                        align="center"
+                                        justify="center"
+                                      >
+                                        <div class="display-3">
+                                          {{ slide }} Slide
+                                        </div>
+                                      </v-row>
+                                    </v-sheet>
+                                  </v-carousel-item>
+                                </v-carousel>
+                              </div>
+                              <br />
+                              <div class="text--center">
+                                <v-btn
+                                  class="explore"
+                                  color="primary lighten-2"
+                                  dark
+                                  tile
+                                  v-bind:href="`${pro.contact}`"
+                                  >[ Message Me ]
+                                </v-btn>
+                              </div>
+                            </v-card-text>
+                          </v-card>
+                        </v-dialog>
+                      </v-card-actions>
+                    </v-flex>
+                  </v-layout>
+
+                  <!-- modal end -->
+                </v-card>
               </v-flex>
-            </v-layout>
-            
-            <!-- modal end -->
-          </v-card>
-        </div>
+            </div>
+          </v-row>
+        </container>
       </v-row>
     </v-container>
   </v-container>
@@ -160,20 +242,64 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
-       colors: [
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-        ],
-        slides: [
-          'First',
-          'Second',
-          'Third',
-          'Fourth',
-          'Fifth',
-        ],
+      specialty: [
+        "Agricultural",
+        "Air Conditioning",
+        "Auto Paint & Body",
+        "Auto Mechanics",
+        "Auto Detailing",
+        "Brick Pavers",
+        "Brick & Block Masonry",
+        "Carpentry (rough and finish)",
+        "Cabinetry",
+        "Construction Cleaning",
+        "Concrete Cutting and Drilling",
+        "Concrete Placing & Finishing",
+        "Dishwashing",
+        "Demolition",
+        "Delivery/Driver",
+        "Drywall",
+        "Electrical",
+        "Flooring",
+        "Fence",
+        "Fire & Security Alarm",
+        "Fire Protection",
+        "Glass & Windows",
+        "General Construction",
+        "Granite & Stone Fabrication",
+        "Golf Course and Greens keeper",
+        "Handyman",
+        "Home Remodeling",
+        "Housekeeping/ Maid service",
+        "Irrigation/Sprinkler",
+        "Insulation",
+        "Janitorial",
+        "Landscaping",
+        "Marine",
+        "Mechanical Systems",
+        "Moving",
+        "Painting",
+        "Paving & Roadwork",
+        "Pest Control",
+        "Plumbing",
+        "Pool Service",
+        "Pool & Spa installation",
+        "Roofing",
+        "Stucco & Plastering",
+        "Tile & Marble",
+        "Tree Work",
+        "Warehouse"
+      ],
+      items: ["Helper", "Mechanic"],
+      location: ["Woodinville", "CDA", "Boise"],
+      colors: [
+        "indigo",
+        "warning",
+        "pink darken-2",
+        "red lighten-1",
+        "deep-purple accent-4"
+      ],
+      slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       pros: [],
       myIcon: "mdi-account-card-details-outline"
     };
@@ -187,6 +313,7 @@ export default {
   beforeCreate() {
     // fetch data from firestore
     db.collection("specialistProfile")
+      .orderBy("city")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -201,21 +328,21 @@ export default {
 
 <style>
 .avatar {
-  margin: 10px;
+  margin-left: 10px;
 }
 .event {
   margin-left: 5px;
   color: darkslategray;
 }
-.explore {
-  padding: 0px;
-  margin: 0px;
+.filterButton {
+  margin-bottom: 10px;
 }
 .myTitle {
   word-break: keep-all;
 }
 .proCards {
-  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .profileCard {
   margin-top: 0px;
@@ -230,5 +357,9 @@ export default {
 }
 .headline {
   color: black;
+}
+.select {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 </style>

@@ -125,7 +125,7 @@ export default {
         {
           icon: "mdi-account-badge-outline",
           text: "Find a Worker",
-          route: "/Profiles"
+          route: "/SpecialistProfile"
         },
         { icon: "mdi-pencil-plus-outline", text: "Signup", route: "/Signup" },
         {

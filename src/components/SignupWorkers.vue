@@ -7,7 +7,7 @@
     </v-toolbar>
     <v-card class="loginTitle">
       <v-card-text>
-        <v-form class="card-panel" v-model="valid">
+        <v-form @sumbmit.prevent="signup" class="card-panel" v-model="valid">
           <v-text-field
             v-model="fullName"
             label="Full Name:"
