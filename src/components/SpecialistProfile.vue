@@ -22,7 +22,7 @@
               </v-card-title>
               <v-select
                 class="select"
-                v-model="select"
+                v-model="specialty"
                 :items="specialty"
                 label="Specialty"
                 data-vv-name="select"
@@ -30,7 +30,7 @@
               </v-select>
               <v-select
                 class="select"
-                v-model="select"
+                v-model="location"
                 :items="location"
                 label="Location"
                 data-vv-name="select"
@@ -38,7 +38,7 @@
               </v-select>
               <v-select
                 class="select"
-                v-model="select"
+                v-model="items"
                 :items="items"
                 label="Helper/Mechanic"
                 data-vv-name="select"
@@ -297,7 +297,8 @@ export default {
       ],
       slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       pros: [],
-      myIcon: "mdi-account-card-details-outline"
+      myIcon: "mdi-account-card-details-outline",
+      dialog: false
     };
   },
   methods: {},

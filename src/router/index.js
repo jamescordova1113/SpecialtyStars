@@ -3,11 +3,9 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Signup from '@/components/Signup'
 import Login from '@/components/Login'
-import About from '@/components/About'
 import Contact from '@/components/Contact'
-import Profiles from '@/components/Profiles'
 import WorkersPage from '@/components/WorkersPage'
-import WhatsYourSpec from '@/components/WhatsYourSpec'
+import WhatsYourSpec from '@/components/LandingPage/WhatsYourSpec'
 import NeedWorkers from '@/components/NeedWorkers'
 import SpecialistProfile from '@/components/SpecialistProfile'
 
@@ -39,19 +37,9 @@ const router = new Router({
       component: Login
     },  
     {
-      path: '/About',
-      name: 'About',
-      component: About
-    },
-    {
       path: '/Contact',
       name: 'Contact',
       component: Contact
-    },
-    {
-      path: '/Profiles',
-      name: 'Profiles',
-      component: Profiles
     },
     {
       path: '/WorkersPage',
@@ -59,7 +47,7 @@ const router = new Router({
       component: WorkersPage
     },
     {
-      path: '/WhatsYourSpec',
+      path: '/LandingPage/WhatsYourSpec',
       name: 'WhatsYourSpec',
       component: WhatsYourSpec
     },

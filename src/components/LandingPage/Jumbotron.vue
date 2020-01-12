@@ -1,34 +1,27 @@
 <template>
-  <div class="infoMain">
+  <div class="jumbo" color="primary" dark>
     <!-- <v-layout align-center> -->
     <v-row xs-2 justify="space-around">
-      <v-col xs-1 lg-2>
+      <v-col xs-1 lg-4>
         <v-img
-          class="infoImage mx-auto"
-          max-width="260"
-          src="@/assets/images/landscaping.jpg"
+          class="jumboImage mx-auto"
+          max-width="400"
+          src="../../assets/images/concretemix.jpg"
         />
       </v-col>
-      <v-col xs-1 lg-3>
+      <v-col xs-1 lg-4>
         <v-img
-          class="infoImage mx-auto"
-          max-width="350"
-          src="@/assets/images/roofing.jpg"
-        />
-      </v-col>
-      <v-col xs-1 lg-2>
-        <v-img
-          class="infoImage mx-auto"
-          max-width="260"
-          src="@/assets/images/mudding.jpg"
+          class="jumboImage mx-auto"
+          max-width="400"
+          src="../../assets/images/pavers.jpg"
         />
       </v-col>
       <v-col xs-1 lg-4>
         <v-flex text-xs-center>
           <br />
-          <div class="infoText text-center ">
+          <div class="jumboText text-center ">
             <h3 class="display-3">
-              Start working tomorrow!
+              What's your specialty?
             </h3>
             <br />
             <div class="text-center">
@@ -45,23 +38,24 @@
       </v-col>
     </v-row>
   </div>
-  
 </template>
 
 <script>
 export default {
-  name: "HowImg"
+  name: "Jumbotron"
 };
 </script>
 
 <style scoped>
-.infoMain {
-  margin-top: 0px;
+.jumbo {
+  margin-top: 30px;
 }
-.infoImage {
+.jumboImage {
   margin: 30px;
 }
-.infoText {
+.jumboText {
   margin-right: 20px;
+  margin-left: 20px;
+  padding: 15px;
 }
 </style>

@@ -10,10 +10,10 @@
 <script>
 // @ is an alias to /src
 import firebase from "firebase";
-import Jumbotron from "@/components/Jumbotron.vue";
-import Whatis from "@/components/Whatis.vue";
-import HowImg from "@/components/HowImg.vue";
-import HowText from "@/components/HowText.vue";
+import Jumbotron from "@/components/LandingPage/Jumbotron.vue";
+import Whatis from "@/components/LandingPage/Whatis.vue";
+import HowImg from "@/components/LandingPage/HowImg.vue";
+import HowText from "@/components/LandingPage/HowText.vue";
 
 export default {
   name: "home",
