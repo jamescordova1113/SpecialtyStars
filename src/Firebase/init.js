@@ -14,6 +14,7 @@ const firebaseConfig = {
   };
   // Initialize Firebase
   const firebaseApp = firebase.initializeApp(firebaseConfig);
-  let specilistRef = db.ref('specialistProfile')
+  // let db = app.database()
+  // let specialistProfileRef = db.ref('specialistProfile')
 
   export default firebaseApp.firestore()

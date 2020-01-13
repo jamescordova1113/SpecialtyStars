@@ -4,11 +4,8 @@ import Index from '@/components/Index'
 import Signup from '@/components/Signup'
 import Login from '@/components/Login'
 import Contact from '@/components/Contact'
-<<<<<<< HEAD
-import Profiles from '@/components/Profiles'
+import Profiles from '@/components/Profiles/CreateWorkerProfile'
 import MessageBoard from '@/components/MessageBoard'
-=======
->>>>>>> bb5d5793c5093e9af32b944509a82b17ef49717f
 import WorkersPage from '@/components/WorkersPage'
 import WhatsYourSpec from '@/components/LandingPage/WhatsYourSpec'
 import NeedWorkers from '@/components/NeedWorkers'
@@ -47,19 +44,16 @@ const router = new Router({
       component: Contact
     },
     {
-<<<<<<< HEAD
       path: '/MessageBoard',
       name: 'MessageBoard',
       component: MessageBoard
     },
     {
-      path: '/Profiles',
+      path: '/Profiles/CreateWorkerProfile',
       name: 'Profiles',
       component: Profiles
     },
     {
-=======
->>>>>>> bb5d5793c5093e9af32b944509a82b17ef49717f
       path: '/WorkersPage',
       name: 'WorkersPage',
       component: WorkersPage
