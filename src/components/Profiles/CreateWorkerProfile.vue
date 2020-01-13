@@ -108,14 +108,7 @@ export default {
       valid: false,
       name: null,
       specialty: null,
-      phone: null,
-      email: null,
-      yrsexperience: null,
-      minperhour: null,
-      perferredContact: null,
-      canContact: null,
-      city: null,
-      zip: null,
+      specialistProfile: {name: null},
       filename: null,
       event: {title : null},
       feedback: null,
@@ -203,10 +196,17 @@ export default {
         v => !!v || "Button Text is required",
         v =>
           (v && v.length <= 15) || "Button Text must be less than 15 characters"
+      ],
+       emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ]
     };
   },
   methods: {
+    signup() {
+      // need code here
+    },
     update() {
       //save specialistProfile to firestore
       db.collection("specialistProfile")
@@ -270,15 +270,19 @@ export default {
     }
   },
   created() {
+    // console.log(firebase.auth().currentUser.uid)
     let ref = db
       .collection("specilistProfile")
       .where(
-        firebase.firestore.FieldPath.documentId(),
+        'userID',
         "==",
-        this.$route.params.specialistProfile_id
+        'ZEbwfj8hU2h8smWVzEecLynB3X73'
+        // firebase.auth().currentUser.uid
       );
+    console.log('got Here')
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
+        console.log('got a doc')
         this.specialistProfile = doc.data();
         this.specialistProfile.id = doc.id;
       });
