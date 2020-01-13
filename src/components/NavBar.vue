@@ -152,7 +152,7 @@ export default {
           route: "/Portfolio"
         },
         {
-          icon: "mdi-view-dashboard-outline",
+          icon: "mdi-message-outline",
           text: "Message Board",
           route: "/MessageBoard"
         },
