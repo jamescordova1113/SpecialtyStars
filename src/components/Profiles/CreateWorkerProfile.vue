@@ -5,10 +5,10 @@
         <h3 class="panel-title">Add New Profile</h3>
       </div>
       <div class="panel-body">
-        <form id="form" class="form-inline" v-on:submit.prevent="addBook">
+        <v-form id="form" class="form-inline" v-on:submit.prevent="addBook">
           <div class="form-group">
-            <label for="specialistProfileTitle">Full Name:</label>
-            <input
+            <v-label for="specialistProfileTitle">Full Name:</v-label>
+            <v-input
               type="text"
               id="specialistProfileTitle"
               class="form-control"
@@ -16,8 +16,8 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileCity">City:</label>
-            <input
+            <v-label for="specialistProfileCity">City:</v-label>
+            <v-input
               type="text"
               id="specialistProfileCity"
               class="form-control"
@@ -25,8 +25,8 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileContact">Contact:</label>
-            <input
+            <v-label for="specialistProfileContact">Contact:</v-label>
+            <v-input
               type="text"
               id="specialistProfileContact"
               class="form-control"
@@ -34,8 +34,8 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileEmail">Email:</label>
-            <input
+            <v-label for="specialistProfileEmail">Email:</v-label>
+            <v-input
               type="text"
               id="specialistProfileEmail"
               class="form-control"
@@ -43,8 +43,8 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileMinPerHour">Minimum per hour:</label>
-            <input
+            <v-label for="specialistProfileMinPerHour">Minimum per hour:</v-label>
+            <v-input
               type="text"
               id="specialistProfileMinPerHour"
               class="form-control"
@@ -52,8 +52,8 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileSpecialty">Specialty:</label>
-            <input
+            <v-label for="specialistProfileSpecialty">Specialty:</v-label>
+            <v-input
               type="text"
               id="specialistProfileSpecialty"
               class="form-control"
@@ -61,8 +61,8 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileYrsExperience">Year of Experience:</label>
-            <input
+            <v-label for="specialistProfileYrsExperience">Year of Experience:</v-label>
+            <v-input
               type="text"
               id="specialistProfileYrsExperience"
               class="form-control"
@@ -70,8 +70,8 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileZip">Zip:</label>
-            <input
+            <v-label for="specialistProfileZip">Zip:</v-label>
+            <v-input
               type="text"
               id="specialistProfileZip"
               class="form-control"
@@ -79,16 +79,16 @@
             />
           </div>
           <div class="form-group">
-            <label for="specialistProfileImage">Image:</label>
-            <input
+            <v-label for="specialistProfileImage">Image:</v-label>
+            <v-input
               type="text"
               id="specialistProfileImage"
               class="form-control"
               v-model="specialistProfile.image"
             />
           </div>
-          <input type="submit" class="btn btn-primary" value="Add Book" />
-        </form>
+          <v-input type="submit" class="btn btn-primary" value="Add SpecialistProfile" />
+        </v-form>
       </div>
     </div>
   </v-container>
