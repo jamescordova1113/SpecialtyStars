@@ -16,6 +16,18 @@ export const store = new Vuex.Store({
       sendVerify: false,
       newEmail: null,
       newPassword: null,
+    },
+    specialistProfile: {
+      city: '',
+      contact: '',
+      image: '',
+      minperhour: '',
+      specialty: '',
+      title: '',
+      yrsexperience: '',
+      email: '',
+      zip: ''
+
     }
   },
   getters: {

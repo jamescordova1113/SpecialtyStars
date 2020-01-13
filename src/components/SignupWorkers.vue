@@ -20,7 +20,12 @@
             data-vv-name="select"
             required
           ></v-select>
-          <v-text-field v-model="phone" label="Phone#:" required></v-text-field>
+          <v-text-field 
+          type="phone"
+          v-model="phone" 
+          label="Phone#:" 
+          required
+          ></v-text-field>
           <v-text-field
             v-model="email"
             :rules="emailRules"
@@ -47,44 +52,10 @@
             label="Username:"
             required
           ></v-text-field>
-          <v-container fluid>
-            Who can contact me:
-            <v-checkbox
-              v-model="checkbox1"
-              :label="`Homeowners: ${checkbox1.toString()}`"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="checkbox2"
-              :label="`Contractors: ${checkbox2.toString()}`"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="checkbox3"
-              :label="`Employers: ${checkbox3.toString()}`"
-            ></v-checkbox>
-          </v-container>
-          <v-container fluid>
-            How to contact me:
-            <v-checkbox
-              v-model="checkbox4"
-              :label="`Message: ${checkbox4.toString()}`"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="checkbox5"
-              :label="`Text: ${checkbox5.toString()}`"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="checkbox6"
-              :label="`Phone Call: ${checkbox6.toString()}`"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="checkbox7"
-              :label="`Email: ${checkbox7.toString()}`"
-            ></v-checkbox>
-          </v-container>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
-          <v-btn @click="signup" color="orange" dark tile :disabled="!valid">
-              Sign Me Up!
-            </v-btn>
+          <v-btn @click="signup" color="orange" dark tile >
+            Sign Me Up!
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
@@ -100,19 +71,19 @@ export default {
   name: "Signup",
   data() {
     return {
-      checkbox1: true,
-      checkbox2: false,
-      checkbox3: false,
-      checkbox4: true,
-      checkbox5: false,
-      checkbox6: false,
-      checkbox7: false,
-      phone: null,
-      fullName: null,
-      select: null,
-      email: '',
-      password: '',
-      confirmPassword: '',
+      Homeowners: true,
+      Contractors: false,
+      Employers: false,
+      Message: true,
+      Text: false,
+      Phonecall: false,
+      Email: false,
+      phone: "",
+      fullName: "",
+      select: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
       alias: null,
       feedback: "",
       slug: null,
@@ -174,14 +145,20 @@ export default {
     };
   },
   computed: {
-comparePasswords () {
-  return this.password !== this.confirmPassword ? 'Password does not match' : ''
-}
+    comparePasswords() {
+      return this.password !== this.confirmPassword
+        ? "Password does not match"
+        : "";
+    }
   },
- 
+
   methods: {
     signup() {
-      if (this.alias && this.email && this.password) {
+      if (
+        this.alias &&
+        this.email &&
+        this.password )
+         {
         this.slug = slugify(this.alias, {
           replacement: "-",
           remove: /[$*_+~.()'"!\-:@]/g,
@@ -202,19 +179,19 @@ comparePasswords () {
                   alias: this.alias,
                   geolocation: null,
                   user_id: cred.user.uid
-                });
+               });
               })
               .then(() => {
                 this.myCred.user
                   .sendEmailVerification()
                   .then(() => {
                     // Go to login page and set configuration in vuex store
-                        this.$store.commit("setConfig", {
-                          sendVerify: true,
-                          newEmail: this.email,
-                          newPassword: this.password
-                        });
-                    this.$router.push({ name: "Login"});
+                    this.$store.commit("setConfig", {
+                      sendVerify: true,
+                      newEmail: this.email,
+                      newPassword: this.password
+                    });
+                    this.$router.push({ name: "Login" });
                   })
                   .catch(err => {
                     this.feedback = err.message;
