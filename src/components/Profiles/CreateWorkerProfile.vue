@@ -1,100 +1,109 @@
 <template>
-  <v-container>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Add New Profile</h3>
-      </div>
-      <div class="panel-body">
-        <v-form id="form" class="form-inline" v-on:submit.prevent="addBook">
-          <div class="form-group">
-            <v-label for="specialistProfileTitle">Full Name:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileTitle"
-              class="form-control"
-              v-model="newSpecialistProfile.title"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileCity">City:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileCity"
-              class="form-control"
-              v-model="newSpecialistProfile.city"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileContact">Contact:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileContact"
-              class="form-control"
-              v-model="newspecialistProfile.contact"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileEmail">Email:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileEmail"
-              class="form-control"
-              v-model="specialistProfile.email"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileMinPerHour">Minimum per hour:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileMinPerHour"
-              class="form-control"
-              v-model="specialistProfile.minperhour"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileSpecialty">Specialty:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileSpecialty"
-              class="form-control"
-              v-model="specialistProfile.specialty"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileYrsExperience">Year of Experience:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileYrsExperience"
-              class="form-control"
-              v-model="specialistProfile.yrsexperience"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileZip">Zip:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileZip"
-              class="form-control"
-              v-model="specialistProfile.zip"
-            />
-          </div>
-          <div class="form-group">
-            <v-label for="specialistProfileImage">Image:</v-label>
-            <v-input
-              type="text"
-              id="specialistProfileImage"
-              class="form-control"
-              v-model="specialistProfile.image"
-            />
-          </div>
-          <v-input type="submit" class="btn btn-primary" value="Add SpecialistProfile" />
-        </v-form>
-      </div>
+  <v-container class="loginCard">
+    <v-toolbar color="orange" dark justify="center" max-width="450px" flat>
+      <v-row justify="space-around">
+        <v-toolbar-title
+          ><h1>Add a your Specialist Profile</h1></v-toolbar-title
+        >
+      </v-row>
+    </v-toolbar>
+    <div class="panel-body">
+      <v-form id="form" class="form-inline" v-on:submit.prevent="addBook">
+        <div class="form-group">
+          <v-text-field>Full Name:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileTitle"
+            class="form-control"
+            v-model="newSpecialistProfile.title"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>City:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileCity"
+            class="form-control"
+            v-model="newSpecialistProfile.city"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>Contact:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileContact"
+            class="form-control"
+            v-model="newspecialistProfile.contact"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>Email:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileEmail"
+            class="form-control"
+            v-model="specialistProfile.email"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>Minimum per hour:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileMinPerHour"
+            class="form-control"
+            v-model="specialistProfile.minperhour"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>Specialty:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileSpecialty"
+            class="form-control"
+            v-model="specialistProfile.specialty"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>Year of Experience:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileYrsExperience"
+            class="form-control"
+            v-model="specialistProfile.yrsexperience"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>Zip:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileZip"
+            class="form-control"
+            v-model="specialistProfile.zip"
+          />
+        </div>
+        <div class="form-group">
+          <v-text-field>Image:</v-text-field>
+          <v-input
+            type="text"
+            id="specialistProfileImage"
+            class="form-control"
+            v-model="specialistProfile.image"
+          />
+        </div>
+        <v-input
+          type="submit"
+          class="btn btn-primary"
+          value="Add SpecialistProfile"
+        />
+      </v-form>
     </div>
   </v-container>
 </template>
 
 <script>
+import db from "@/firebase/init";
+
+let SpecialistProfileRef = db.ref("specialistProfile");
 export default {
   name: "createWorkerProfile",
   data() {
@@ -111,6 +120,20 @@ export default {
         zip: ""
       }
     };
+  },
+  methods: {
+    addSpecialistProfile: function() {
+      SpecialistProfileRef.push(this.newSpecialistProfile);
+      this.newSpecialistProfile.title = "";
+      this.newSpecialistProfile.author = "";
+      this.newSpecialistProfile.image = "";
+      this.newSpecialistProfile.minperhour = "";
+      this.newSpecialistProfile.specialty = "";
+      this.newSpecialistProfile.city = "";
+      this.newSpecialistProfile.yrsexperience = "";
+      this.newSpecialistProfile.email = "";
+      this.newSpecialistProfile.zip = "";
+    }
   }
 };
 </script>
