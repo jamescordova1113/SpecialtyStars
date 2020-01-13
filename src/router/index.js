@@ -4,12 +4,12 @@ import Index from '@/components/Index'
 import Signup from '@/components/Signup'
 import Login from '@/components/Login'
 import Contact from '@/components/Contact'
-import Profiles from '@/components/Profiles/CreateWorkerProfile'
+import CreateWorkerProfile from '@/components/Profiles/CreateWorkerProfile'
 import MessageBoard from '@/components/MessageBoard'
 import WorkersPage from '@/components/WorkersPage'
 import WhatsYourSpec from '@/components/LandingPage/WhatsYourSpec'
 import NeedWorkers from '@/components/NeedWorkers'
-import SpecialistProfile from '@/components/SpecialistProfile'
+import SpecialistProfile from '@/components/Profiles/SpecialistProfiles'
 
 
 import firebase from 'firebase'
@@ -50,8 +50,8 @@ const router = new Router({
     },
     {
       path: '/Profiles/CreateWorkerProfile',
-      name: 'Profiles',
-      component: Profiles
+      name: 'CreateWorkerProfile',
+      component: CreateWorkerProfile
     },
     {
       path: '/WorkersPage',
@@ -69,7 +69,7 @@ const router = new Router({
       component: NeedWorkers
     },
     {
-      path: '/SpecialistProfile',
+      path: '/Profiles/SpecialistProfiles',
       name: 'SpecialistProfile',
       component: SpecialistProfile
     }

@@ -9,7 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon }  from '@fortawesome/vue-fontawesome'
 import { store } from './store/store'
-import SpecialtyFilter from './filters/Specialty'
+
 
 library.add(faUserSecret)
 
@@ -17,7 +17,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
-Vue.filter('specialty', SpecialtyFilter)
+
 
 // wait for firebase auth to init before creating the app
 firebase.auth().onAuthStateChanged(() => {

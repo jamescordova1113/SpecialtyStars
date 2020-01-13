@@ -122,11 +122,7 @@ export default {
       drawer: false,
       links: [
         { icon: "mdi-home-outline", text: "Home", route: "/" },
-        {
-          icon: "mdi-account-badge-outline",
-          text: "Find a Worker",
-          route: "/SpecialistProfile"
-        },
+        
         { icon: "mdi-pencil-plus-outline", text: "Signup", route: "/Signup" },
         {
           icon: "mdi-login-variant",
@@ -138,18 +134,18 @@ export default {
       memberLinks: [
         {
           icon: "mdi-home-import-outline",
-          text: "Projects",
-          route: "/Projects"
+          text: "Find a Worker",
+          route: "/Profiles/SpecialistProfiles"
         },
         {
           icon: "mdi-account-circle-outline",
-          text: "Profile",
-          route: "/Profile"
+          text: "Create Worker Profile",
+          route: "/Profiles/CreateWorkerProfile"
         },
         {
-          icon: "mdi-view-dashboard-outline",
-          text: "Portfolio",
-          route: "/Portfolio"
+          icon: "mdi-account-circle",
+          text: "Create Employer Profile",
+          route: "/Profiles/CreateEmployerProfile"
         },
         {
           icon: "mdi-message-outline",
