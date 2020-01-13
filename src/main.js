@@ -9,9 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon }  from '@fortawesome/vue-fontawesome'
 import { store } from './store/store'
-import VueFire from 'vuefire'
 
-Vue.use(VueFire)
 
 library.add(faUserSecret)
 

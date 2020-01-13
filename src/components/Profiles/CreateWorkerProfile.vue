@@ -1,20 +1,20 @@
 <template>
-  <v-container class="loginCard">
+  <v-container class="editProfileCard">
     <v-toolbar color="orange" dark justify="center" max-width="450px" flat>
       <v-row justify="space-around">
-        <v-toolbar-title><h1>Signup Free: Worker</h1></v-toolbar-title>
+        <v-toolbar-title><h1>Profile Page: Worker</h1></v-toolbar-title>
       </v-row>
     </v-toolbar>
     <v-card class="loginTitle">
       <v-card-text>
-        <v-form @sumbmit.prevent="signup" class="card-panel" v-model="valid">
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
-            v-model="newSpecialistProfile.name"
+            v-model="specialistProfile.name"
             label="First Name:"
             required
           ></v-text-field>
           <v-select
-            v-model="newSpecialistProfile.specialty"
+            v-model="specialistProfile.specialty"
             :items="items"
             label="Specialty"
             data-vv-name="select"
@@ -22,74 +22,71 @@
           ></v-select>
           <v-text-field 
           type="phone"
-          v-model="newSpecialistProfile.phone" 
+          v-model="specialistProfile.phone" 
           label="Phone#:" 
           required
           ></v-text-field>
           <v-text-field
-            v-model="newSpecialistProfile.email"
+            v-model="specialistProfile.email"
             :rules="emailRules"
             label="E-mail:"
           ></v-text-field>
           <v-text-field
-            v-model="newSpecialistProfile.yrsexperience"
+            v-model="specialistProfile.yrsexperience"
             label="Years of experience:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="newSpecialistProfile.minperhour"
+            v-model="specialistProfile.minperhour"
             label="Minimum Dollars Per Hour:"
             required
           ></v-text-field>
            <v-select
-            v-model="newSpecialistProfile.perferredContact"
+            v-model="specialistProfile.perferredContact"
             :items="contactTypes"
             label="Perferred Method of Contact"
             data-vv-name="perferredContact"
             required
           ></v-select>
           <v-select
-            v-model="newSpecialistProfile.canContact"
+            v-model="specialistProfile.canContact"
             :items="contacts"
             label="Can Contact Me"
             data-vv-name="canContact"
             required
           ></v-select>
           <v-text-field
-            v-model="newSpecialistProfile.City"
+            v-model="specialistProfile.City"
             label="City:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="newSpecialistProfile.zip"
+            v-model="specialistProfile.zip"
             label="Zip Code:"
             required
           ></v-text-field>
            <v-text-field
-            v-model="newSpecialistProfile.image"
+            v-model="specialistProfile.image"
             label="Profile Picture:"
             required
           ></v-text-field>
-           <v-text-field
-            v-model="newSpecialistProfile.portPic1"
-            label="Portfolio Picture #1:"
-          ></v-text-field>
-          <v-text-field
-            v-model="newSpecialistProfile.portPic2"
-            label="Portfolio Picture #2:"
-          ></v-text-field>
-          <v-text-field
-            v-model="newSpecialistProfile.portPic3"
-            label="Portfolio Picture #3:"
-          ></v-text-field>
-          <v-text-field
-            v-model="newSpecialistProfile.portPic4"
-            label="Portfolio Picture #4:"
-          ></v-text-field>
-          <v-text-field
-            v-model="newSpecialistProfile.portPic5"
-            label="Portfolio Picture #5:"
-          ></v-text-field>
+            <v-flex class="xs12 sm6 mb-2">
+              <v-btn class="primary" raised @click="onPickFile">Change Image</v-btn>
+              <input
+                type="file"
+                style="display: none"
+                ref="fileInput"
+                accept="image/*"
+                @change="onFilePicked"
+              />
+            </v-flex>
+            <img :src="imageUrl" :height="imageHeight" />
+            <v-flex class="xs12 sm6 mt-5 offset-sm1">
+              <v-btn :disabled="!valid" color="success" class="mr-4" @click="update">Update</v-btn>
+              <router-link :to="{ name : 'Index'}">
+                <v-btn color="error" class="mr-4">Cancel</v-btn>
+              </router-link>
+            </v-flex>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-btn @click="signup" color="orange" dark tile >
             Sign Me Up!
@@ -100,60 +97,31 @@
   </v-container>
 </template>
 
+
 <script>
-import Firebase from 'firebase'
-// import firestore from '/firebase/firestore'
-
-// Your web app's Firebase configuration
-let config = {
-    apiKey: "AIzaSyDqRa3O0YBOiJWIcmdBTyo5qhSYBrxf40E",
-    authDomain: "specialtystars.firebaseapp.com",
-    databaseURL: "https://specialtystars.firebaseio.com",
-    projectId: "specialtystars",
-    storageBucket: "specialtystars.appspot.com",
-    messagingSenderId: "876655856558",
-    appId: "1:876655856558:web:32bcb997948ca0df15563f",
-    measurementId: "G-P43CDSNW7Q"
-  };
-let app = Firebase.initializeApp(config)
-let db = app.database()
-let SpecialistProfileRef = db.ref('SpecialistProfile')
-
-
-
-
+import db from "@/firebase/init";
+import firebase from "firebase";
 export default {
-  name: "SpecialistProfile",
-  firebase: {
-    SpecialistProfile: SpecialistProfileRef
-  },
+  name: "CreateWorkerProfile",
   data() {
     return {
-       newSpecialtyProfile: {
-          name: '',
-          city: '',
-          phone: '',
-          email: '',
-          image: '',
-          minperhour: '',
-          specialty: '',
-          yrsexperience: '',
-          zip: '',
-          perferredContact: '',
-          canContact: '',
-          portPic1: '',
-          portPic2: '',
-          portPic3: '',
-          portPic4: '',
-          portPic5: '',
-       },
-  
-      feedback: "",
-      slug: null,
-      emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
+      valid: false,
+      name: null,
+      specialty: null,
+      phone: null,
+      email: null,
+      yrsexperience: null,
+      minperhour: null,
+      perferredContact: null,
+      canContact: null,
+      city: null,
+      zip: null,
+      filename: null,
+      event: {title : null},
+      feedback: null,
+      imageUrl: null,
+      image: null,
+      imageHeight: 0,
       items: [
         "Agricultural",
         "Air Conditioning",
@@ -212,37 +180,109 @@ export default {
         "Homeowners",
         "Employers"
       ],
-      valid: true,
-      myCred: null
+      titleRules: [
+        v => !!v || "Title is required",
+        v => (v && v.length <= 10) || "Title must be less than 50 characters"
+      ],
+      descRules: [
+        v => !!v || "Description is required",
+        v =>
+          (v && v.length <= 150) ||
+          "Description must be less than 150 characters"
+      ],
+      dateRules: [
+        v => !!v || "Event Date is required",
+        v =>
+          (v && v.length <= 50) || "Event Date must be less than 50 characters"
+      ],
+      locationRules: [
+        v => !!v || "Location is required",
+        v => (v && v.length <= 50) || "Location must be less than 50 characters"
+      ],
+      buttonRules: [
+        v => !!v || "Button Text is required",
+        v =>
+          (v && v.length <= 15) || "Button Text must be less than 15 characters"
+      ]
     };
   },
- 
-
   methods: {
-    
-     addSpecialistProfile: function () {
-        SpecialistProfileRef.push(this.newSpecialistProfile);
-        this.newSpecialistProfile.name = '';
-        this.newSpecialistProfile.city = '';
-        this.newSpecialistProfile.phone = '';
-        this.newSpecialistProfile.email = '';
-        this.newSpecialistProfile.image = '';
-        this.newSpecialistProfile.minperhour = '';
-        this.newSpecialistProfile.specialty = '';
-        this.newSpecialistProfile.yrsexperience = '';
-        this.newSpecialistProfile.zip = '';
-        this.newSpecialistProfile.perferredContact = '';
-        this.newSpecialistProfile.canContact = '';
-        this.newSpecialistProfile.portPic1 = '';
-        this.newSpecialistProfile.portPic2 = '';
-        this.newSpecialistProfile.portPic3 = '';
-        this.newSpecialistProfile.portPic4 = '';
-        this.newSpecialistProfile.portPic5 = '';
-
-
-      },
-     
+    update() {
+      //save specialistProfile to firestore
+      db.collection("specialistProfile")
+        .doc(this.specialistProfile.id)
+        .update({
+        name: this.specialistProfile.name,
+        city: this.specialistProfile.city,
+        phone: this.specialistProfile.phone,
+        email: this.specialistProfile.email,
+        minperhour: this.specialistProfile.minperhour,
+        specialty: this.specialistProfile.specialty,
+        yrsexperience: this.specialistProfile.yrsexperience,
+        zip: this.specialistProfile.zip,
+        perferredContact: this.specialistProfile.perferredContact,
+        canContact: this.specialistProfile.canContact,
+        portPic1: this.specialistProfile.portPic1,
+        portPic2: this.specialistProfile.portPic2,
+        portPic3: this.specialistProfile.portPic3,
+        portPic4: this.specialistProfile.portPic4,
+        portPic5: this.specialistProfile.portPic5
+        })
+        .then( () => {
+          if (this.image)
+          return firebase.storage().ref('Images/' + this.filename).put(this.image)
+        })
+        .then( () => {
+          if (this.image)
+          return firebase.storage().ref('Images/' + this.filename).getDownloadURL()
+        })
+        .then(URL => {
+          if (URL)
+          db.collection("specialistProfile").doc(this.specialistProfile.id)
+          .update({
+            image: URL
+          })
+        })
+        .then(() => {
+          this.$router.push({ name: "Index" });
+        });
+      // .catch(err => {});
+    },
+    onPickFile() {
+      this.$refs.fileInput.click();
+    },
+    onFilePicked(event) {
+      const files = event.target.files;
+      this.filename = files[0].name;
+      if (this.filename.lastIndexOf(".") <= 0) {
+        return alert("Please Select a valid Image File");
+      }
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        this.imageUrl = fileReader.result;
+      });
+      fileReader.readAsDataURL(files[0]);
+      this.image = files[0];
+      this.imageHeight = 150;
+      // const ext = filename.slice(filename.lastIndexOf("."));
+      // console.log('files', files[0]);
+      // upload the file to firebase storage
     }
-  };
-
+  },
+  created() {
+    let ref = db
+      .collection("specilistProfile")
+      .where(
+        firebase.firestore.FieldPath.documentId(),
+        "==",
+        this.$route.params.specialistProfile_id
+      );
+    ref.get().then(snapshot => {
+      snapshot.forEach(doc => {
+        this.specialistProfile = doc.data();
+        this.specialistProfile.id = doc.id;
+      });
+    });
+  }
+};
 </script>
