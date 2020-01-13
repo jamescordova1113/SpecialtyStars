@@ -4,14 +4,14 @@
     <v-row justify="center" align="center" no-gutters>
       
       <v-flex xs3 class="main">
-        <v-img src="../assets/images/spec1.png" max-width="350px"> </v-img>
+        <v-img src="../../assets/images/spec1.png" max-width="350px"> </v-img>
       </v-flex>
 
       <v-flex xs3 class="main">
         <h1>What's Your Specialty?</h1>
       </v-flex>
       <v-flex xs3 class="main">
-        <v-img src="../assets/images/spec2.png" max-width="350px"> </v-img>
+        <v-img src="../../assets/images/spec2.png" max-width="350px"> </v-img>
       </v-flex>
     </v-row>
     <br />

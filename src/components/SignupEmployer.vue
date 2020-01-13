@@ -51,6 +51,15 @@
             label="Password:"
             required
           ></v-text-field>
+          <v-text-field
+            type="password"
+            v-model="confirmPassword"
+            label="Confirm Password:"
+            id="confirmPassword"
+            name="confirmPassword"
+            :rules="[comparePasswords]"
+            required
+          ></v-text-field>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
             <v-btn type="submit" color="orange" dark tile>
@@ -77,8 +86,9 @@ export default {
       businessPhone: null,
       businessAddress: null,
       fullName: null,
-      email: null,
-      password: null,
+      email: '',
+      password: '',
+      confirmPassword: '',
       alias: null,
       feedback: null,
       slug: null,
@@ -87,6 +97,11 @@ export default {
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ]
     };
+  },
+  computed: {
+comparePasswords () {
+  return this.password !== this.confirmPassword ? 'Password does not match' : ''
+}
   },
   methods: {
     signup() {

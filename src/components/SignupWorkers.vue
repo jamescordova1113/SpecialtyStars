@@ -34,6 +34,15 @@
             required
           ></v-text-field>
           <v-text-field
+            type="password"
+            v-model="confirmPassword"
+            label="Confirm Password:"
+            id="confirmPassword"
+            name="confirmPassword"
+            :rules="[comparePasswords]"
+            required
+          ></v-text-field>
+          <v-text-field
             v-model="alias"
             label="Username:"
             required
@@ -86,6 +95,7 @@
 import db from "@/firebase/init";
 import slugify from "slugify";
 import firebase from "firebase";
+
 export default {
   name: "Signup",
   data() {
@@ -100,8 +110,9 @@ export default {
       phone: null,
       fullName: null,
       select: null,
-      email: null,
-      password: null,
+      email: '',
+      password: '',
+      confirmPassword: '',
       alias: null,
       feedback: "",
       slug: null,
@@ -162,6 +173,12 @@ export default {
       myCred: null
     };
   },
+  computed: {
+comparePasswords () {
+  return this.password !== this.confirmPassword ? 'Password does not match' : ''
+}
+  },
+ 
   methods: {
     signup() {
       if (this.alias && this.email && this.password) {

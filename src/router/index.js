@@ -3,12 +3,14 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Signup from '@/components/Signup'
 import Login from '@/components/Login'
-import About from '@/components/About'
 import Contact from '@/components/Contact'
+<<<<<<< HEAD
 import Profiles from '@/components/Profiles'
 import MessageBoard from '@/components/MessageBoard'
+=======
+>>>>>>> bb5d5793c5093e9af32b944509a82b17ef49717f
 import WorkersPage from '@/components/WorkersPage'
-import WhatsYourSpec from '@/components/WhatsYourSpec'
+import WhatsYourSpec from '@/components/LandingPage/WhatsYourSpec'
 import NeedWorkers from '@/components/NeedWorkers'
 import SpecialistProfile from '@/components/SpecialistProfile'
 
@@ -40,16 +42,12 @@ const router = new Router({
       component: Login
     },  
     {
-      path: '/About',
-      name: 'About',
-      component: About
-    },
-    {
       path: '/Contact',
       name: 'Contact',
       component: Contact
     },
     {
+<<<<<<< HEAD
       path: '/MessageBoard',
       name: 'MessageBoard',
       component: MessageBoard
@@ -60,12 +58,14 @@ const router = new Router({
       component: Profiles
     },
     {
+=======
+>>>>>>> bb5d5793c5093e9af32b944509a82b17ef49717f
       path: '/WorkersPage',
       name: 'WorkersPage',
       component: WorkersPage
     },
     {
-      path: '/WhatsYourSpec',
+      path: '/LandingPage/WhatsYourSpec',
       name: 'WhatsYourSpec',
       component: WhatsYourSpec
     },
