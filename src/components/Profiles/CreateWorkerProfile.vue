@@ -65,13 +65,9 @@
             label="Zip Code:"
             required
           ></v-text-field>
-           <v-text-field
-            v-model="specialistProfile.image"
-            label="Profile Picture:"
-            required
-          ></v-text-field>
+           
             <v-flex class="xs12 sm6 mb-2">
-              <v-btn class="primary" raised @click="onPickFile">Change Image</v-btn>
+              <v-btn class="primary" raised @click="onPickFile">Change Profile Image</v-btn>
               <input
                 type="file"
                 style="display: none"
@@ -88,9 +84,6 @@
               </router-link>
             </v-flex>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
-          <v-btn @click="signup" color="orange" dark tile >
-            Sign Me Up!
-          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
