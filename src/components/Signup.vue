@@ -7,7 +7,7 @@
     </v-toolbar>
     <v-card>
         <v-card-text>
-        <v-form @submit.prevent="signup" class="card-panel" id='signupForm'>
+        <v-form @submit.prevent="signup" class="card-panel">
             
             <v-text-field  type="Email" v-model="email" :rules="emailRules" label="E-mail:" required></v-text-field>
             <v-text-field  type="password" v-model="password" label="Password:" required></v-text-field>
@@ -71,14 +71,15 @@ export default {
           } else {
             // this alias does not yet exists in the db
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(cred => {
+              db.collection('users').doc(cred.user.uid).set({
+                role: this.role
+              })
               ref.set({
                 alias: this.alias,
                 user_id: cred.user.uid,
-                isAdmin: false
+                isAdmin: false,
               })
-              return db.collection('specialistProfile').doc(cred.user.uid).set({
-                role: this.role
-              });
+              
             }).then(() => {
               this.$router.push({name: 'Login'})
             })

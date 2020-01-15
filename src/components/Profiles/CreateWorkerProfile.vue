@@ -272,10 +272,10 @@ export default {
         'ZEbwfj8hU2h8smWVzEecLynB3X73'
         // firebase.auth().currentUser.uid
       );
-    console.log('got Here')
+    // console.log('got Here')
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
-        console.log('got a doc')
+        // console.log('got a doc')
         this.specialistProfile = doc.data();
         this.specialistProfile.id = doc.id;
       });
