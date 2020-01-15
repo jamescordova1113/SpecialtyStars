@@ -1,8 +1,8 @@
 <template>
    <v-container class="loginCard">
-    <v-toolbar color="orange" dark justify="center" max-width="450px" flat>
+    <v-toolbar color="primary lighten-2" dark justify="center" max-width="450px" flat>
       <v-row justify="space-around">
-        <v-toolbar-title><h1>Signup Free: Worker</h1></v-toolbar-title>
+        <v-toolbar-title><h1>Signup Free</h1></v-toolbar-title>
       </v-row>
     </v-toolbar>
     <v-card>
