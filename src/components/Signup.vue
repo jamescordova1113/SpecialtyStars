@@ -11,19 +11,21 @@
             
             <v-text-field  type="Email" v-model="email" :rules="emailRules" label="E-mail:" required></v-text-field>
             <v-text-field  type="password" v-model="password" label="Password:" required></v-text-field>
-            <v-text-field  type="alias" v-model="alias" label="Alias:" required></v-text-field>
+            <v-text-field  type="alias" v-model="alias" label="Nick Name:" required></v-text-field>
             <v-select
             v-model="role"
-            :items="role"
-            label="Role"
+            v-bind:items="roles"
+            label="Role:"
             data-vv-name="role"
+            single-line
+            bottom
             required
           ></v-select>
 
             <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
             <v-card-actions class="text-center">
             <div class="flex-grow-1"></div>
-            <v-btn @click="submit" color="primary lighten-2"> Submit </v-btn>
+            <v-btn @click="signup" color="primary lighten-2"> Submit </v-btn>
             </v-card-actions>
         </v-form>
         </v-card-text>
@@ -40,9 +42,10 @@ export default {
   name: 'Signup',
   data(){
     return{
-      role: [
-        "Worker",
-        "Employer"
+      role: '',
+      roles: [
+        { text: 'Worker'},
+        { text: 'Employer'}
       ],
       email: null,
       password: null,
@@ -53,19 +56,9 @@ export default {
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ]
-    }
+    };
   },
-  beforeCreate() {
-    firebase
-      .auth()
-      .signInAnonymously()
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert('ErrorCode: ' + errorCode +'\n' + 'ErrorMessage: ' + errorMessage)
-      });
-  },
+  
   methods: {
     
     signup(){
@@ -86,23 +79,47 @@ export default {
                 role: this.role
               })
               ref.set({
-                alias: this.alias,
-                user_id: cred.user.uid,
-                isAdmin: false,
+                  alias: this.alias,
+                  geolocation: null,
+                  user_id: cred.user.uid
+               });
               })
-              
-            }).then(() => {
-              this.$router.push({name: 'Login'})
-            })
-            .catch(err => {
-              this.feedback = err.message
-            })
+              .then(() => {
+                this.myCred.user
+                  .sendEmailVerification()
+                  .then(() => {
+                    // Go to login page and set configuration in vuex store
+                    this.$store.commit("setConfig", {
+                      sendVerify: true,
+                      newEmail: this.email,
+                      newPassword: this.password
+                    });
+                    this.$router.push({ name: "Login" });
+                  })
+                  .catch(err => {
+                    this.feedback = err.message;
+                  });
+              })
+              .catch(err => {
+                this.feedback = err.message;
+              });
           }
-        })
+        });
       } else {
         this.feedback = 'Please enter data in all fields'
       }
     }
-  }
+  },
+   beforeCreate() {
+    firebase
+      .auth()
+      .signInAnonymously()
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert('ErrorCode: ' + errorCode +'\n' + 'ErrorMessage: ' + errorMessage)
+      });
+  },
 }
 </script>

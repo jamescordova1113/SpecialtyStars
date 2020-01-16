@@ -31,7 +31,7 @@
             Welcome, {{ this.user.alias }}
           </v-label>
           <v-spacer></v-spacer>
-          <v-col cols="3">
+          
             <router-link to="/WorkersPage">
               <v-btn color="white" @click="setCookie('worker')">
                 <span class="text-center">Need Work</span>
@@ -42,7 +42,7 @@
                 <span class="text-center">Need Worker</span>
               </v-btn>
             </router-link>
-          </v-col>
+          
           <router-link :to="{ name: 'Login' }">
             <v-btn color="white" v-if="!user.isLoggedIn">{{
               this.loginText
