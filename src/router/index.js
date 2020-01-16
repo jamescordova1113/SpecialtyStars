@@ -9,7 +9,7 @@ import MessageBoard from '@/components/MessageBoard'
 import WorkersPage from '@/components/WorkersPage'
 import WhatsYourSpec from '@/components/LandingPage/WhatsYourSpec'
 import NeedWorkers from '@/components/NeedWorkers'
-import SpecialistProfile from '@/components/Profiles/SpecialistProfiles'
+import SpecialistProfiles from '@/components/Profiles/SpecialistProfiles'
 
 
 import firebase from 'firebase'
@@ -70,8 +70,8 @@ const router = new Router({
     },
     {
       path: '/Profiles/SpecialistProfiles',
-      name: 'SpecialistProfile',
-      component: SpecialistProfile
+      name: 'SpecialistProfiles',
+      component: SpecialistProfiles
     }
   ]
 })

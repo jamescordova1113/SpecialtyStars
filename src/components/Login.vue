@@ -119,7 +119,7 @@ export default {
                           isLoggedIn: true,
                           isAdmin: doc.data().isAdmin
                         });
-                        this.$router.push({ name: "Contact" });
+                        this.$router.push({ name: "SpecialistProfiles" });
                       }
                     });
                 });
