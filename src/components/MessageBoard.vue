@@ -54,9 +54,97 @@
           </v-card>
         </div>
       </v-col>
-      <!-- <v-col xs-1 lg-8>
-        <EventForm />
-      </v-col> -->
+      <v-col xs-1 lg-8>
+        <form class="col-10" id="eventForm">
+          <v-text-field
+            type="title"
+            v-model="Event"
+            :error-messages="eventErrors"
+            :counter="20"
+            label="Message Title"
+            required
+            @input="$v.event.$touch()"
+            @blur="$v.event.$touch()"
+          ></v-text-field>
+          <v-text-field
+            type="address"
+            v-model="Loaction"
+            :error-messages="locationErrors"
+            :counter="20"
+            label="Location and Specialty"
+            required
+            @input="$v.location.$touch()"
+            @blur="$v.location.$touch()"
+          ></v-text-field>
+          <!-- <template>
+            <v-container>
+              <v-row>
+                <v-col cols="12" lg="6">
+                  <v-menu
+                    v-model="menu1"
+                    :close-on-content-click="true"
+                    max-width="290"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        type="start"
+                        required
+                        :value="computedDateFormattedMomentjs"
+                        clearable
+                        label="Start Date"
+                        readonly
+                        v-on="on"
+                        @click:clear="date = null"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="date"
+                      @change="menu1 = false"
+                    ></v-date-picker>
+                  </v-menu>
+                </v-col>
+
+                <v-col cols="12" lg="6">
+                  <v-menu
+                    v-model="menu"
+                    :close-on-content-click="true"
+                    max-width="290"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        type="end"
+                        :value="computedDateFormattedMomentjs"
+                        clearable
+                        label="End Date"
+                        readonly
+                        v-on="on"
+                        @click:clear="date = null"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="date"
+                      @change="menu2 = false"
+                    ></v-date-picker>
+                  </v-menu>
+                </v-col>
+              </v-row>
+            </v-container>
+          </template> -->
+          <v-textarea
+            outlined
+            name="input-7-4"
+            label="Description of Event"
+            value=""
+          ></v-textarea>
+          <template>
+            <v-file-input label="Upload Picture for Event"></v-file-input>
+          </template>
+
+          <v-btn class="mr-4" @click="submit">submit</v-btn>
+          <v-btn @click="clear">clear</v-btn>
+          <br />
+        </form>
+      </v-col>
     </v-row>
   </div>
 </template>
