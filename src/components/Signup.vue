@@ -102,7 +102,8 @@ export default {
                   .set({
                     role: this.role,
                     alias: this.alias,
-                    geolocation: null
+                    geolocation: null,
+                    user_id: cred.user.uid
                   });
               })
               .then(() => {

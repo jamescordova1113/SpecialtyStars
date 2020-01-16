@@ -30,7 +30,7 @@
               <br />
               <v-card-actions class="text-center">
                 <!-- <div class="flex-grow-1"></div> -->
-                <v-btn type="submit" color="orange" dark tile null="true">
+                <v-btn @click="login" color="orange" dark tile null="true">
                   Log Me In!
                 </v-btn>
               </v-card-actions>
@@ -92,6 +92,7 @@ export default {
   methods: {
     login() {
       if (this.email && this.password) {
+        console.log("trying to log in")
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
@@ -118,7 +119,7 @@ export default {
                           isLoggedIn: true,
                           isAdmin: doc.data().isAdmin
                         });
-                        this.$router.push({ name: "SpecialistProfile" });
+                        this.$router.push({ name: "Contact" });
                       }
                     });
                 });
