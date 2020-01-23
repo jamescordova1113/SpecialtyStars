@@ -22,8 +22,8 @@
           >
             <img
               class="mr-3"
-              :src="require('../assets/sslogo.png')"
-              height="75"
+              :src="require('../assets/sslogov2.png')"
+              height="65"
             />
           </router-link>
           <v-spacer class="d-none d-lg-block"></v-spacer>
@@ -32,7 +32,7 @@
           </v-label>
           <v-spacer></v-spacer>
           
-            <router-link to="/WorkersPage">
+            <!-- <router-link to="/WorkersPage">
               <v-btn color="white" @click="setCookie('worker')">
                 <span class="text-center">Need Work</span>
               </v-btn>
@@ -41,7 +41,7 @@
               <v-btn color="white" @click="setCookie('employer')">
                 <span class="text-center">Need Worker</span>
               </v-btn>
-            </router-link>
+            </router-link> -->
           
           <router-link :to="{ name: 'Login' }">
             <v-btn color="white" v-if="!user.isLoggedIn">{{
@@ -121,34 +121,35 @@ export default {
     return {
       drawer: false,
       links: [
-        { icon: "mdi-home-outline", text: "Home", route: "/" },
-        
-        { icon: "mdi-pencil-plus-outline", text: "Signup", route: "/Signup" },
+        {  text: "Home", route: "/" },
+                {  text: "Specialties", route: "/Specialties" },
+        {  text: "Employer", route: "/NeedWorkers" },
+                {  text: "Worker", route: "/WorkersPage" },
         {
-          icon: "mdi-login-variant",
+          
           text: "Login",
           route: "/login"
         },
-        { icon: "mdi-contact-mail-outline", text: "Contact", route: "/contact" }
+        {  text: "Help", route: "/Help" }
       ],
       memberLinks: [
         {
-          icon: "mdi-home-import-outline",
+          
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"
         },
         {
-          icon: "mdi-account-circle-outline",
+          
           text: "Create Worker Profile",
           route: "/Profiles/CreateWorkerProfile"
         },
         {
-          icon: "mdi-account-circle",
+          
           text: "Create Employer Profile",
           route: "/Profiles/CreateEmployerProfile"
         },
         {
-          icon: "mdi-message-outline",
+          
           text: "Message Board",
           route: "/MessageBoard"
         },
