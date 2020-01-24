@@ -1,178 +1,238 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Index from '@/components/Index'
-import Signup from '@/components/Signup'
-import Login from '@/components/Login'
-import Contact from '@/components/Contact'
-import CreateWorkerProfile from '@/components/Profiles/CreateWorkerProfile'
-import MessageBoard from '@/components/MessageBoard'
-import WorkersPage from '@/components/WorkersPage'
-import WhatsYourSpec from '@/components/LandingPage/WhatsYourSpec'
-import NeedWorkers from '@/components/NeedWorkers'
-import Help from '@/components/Help'
-import Advertising from '@/components/FooterLinks/Advertising'
-import CookiePolicy from '@/components/FooterLinks/CookiePolicy'
-import Events from '@/components/FooterLinks/Events'
-import Guidlines from '@/components/FooterLinks/Guidlines'
-import HelpCenter from '@/components/FooterLinks/HelpCenter'
-import JoinTheTeam from '@/components/FooterLinks/JoinTheTeam'
-import Press from '@/components/FooterLinks/Press'
-import PrivacyPolicy from '@/components/FooterLinks/PrivacyPolicy'
-import Resources from '@/components/FooterLinks/Resources'
-import Safety from '@/components/FooterLinks/Safety'
-import SuperStars from '@/components/FooterLinks/SuperStars'
-import TermsOfUse from '@/components/FooterLinks/TermsOfUse'
-import Specialties from '@/components/Specialties'
-import SpecialistProfiles from '@/components/Profiles/SpecialistProfiles'
+import Vue from "vue";
+import Router from "vue-router";
+import Index from "@/components/Index";
+import Signup from "@/components/Signup";
+import Login from "@/components/Login";
+import Contact from "@/components/Contact";
+import CreateWorkerProfile from "@/components/Profiles/CreateWorkerProfile";
+import WorkerDashBoard from "@/components/Profiles/WorkerDashBoard";
+import EmployerDashBoard from "@/components/Profiles/EmployerDashBoard";
+import MessageBoard from "@/components/MessageBoard";
+import WorkersPage from "@/components/WorkersPage";
+import WhatsYourSpec from "@/components/LandingPage/WhatsYourSpec";
+import NeedWorkers from "@/components/NeedWorkers";
+import Help from "@/components/Help";
+import Advertising from "@/components/FooterLinks/Advertising";
+import CookiePolicy from "@/components/FooterLinks/CookiePolicy";
+import Events from "@/components/FooterLinks/Events";
+import Guidlines from "@/components/FooterLinks/Guidlines";
+import HelpCenter from "@/components/FooterLinks/HelpCenter";
+import JoinTheTeam from "@/components/FooterLinks/JoinTheTeam";
+import Press from "@/components/FooterLinks/Press";
+import PrivacyPolicy from "@/components/FooterLinks/PrivacyPolicy";
+import Resources from "@/components/FooterLinks/Resources";
+import Safety from "@/components/FooterLinks/Safety";
+import SuperStars from "@/components/FooterLinks/SuperStars";
+import TermsOfUse from "@/components/FooterLinks/TermsOfUse";
+import History from "@/components/Profiles/Dashboard/History";
+import MakeAPayment from "@/components/Profiles/Dashboard/MakeAPayment";
+import MyInfo from "@/components/Profiles/Dashboard/MyInfo";
+import Notifications from "@/components/Profiles/Dashboard/Notifications";
+import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
+import Preferences from "@/components/Profiles/Dashboard/Preferences";
+import SavedMessages from "@/components/Profiles/Dashboard/SavedMessages";
+import SentMessages from "@/components/Profiles/Dashboard/SentMessages";
 
+import Specialties from "@/components/Specialties";
+import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
 
-import firebase from 'firebase'
+import firebase from "firebase";
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
-  mode: 'history',
+  mode: "history",
   routes: [
     {
-      path: '/',
-      name: 'Index',
-      component: Index,
+      path: "/",
+      name: "Index",
+      component: Index
       // Add this to do route guard
       // meta: {
       //   requiresAuth: true
       // }
     },
     {
-      path: '/signup',
-      name: 'Signup',
+      path: "/signup",
+      name: "Signup",
       component: Signup
     },
     {
-      path: '/login',
-      name: 'Login',
+      path: "/login",
+      name: "Login",
       component: Login
-    },  
+    },
     {
-      path: '/Contact',
-      name: 'Contact',
+      path: "/Contact",
+      name: "Contact",
       component: Contact
     },
     {
-      path: '/MessageBoard',
-      name: 'MessageBoard',
+      path: "/MessageBoard",
+      name: "MessageBoard",
       component: MessageBoard
     },
     {
-      path: '/Profiles/CreateWorkerProfile',
-      name: 'CreateWorkerProfile',
+      path: "/Profiles/CreateWorkerProfile",
+      name: "CreateWorkerProfile",
       component: CreateWorkerProfile
     },
     {
-      path: '/WorkersPage',
-      name: 'WorkersPage',
+      path: "/Profiles/WorkerDashBoard",
+      name: "WorkerDashBoard",
+      component: WorkerDashBoard
+    },
+    {
+      path: "/Profiles/EmployerDashBoard",
+      name: "EmployerDashBoard",
+      component: EmployerDashBoard
+    },
+    {
+      path: "/WorkersPage",
+      name: "WorkersPage",
       component: WorkersPage
     },
     {
-      path: '/LandingPage/WhatsYourSpec',
-      name: 'WhatsYourSpec',
+      path: "/LandingPage/WhatsYourSpec",
+      name: "WhatsYourSpec",
       component: WhatsYourSpec
     },
     {
-      path: '/NeedWorkers',
-      name: 'NeedWorkers',
+      path: "/NeedWorkers",
+      name: "NeedWorkers",
       component: NeedWorkers
     },
     {
-      path: '/Help',
-      name: 'Help',
+      path: "/Help",
+      name: "Help",
       component: Help
     },
     {
-      path: '/FooterLinks/Advertising',
-      name: 'Advertising',
+      path: "/FooterLinks/Advertising",
+      name: "Advertising",
       component: Advertising
     },
     {
-      path: '/FooterLinks/CookiePolicy',
-      name: 'CookiePolicy',
+      path: "/FooterLinks/CookiePolicy",
+      name: "CookiePolicy",
       component: CookiePolicy
     },
     {
-      path: '/FooterLinks/Events',
-      name: 'Events',
+      path: "/FooterLinks/Events",
+      name: "Events",
       component: Events
     },
     {
-      path: '/FooterLinks/Guidlines',
-      name: 'Guidlines',
+      path: "/FooterLinks/Guidlines",
+      name: "Guidlines",
       component: Guidlines
     },
     {
-      path: '/FooterLinks/HelpCenter',
-      name: 'HelpCenter',
+      path: "/FooterLinks/HelpCenter",
+      name: "HelpCenter",
       component: HelpCenter
     },
     {
-      path: '/FooterLinks/JoinTheTeam',
-      name: 'JoinTheTeam',
+      path: "/FooterLinks/JoinTheTeam",
+      name: "JoinTheTeam",
       component: JoinTheTeam
     },
     {
-      path: '/FooterLinks/Press',
-      name: 'Press',
+      path: "/FooterLinks/Press",
+      name: "Press",
       component: Press
     },
     {
-      path: '/FooterLinks/PrivacyPolicy',
-      name: 'PrivacyPolicy',
+      path: "/FooterLinks/PrivacyPolicy",
+      name: "PrivacyPolicy",
       component: PrivacyPolicy
     },
     {
-      path: '/FooterLinks/Resources',
-      name: 'Resources',
+      path: "/FooterLinks/Resources",
+      name: "Resources",
       component: Resources
     },
     {
-      path: '/FooterLinks/Safety',
-      name: 'Safety',
+      path: "/FooterLinks/Safety",
+      name: "Safety",
       component: Safety
     },
     {
-      path: '/FooterLinks/SuperStars',
-      name: 'SuperStars',
+      path: "/FooterLinks/SuperStars",
+      name: "SuperStars",
       component: SuperStars
     },
     {
-      path: '/FooterLinks/TermsOfUse',
-      name: 'TermsOfUse',
+      path: "/FooterLinks/TermsOfUse",
+      name: "TermsOfUse",
       component: TermsOfUse
     },
     {
-      path: '/Specialties',
-      name: 'Specialties',
+      path: "/Profiles/Dashboard/History",
+      name: "History",
+      component: History
+    },
+    {
+      path: "/Profiles/Dashboard/MakeAPayment",
+      name: "MakeAPayment",
+      component: MakeAPayment
+    },
+    {
+      path: "/Profiles/Dashboard/MyInfo",
+      name: "MyInfo",
+      component: MyInfo
+    },
+    {
+      path: "/Profiles/Dashboard/Notifications",
+      name: "Notifications",
+      component: Notifications
+    },
+    {
+      path: "/Profiles/Dashboard/PaymentInfo",
+      name: "PaymentInfo",
+      component: PaymentInfo
+    },
+    {
+      path: "/Profiles/Dashboard/Preferences",
+      name: "Preferences",
+      component: Preferences
+    },
+    {
+      path: "/Profiles/Dashboard/SavedMessages",
+      name: "SavedMessages",
+      component: SavedMessages
+    },
+    {
+      path: "/Profiles/Dashboard/SentMessages",
+      name: "SentMessages",
+      component: SentMessages
+    },
+    {
+      path: "/Specialties",
+      name: "Specialties",
       component: Specialties
     },
     {
-      path: '/Profiles/SpecialistProfiles',
-      name: 'SpecialistProfiles',
+      path: "/Profiles/SpecialistProfiles",
+      name: "SpecialistProfiles",
       component: SpecialistProfiles
     }
   ]
-})
+});
 
 // route guard
 router.beforeEach((to, from, next) => {
   if (to.matched.some(rec => rec.meta.requiresAuth)) {
-    let user = firebase.auth().currentUser
+    let user = firebase.auth().currentUser;
     if (user) {
       // user signed in, proceed to router
-      next()
+      next();
     } else {
       // no user signed in redirect to login
-      next({name: 'Login'})
+      next({ name: "Login" });
     }
   } else {
-    next()
+    next();
   }
 });
 

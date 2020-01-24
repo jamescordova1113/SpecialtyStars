@@ -138,16 +138,16 @@ export default {
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"
         },
-        // {
+        {
           
-        //   text: "Create Worker Profile",
-        //   route: "/Profiles/CreateWorkerProfile"
-        // },
-        // {
+          text: "Worker Dashboard",
+          route: "/Profiles/WorkerDashBoard"
+        },
+        {
           
-        //   text: "Create Employer Profile",
-        //   route: "/Profiles/CreateEmployerProfile"
-        // },
+          text: "Employer Dashboard",
+          route: "/Profiles/EmployerDashBoard"
+        },
         {
           
           text: "Message Board",

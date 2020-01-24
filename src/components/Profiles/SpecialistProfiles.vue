@@ -310,7 +310,7 @@ export default {
   beforeCreate() {
     // fetch data from firestore
     db.collection("specialistProfile")
-      .orderBy("city")
+      
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
