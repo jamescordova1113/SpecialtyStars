@@ -44,7 +44,7 @@
             </router-link> -->
           
           <router-link :to="{ name: 'Login' }">
-            <v-btn color="white" v-if="!user.isLoggedIn">{{
+            <v-btn text v-if="!user.isLoggedIn">{{
               this.loginText
             }}</v-btn>
           </router-link>
@@ -52,7 +52,7 @@
             this.logoutText
           }}</v-btn>
           <router-link to="/Signup">
-            <v-btn color="white">
+            <v-btn text>
               <span class="text-center">Sign Up</span>
             </v-btn>
           </router-link>
@@ -138,16 +138,16 @@ export default {
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"
         },
-        {
+        // {
           
-          text: "Create Worker Profile",
-          route: "/Profiles/CreateWorkerProfile"
-        },
-        {
+        //   text: "Create Worker Profile",
+        //   route: "/Profiles/CreateWorkerProfile"
+        // },
+        // {
           
-          text: "Create Employer Profile",
-          route: "/Profiles/CreateEmployerProfile"
-        },
+        //   text: "Create Employer Profile",
+        //   route: "/Profiles/CreateEmployerProfile"
+        // },
         {
           
           text: "Message Board",

@@ -1,31 +1,43 @@
 <template>
   <v-container>
     <v-flex text-xs-center>
-      <v-row class="mb-6" justify="center" align="center" no-gutters>
-        <v-col lg="3"> </v-col>
+      <v-row justify="center" align="center" no-gutters>
+
         <v-col lg="6">
           <div class="max-width: 100%">
-            <h2 class=" PageTitle ">
+            <h2 class=" PageTitle text-center ">
               Home For Employers
             </h2>
           </div>
         </v-col>
-        <v-col lg="3">
-          <div>
-             <router-link
-          to="/Signup"
-          >
-            <v-btn color="orange" tile dark> Sign up FREE! </v-btn>
-             </router-link>
-          </div>
-        </v-col>
       </v-row>
+        <v-row class="mb-6" justify="center" align="center" no-gutters>
+        <v-col >
+         <div class="carousel">
+          <v-carousel
+            cycle
+            height="350"
+            hide-delimiter-background
+            show-arrows-on-hover
+          >
+            <v-carousel-item v-for="(slide, i) in slides" :key="i">
+              <v-sheet :color="colors[i]" height="100%">
+                <v-row class="fill-height" align="center" justify="center">
+                  <div class="display-3">{{ slide }} Slide</div>
+                </v-row>
+              </v-sheet>
+            </v-carousel-item>
+          </v-carousel>
+        </div>
+        </v-col>
+        </v-row>
+        
     </v-flex>
     <div>
       <v-flex text-xs-center>
         <v-row class="mb-6" justify="center" align="center" no-gutters>
-          <v-col lg="6">
-            <v-card class="MainInfoCard">
+          <v-col>
+           
               <v-card-text>
                 <v-flex text-xs-center>
                   <v-col class="MainInfo text-center">
@@ -56,37 +68,29 @@
                   resource for labor like Specialty Stars.
                 </p>
               </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col lg="3">
-            <v-img src="../assets/images/plumber.jpg" max-width="400px">
-            </v-img>
           </v-col>
         </v-row>
       </v-flex>
     </div>
-      <v-layout>
-        <v-row class="mb-6" justify="center" align="center" no-gutters>
-          <v-flex xs3>
-              <v-img src="../assets/images/painter.jpg" max-width="400px">
-              </v-img>
-          </v-flex>
-          <v-flex xs3>
-              <v-img src="../assets/images/glazer.jpg" max-width="400px">
-              </v-img>
-          </v-flex>
-          <v-flex xs3>
-              <v-img src="../assets/images/cuttingtile.jpg" max-width="400px">
-              </v-img>
-          </v-flex>
-        </v-row>
-      </v-layout>
+      
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "NeedWorkers"
+  name: "NeedWorkers",
+   data() {
+    return {
+      colors: [
+        "indigo",
+        "warning",
+        "pink darken-2",
+        "red lighten-1",
+        "deep-purple accent-4"
+      ],
+      slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+    };
+  }
 };
 </script>
 

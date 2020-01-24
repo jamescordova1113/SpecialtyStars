@@ -1,140 +1,145 @@
 <template>
   <v-container>
     <v-flex text-xs-center>
-      <v-row class="mb-6" justify="center" align="center" no-gutters>
-        <v-col lg="3"> </v-col>
-        <v-col lg="6">
-          <div class="max-width: 100%">
-            <h2 class=" PageTitle ">
-              Home For Worker
-            </h2>
-          </div>
-        </v-col>
-        <v-col lg="3">
-          <div>
-             <router-link
-          to="/Signup"
-          >
-            <v-btn color="orange" tile dark> Sign up FREE! </v-btn>
-             </router-link>
-          </div>
-        </v-col>
+      <v-row class="mb-0" justify="center" align="center" no-gutters>
+        <h2 class=" PageTitle ">
+          Worker Home
+        </h2>
       </v-row>
     </v-flex>
+    
+    <div class="carousel">
+      <v-carousel
+        cycle
+        height="350"
+        hide-delimiter-background
+        show-arrows-on-hover
+      >
+        <v-carousel-item v-for="(slide, i) in slides" :key="i">
+          <v-sheet :color="colors[i]" height="100%">
+            <v-row class="fill-height" align="center" justify="center">
+              <div class="display-3">{{ slide }} Slide</div>
+            </v-row>
+          </v-sheet>
+        </v-carousel-item>
+      </v-carousel>
+    </div>
+    <div>
+    <v-row class="mt-6" justify="center" align="center no-gutters">
+      <p>
+        Welcome to “Specialty Stars” a new and convenient resource for hard
+        working people and their employers to connect. Specialty Stars is
+        tailored for people in the Construction, Home services, and other labor
+        generated industries. Hard working people can easily find work by
+        showcasing their skills in an online profile, meanwhile, employers can
+        browse those profiles and quickly find who they’re looking for. Whether
+        you need work or you need workers, Specialty Stars connects you faster
+        and easier than ever before. It’s free to sign up, and free to browse
+        profiles, all from your phone. Sign up for free today!
+      </p>
+    </v-row>
+    </div>
     <div>
       <v-flex text-xs-center>
-        <v-row class="mb-6" justify="center" align="center" no-gutters>
-          <v-col lg="8">
-            <v-card class="MainInfoCard">
-              <v-card-text>
-                <v-flex text-xs-center>
-                  <v-col class="MainInfo text-center">
-                    <div class="max-width: 100%">
-                      <h3 class="orange--text">
-                        What’s Your Specialty?!
-                      </h3>
-                    </div>
-                  </v-col>
-                </v-flex>
-                <p class="CardText">
-                  Got skills but no work? Maybe you have a trade but are doing
-                  something else in the mean time? If you are not a member of
-                  the local union, it can be difficult to find steady work in
-                  your trade and the crazy thing is there is tons of work in
-                  South Fl. In fact, employers in your area need someone like
-                  you but can’t find you other than word of mouth, that’s also
-                  crazy! Maybe you are new to South Florida, need a job, but
-                  don’t know many people. Showcase your skills on Specialty
-                  Stars and let the work find you! If you are a hard worker,
-                  employers need you.. Introduce yourself on Specialty Stars,
-                  Get found today! Ever want to advertise your services but
-                  don’t have a license? Specialty Stars lets you advertise to
-                  the people who are looking for you! Whether you just started
-                  in your field or you have many years experience; Whether you
-                  have a job or not, Why not see which companies need you and
-                  how much they pay. Maybe you are looking for weekend work,
-                  night work, or side jobs? Whatever you are looking for,
-                  Specialty Stars has it!
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col lg="4">
-            <v-img src="../assets/images/mudding2.jpg" max-width="450px">
-            </v-img>
+        <v-row class="mb-0" justify="center" align="center" no-gutters>
+          <v-col>
+            <!-- <v-card class="MainInfoCard"> -->
+            <v-card-text>
+              <v-flex text-xs-center>
+                <v-col class="MainInfo ">
+                  <div class="max-width: 100%">
+                    <h3 class="orange--text">
+                      What’s Your Specialty?!
+                    </h3>
+                  </div>
+                </v-col>
+              </v-flex>
+              <p class="CardText">
+                Got skills but no work? Maybe you have a trade but are doing
+                something else in the mean time? If you are not a member of the
+                local union, it can be difficult to find steady work in your
+                trade and the crazy thing is there is tons of work in South Fl.
+                In fact, employers in your area need someone like you but can’t
+                find you other than word of mouth, that’s also crazy! Maybe you
+                are new to South Florida, need a job, but don’t know many
+                people. Showcase your skills on Specialty Stars and let the work
+                find you! If you are a hard worker, employers need you..
+                Introduce yourself on Specialty Stars, Get found today! Ever
+                want to advertise your services but don’t have a license?
+                Specialty Stars lets you advertise to the people who are looking
+                for you! Whether you just started in your field or you have many
+                years experience; Whether you have a job or not, Why not see
+                which companies need you and how much they pay. Maybe you are
+                looking for weekend work, night work, or side jobs? Whatever you
+                are looking for, Specialty Stars has it!
+              </p>
+            </v-card-text>
+            <!-- </v-card> -->
           </v-col>
         </v-row>
       </v-flex>
     </div>
     <div>
       <v-flex text-xs-center>
-        <v-row class="mb-6" justify="center" align="center" no-gutters>
-          <v-col lg="8">
-            <v-card class="MainInfoCard">
-              <v-card-text>
-                <v-flex text-xs-center>
-                  <v-col class="MainInfo text-center" xs-1 lg-4>
-                    <div class="max-width: 100%">
-                      <h3 class="orange--text">
-                        How Much Does It Cost To Post My Work Profile On The
-                        Specialty Stars Website?
-                      </h3>
-                    </div>
-                  </v-col>
-                </v-flex>
-                <p class="CardText">
-                  Absolutely NOTHING! Using the Specialty Stars website is FREE
-                  and easy for skilled workers; all you need Is a smartphone to
-                  upload your profile information. Employers can then find and
-                  contact you based on how your skills match up with what they
-                  need.
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col lg="4">
-            <v-img src="../assets/images/concretefinish.jpg" max-width="450px">
-            </v-img>
+        <v-row class="mb-0" justify="center" align="center" no-gutters>
+          <v-col>
+            <!-- <v-card class="MainInfoCard"> -->
+            <v-card-text>
+              <v-flex text-xs-center>
+                <v-col class="MainInfo " xs-1 lg-4>
+                  <div class="max-width: 100%">
+                    <h3 class="orange--text">
+                      How Much Does It Cost To Post My Work Profile On The
+                      Specialty Stars Website?
+                    </h3>
+                  </div>
+                </v-col>
+              </v-flex>
+              <p class="CardText">
+                Absolutely NOTHING! Using the Specialty Stars website is FREE
+                and easy for skilled workers; all you need Is a smartphone to
+                upload your profile information. Employers can then find and
+                contact you based on how your skills match up with what they
+                need.
+              </p>
+            </v-card-text>
+            <!-- </v-card> -->
           </v-col>
         </v-row>
       </v-flex>
     </div>
     <div>
       <v-flex text-xs-center>
-        <v-row class="mb-6" justify="left" align="center" no-gutters>
-          <v-col lg="8">
-            <v-card class="MainInfoCard">
-              <v-card-text>
-                <v-flex text-xs-center>
-                  <v-col class="MainInfo text-center" xs-1 lg-4>
-                    <div class="max-width: 100%">
-                      <h3 class="orange--text">
-                        How Do I get Started?
-                      </h3>
-                    </div>
-                  </v-col>
-                </v-flex>
-                <p class="CardText">
-                  If you are a skilled worker available for work, it is as easy
-                  as 1-2-3 to get started:
-                </p>
+        <v-row class="mb-0" justify="left" align="center" no-gutters>
+          <v-col>
+            <!-- <v-card class="MainInfoCard"> -->
+            <v-card-text>
+              <v-flex text-xs-center>
+                <v-col class="MainInfo" xs-1 lg-4>
+                  <div class="max-width: 100%">
+                    <h3 class="orange--text">
+                      How Do I get Started?
+                    </h3>
+                  </div>
+                </v-col>
+              </v-flex>
+              <p class="CardText">
+                If you are a skilled worker available for work, it is as easy as
+                1-2-3 to get started:
+              </p>
 
-                <ol class="CardText">
-                  <li>Sign up for free.</li>
-                  <li>Fill out a profile questionnaire and post it.</li>
-                  <li>Wait for an employer to text or call you!</li>
-                </ol>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col lg="4">
-            <v-img src="../assets/images/concretetexture.jpg" max-width="450px">
-            </v-img>
+              <ol class="CardText">
+                <li>Sign up for free.</li>
+                <li>Fill out a profile questionnaire and post it.</li>
+                <li>Wait for an employer to text or call you!</li>
+              </ol>
+            </v-card-text>
+            <!-- </v-card> -->
           </v-col>
         </v-row>
       </v-flex>
 
-      <v-flex text-xs-center align-center>
+      <!-- <v-flex text-xs-center align-center>
         <v-row class="mb-6" justify="center" no-gutters>
           <v-col class="MainInfo text-center" xs-12>
             <div class="max-width: 100%">
@@ -144,14 +149,26 @@
             </div>
           </v-col>
         </v-row>
-      </v-flex>
+      </v-flex> -->
     </div>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "WorkersPage"
+  name: "WorkersPage",
+  data() {
+    return {
+      colors: [
+        "indigo",
+        "warning",
+        "pink darken-2",
+        "red lighten-1",
+        "deep-purple accent-4"
+      ],
+      slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+    };
+  }
 };
 </script>
 

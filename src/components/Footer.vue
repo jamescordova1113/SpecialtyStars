@@ -19,30 +19,26 @@
         </v-btn>
       </v-card-text>
 
-      <v-card-text class="white--text pt-0">
-        Check out our Social Media Channels! Become part of the Specialty Stars
-        Community.
-      </v-card-text>
       <v-flex>
         <v-row class="justify-center">
           <v-col cols="3">
             <h2>Community</h2>
              <router-link to="../FooterLinks/Guidlines">
-            <v-btn text>
+            <v-btn text small>
               Guidlines
             </v-btn>
              </router-link>
             <v-spacer />
                          <router-link to="../FooterLinks/Events">
 
-            <v-btn text>
+            <v-btn text small>
               Events
             </v-btn>
                          </router-link>
             <v-spacer />
              <router-link to="../FooterLinks/SuperStars">
 
-            <v-btn text>
+            <v-btn text small>
               Super Stars
             </v-btn>
              </router-link>
@@ -51,21 +47,21 @@
             <h2>Company</h2>
                          <router-link to="../FooterLinks/Advertising">
 
-            <v-btn text>
+            <v-btn text small>
               Advertising
             </v-btn>
                          </router-link>
             <v-spacer />
              <router-link to="../FooterLinks/Press">
 
-            <v-btn text>
+            <v-btn text small>
               Press
             </v-btn>
              </router-link>
             <v-spacer />
              <router-link to="../FooterLinks/JoinTheTeam">
 
-            <v-btn text>
+            <v-btn text small>
               Join The Team
             </v-btn>
              </router-link>
@@ -76,7 +72,7 @@
             <h2>Help</h2>
                          <router-link to="../FooterLinks/HelpCenter">
 
-            <v-btn text>
+            <v-btn text small>
               Help Center
             </v-btn>
                          </router-link>
@@ -85,14 +81,14 @@
             <v-spacer />
                          <router-link to="../FooterLinks/Resources">
 
-            <v-btn text>
+            <v-btn text small>
               Resources
             </v-btn>
                          </router-link>
             <v-spacer />
              <router-link to="../FooterLinks/Safety">
 
-            <v-btn text>
+            <v-btn text small>
               Safety
             </v-btn>
              </router-link>
@@ -101,21 +97,21 @@
             <h2>Legal</h2>
                          <router-link to="../FooterLinks/TermsOfUse">
 
-            <v-btn text>
+            <v-btn text small>
               Terms of Use
             </v-btn>
                          </router-link>
             <v-spacer />
              <router-link to="../FooterLinks/PrivacyPolicy">
 
-            <v-btn text>
+            <v-btn text small>
               Privacy Policy
             </v-btn>
              </router-link>
             <v-spacer />
              <router-link to="../FooterLinks/CookiePolicy">
 
-            <v-btn text>
+            <v-btn text small>
               Cookie Policy
             </v-btn>
              </router-link>
