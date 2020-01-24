@@ -92,7 +92,7 @@ export default {
   methods: {
     login() {
       if (this.email && this.password) {
-        console.log("trying to log in")
+        // console.log("trying to log in")
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
