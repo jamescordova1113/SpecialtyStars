@@ -15,7 +15,7 @@
     
         <v-container class="my-4 proCards">
           <v-row justify="center">
-            <v-card class="filterCard" width="300px" height="250px">
+            <v-card class="filterCard" width="300px" height="300px">
               <v-card-title>
                 Filter results
               </v-card-title>
@@ -296,7 +296,7 @@ export default {
     },
     filteredProfiles:function(){
       return this.pros.filter((pro) => {
-        return (pro.specialty.match(this.searchspec), pro.experience.match(this.searchexp), pro.zip.match(this.searchzip))
+        return (pro.specialty.match(this.searchspec) && pro.experience.match(this.searchexp) && pro.zip.match(this.searchzip))
       });
     }
   },
