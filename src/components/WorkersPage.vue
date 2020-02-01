@@ -63,9 +63,8 @@
                 find you other than word of mouth, that’s also crazy! Maybe you
                 are new to South Florida, need a job, but don’t know many
                 people. Showcase your skills on Specialty Stars and let the work
-                find you! If you are a hard worker, employers need you..
-                Introduce yourself on Specialty Stars, Get found today! Ever
-                want to advertise your services but don’t have a license?
+                find you! If you are a hard worker, employers need you.
+                Introduce yourself on Specialty Stars, Get found today! 
                 Specialty Stars lets you advertise to the people who are looking
                 for you! Whether you just started in your field or you have many
                 years experience; Whether you have a job or not, Why not see

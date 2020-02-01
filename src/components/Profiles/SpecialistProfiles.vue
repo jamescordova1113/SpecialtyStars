@@ -13,16 +13,15 @@
     </v-toolbar>
 
     
-        
         <v-container class="my-4 proCards">
           <v-row justify="center">
-            <v-card class="filterCard" width="300px" height="350px">
+            <v-card class="filterCard" width="300px" height="250px">
               <v-card-title>
                 Filter results
               </v-card-title>
               <v-select
                 class="select"
-                v-model="specialty"
+                v-model="searchspec"
                 :items="specialty"
                 label="Specialty"
                 data-vv-name="select"
@@ -30,42 +29,26 @@
               </v-select>
               <v-select
                 class="select"
-                v-model="location"
-                :items="location"
-                label="Location"
-                data-vv-name="select"
-              >
-              </v-select>
-              <v-select
-                class="select"
-                v-model="items"
+                v-model="searchexp"
                 :items="items"
-                label="Helper/Mechanic"
+                label="Experience"
                 data-vv-name="select"
               >
               </v-select>
-              <v-card-actions class="justify-center">
-                <v-btn
-                  class="filterButton"
-                  color="primary lighten-2"
-                  v-on="on"
-                  dark
-                  tile
-                  right
-                  @click.stop="dialog = true"
-                >
-                  Submit
-                </v-btn>
-              </v-card-actions>
+              <input class="ml-5" type="text" v-model="searchzip" placeholder="Search by zipcode"
+              />
+                      
+
+              
             </v-card>
-            <div v-for="pro in pros" :key="pro.id">
+            <div v-for="pro in filteredProfiles" :key="pro.id">
               <v-flex style="width: 350px">
                 
                 <v-card
                   class="mx-auto profileCard"
                   outlined
                   width="300px"
-                  height="350px"
+                  height="370px"
                 >
                   <v-card-title
                     class="headline primary lighten-2 white--text"
@@ -77,12 +60,14 @@
                     </v-img>
                   </v-avatar>
                   <v-card-text class="proCards">
-                    <span class="event">City: {{ pro.city }}</span>
+                    <span class="event">City: {{ pro.location }}</span>
+                    <br />
+                    <span class="event">Zip Code: {{ pro.zip }}</span>
                     <br />
                     <span class="event"> Specialty: {{ pro.specialty }}</span>
                     <br />
                     <span class="event"
-                      >Experience: {{ pro.yrsexperience }} Years</span
+                      >Experience: {{ pro.experience }} </span
                     >
                     <br />
                     <span class="event"
@@ -224,10 +209,10 @@
                   <!-- modal end -->
                 </v-card>
               </v-flex>
-            </div>
+                                </div>
+
           </v-row>
         </v-container>
-      
   </v-container>
 </template>
 
@@ -286,7 +271,7 @@ export default {
         "Tree Work",
         "Warehouse"
       ],
-      items: ["Helper", "Mechanic"],
+      items: ["Laborer", "Apprentice", "Journeyman"],
       location: ["Woodinville", "CDA", "Boise"],
       colors: [
         "indigo",
@@ -298,13 +283,21 @@ export default {
       slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       pros: [],
       myIcon: "mdi-account-card-details-outline",
-      dialog: false
+      dialog: false,
+      searchzip: '',
+      searchexp: '',
+      searchspec: ''
     };
   },
   methods: {},
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    filteredProfiles:function(){
+      return this.pros.filter((pro) => {
+        return (pro.specialty.match(this.searchspec), pro.experience.match(this.searchexp), pro.zip.match(this.searchzip))
+      });
     }
   },
   beforeCreate() {
