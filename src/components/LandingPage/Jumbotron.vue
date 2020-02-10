@@ -31,7 +31,7 @@
         </h1>
       </v-col>
     </v-row>
-    <div class="text-center">
+    <div class="buttons text-center">
       <router-link to="/WorkersPage">
         <v-btn
           @click="setCookie('worker')"
@@ -72,15 +72,15 @@ export default {
     };
   },
   methods: {
-    setCookie(userType) {
-      if (userType == "employer") {
-        document.cookie =
-          'userType=employer; expires=Fri, 31 Dec 9999 23:59:59 GMT"';
-      } else {
-        document.cookie =
-          "userType=worker; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-      }
-    }
+    // setCookie(userType) {
+    //   if (userType == "employer") {
+    //     document.cookie =
+    //       'userType=employer; expires=Fri, 31 Dec 9999 23:59:59 GMT"';
+    //   } else {
+    //     document.cookie =
+    //       "userType=worker; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    //   }
+    // }
   }
 };
 </script>
@@ -96,5 +96,8 @@ export default {
   margin-right: 20px;
   margin-left: 20px;
   padding: 15px;
+}
+.buttons {
+  margin-bottom: 20px
 }
 </style>

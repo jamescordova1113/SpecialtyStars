@@ -30,7 +30,7 @@
               <v-select
                 class="select"
                 v-model="searchexp"
-                :items="items"
+                :items="experience"
                 label="Experience"
                 data-vv-name="select"
               >
@@ -271,7 +271,7 @@ export default {
         "Tree Work",
         "Warehouse"
       ],
-      items: ["Laborer", "Apprentice", "Journeyman"],
+      experience: ["Laborer", "Apprentice", "Journeyman"],
       location: ["Woodinville", "CDA", "Boise"],
       colors: [
         "indigo",

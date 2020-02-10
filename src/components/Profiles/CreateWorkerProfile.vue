@@ -9,12 +9,12 @@
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
-            v-model="specialistProfile.name"
+            v-model="users.name"
             label="First Name:"
             required
           ></v-text-field>
           <v-select
-            v-model="specialistProfile.specialty"
+            v-model="users.specialty"
             :items="items"
             label="Specialty"
             data-vv-name="select"
@@ -22,46 +22,50 @@
           ></v-select>
           <v-text-field 
           type="phone"
-          v-model="specialistProfile.phone" 
+          v-model="users.phone" 
           label="Phone#:" 
           required
           ></v-text-field>
           <v-text-field
-            v-model="specialistProfile.email"
+            v-model="users.email"
             :rules="emailRules"
             label="E-mail:"
           ></v-text-field>
-          <v-text-field
-            v-model="specialistProfile.yrsexperience"
-            label="Years of experience:"
+          <v-select
+            v-model="users.experience"
+            :items="experience"
+            label="Experience:"
+            data-vv-name="experience"
             required
-          ></v-text-field>
+          ></v-select>
           <v-text-field
-            v-model="specialistProfile.minperhour"
+          type="number"
+            v-model="users.minperhour"
             label="Minimum Dollars Per Hour:"
             required
           ></v-text-field>
            <v-select
-            v-model="specialistProfile.perferredContact"
+            v-model="users.preferredContact"
             :items="contactTypes"
-            label="Perferred Method of Contact"
-            data-vv-name="perferredContact"
+            label="Preferred Method of Contact"
+            data-vv-name="preferredContact"
             required
           ></v-select>
           <v-select
-            v-model="specialistProfile.canContact"
+            v-model="users.canContact"
             :items="contacts"
             label="Can Contact Me"
             data-vv-name="canContact"
             required
           ></v-select>
           <v-text-field
-            v-model="specialistProfile.City"
+            v-model="users.city"
             label="City:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="specialistProfile.zip"
+            type="number"
+            v-model="users.zip"
             label="Zip Code:"
             required
           ></v-text-field>
@@ -98,16 +102,27 @@ export default {
   name: "CreateWorkerProfile",
   data() {
     return {
+      phone: '',
+      minperhour: '',
+      email: '',
+      preferredContact: '',
+      canContact: '',
+      location: '',
+      city: '',
+      zip: '',
       valid: false,
       name: null,
       specialty: null,
-      specialistProfile: {name: null},
+      users: {name: null},
       filename: null,
-      event: {title : null},
-      feedback: null,
       imageUrl: null,
       image: null,
       imageHeight: 0,
+      experience: [
+        "Laborer",
+        "Apprentice",
+        "Journeyman"
+      ],
       items: [
         "Agricultural",
         "Air Conditioning",
@@ -201,8 +216,8 @@ export default {
       // need code here
     },
     update() {
-      //save specialistProfile to firestore
-      db.collection("specialistProfile")
+      //save users to firestore
+      db.collection("specialtistProfile")
         .doc(this.specialistProfile.id)
         .update({
         name: this.specialistProfile.name,
@@ -211,9 +226,9 @@ export default {
         email: this.specialistProfile.email,
         minperhour: this.specialistProfile.minperhour,
         specialty: this.specialistProfile.specialty,
-        yrsexperience: this.specialistProfile.yrsexperience,
+        experience: this.specialistProfile.experience,
         zip: this.specialistProfile.zip,
-        perferredContact: this.specialistProfile.perferredContact,
+        preferredContact: this.specialistProfile.preferredContact,
         canContact: this.specialistProfile.canContact,
         portPic1: this.specialistProfile.portPic1,
         portPic2: this.specialistProfile.portPic2,
@@ -244,14 +259,14 @@ export default {
     onPickFile() {
       this.$refs.fileInput.click();
     },
-    onFilePicked(event) {
-      const files = event.target.files;
+    onFilePicked(specialistProfile) {
+      const files = specialistProfile.target.files;
       this.filename = files[0].name;
       if (this.filename.lastIndexOf(".") <= 0) {
         return alert("Please Select a valid Image File");
       }
       const fileReader = new FileReader();
-      fileReader.addEventListener("load", () => {
+      fileReader.addspecialistProfileListener("load", () => {
         this.imageUrl = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
@@ -262,16 +277,32 @@ export default {
       // upload the file to firebase storage
     }
   },
+  // beforeCreate() {
+  //   db.collection("specialistProfile")
+  //   .get()
+  //   .then(snapshot => {
+  //       snapshot.forEach(doc => {
+  //         let pro = doc.data();
+  //         pro.id = doc.id;
+  //         this.pros.push(pro);
+  //       });
+  // });
+  // },
   created() {
     // console.log(firebase.auth().currentUser.uid)
     let ref = db
-      .collection("specilistProfile")
+      .collection("users")
+      .documentID("currentUser.uid")
       .where(
-        'userID',
+        firebase.firestore.FieldPath.documentID(),
         "==",
-        'ZEbwfj8hU2h8smWVzEecLynB3X73'
-        // firebase.auth().currentUser.uid
+        this.$route.params.user_id
       );
+        'user_id',
+        "==",
+        '4cODmDds8ycLu0wAlixxSKXF1Kk2'
+        firebase.auth().currentUser.uid
+    
     // console.log('got Here')
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {

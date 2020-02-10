@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       role: "",
-      roles: [{ text: "Worker" }, { text: "Employer" }],
+      roles: [{ text: "Looking for work" }, { text: "Employer - Contractor" }, { text: "Employer - Homeowner" },],
       email: null,
       password: null,
       alias: null,
@@ -104,7 +104,17 @@ export default {
                     alias: this.alias,
                     geolocation: null,
                     user_id: cred.user.uid
-                  });
+                  })
+                  .then(cred => {
+                    this.myCred = cred
+                    db.collection("specialistProfile")
+                    .doc(cred.user.id)
+                    .set({
+                      role: this.role,
+                      alias: this.alias,
+                      user_id: cred.user.uid
+                    });
+                  })
               })
               .then(() => {
                 this.myCred.user

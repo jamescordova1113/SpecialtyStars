@@ -3,7 +3,7 @@
     <v-card
       flat
       tile
-      class="indigo lighten-1 white--text text-center"
+      class="primary lighten-3 white--text text-center"
       width="100%"
     >
       <v-card-text>

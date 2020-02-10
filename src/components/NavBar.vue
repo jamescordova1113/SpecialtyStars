@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <div>
     <v-toolbar elevation="2">
       <div class="myNav">
         <v-app-bar app absolute flat width="100%" permanent>
@@ -13,6 +13,7 @@
             class="darkgrey--text"
             @click="drawer = !drawer"
           ></v-app-bar-nav-icon>
+          
 
           <router-link
             to="/"
@@ -31,8 +32,8 @@
             Welcome, {{ this.user.alias }}
           </v-label>
           <v-spacer></v-spacer>
-          
-            <!-- <router-link to="/WorkersPage">
+
+          <!-- <router-link to="/WorkersPage">
               <v-btn color="white" @click="setCookie('worker')">
                 <span class="text-center">Need Work</span>
               </v-btn>
@@ -42,11 +43,9 @@
                 <span class="text-center">Need Worker</span>
               </v-btn>
             </router-link> -->
-          
+
           <router-link :to="{ name: 'Login' }">
-            <v-btn text v-if="!user.isLoggedIn">{{
-              this.loginText
-            }}</v-btn>
+            <v-btn text v-if="!user.isLoggedIn">{{ this.loginText }}</v-btn>
           </router-link>
           <v-btn v-if="user.isLoggedIn" color="white" @click="logout">{{
             this.logoutText
@@ -110,7 +109,7 @@
         </div>
       </v-list>
     </v-navigation-drawer>
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -121,39 +120,34 @@ export default {
     return {
       drawer: false,
       links: [
-        {  text: "Home", route: "/" },
-                {  text: "Specialties", route: "/Specialties" },
-        {  text: "Employer", route: "/NeedWorkers" },
-                {  text: "Worker", route: "/WorkersPage" },
+        { text: "Home", route: "/" },
+        { text: "Specialties", route: "/Specialties" },
+        { text: "Employer", route: "/NeedWorkers" },
+        { text: "Worker", route: "/WorkersPage" },
         {
-          
-          text: "Login",
-          route: "/login"
-        },
-        {  text: "Help", route: "/Help" }
-      ],
-      memberLinks: [
-        {
-          
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"
         },
         {
-          
+          text: "Login",
+          route: "/login"
+        },
+        { text: "Help", route: "/Help" }
+      ],
+      memberLinks: [
+        
+        {
           text: "Worker Dashboard",
           route: "/Profiles/WorkerDashBoard"
         },
         {
-          
           text: "Employer Dashboard",
           route: "/Profiles/EmployerDashBoard"
         },
         {
-          
           text: "Message Board",
           route: "/MessageBoard"
-        },
-        
+        }
       ],
       loginText: "Login",
       logoutText: "Logout",
@@ -173,15 +167,15 @@ export default {
           });
           this.$router.push({ name: "Login" });
         });
-    },
-     setCookie(userType) {
-      if (userType == 'employer') {
-        document.cookie = 'userType=employer; expires=Fri, 31 Dec 9999 23:59:59 GMT"'
-      } else {
-        document.cookie = 'userType=worker; expires=Fri, 31 Dec 9999 23:59:59 GMT'
-      }
     }
+    //    setCookie(userType) {
+    //     if (userType == 'employer') {
+    //       document.cookie = 'userType=employer; expires=Fri, 31 Dec 9999 23:59:59 GMT"'
+    //     } else {
+    //       document.cookie = 'userType=worker; expires=Fri, 31 Dec 9999 23:59:59 GMT'
+    //     }
   },
+
   computed: {
     user() {
       return this.$store.state.user;

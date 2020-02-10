@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+// import * as firebase from 'firebase'
 
 Vue.use(Vuex);
 
@@ -8,6 +9,8 @@ export const store = new Vuex.Store({
     user: {
       alias: "guest",
       isAdmin: false,
+      isWorker: false,
+      isEmployer: false,
       isLoggedIn: false
     },
     config: {
@@ -17,8 +20,8 @@ export const store = new Vuex.Store({
       newEmail: null,
       newPassword: null,
     },
-    specialistProfile: {
-      city: '',
+    loadedpros: {
+      location: '',
       contact: '',
       image: '',
       minperhour: '',
@@ -26,17 +29,23 @@ export const store = new Vuex.Store({
       title: '',
       yrsexperience: '',
       email: '',
-      zip: ''
-
-    }
-  },
-  getters: {
-
-  },
+      zip: '',
+      alias: '',
+      experience: '',
+      featured: '',
+      name: '',
+      preferredContact: '',
+      phone: '',
+      role: '',
+      user_id: '',
+ }
+ },
   mutations: {
     setCredentials (state, payload) {
       state.user.alias = payload.alias;
       state.user.isAdmin = payload.isAdmin;
+      state.user.isWorker = payload.isWorker;
+      state.user.isEmployer = payload.isEmployer;
       state.user.isLoggedIn = payload.isLoggedIn;
     },
     setConfig (state, payload) {
@@ -45,6 +54,51 @@ export const store = new Vuex.Store({
       state.config.sendVerify = payload.sendVerify;
       state.config.newEmail = payload.newEmail;
       state.config.newPassword = payload.newPassword
+    },
+    createPro (state, payload) {
+      state.loadMeetuos.push(payload)
     }
-  }
-});
+  },
+actions: {
+  // createPro ({commit}, payload) {
+  //   const pro = {
+  //     name: payload.name,
+  //     city: payload.city,
+  //     email: payload.email,
+  //     zip: payload.zip,
+  //     experience: payload.experience,
+  //     image: payload.image,
+  //     location: payload.location,
+  //     minperhour: payload.minperhour,
+  //     canContact: payload.canContact,
+  //     preferredContact: payload.preferredContact,
+  //     phone: payload.phone,
+  //     specialty: payload.specialty,
+  //     yrsexperience: payload.yrsexperience
+  //   }
+    // firebase.database().ref('specialistProfile').push(pro)
+    // .then((data) => {
+    //   console.log(data)
+    //   commit('createPro', pro)
+    // })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
+    // Reach out to firebase and store it
+  },
+  getters: {
+    loadedpros (state) {
+      return state.loadedpros.sort((proA, proB) => {
+        return proA.zip > proB.zip
+      })
+    },
+    loadedPro (state) {
+      return (proId) => {
+      return state.loadedPros.find((pro) => {
+        return pro.id === proId
+      })
+    }
+    }
+  },
+})
+// })
