@@ -9,7 +9,7 @@
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
-            v-model="users.name"
+            v-model="specialistProfile.firstname"
             label="First Name:"
             required
           ></v-text-field>
@@ -20,11 +20,11 @@
             data-vv-name="select"
             required
           ></v-select>
-          <v-text-field 
-          type="phone"
-          v-model="users.phone" 
-          label="Phone#:" 
-          required
+          <v-text-field
+            type="phone"
+            v-model="users.phone"
+            label="Phone#:"
+            required
           ></v-text-field>
           <v-text-field
             v-model="users.email"
@@ -39,12 +39,12 @@
             required
           ></v-select>
           <v-text-field
-          type="number"
+            type="number"
             v-model="users.minperhour"
             label="Minimum Dollars Per Hour:"
             required
           ></v-text-field>
-           <v-select
+          <v-select
             v-model="users.preferredContact"
             :items="contactTypes"
             label="Preferred Method of Contact"
@@ -69,31 +69,38 @@
             label="Zip Code:"
             required
           ></v-text-field>
-           
-            <v-flex class="xs12 sm6 mb-2">
-              <v-btn class="primary" raised @click="onPickFile">Change Profile Image</v-btn>
-              <input
-                type="file"
-                style="display: none"
-                ref="fileInput"
-                accept="image/*"
-                @change="onFilePicked"
-              />
-            </v-flex>
-            <img :src="imageUrl" :height="imageHeight" />
-            <v-flex class="xs12 sm6 mt-5 offset-sm1">
-              <v-btn :disabled="!valid" color="success" class="mr-4" @click="update">Update</v-btn>
-              <router-link :to="{ name : 'Index'}">
-                <v-btn color="error" class="mr-4">Cancel</v-btn>
-              </router-link>
-            </v-flex>
+
+          <v-flex class="xs12 sm6 mb-2">
+            <v-btn class="primary" raised @click="onPickFile"
+              >Change Profile Image</v-btn
+            >
+            <input
+              type="file"
+              style="display: none"
+              ref="fileInput"
+              accept="image/*"
+              @change="onFilePicked"
+            />
+          </v-flex>
+          <img :src="imageUrl" :height="imageHeight" />
+          <v-flex class="xs12 sm6 mt-5 offset-sm1">
+            <v-btn
+              :disabled="!valid"
+              color="success"
+              class="mr-4"
+              @click="update"
+              >Update</v-btn
+            >
+            <router-link :to="{ name: 'Index' }">
+              <v-btn color="error" class="mr-4">Cancel</v-btn>
+            </router-link>
+          </v-flex>
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
         </v-form>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
-
 
 <script>
 import db from "@/firebase/init";
@@ -102,27 +109,23 @@ export default {
   name: "CreateWorkerProfile",
   data() {
     return {
-      phone: '',
-      minperhour: '',
-      email: '',
-      preferredContact: '',
-      canContact: '',
-      location: '',
-      city: '',
-      zip: '',
+      phone: "",
+      minperhour: "",
+      email: "",
+      preferredContact: "",
+      canContact: "",
+      location: "",
+      city: "",
+      zip: "",
       valid: false,
       name: null,
       specialty: null,
-      users: {name: null},
+      users: { name: null },
       filename: null,
       imageUrl: null,
       image: null,
       imageHeight: 0,
-      experience: [
-        "Laborer",
-        "Apprentice",
-        "Journeyman"
-      ],
+      experience: ["Laborer", "Apprentice", "Journeyman"],
       items: [
         "Agricultural",
         "Air Conditioning",
@@ -171,16 +174,8 @@ export default {
         "Tree Work",
         "Warehouse"
       ],
-      contactTypes: [
-        "Message",
-        "Email",
-        "Phone Call",
-        "Text"
-      ],
-      contacts: [
-        "Homeowners",
-        "Employers"
-      ],
+      contactTypes: ["Message", "Email", "Phone Call", "Text"],
+      contacts: ["Homeowners", "Employers"],
       titleRules: [
         v => !!v || "Title is required",
         v => (v && v.length <= 10) || "Title must be less than 50 characters"
@@ -205,10 +200,11 @@ export default {
         v =>
           (v && v.length <= 15) || "Button Text must be less than 15 characters"
       ],
-       emailRules: [
+      emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ]
+      ],
+      specialistProfile: null
     };
   },
   methods: {
@@ -220,36 +216,43 @@ export default {
       db.collection("specialtistProfile")
         .doc(this.specialistProfile.id)
         .update({
-        name: this.specialistProfile.name,
-        city: this.specialistProfile.city,
-        phone: this.specialistProfile.phone,
-        email: this.specialistProfile.email,
-        minperhour: this.specialistProfile.minperhour,
-        specialty: this.specialistProfile.specialty,
-        experience: this.specialistProfile.experience,
-        zip: this.specialistProfile.zip,
-        preferredContact: this.specialistProfile.preferredContact,
-        canContact: this.specialistProfile.canContact,
-        portPic1: this.specialistProfile.portPic1,
-        portPic2: this.specialistProfile.portPic2,
-        portPic3: this.specialistProfile.portPic3,
-        portPic4: this.specialistProfile.portPic4,
-        portPic5: this.specialistProfile.portPic5
+          name: this.specialistProfile.name,
+          city: this.specialistProfile.city,
+          phone: this.specialistProfile.phone,
+          email: this.specialistProfile.email,
+          minperhour: this.specialistProfile.minperhour,
+          specialty: this.specialistProfile.specialty,
+          experience: this.specialistProfile.experience,
+          zip: this.specialistProfile.zip,
+          preferredContact: this.specialistProfile.preferredContact,
+          canContact: this.specialistProfile.canContact,
+          portPic1: this.specialistProfile.portPic1,
+          portPic2: this.specialistProfile.portPic2,
+          portPic3: this.specialistProfile.portPic3,
+          portPic4: this.specialistProfile.portPic4,
+          portPic5: this.specialistProfile.portPic5
         })
-        .then( () => {
+        .then(() => {
           if (this.image)
-          return firebase.storage().ref('Images/' + this.filename).put(this.image)
+            return firebase
+              .storage()
+              .ref("Images/" + this.filename)
+              .put(this.image);
         })
-        .then( () => {
+        .then(() => {
           if (this.image)
-          return firebase.storage().ref('Images/' + this.filename).getDownloadURL()
+            return firebase
+              .storage()
+              .ref("Images/" + this.filename)
+              .getDownloadURL();
         })
         .then(URL => {
           if (URL)
-          db.collection("specialistProfile").doc(this.specialistProfile.id)
-          .update({
-            image: URL
-          })
+            db.collection("specialistProfile")
+              .doc(this.specialistProfile.id)
+              .update({
+                image: URL
+              });
         })
         .then(() => {
           this.$router.push({ name: "Index" });
@@ -292,18 +295,13 @@ export default {
     // console.log(firebase.auth().currentUser.uid)
     let ref = db
       .collection("users")
-      .documentID("currentUser.uid")
       .where(
-        firebase.firestore.FieldPath.documentID(),
-        "==",
-        this.$route.params.user_id
-      );
         'user_id',
         "==",
-        '4cODmDds8ycLu0wAlixxSKXF1Kk2'
         firebase.auth().currentUser.uid
-    
-    // console.log('got Here')
+      );
+  
+    console.log('got Here')
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
         // console.log('got a doc')
