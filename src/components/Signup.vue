@@ -30,18 +30,21 @@
           <v-text-field
             type="alias"
             v-model="alias"
-            label="Nick Name:"
+            label="First Name:"
             required
           ></v-text-field>
-          <v-select
-            v-model="role"
-            v-bind:items="roles"
-            label="Role:"
-            data-vv-name="role"
-            single-line
-            bottom
-            required
-          ></v-select>
+          <v-switch
+            label="Looking for Work?"
+            input-value="worker"
+            color="primary lighten-2"
+          >
+          </v-switch>
+          <v-switch
+            label="Looking for a Worker"
+            input-value="employer"
+            color="primary lighten-2"
+          >
+          </v-switch>
 
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
@@ -63,14 +66,14 @@ export default {
   name: "Signup",
   data() {
     return {
-      role: "",
-      roles: [{ text: "Looking for work" }, { text: "Employer - Contractor" }, { text: "Employer - Homeowner" },],
       email: null,
       password: null,
       alias: null,
       feedback: null,
       slug: null,
       myCred: null,
+      worker: false,
+      employer: false,
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -80,7 +83,13 @@ export default {
 
   methods: {
     signup() {
-      if (this.alias && this.email && this.password && this.role) {
+      if (
+        this.alias &&
+        this.email &&
+        this.password &&
+        this.worker &&
+        this.employer
+      ) {
         this.slug = slugify(this.alias, {
           replacement: "-",
           remove: /[$*_+~.()'"!\-:@]/g,
@@ -96,25 +105,16 @@ export default {
               .auth()
               .createUserWithEmailAndPassword(this.email, this.password)
               .then(cred => {
-                this.myCred = cred
+                this.myCred = cred;
                 db.collection("users")
                   .doc(cred.user.uid)
                   .set({
-                    role: this.role,
+                    worker: this.worker,
+                    employer: this.employer,
                     alias: this.alias,
                     geolocation: null,
                     user_id: cred.user.uid
-                  })
-                  .then(cred => {
-                    this.myCred = cred
-                    db.collection("specialistProfile")
-                    .doc(cred.user.id)
-                    .set({
-                      role: this.role,
-                      alias: this.alias,
-                      user_id: cred.user.uid
-                    });
-                  })
+                  });
               })
               .then(() => {
                 this.myCred.user

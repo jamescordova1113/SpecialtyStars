@@ -118,7 +118,8 @@ export default {
                           alias: doc.data().alias,
                           isLoggedIn: true,
                           isAdmin: doc.data().isAdmin,
-                          role: doc.data().role
+                          worker: doc.data().worker,
+                          employer: doc.data().employer
                         });
                         this.$router.push({ name: "SpecialistProfiles" });
                       }

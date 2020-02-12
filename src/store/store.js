@@ -54,7 +54,7 @@ export const store = new Vuex.Store({
       state.config.newPassword = payload.newPassword
     },
     createPro (state, payload) {
-      state.loadMeetuos.push(payload)
+      state.loadPros.push(payload)
     }
   },
 actions: {

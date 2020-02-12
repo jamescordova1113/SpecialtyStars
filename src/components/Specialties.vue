@@ -1,13 +1,14 @@
 <template>
   <container bg fill-height grid-list-md text-xs-center>
-    <layout>
+    
     <v-card class="main">
       <v-card-title class="justify-center">
         Specialties
       </v-card-title>
-    <v-row justify="center" align="center" no-gutters>
-      <v-flex xs3>
-        <v-list class="list">
+      <div class="justify-center">
+    <v-layout>
+      <v-flex xs4 offset-2>
+        <v-list class="list" >
           <li>Agricultural</li>
           <li>Air Conditioning</li>
           <li>Auto Paint & Body</li>
@@ -25,7 +26,7 @@
           <li>Electrical</li>
         </v-list>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs4>
         <v-list>
           
           <li>Flooring</li>
@@ -45,7 +46,7 @@
           <li>Janitorial</li>
         </v-list>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs4>
         <v-list>
           <li>Landscaping</li>
           <li>Marine</li>
@@ -65,9 +66,11 @@
           <li>Warehouse</li>
         </v-list>
       </v-flex>
-    </v-row>
+    </v-layout>
+    </div>
     </v-card>
-    </layout>
+  
+
   </container >
 </template>
 
