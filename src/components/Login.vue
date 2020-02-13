@@ -118,10 +118,10 @@ export default {
                           alias: doc.data().alias,
                           isLoggedIn: true,
                           isAdmin: doc.data().isAdmin,
-                          worker: doc.data().worker,
-                          employer: doc.data().employer
+                          isWorker: doc.data().worker,
+                          isEmployer: doc.data().employer
                         });
-                        this.$router.push({ name: "SpecialistProfiles" });
+                        this.$router.push({ name: "users" });
                       }
                     });
                 });

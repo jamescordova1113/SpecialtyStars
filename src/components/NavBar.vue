@@ -45,9 +45,9 @@
             </router-link> -->
 
           <router-link :to="{ name: 'Login' }">
-            <v-btn text v-if="!user.isLoggedIn">{{ this.loginText }}</v-btn>
+            <v-btn text v-if="!user.isWorker || !user.isEmployer">{{ this.loginText }}</v-btn>
           </router-link>
-          <v-btn v-if="user.isLoggedIn" color="white" @click="logout">{{
+          <v-btn v-if="user.isWorker || user.isEmployer" color="white" @click="logout">{{
             this.logoutText
           }}</v-btn>
           <router-link to="/Signup">
@@ -84,13 +84,21 @@
         </v-list-item>
 
         <v-divider inset></v-divider>
-        <v-subheader inset v-if="!user.isLoggedIn"
+        <v-subheader inset v-if="!user.isWorker || user.isEmployer"
           >Login For More Options</v-subheader
         >
-        <v-subheader inset v-if="user.isLoggedIn">Client Area</v-subheader>
-        <div v-if="user.isLoggedIn">
+        <v-subheader inset v-if="user.isWorker || user.isEmpolyer">Client Area</v-subheader>
+        <div v-if="user.isWorker">
           <v-list-item
-            v-for="link in memberLinks"
+            v-for="link in employerLinks"
+            :key="link.text"
+            router
+            :to="link.route"
+          ></v-list-item>
+        </div>
+           <div v-if="user.isEmployer">
+          <v-list-item
+            v-for="link in employerLinks"
             :key="link.text"
             router
             :to="link.route"
@@ -134,21 +142,31 @@ export default {
         },
         { text: "Help", route: "/Help" }
       ],
-      memberLinks: [
+      workerLinks: [
         
         {
           text: "Worker Dashboard",
           route: "/Profiles/WorkerDashBoard"
         },
-        {
-          text: "Employer Dashboard",
-          route: "/Profiles/EmployerDashBoard"
-        },
+       
         {
           text: "Message Board",
           route: "/MessageBoard"
         }
       ],
+      employerLinks: [
+        
+        {
+          text: "Employer Dashboard",
+          route: "/Profiles/EmployerDashBoard"
+        },
+       
+        {
+          text: "Message Board",
+          route: "/MessageBoard"
+        }
+      ],
+       
       loginText: "Login",
       logoutText: "Logout",
       signupText: "Signup"
@@ -163,6 +181,8 @@ export default {
           this.$store.commit("setCredentials", {
             alias: "guest",
             isLoggedIn: false,
+            isWorker: false,
+            isEmployer: false,
             isAdmin: false
           });
           this.$router.push({ name: "Login" });

@@ -302,7 +302,7 @@ export default {
   },
   beforeCreate() {
     // fetch data from firestore
-    db.collection("specialistProfile")
+    db.collection("users")
       
       .get()
       .then(snapshot => {

@@ -13,7 +13,7 @@
     </v-toolbar>
     <v-card>
       <v-card-text>
-        <v-form @submit.prevent="signup" class="card-panel">
+        <v-form @submit="signup" class="card-panel">
           <v-text-field
             type="Email"
             v-model="email"
@@ -33,18 +33,20 @@
             label="First Name:"
             required
           ></v-text-field>
-          <v-switch
-            label="Looking for Work?"
-            input-value="worker"
-            color="primary lighten-2"
+          <v-checkbox
+          type="checkbox"
+            v-model="role"
+            value="Worker"
+            label="Looking for Work."
           >
-          </v-switch>
-          <v-switch
-            label="Looking for a Worker"
-            input-value="employer"
-            color="primary lighten-2"
+          </v-checkbox>
+          <v-checkbox
+          type="checkbox"
+           v-model="role"
+            value="Employer"
+            label="Looking for Worker."
           >
-          </v-switch>
+          </v-checkbox>
 
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
@@ -72,8 +74,7 @@ export default {
       feedback: null,
       slug: null,
       myCred: null,
-      worker: false,
-      employer: false,
+      role: [],
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -87,8 +88,8 @@ export default {
         this.alias &&
         this.email &&
         this.password &&
-        this.worker &&
-        this.employer
+        this.role
+        
       ) {
         this.slug = slugify(this.alias, {
           replacement: "-",
@@ -109,8 +110,7 @@ export default {
                 db.collection("users")
                   .doc(cred.user.uid)
                   .set({
-                    worker: this.worker,
-                    employer: this.employer,
+                    role: this.role,
                     alias: this.alias,
                     geolocation: null,
                     user_id: cred.user.uid

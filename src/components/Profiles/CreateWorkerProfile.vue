@@ -9,7 +9,7 @@
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
-            v-model="specialistProfile.firstname"
+            v-model="users.alias"
             label="First Name:"
             required
           ></v-text-field>
@@ -121,7 +121,7 @@ export default {
       name: null,
       specialty: null,
       users: { name: null },
-      filename: null,
+      alias: null,
       imageUrl: null,
       image: null,
       imageHeight: 0,
@@ -204,7 +204,7 @@ export default {
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
-      specialistProfile: null
+      specialistProfile: null,
     };
   },
   methods: {
@@ -213,24 +213,24 @@ export default {
     },
     update() {
       //save users to firestore
-      db.collection("specialtistProfile")
-        .doc(this.specialistProfile.id)
+      db.collection("users")
+        .doc(this.users.id)
         .update({
-          name: this.specialistProfile.name,
-          city: this.specialistProfile.city,
-          phone: this.specialistProfile.phone,
-          email: this.specialistProfile.email,
-          minperhour: this.specialistProfile.minperhour,
-          specialty: this.specialistProfile.specialty,
-          experience: this.specialistProfile.experience,
-          zip: this.specialistProfile.zip,
-          preferredContact: this.specialistProfile.preferredContact,
-          canContact: this.specialistProfile.canContact,
-          portPic1: this.specialistProfile.portPic1,
-          portPic2: this.specialistProfile.portPic2,
-          portPic3: this.specialistProfile.portPic3,
-          portPic4: this.specialistProfile.portPic4,
-          portPic5: this.specialistProfile.portPic5
+          name: this.users.name,
+          city: this.users.city,
+          phone: this.users.phone,
+          email: this.users.email,
+          minperhour: this.users.minperhour,
+          specialty: this.users.specialty,
+          experience: this.users.experience,
+          zip: this.users.zip,
+          preferredContact: this.users.preferredContact,
+          canContact: this.users.canContact,
+          portPic1: this.users.portPic1,
+          portPic2: this.users.portPic2,
+          portPic3: this.users.portPic3,
+          portPic4: this.users.portPic4,
+          portPic5: this.users.portPic5
         })
         .then(() => {
           if (this.image)
@@ -248,8 +248,8 @@ export default {
         })
         .then(URL => {
           if (URL)
-            db.collection("specialistProfile")
-              .doc(this.specialistProfile.id)
+            db.collection("users")
+              .doc(this.user.id)
               .update({
                 image: URL
               });
@@ -262,14 +262,14 @@ export default {
     onPickFile() {
       this.$refs.fileInput.click();
     },
-    onFilePicked(specialistProfile) {
-      const files = specialistProfile.target.files;
+    onFilePicked(users) {
+      const files = users.target.files;
       this.filename = files[0].name;
       if (this.filename.lastIndexOf(".") <= 0) {
         return alert("Please Select a valid Image File");
       }
       const fileReader = new FileReader();
-      fileReader.addspecialistProfileListener("load", () => {
+      fileReader.addusersListener("load", () => {
         this.imageUrl = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
@@ -305,8 +305,8 @@ export default {
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
         // console.log('got a doc')
-        this.specialistProfile = doc.data();
-        this.specialistProfile.id = doc.id;
+        this.users = doc.data();
+        this.users.id = doc.id;
       });
     });
   }
