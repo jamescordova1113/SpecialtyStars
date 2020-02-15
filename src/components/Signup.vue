@@ -33,19 +33,9 @@
             label="First Name:"
             required
           ></v-text-field>
-          <v-checkbox
-          type="checkbox"
-            v-model="role"
-            value="Worker"
-            label="Looking for Work."
-          >
+          <v-checkbox id="1" v-model="isWorker" label="Looking for Work.">
           </v-checkbox>
-          <v-checkbox
-          type="checkbox"
-           v-model="role"
-            value="Employer"
-            label="Looking for Worker."
-          >
+          <v-checkbox id="2" v-model="isEmployer" label="Looking for Worker.">
           </v-checkbox>
 
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
@@ -74,7 +64,8 @@ export default {
       feedback: null,
       slug: null,
       myCred: null,
-      role: [],
+      isWorker: [{ id: 1, name: "isWorker", checked: true }],
+      isEmployer: [{ id: 2, name: "isEmployer", checked: true }],
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -84,13 +75,7 @@ export default {
 
   methods: {
     signup() {
-      if (
-        this.alias &&
-        this.email &&
-        this.password &&
-        this.role
-        
-      ) {
+      if ((this.alias && this.email && this.password) || this.roles) {
         this.slug = slugify(this.alias, {
           replacement: "-",
           remove: /[$*_+~.()'"!\-:@]/g,
@@ -110,7 +95,8 @@ export default {
                 db.collection("users")
                   .doc(cred.user.uid)
                   .set({
-                    role: this.role,
+                    isWorker: this.isWorker,
+                    isEmployer: this.isEmployer,
                     alias: this.alias,
                     geolocation: null,
                     user_id: cred.user.uid
