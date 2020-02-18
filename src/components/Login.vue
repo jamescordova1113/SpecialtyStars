@@ -118,8 +118,8 @@ export default {
                           alias: doc.data().alias,
                           isLoggedIn: true,
                           isAdmin: doc.data().isAdmin,
-                          isWorker: doc.data().worker,
-                          isEmployer: doc.data().employer
+                          isWorker: doc.data().isworker,
+                          isEmployer: doc.data().isemployer
                         });
                         this.$router.push({ name: "users" });
                       }

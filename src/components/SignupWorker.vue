@@ -8,7 +8,7 @@
       flat
     >
       <v-row justify="space-around">
-        <v-toolbar-title><h1>Signup Free</h1></v-toolbar-title>
+        <v-toolbar-title><h1>Signup For Worker</h1></v-toolbar-title>
       </v-row>
     </v-toolbar>
     <v-card>
@@ -33,10 +33,8 @@
             label="First Name:"
             required
           ></v-text-field>
-          <v-checkbox id="1" v-model="isWorker" label="Looking for Work.">
-          </v-checkbox>
-          <v-checkbox id="2" v-model="isEmployer" label="Looking for Worker.">
-          </v-checkbox>
+          
+          
 
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
@@ -63,9 +61,10 @@ export default {
       alias: null,
       feedback: null,
       slug: null,
+      isWorker: true,
       myCred: null,
-      isWorker: [{ id: 1, name: "isWorker", checked: true }],
-      isEmployer: [{ id: 2, name: "isEmployer", checked: true }],
+      // isWorker: [{ id: 1, name: "isWorker", checked: true }],
+      // isEmployer: [{ id: 2, name: "isEmployer", checked: true }],
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -75,7 +74,11 @@ export default {
 
   methods: {
     signup() {
-      if ((this.alias && this.email && this.password) || this.roles) {
+      if (
+        (this.alias && this.email && this.password) ||
+        this.isWorker ||
+        this.isEmployer
+      ) {
         this.slug = slugify(this.alias, {
           replacement: "-",
           remove: /[$*_+~.()'"!\-:@]/g,
@@ -96,7 +99,6 @@ export default {
                   .doc(cred.user.uid)
                   .set({
                     isWorker: this.isWorker,
-                    isEmployer: this.isEmployer,
                     alias: this.alias,
                     geolocation: null,
                     user_id: cred.user.uid

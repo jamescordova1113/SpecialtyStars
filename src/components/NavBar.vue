@@ -1,4 +1,4 @@
-<template>
+<template v-slot:activator="{ on }">
   <div>
     <v-toolbar elevation="2">
       <div class="myNav">
@@ -22,15 +22,22 @@
             class="myAnchor"
           >
             <img
-              class="mr-3"
+              class="mr-3 d-none d-lg-block hidden-lg-and-down"
               :src="require('../assets/sslogov2.png')"
               height="65"
             />
+             <img
+              class="mr-3 hidden-lg-and-up"
+              :src="require('../assets/sslogov2.png')"
+              height="35"
+            />
           </router-link>
-          <v-spacer class="d-none d-lg-block"></v-spacer>
-          <v-label class="mr-4 d-none d-lg-block">
+          <v-spacer class="d-none d-lg-block "></v-spacer>
+          <div class="mr-4 d-none d-lg-block hidden-lg-and-down">
+          <v-label>
             Welcome, {{ this.user.alias }}
           </v-label>
+          </div>
           <v-spacer></v-spacer>
 
           <!-- <router-link to="/WorkersPage">
@@ -50,11 +57,40 @@
           <v-btn v-if="user.isWorker || user.isEmployer" color="white" @click="logout">{{
             this.logoutText
           }}</v-btn>
-          <router-link to="/Signup">
-            <v-btn text>
-              <span class="text-center">Sign Up</span>
-            </v-btn>
-          </router-link>
+          <div class="text-center">
+   
+           <v-menu
+      transition="slide-x-transition"
+      bottom
+      right
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="orange"
+          text
+          v-on="on"
+          
+          
+        >
+          Signup
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item
+          v-for="item in items"
+          :key="item.text"
+          router
+          :to="item.route"
+          
+          
+          
+        >
+          <v-list-item-title class="orange--text" >{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+          </div>
         </v-app-bar>
       </div>
     </v-toolbar>
@@ -127,6 +163,10 @@ export default {
   data() {
     return {
       drawer: false,
+      items: [
+        { title: "As a Worker", route: "/SignupWorker" }, 
+        { title: "As a Employer", route: "/SignupEmployer" }
+      ],
       links: [
         { text: "Home", route: "/" },
         { text: "Specialties", route: "/Specialties" },

@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Index from "@/components/Index";
-import Signup from "@/components/Signup";
+import SignupWorker from "@/components/SignupWorker";
+import SignupEmployer from "@/components/SignupEmployer";
 import Login from "@/components/Login";
 import Contact from "@/components/Contact";
 import CreateWorkerProfile from "@/components/Profiles/CreateWorkerProfile";
@@ -53,9 +54,14 @@ const router = new Router({
       // }
     },
     {
-      path: "/signup",
-      name: "Signup",
-      component: Signup
+      path: "/signupWorker",
+      name: "SignupWorker",
+      component: SignupWorker
+    },
+    {
+      path: "/signupEmployer",
+      name: "SignupEmployer",
+      component: SignupEmployer
     },
     {
       path: "/login",
