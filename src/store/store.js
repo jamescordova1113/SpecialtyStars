@@ -8,10 +8,9 @@ export const store = new Vuex.Store({
   state: {
     user: {
       alias: "guest",
-      isAdmin: false,
+      isLoggedIn: false,
       isWorker: false,
-      isEmployer: false,
-      isLoggedIn: false
+      isEmployer: false
     },
     config: {
       contactEmail: null,
@@ -43,9 +42,9 @@ export const store = new Vuex.Store({
   mutations: {
     setCredentials (state, payload) {
       state.user.alias = payload.alias;
-      state.user.isAdmin = payload.isAdmin;
-      state.user.role = payload.role;
-      // state.user.isLoggedIn = payload.isLoggedIn;
+      state.user.isLoggedIn = payload.isLoggedIn;
+      state.user.isWorker = payload.isWorker;
+      state.user.isEmployer = payload.isEmployer;
     },
     setConfig (state, payload) {
       state.config.contactEmail = payload.contactEmail;

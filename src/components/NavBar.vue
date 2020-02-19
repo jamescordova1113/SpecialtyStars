@@ -13,7 +13,6 @@
             class="darkgrey--text"
             @click="drawer = !drawer"
           ></v-app-bar-nav-icon>
-          
 
           <router-link
             to="/"
@@ -26,7 +25,7 @@
               :src="require('../assets/sslogov2.png')"
               height="65"
             />
-             <img
+            <img
               class="mr-3 hidden-lg-and-up"
               :src="require('../assets/sslogov2.png')"
               height="35"
@@ -34,9 +33,7 @@
           </router-link>
           <v-spacer class="d-none d-lg-block "></v-spacer>
           <div class="mr-4 d-none d-lg-block hidden-lg-and-down">
-          <v-label>
-            Welcome, {{ this.user.alias }}
-          </v-label>
+            <v-label> Welcome, {{ this.user.alias }} </v-label>
           </div>
           <v-spacer></v-spacer>
 
@@ -52,44 +49,37 @@
             </router-link> -->
 
           <router-link :to="{ name: 'Login' }">
-            <v-btn text v-if="!user.isWorker || !user.isEmployer">{{ this.loginText }}</v-btn>
+            <v-btn text v-if="!user.isWorker || !user.isEmployer">{{
+              this.loginText
+            }}</v-btn>
           </router-link>
-          <v-btn v-if="user.isWorker || user.isEmployer" color="white" @click="logout">{{
-            this.logoutText
-          }}</v-btn>
+          <v-btn
+            v-if="user.isWorker || user.isEmployer"
+            color="white"
+            @click="logout"
+            >{{ this.logoutText }}</v-btn
+          >
           <div class="text-center">
-   
-           <v-menu
-      transition="slide-x-transition"
-      bottom
-      right
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          color="orange"
-          text
-          v-on="on"
-          
-          
-        >
-          Signup
-        </v-btn>
-      </template>
+            <v-menu transition="slide-x-transition" bottom right>
+              <template v-slot:activator="{ on }">
+                <v-btn color="orange" text v-on="on">
+                  Signup
+                </v-btn>
+              </template>
 
-      <v-list>
-        <v-list-item
-          v-for="item in items"
-          :key="item.text"
-          router
-          :to="item.route"
-          
-          
-          
-        >
-          <v-list-item-title class="orange--text" >{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+              <v-list>
+                <v-list-item
+                  v-for="item in items"
+                  :key="item.text"
+                  router
+                  :to="item.route"
+                >
+                  <v-list-item-title class="orange--text">{{
+                    item.title
+                  }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </div>
         </v-app-bar>
       </div>
@@ -120,21 +110,34 @@
         </v-list-item>
 
         <v-divider inset></v-divider>
-        <v-subheader inset v-if="!user.isWorker || user.isEmployer"
+        <v-subheader inset v-if="!user.isLoggedIn"
           >Login For More Options</v-subheader
         >
-        <v-subheader inset v-if="user.isWorker || user.isEmpolyer">Client Area</v-subheader>
-        <div v-if="user.isWorker">
+        <v-subheader inset v-if="user.isLoggedIn"
+          >Client Area</v-subheader
+        >
+        <div v-if="user.isEmployer">
           <v-list-item
             v-for="link in employerLinks"
             :key="link.text"
             router
             :to="link.route"
-          ></v-list-item>
+          >
+            <v-list-item-action>
+              <router-link to="/" tag="span" style="cursor: pointer">
+                <v-icon class="primary--text">{{ link.icon }}</v-icon>
+              </router-link>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="primary--text">{{
+                link.text
+              }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </div>
-           <div v-if="user.isEmployer">
+         <div v-if="user.isWorker">
           <v-list-item
-            v-for="link in employerLinks"
+            v-for="link in workerLinks"
             :key="link.text"
             router
             :to="link.route"
@@ -164,7 +167,7 @@ export default {
     return {
       drawer: false,
       items: [
-        { title: "As a Worker", route: "/SignupWorker" }, 
+        { title: "As a Worker", route: "/SignupWorker" },
         { title: "As a Employer", route: "/SignupEmployer" }
       ],
       links: [
@@ -183,30 +186,28 @@ export default {
         { text: "Help", route: "/Help" }
       ],
       workerLinks: [
-        
         {
           text: "Worker Dashboard",
           route: "/Profiles/WorkerDashBoard"
         },
-       
+
         {
           text: "Message Board",
           route: "/MessageBoard"
         }
       ],
       employerLinks: [
-        
         {
           text: "Employer Dashboard",
           route: "/Profiles/EmployerDashBoard"
         },
-       
+
         {
           text: "Message Board",
           route: "/MessageBoard"
         }
       ],
-       
+
       loginText: "Login",
       logoutText: "Logout",
       signupText: "Signup"
@@ -222,8 +223,7 @@ export default {
             alias: "guest",
             isLoggedIn: false,
             isWorker: false,
-            isEmployer: false,
-            isAdmin: false
+            isEmployer: false
           });
           this.$router.push({ name: "Login" });
         });

@@ -117,9 +117,8 @@ export default {
                         this.$store.commit("setCredentials", {
                           alias: doc.data().alias,
                           isLoggedIn: true,
-                          isAdmin: doc.data().isAdmin,
-                          isWorker: doc.data().isWorker,
-                          isEmployer: doc.data().isEmployer
+                          isWorker: true,
+                          isEmployer: true
                         });
                         this.$router.push({ name: "SpecialistProfiles" });
                       }
