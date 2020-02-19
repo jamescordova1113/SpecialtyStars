@@ -75,9 +75,8 @@ export default {
   methods: {
     signup() {
       if (
-        (this.alias && this.email && this.password) ||
-        this.isWorker ||
-        this.isEmployer
+        (this.alias && this.email && this.password && this.isWorker)
+        
       ) {
         this.slug = slugify(this.alias, {
           replacement: "-",

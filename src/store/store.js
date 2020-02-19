@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
     user: {
       alias: "guest",
       isAdmin: false,
-      role: '',
+      isWorker: false,
+      isEmployer: false,
       isLoggedIn: false
     },
     config: {

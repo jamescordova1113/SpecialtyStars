@@ -7,7 +7,25 @@
     </v-toolbar>
     <v-card class="loginTitle">
       <v-card-text>
-        <v-form ref="form" v-model="valid" lazy-validation>
+        <v-form
+          ref="form"
+          @click="
+            update(
+              users.alias,
+              users.specialty,
+              users.phone,
+              users.email,
+              users.experience,
+              users.minperhour,
+              users.preferredContact,
+              users.canContact,
+              users.city,
+              users.zip
+            )
+          "
+          v-model="valid"
+          lazy-validation
+        >
           <v-text-field
             v-model="users.alias"
             label="First Name:"
@@ -17,7 +35,7 @@
             v-model="users.specialty"
             :items="items"
             label="Specialty"
-            data-vv-name="select"
+            data-vv-name="items"
             required
           ></v-select>
           <v-text-field
@@ -33,7 +51,7 @@
           ></v-text-field>
           <v-select
             v-model="users.experience"
-            :items="experience"
+            :items="experiences"
             label="Experience:"
             data-vv-name="experience"
             required
@@ -46,16 +64,16 @@
           ></v-text-field>
           <v-select
             v-model="users.preferredContact"
-            :items="contactTypes"
+            :items="contact"
             label="Preferred Method of Contact"
-            data-vv-name="preferredContact"
+            data-vv-name="contact"
             required
           ></v-select>
           <v-select
             v-model="users.canContact"
             :items="contacts"
             label="Can Contact Me"
-            data-vv-name="canContact"
+            data-vv-name="contacts"
             required
           ></v-select>
           <v-text-field
@@ -95,7 +113,7 @@
               <v-btn color="error" class="mr-4">Cancel</v-btn>
             </router-link>
           </v-flex>
-          <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
+          <!-- <p class="red--text text-center" v-if="feedback">{{ feedback }}</p> -->
         </v-form>
       </v-card-text>
     </v-card>
@@ -120,12 +138,26 @@ export default {
       valid: false,
       name: null,
       specialty: null,
-      users: { name: null },
+      users: {
+        name: null,
+        phone: "",
+        minperhour: "",
+        email: "",
+        preferredContact: "",
+        canContact: "",
+        location: "",
+        city: "",
+        zip: "",
+        specialty: null,
+        image: null,
+        experience: null
+      },
       alias: null,
       imageUrl: null,
       image: null,
       imageHeight: 0,
-      experience: ["Laborer", "Apprentice", "Journeyman"],
+      experience: null,
+      experiences: ["Laborer", "Apprentice", "Journeyman"],
       items: [
         "Agricultural",
         "Air Conditioning",
@@ -174,7 +206,8 @@ export default {
         "Tree Work",
         "Warehouse"
       ],
-      contactTypes: ["Message", "Email", "Phone Call", "Text"],
+
+      contact: ["Message", "Email", "Phone Call", "Text"],
       contacts: ["Homeowners", "Employers"],
       titleRules: [
         v => !!v || "Title is required",
@@ -204,19 +237,21 @@ export default {
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
-      specialistProfile: null,
+      specialistProfile: null
+    };
+  },
+  firestore() {
+    return {
+      users: db.collection("users").orderBy("Alias")
     };
   },
   methods: {
-    signup() {
-      // need code here
-    },
     update() {
-      //save users to firestore
+      firebase.firestore();
       db.collection("users")
         .doc(this.users.id)
         .update({
-          name: this.users.name,
+          alias: this.users.alias,
           city: this.users.city,
           phone: this.users.phone,
           email: this.users.email,
@@ -226,11 +261,7 @@ export default {
           zip: this.users.zip,
           preferredContact: this.users.preferredContact,
           canContact: this.users.canContact,
-          portPic1: this.users.portPic1,
-          portPic2: this.users.portPic2,
-          portPic3: this.users.portPic3,
-          portPic4: this.users.portPic4,
-          portPic5: this.users.portPic5
+          image: this.users.image
         })
         .then(() => {
           if (this.image)
@@ -295,13 +326,9 @@ export default {
     // console.log(firebase.auth().currentUser.uid)
     let ref = db
       .collection("users")
-      .where(
-        'user_id',
-        "==",
-        firebase.auth().currentUser.uid
-      );
-  
-    console.log('got Here')
+      .where("user_id", "==", firebase.auth().currentUser.uid);
+
+    console.log("got Here");
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
         // console.log('got a doc')
