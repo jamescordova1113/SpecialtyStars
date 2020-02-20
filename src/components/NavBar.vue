@@ -55,7 +55,8 @@
           </router-link>
           <v-btn
             v-if="user.isWorker || user.isEmployer"
-            color="white"
+            
+            text
             @click="logout"
             >{{ this.logoutText }}</v-btn
           >

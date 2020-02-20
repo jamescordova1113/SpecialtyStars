@@ -11,28 +11,28 @@
           ref="form"
           @click="
             update(
-              users.alias,
-              users.specialty,
-              users.phone,
-              users.email,
-              users.experience,
-              users.minperhour,
-              users.preferredContact,
-              users.canContact,
-              users.city,
-              users.zip
+              alias,
+              specialty,
+              phone,
+              email,
+              experience,
+              minperhour,
+              preferredContact,
+              canContact,
+              city,
+              zip
             )
           "
           v-model="valid"
           lazy-validation
         >
           <v-text-field
-            v-model="users.alias"
+            v-model="alias"
             label="First Name:"
             required
           ></v-text-field>
           <v-select
-            v-model="users.specialty"
+            v-model="specialty"
             :items="items"
             label="Specialty"
             data-vv-name="items"
@@ -40,17 +40,17 @@
           ></v-select>
           <v-text-field
             type="phone"
-            v-model="users.phone"
+            v-model="phone"
             label="Phone#:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="users.email"
+            v-model="email"
             :rules="emailRules"
             label="E-mail:"
           ></v-text-field>
           <v-select
-            v-model="users.experience"
+            v-model="experience"
             :items="experiences"
             label="Experience:"
             data-vv-name="experience"
@@ -58,58 +58,65 @@
           ></v-select>
           <v-text-field
             type="number"
-            v-model="users.minperhour"
+            v-model="minperhour"
             label="Minimum Dollars Per Hour:"
             required
           ></v-text-field>
           <v-select
-            v-model="users.preferredContact"
+            v-model="preferredContact"
             :items="contact"
             label="Preferred Method of Contact"
             data-vv-name="contact"
             required
           ></v-select>
           <v-select
-            v-model="users.canContact"
+            v-model="canContact"
             :items="contacts"
             label="Can Contact Me"
             data-vv-name="contacts"
             required
           ></v-select>
           <v-text-field
-            v-model="users.city"
+            v-model="city"
             label="City:"
             required
           ></v-text-field>
           <v-text-field
             type="number"
-            v-model="users.zip"
+            v-model="zip"
             label="Zip Code:"
             required
           ></v-text-field>
 
           <v-flex class="xs12 sm6 mb-2">
-            <v-btn class="primary" raised @click="onPickFile"
-              >Change Profile Image</v-btn
-            >
-            <input
-              type="file"
-              style="display: none"
-              ref="fileInput"
-              accept="image/*"
-              @change="onFilePicked"
-            />
+            
+           <div >
+      <p>Upload a profile picture:</p>
+      <input type="file" @change="previewImage" accept="image/*" >
+    </div>
           </v-flex>
-          <img :src="imageUrl" :height="imageHeight" />
+          
+          <div>
+      <p>Progress: {{uploadValue.toFixed()+"%"}}
+      <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
+    </div>
+    <div v-if="imageData!=null">
+        <img class="preview" :src="picture">
+        <br>
+      <v-btn @click="onUpload">Upload Image</v-btn>
+    </div>
           <v-flex class="xs12 sm6 mt-5 offset-sm1">
             <v-btn
               :disabled="!valid"
               color="success"
               class="mr-4"
               @click="update"
-              >Update</v-btn
+              
+              >Post Profile</v-btn
             >
+           
             <router-link :to="{ name: 'Index' }">
+              
               <v-btn color="error" class="mr-4">Cancel</v-btn>
             </router-link>
           </v-flex>
@@ -206,7 +213,10 @@ export default {
         "Tree Work",
         "Warehouse"
       ],
-
+      imageData: null,
+      picture: null,
+      uploadValue: 0,
+date: new Date().toISOString().substr(0, 10),
       contact: ["Message", "Email", "Phone Call", "Text"],
       contacts: ["Homeowners", "Employers"],
       titleRules: [
@@ -240,77 +250,56 @@ export default {
       specialistProfile: null
     };
   },
+  
   firestore() {
     return {
-      users: db.collection("users").orderBy("Alias")
+      Profile: db.collection("specialistProfile").orderBy("createdAt")
     };
   },
   methods: {
     update() {
-      firebase.firestore();
-      db.collection("users")
-        .doc(this.users.id)
-        .update({
-          alias: this.users.alias,
-          city: this.users.city,
-          phone: this.users.phone,
-          email: this.users.email,
-          minperhour: this.users.minperhour,
-          specialty: this.users.specialty,
-          experience: this.users.experience,
-          zip: this.users.zip,
-          preferredContact: this.users.preferredContact,
-          canContact: this.users.canContact,
-          image: this.users.image
+      db.collection("specialistProfile")
+        .add({
+          alias: this.alias,
+          city: this.city,
+          phone: this.phone,
+          email: this.email,
+          minperhour: this.minperhour,
+          specialty: this.specialty,
+          experience: this.experience,
+          zip: this.zip,
+          preferredContact: this.preferredContact,
+          canContact: this.canContact,
+          image: this.image,
+          picture: this.picture
         })
-        .then(() => {
-          if (this.image)
-            return firebase
-              .storage()
-              .ref("Images/" + this.filename)
-              .put(this.image);
-        })
-        .then(() => {
-          if (this.image)
-            return firebase
-              .storage()
-              .ref("Images/" + this.filename)
-              .getDownloadURL();
-        })
-        .then(URL => {
-          if (URL)
-            db.collection("users")
-              .doc(this.user.id)
-              .update({
-                image: URL
-              });
-        })
-        .then(() => {
-          this.$router.push({ name: "Index" });
+    },
+    previewImage(event) {
+      this.uploadValue=0;
+      this.picture=null;
+      this.imageData = event.target.files[0];
+    },
+
+    onUpload(){
+      this.picture=null;
+      const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+      storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      }, error=>{console.log(error.message)},
+      ()=>{this.uploadValue=100;
+        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+          this.picture =url;
         });
-      // .catch(err => {});
-    },
-    onPickFile() {
-      this.$refs.fileInput.click();
-    },
-    onFilePicked(users) {
-      const files = users.target.files;
-      this.filename = files[0].name;
-      if (this.filename.lastIndexOf(".") <= 0) {
-        return alert("Please Select a valid Image File");
       }
-      const fileReader = new FileReader();
-      fileReader.addusersListener("load", () => {
-        this.imageUrl = fileReader.result;
-      });
-      fileReader.readAsDataURL(files[0]);
-      this.image = files[0];
-      this.imageHeight = 150;
+      );
+    }
+
+  },
       // const ext = filename.slice(filename.lastIndexOf("."));
       // console.log('files', files[0]);
       // upload the file to firebase storage
-    }
-  },
+    
+  
   // beforeCreate() {
   //   db.collection("specialistProfile")
   //   .get()
@@ -338,4 +327,14 @@ export default {
     });
   }
 };
+
+  
+
 </script>
+
+
+<style scoped>
+img.preview {
+  width: 150px;
+}
+</style>

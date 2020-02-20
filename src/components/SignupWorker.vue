@@ -124,7 +124,13 @@ export default {
               });
           }
         });
-      } else {
+      // } 
+      // .then (() => {
+      //   firebase 
+      //   .firestore()
+      //   createSpecialistProfile(this.users.user_id)
+      // }
+        } else {
         this.feedback = "Please enter data in all fields";
       }
     }

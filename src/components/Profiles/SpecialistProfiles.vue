@@ -12,207 +12,204 @@
       </v-row>
     </v-toolbar>
 
-    
-        <v-container class="my-4 proCards">
-          <v-row justify="center">
-            <v-card class="filterCard" width="300px" height="300px">
-              <v-card-title>
-                Filter results
-              </v-card-title>
-              <v-select
-                class="select"
-                v-model="searchspec"
-                :items="specialty"
-                label="Specialty"
-                data-vv-name="select"
-              >
-              </v-select>
-              <v-select
-                class="select"
-                v-model="searchexp"
-                :items="experience"
-                label="Experience"
-                data-vv-name="select"
-              >
-              </v-select>
-              <input class="ml-5" type="text" v-model="searchzip" placeholder="Search by zipcode"
-              />
-                      
+    <v-container class="my-4 proCards">
+      <v-row justify="center">
+        <v-card class="filterCard" width="300px" height="300px">
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-card-title>
+              Filter results
+            </v-card-title>
+            <v-select
+              class="select"
+              v-model="searchspec"
+              :items="specialty"
+              label="Specialty"
+              data-vv-name="select"
+            >
+            </v-select>
+            <v-select
+              class="select"
+              v-model="searchexp"
+              :items="experience"
+              label="Experience"
+              data-vv-name="select"
+            >
+            </v-select>
+            <input
+              class="ml-5"
+              type="text"
+              v-model="searchzip"
+              placeholder="Search by zipcode"
+            />
 
-              
-            </v-card>
-            <div v-for="pro in filteredProfiles" :key="pro.id">
-              <v-flex style="width: 350px">
-                
-                <v-card
-                  class="mx-auto profileCard"
-                  outlined
-                  width="300px"
-                  height="370px"
+            <v-btn color="red" dark @click="reset"> Reset </v-btn>
+          </v-form>
+        </v-card>
+        <div v-for="pro in pros" :key="pro.id">
+          <v-flex style="width: 350px">
+            <v-card
+              class="mx-auto profileCard"
+              outlined
+              width="300px"
+              height="370px"
+            >
+              <v-card-title
+                class="headline primary lighten-2 white--text"
+                primary-title
+                >{{ pro.specialty }}</v-card-title
+              >
+              <v-avatar class="ml-5 mt-1" size="100px">
+                <v-img class="white--text" v-bind:src="`${pro.image}`"> </v-img>
+              </v-avatar>
+              <v-card-text class="proCards">
+                <span class="event">City: {{ pro.location }}</span>
+                <br />
+                <span class="event">Zip Code: {{ pro.zip }}</span>
+                <br />
+                <span class="event"> Specialty: {{ pro.specialty }}</span>
+                <br />
+                <span class="event">Experience: {{ pro.experience }} </span>
+                <br />
+                <span class="event"
+                  >Min cost per hour: ${{ pro.minperhour }}</span
                 >
-                  <v-card-title
-                    class="headline primary lighten-2 white--text"
-                    primary-title
-                    >{{ pro.title }}</v-card-title
-                  >
-                  <v-avatar class="ml-5 mt-1" size="100px">
-                    <v-img class="white--text" v-bind:src="`${pro.image}`">
-                    </v-img>
-                  </v-avatar>
-                  <v-card-text class="proCards">
-                    <span class="event">City: {{ pro.location }}</span>
-                    <br />
-                    <span class="event">Zip Code: {{ pro.zip }}</span>
-                    <br />
-                    <span class="event"> Specialty: {{ pro.specialty }}</span>
-                    <br />
-                    <span class="event"
-                      >Experience: {{ pro.experience }} </span
-                    >
-                    <br />
-                    <span class="event"
-                      >Min cost per hour: ${{ pro.minperhour }}</span
-                    >
-                  </v-card-text>
-                  <v-layout class="explorelist">
-                    <v-flex>
-                      <!-- modal -->
-                      <v-card-actions class="justify-center">
-                        <v-dialog v-model="dialog" width="500">
-                          <template v-slot:activator="{ on }">
+              </v-card-text>
+              <v-layout class="explorelist">
+                <v-flex>
+                  <!-- modal -->
+                  <v-card-actions class="justify-center">
+                    <v-dialog v-model="dialog" width="500">
+                      <template v-slot:activator="{ on }">
+                        <v-btn
+                          class="explorebutton"
+                          color="primary lighten-2"
+                          v-on="on"
+                          dark
+                          tile
+                          right
+                          @click.stop="dialog = true"
+                        >
+                          View Profile
+                        </v-btn>
+                      </template>
+
+                      <v-card>
+                        <v-card-title
+                          class="headline primary lighten-2 white--text"
+                          primary-title
+                        >
+                          Specialist Profile: {{ pro.title }}
+                        </v-card-title>
+
+                        <v-avatar class="avatar" size="100px">
+                          <v-img
+                            class="white--text"
+                            v-bind:src="`${pro.image}`"
+                          >
+                          </v-img>
+                        </v-avatar>
+                        <v-card-text>
+                          <div>
+                            <h3>General Info</h3>
+                          </div>
+
+                          <div class="event">
+                            First Name: {{ pro.firstname }}
+                          </div>
+                          <div class="event">
+                            Specialty: {{ pro.specialty }}
+                          </div>
+                          <div class="event">
+                            Transportion to work: {{ pro.transportation }}
+                          </div>
+                          <div class="event">
+                            Looking for: {{ pro.workduration }}
+                          </div>
+                          <div class="event">I Live in: {{ pro.speccity }}</div>
+                          <div class="event">
+                            My minimum per hour: {{ pro.minperhour }}
+                          </div>
+                          <div class="event">
+                            I will travel {{ pro.traveldistance }} to work.
+                          </div>
+                          <h3>Trade specific Info:</h3>
+                          <div class="event">
+                            Mechanic or helper: {{ pro.helper }}
+                          </div>
+                          <div class="event">
+                            Have own tools: {{ pro.tools }}
+                          </div>
+                          <div class="event">
+                            (Helpers) I can make cuts and grout:
+                            {{ pro.Helpgroutcut }}
+                          </div>
+                          <div class="event">
+                            My strenghts: {{ pro.strengths }}
+                          </div>
+                          <div class="event">
+                            Specific experience: {{ pro.specworktypes }}
+                          </div>
+                          <div class="event">
+                            (Mechanics) I can install walls and floors:
+                            {{ pro.wallfloors }}
+                          </div>
+                          <div class="event">
+                            Can produce a level floor: {{ pro.levelfloors }}
+                          </div>
+                          <div class="event">
+                            Can produce a plumb wall: {{ pro.plumbwalls }}
+                          </div>
+
+                          <br />
+                          <div class="carousel">
+                            <v-carousel
+                              cycle
+                              height="350"
+                              hide-delimiter-background
+                              show-arrows-on-hover
+                            >
+                              <v-carousel-item
+                                v-for="(slide, i) in slides"
+                                :key="i"
+                              >
+                                <v-sheet :color="colors[i]" height="100%">
+                                  <v-row
+                                    class="fill-height"
+                                    align="center"
+                                    justify="center"
+                                  >
+                                    <div class="display-3">
+                                      {{ slide }} Slide
+                                    </div>
+                                  </v-row>
+                                </v-sheet>
+                              </v-carousel-item>
+                            </v-carousel>
+                          </div>
+                          <br />
+                          <div class="text--center">
                             <v-btn
-                              class="explorebutton"
+                              class="explore"
                               color="primary lighten-2"
-                              v-on="on"
                               dark
                               tile
-                              right
-                              @click.stop="dialog = true"
-                            >
-                              View Profile
+                              v-bind:href="`${pro.contact}`"
+                              >[ Message Me ]
                             </v-btn>
-                          </template>
+                          </div>
+                        </v-card-text>
+                      </v-card>
+                    </v-dialog>
+                  </v-card-actions>
+                </v-flex>
+              </v-layout>
 
-                          <v-card>
-                            <v-card-title
-                              class="headline primary lighten-2 white--text"
-                              primary-title
-                            >
-                              Specialist Profile: {{ pro.title }}
-                            </v-card-title>
-
-                            <v-avatar class="avatar" size="100px">
-                              <v-img
-                                class="white--text"
-                                v-bind:src="`${pro.image}`"
-                              >
-                              </v-img>
-                            </v-avatar>
-                            <v-card-text>
-                              <div>
-                                <h3>General Info</h3>
-                              </div>
-
-                              <div class="event">
-                                First Name: {{ pro.firstname }}
-                              </div>
-                              <div class="event">
-                                Specialty: {{ pro.specialty }}
-                              </div>
-                              <div class="event">
-                                Transportion to work: {{ pro.transportation }}
-                              </div>
-                              <div class="event">
-                                Looking for: {{ pro.workduration }}
-                              </div>
-                              <div class="event">
-                                I Live in: {{ pro.speccity }}
-                              </div>
-                              <div class="event">
-                                My minimum per hour: {{ pro.minperhour }}
-                              </div>
-                              <div class="event">
-                                I will travel {{ pro.traveldistance }} to work.
-                              </div>
-                              <h3>Trade specific Info:</h3>
-                              <div class="event">
-                                Mechanic or helper: {{ pro.helper }}
-                              </div>
-                              <div class="event">
-                                Have own tools: {{ pro.tools }}
-                              </div>
-                              <div class="event">
-                                (Helpers) I can make cuts and grout:
-                                {{ pro.Helpgroutcut }}
-                              </div>
-                              <div class="event">
-                                My strenghts: {{ pro.strengths }}
-                              </div>
-                              <div class="event">
-                                Specific experience: {{ pro.specworktypes }}
-                              </div>
-                              <div class="event">
-                                (Mechanics) I can install walls and floors:
-                                {{ pro.wallfloors }}
-                              </div>
-                              <div class="event">
-                                Can produce a level floor: {{ pro.levelfloors }}
-                              </div>
-                              <div class="event">
-                                Can produce a plumb wall: {{ pro.plumbwalls }}
-                              </div>
-
-                              <br />
-                              <div class="carousel">
-                                <v-carousel
-                                  cycle
-                                  height="350"
-                                  hide-delimiter-background
-                                  show-arrows-on-hover
-                                >
-                                  <v-carousel-item
-                                    v-for="(slide, i) in slides"
-                                    :key="i"
-                                  >
-                                    <v-sheet :color="colors[i]" height="100%">
-                                      <v-row
-                                        class="fill-height"
-                                        align="center"
-                                        justify="center"
-                                      >
-                                        <div class="display-3">
-                                          {{ slide }} Slide
-                                        </div>
-                                      </v-row>
-                                    </v-sheet>
-                                  </v-carousel-item>
-                                </v-carousel>
-                              </div>
-                              <br />
-                              <div class="text--center">
-                                <v-btn
-                                  class="explore"
-                                  color="primary lighten-2"
-                                  dark
-                                  tile
-                                  v-bind:href="`${pro.contact}`"
-                                  >[ Message Me ]
-                                </v-btn>
-                              </div>
-                            </v-card-text>
-                          </v-card>
-                        </v-dialog>
-                      </v-card-actions>
-                    </v-flex>
-                  </v-layout>
-
-                  <!-- modal end -->
-                </v-card>
-              </v-flex>
-                                </div>
-
-          </v-row>
-        </v-container>
+              <!-- modal end -->
+            </v-card>
+          </v-flex>
+        </div>
+      </v-row>
+    </v-container>
   </v-container>
 </template>
 
@@ -284,26 +281,34 @@ export default {
       pros: [],
       myIcon: "mdi-account-card-details-outline",
       dialog: false,
-      searchzip: '',
-      searchexp: '',
-      searchspec: ''
+      searchzip: "",
+      searchexp: "",
+      searchspec: ""
     };
   },
-  methods: {},
+  methods: {
+    reset() {
+      this.$refs.form.reset();
+    }
+  },
   computed: {
     user() {
       return this.$store.state.user;
     },
-    filteredProfiles:function(){
-      return this.pros.filter((pro) => {
-        return (pro.specialty.match(this.searchspec) && pro.experience.match(this.searchexp) && pro.zip.match(this.searchzip))
-      });
-    }
+    // filteredProfiles: function() {
+    //   return this.pros.filter(pro => {
+    //     return (
+    //       pro.specialty.match(this.searchspec) &&
+    //       pro.experience.match(this.searchexp) &&
+    //       pro.zip.match(this.searchzip)
+    //     );
+    //   });
+    // }
   },
   beforeCreate() {
     // fetch data from firestore
-    db.collection("users")
-      
+    db.collection("specialistProfile")
+
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
