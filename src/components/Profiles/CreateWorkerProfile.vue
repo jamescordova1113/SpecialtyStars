@@ -76,11 +76,7 @@
             data-vv-name="contacts"
             required
           ></v-select>
-          <v-text-field
-            v-model="city"
-            label="City:"
-            required
-          ></v-text-field>
+          <v-text-field v-model="city" label="City:" required></v-text-field>
           <v-text-field
             type="number"
             v-model="zip"
@@ -89,34 +85,28 @@
           ></v-text-field>
 
           <v-flex class="xs12 sm6 mb-2">
-            
-           <div >
-      <p>Upload a profile picture:</p>
-      <input type="file" @change="previewImage" accept="image/*" >
-    </div>
+            <v-btn class="primary" raised @click="onPickFile"
+              >Add Profile Picture</v-btn
+            >
+            <input
+              type="file"
+              style="display: none"
+              ref="fileInput"
+              accept="image/*"
+              @change="onFilePicked"
+            />
           </v-flex>
-          
-          <div>
-      <p>Progress: {{uploadValue.toFixed()+"%"}}
-      <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
-    </div>
-    <div v-if="imageData!=null">
-        <img class="preview" :src="picture">
-        <br>
-      <v-btn @click="onUpload">Upload Image</v-btn>
-    </div>
+          <img :src="imageUrl" :height="imageHeight" />
           <v-flex class="xs12 sm6 mt-5 offset-sm1">
             <v-btn
               :disabled="!valid"
               color="success"
               class="mr-4"
               @click="update"
-              
               >Post Profile</v-btn
             >
-           
+
             <router-link :to="{ name: 'Index' }">
-              
               <v-btn color="error" class="mr-4">Cancel</v-btn>
             </router-link>
           </v-flex>
@@ -216,7 +206,7 @@ export default {
       imageData: null,
       picture: null,
       uploadValue: 0,
-date: new Date().toISOString().substr(0, 10),
+      date: new Date().toISOString().substr(0, 10),
       contact: ["Message", "Email", "Phone Call", "Text"],
       contacts: ["Homeowners", "Employers"],
       titleRules: [
@@ -250,7 +240,7 @@ date: new Date().toISOString().substr(0, 10),
       specialistProfile: null
     };
   },
-  
+
   firestore() {
     return {
       Profile: db.collection("specialistProfile").orderBy("createdAt")
@@ -258,7 +248,9 @@ date: new Date().toISOString().substr(0, 10),
   },
   methods: {
     update() {
-      db.collection("specialistProfile")
+      firebase
+        .firestore()
+        .collection("specialistProfile")
         .add({
           alias: this.alias,
           city: this.city,
@@ -270,36 +262,60 @@ date: new Date().toISOString().substr(0, 10),
           zip: this.zip,
           preferredContact: this.preferredContact,
           canContact: this.canContact,
-          image: this.image,
+          imageUrl: this.imageUrl,
           picture: this.picture
         })
-    },
-    previewImage(event) {
-      this.uploadValue=0;
-      this.picture=null;
-      this.imageData = event.target.files[0];
-    },
-
-    onUpload(){
-      this.picture=null;
-      const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
-      storageRef.on(`state_changed`,snapshot=>{
-        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-      }, error=>{console.log(error.message)},
-      ()=>{this.uploadValue=100;
-        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
-          this.picture =url;
+        .then(() => {
+          if (this.imageUrl)
+            return firebase
+              .storage()
+              .ref("Images/" + this.filename)
+              .put(this.imageUrl);
+        })
+        .then(() => {
+          if (this.imageUrl)
+            return firebase
+              .storage()
+              .ref("Images/" + this.filename)
+              .getDownloadURL();
+        })
+        .then(URL => {
+          if (URL)
+            db.collection("Events").update({
+              imageUrl: URL
+            });
+        })
+        .then(() => {
+          this.$router.push({ name: "SpecialistProfiles" });
         });
+      // .catch(err => {});
+    },
+    onPickFile() {
+      this.$refs.fileInput.click();
+    },
+    onFilePicked(event) {
+      const files = event.target.files;
+      this.filename = files[0].name;
+      if (this.filename.lastIndexOf(".") <= 0) {
+        return alert("Please Select a valid Image File");
       }
-      );
-    }
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        this.imageUrl = fileReader.result;
+      });
+      fileReader.readAsDataURL(files[0]);
+      this.image = files[0];
+      this.imageHeight = 150;
 
-  },
       // const ext = filename.slice(filename.lastIndexOf("."));
       // console.log('files', files[0]);
       // upload the file to firebase storage
-    
-  
+    }
+  },
+  // const ext = filename.slice(filename.lastIndexOf("."));
+  // console.log('files', files[0]);
+  // upload the file to firebase storage
+
   // beforeCreate() {
   //   db.collection("specialistProfile")
   //   .get()
@@ -317,7 +333,7 @@ date: new Date().toISOString().substr(0, 10),
       .collection("users")
       .where("user_id", "==", firebase.auth().currentUser.uid);
 
-    console.log("got Here");
+    // console.log("got Here");
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
         // console.log('got a doc')
@@ -327,11 +343,7 @@ date: new Date().toISOString().substr(0, 10),
     });
   }
 };
-
-  
-
 </script>
-
 
 <style scoped>
 img.preview {

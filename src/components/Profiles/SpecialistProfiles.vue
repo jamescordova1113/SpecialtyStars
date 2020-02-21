@@ -45,7 +45,7 @@
             <v-btn color="red" dark @click="reset"> Reset </v-btn>
           </v-form>
         </v-card>
-        <div v-for="pro in pros" :key="pro.id">
+        <div v-for="pro in filteredProfiles" :key="pro.id">
           <v-flex style="width: 350px">
             <v-card
               class="mx-auto profileCard"
@@ -59,7 +59,8 @@
                 >{{ pro.specialty }}</v-card-title
               >
               <v-avatar class="ml-5 mt-1" size="100px">
-                <v-img class="white--text" v-bind:src="`${pro.image}`"> </v-img>
+                <v-img class="white--text" v-bind:src="`${pro.imageUrl}`">
+                </v-img>
               </v-avatar>
               <v-card-text class="proCards">
                 <span class="event">City: {{ pro.location }}</span>
@@ -295,15 +296,15 @@ export default {
     user() {
       return this.$store.state.user;
     },
-    // filteredProfiles: function() {
-    //   return this.pros.filter(pro => {
-    //     return (
-    //       pro.specialty.match(this.searchspec) &&
-    //       pro.experience.match(this.searchexp) &&
-    //       pro.zip.match(this.searchzip)
-    //     );
-    //   });
-    // }
+    filteredProfiles: function() {
+      return this.pros.filter(pro => {
+        return (
+          pro.specialty.match(this.searchspec) &&
+          pro.experience.match(this.searchexp) &&
+          pro.zip.match(this.searchzip)
+        );
+      });
+    }
   },
   beforeCreate() {
     // fetch data from firestore
