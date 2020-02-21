@@ -76,13 +76,22 @@
             data-vv-name="contacts"
             required
           ></v-select>
-          <v-text-field v-model="city" label="City:" required></v-text-field>
+          <v-text-field v-model="location" label="City:" required></v-text-field>
           <v-text-field
             type="number"
             v-model="zip"
             label="Zip Code:"
             required
           ></v-text-field>
+          <v-text-field
+            v-model="tools"
+            label="Do you have your own tools?:"
+          ></v-text-field>
+          <v-text-field
+            v-model="transportation"
+            label="Do you have dependable transportation?:"
+          ></v-text-field>
+          
 
           <v-flex class="xs12 sm6 mb-2">
             <v-btn class="primary" raised @click="onPickFile"
@@ -135,19 +144,10 @@ export default {
       valid: false,
       name: null,
       specialty: null,
+      tools: null,
+      transportation: null,
       users: {
         name: null,
-        phone: "",
-        minperhour: "",
-        email: "",
-        preferredContact: "",
-        canContact: "",
-        location: "",
-        city: "",
-        zip: "",
-        specialty: null,
-        image: null,
-        experience: null
       },
       alias: null,
       imageUrl: null,
@@ -253,7 +253,6 @@ export default {
         .collection("specialistProfile")
         .add({
           alias: this.alias,
-          city: this.city,
           phone: this.phone,
           email: this.email,
           minperhour: this.minperhour,
@@ -263,7 +262,9 @@ export default {
           preferredContact: this.preferredContact,
           canContact: this.canContact,
           imageUrl: this.imageUrl,
-          picture: this.picture
+          tools: this.tools,
+          transportation: this.transportation,
+          location: this.location
         })
         .then(() => {
           if (this.imageUrl)

@@ -99,13 +99,13 @@
                           class="headline primary lighten-2 white--text"
                           primary-title
                         >
-                          Specialist Profile: {{ pro.title }}
+                          Profile: {{ pro.title }}
                         </v-card-title>
 
                         <v-avatar class="avatar" size="100px">
                           <v-img
                             class="white--text"
-                            v-bind:src="`${pro.image}`"
+                            v-bind:src="`${pro.imageUrl}`"
                           >
                           </v-img>
                         </v-avatar>
@@ -115,7 +115,7 @@
                           </div>
 
                           <div class="event">
-                            First Name: {{ pro.firstname }}
+                            First Name: {{ pro.alias }}
                           </div>
                           <div class="event">
                             Specialty: {{ pro.specialty }}
