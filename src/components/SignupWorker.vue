@@ -99,7 +99,6 @@ export default {
                   .set({
                     isWorker: this.isWorker,
                     alias: this.alias,
-                    geolocation: null,
                     user_id: cred.user.uid
                   });
               })

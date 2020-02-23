@@ -7,10 +7,10 @@
     </v-toolbar>
     <v-card class="loginTitle">
       <v-card-text>
-        <v-form
-          ref="form"
-          @click="
+        <v-form ref="form" lazy-validation v-model="valid">
+          <!-- @click="
             update(
+              createdAt,
               alias,
               specialty,
               phone,
@@ -20,19 +20,18 @@
               preferredContact,
               canContact,
               city,
-              zip
+              zip,
+              tools,
+              transportation
             )
-          "
-          v-model="valid"
-          lazy-validation
-        >
+          " -->
           <v-text-field
-            v-model="alias"
+            v-model="users.alias"
             label="First Name:"
             required
           ></v-text-field>
           <v-select
-            v-model="specialty"
+            v-model="users.specialty"
             :items="items"
             label="Specialty"
             data-vv-name="items"
@@ -40,17 +39,17 @@
           ></v-select>
           <v-text-field
             type="phone"
-            v-model="phone"
+            v-model="users.phone"
             label="Phone#:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="email"
+            v-model="users.email"
             :rules="emailRules"
             label="E-mail:"
           ></v-text-field>
           <v-select
-            v-model="experience"
+            v-model="users.experience"
             :items="experiences"
             label="Experience:"
             data-vv-name="experience"
@@ -58,40 +57,43 @@
           ></v-select>
           <v-text-field
             type="number"
-            v-model="minperhour"
+            v-model="users.minperhour"
             label="Minimum Dollars Per Hour:"
             required
           ></v-text-field>
           <v-select
-            v-model="preferredContact"
+            v-model="users.preferredContact"
             :items="contact"
             label="Preferred Method of Contact"
             data-vv-name="contact"
             required
           ></v-select>
           <v-select
-            v-model="canContact"
+            v-model="users.canContact"
             :items="contacts"
             label="Can Contact Me"
             data-vv-name="contacts"
             required
           ></v-select>
-          <v-text-field v-model="location" label="City:" required></v-text-field>
+          <v-text-field
+            v-model="users.location"
+            label="City:"
+            required
+          ></v-text-field>
           <v-text-field
             type="number"
-            v-model="zip"
+            v-model="users.zip"
             label="Zip Code:"
             required
           ></v-text-field>
           <v-text-field
-            v-model="tools"
+            v-model="users.tools"
             label="Do you have your own tools?:"
           ></v-text-field>
           <v-text-field
-            v-model="transportation"
+            v-model="users.transportation"
             label="Do you have dependable transportation?:"
           ></v-text-field>
-          
 
           <v-flex class="xs12 sm6 mb-2">
             <v-btn class="primary" raised @click="onPickFile"
@@ -107,11 +109,7 @@
           </v-flex>
           <img :src="imageUrl" :height="imageHeight" />
           <v-flex class="xs12 sm6 mt-5 offset-sm1">
-            <v-btn
-              :disabled="!valid"
-              color="success"
-              class="mr-4"
-              @click="update"
+            <v-btn color="success" class="mr-4" @click="update"
               >Post Profile</v-btn
             >
 
@@ -133,27 +131,27 @@ export default {
   name: "CreateWorkerProfile",
   data() {
     return {
-      phone: "",
-      minperhour: "",
-      email: "",
-      preferredContact: "",
-      canContact: "",
-      location: "",
-      city: "",
-      zip: "",
       valid: false,
-      name: null,
-      specialty: null,
-      tools: null,
-      transportation: null,
+        phone: "",
+        minperhour: "",
+        email: "",
+        preferredContact: "",
+        canContact: "",
+        location: "",
+        city: "",
+        zip: "",
+        specialty: null,
+        tools: null,
+        imageUrl: null,
+        experience: null,
+        transportation: null,
       users: {
-        name: null,
-      },
-      alias: null,
-      imageUrl: null,
+        alias: null,
+        user_id: null,
+        email: null
+        },
       image: null,
       imageHeight: 0,
-      experience: null,
       experiences: ["Laborer", "Apprentice", "Journeyman"],
       items: [
         "Agricultural",
@@ -204,7 +202,6 @@ export default {
         "Warehouse"
       ],
       imageData: null,
-      picture: null,
       uploadValue: 0,
       date: new Date().toISOString().substr(0, 10),
       contact: ["Message", "Email", "Phone Call", "Text"],
@@ -243,32 +240,35 @@ export default {
 
   firestore() {
     return {
-      Profile: db.collection("specialistProfile").orderBy("createdAt")
+      Profile: db.collection("users").orderBy("createdAt")
     };
   },
   methods: {
     update() {
-      firebase
-        .firestore()
-        .collection("specialistProfile")
-        .add({
-          alias: this.alias,
-          phone: this.phone,
-          email: this.email,
-          minperhour: this.minperhour,
-          specialty: this.specialty,
-          experience: this.experience,
-          zip: this.zip,
-          preferredContact: this.preferredContact,
-          canContact: this.canContact,
+      
+      db.collection("users")
+      .doc(this.users.id)
+        .set({
+          createdAt: new Date(),
+          alias: this.users.alias,
+          phone: this.users.phone,
+          email: this.users.email,
+          minperhour: this.users.minperhour,
+          specialty: this.users.specialty,
+          experience: this.users.experience,
+          zip: this.users.zip,
+          preferredContact: this.users.preferredContact,
+          canContact: this.users.canContact,
           imageUrl: this.imageUrl,
-          tools: this.tools,
-          transportation: this.transportation,
-          location: this.location
+          tools: this.users.tools,
+          transportation: this.users.transportation,
+          location: this.users.location,
+          user_id: this.users.user_id
         })
         .then(() => {
           if (this.imageUrl)
             return firebase
+            .firestore()
               .storage()
               .ref("Images/" + this.filename)
               .put(this.imageUrl);
@@ -276,13 +276,14 @@ export default {
         .then(() => {
           if (this.imageUrl)
             return firebase
+            .firestore()
               .storage()
               .ref("Images/" + this.filename)
               .getDownloadURL();
         })
         .then(URL => {
           if (URL)
-            db.collection("Events").update({
+            db.collection("Users").update({
               imageUrl: URL
             });
         })
@@ -313,23 +314,9 @@ export default {
       // upload the file to firebase storage
     }
   },
-  // const ext = filename.slice(filename.lastIndexOf("."));
-  // console.log('files', files[0]);
-  // upload the file to firebase storage
 
-  // beforeCreate() {
-  //   db.collection("specialistProfile")
-  //   .get()
-  //   .then(snapshot => {
-  //       snapshot.forEach(doc => {
-  //         let pro = doc.data();
-  //         pro.id = doc.id;
-  //         this.pros.push(pro);
-  //       });
-  // });
-  // },
   created() {
-    // console.log(firebase.auth().currentUser.uid)
+    console.log(firebase.auth().currentUser.uid);
     let ref = db
       .collection("users")
       .where("user_id", "==", firebase.auth().currentUser.uid);

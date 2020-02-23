@@ -99,7 +99,7 @@
                           class="headline primary lighten-2 white--text"
                           primary-title
                         >
-                          Profile: {{ pro.title }}
+                          Profile: {{ pro.alias }}
                         </v-card-title>
 
                         <v-avatar class="avatar" size="100px">
@@ -221,6 +221,7 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
+     
       specialty: [
         "Agricultural",
         "Air Conditioning",
@@ -308,7 +309,7 @@ export default {
   },
   beforeCreate() {
     // fetch data from firestore
-    db.collection("specialistProfile")
+    db.collection("users")
 
       .get()
       .then(snapshot => {
