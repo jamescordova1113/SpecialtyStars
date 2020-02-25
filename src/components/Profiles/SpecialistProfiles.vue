@@ -99,7 +99,7 @@
                           class="headline primary lighten-2 white--text"
                           primary-title
                         >
-                          Profile: {{ pro.alias }}
+                          Profile: {{ pro.specialty }}
                         </v-card-title>
 
                         <v-avatar class="avatar" size="100px">
@@ -123,42 +123,14 @@
                           <div class="event">
                             Transportion to work: {{ pro.transportation }}
                           </div>
-                          <div class="event">
-                            Looking for: {{ pro.workduration }}
-                          </div>
-                          <div class="event">I Live in: {{ pro.speccity }}</div>
+                          <div class="event">I Live in: {{ pro.location }}</div>
                           <div class="event">
                             My minimum per hour: {{ pro.minperhour }}
                           </div>
-                          <div class="event">
-                            I will travel {{ pro.traveldistance }} to work.
-                          </div>
+                         
                           <h3>Trade specific Info:</h3>
                           <div class="event">
-                            Mechanic or helper: {{ pro.helper }}
-                          </div>
-                          <div class="event">
                             Have own tools: {{ pro.tools }}
-                          </div>
-                          <div class="event">
-                            (Helpers) I can make cuts and grout:
-                            {{ pro.Helpgroutcut }}
-                          </div>
-                          <div class="event">
-                            My strenghts: {{ pro.strengths }}
-                          </div>
-                          <div class="event">
-                            Specific experience: {{ pro.specworktypes }}
-                          </div>
-                          <div class="event">
-                            (Mechanics) I can install walls and floors:
-                            {{ pro.wallfloors }}
-                          </div>
-                          <div class="event">
-                            Can produce a level floor: {{ pro.levelfloors }}
-                          </div>
-                          <div class="event">
-                            Can produce a plumb wall: {{ pro.plumbwalls }}
                           </div>
 
                           <br />
@@ -310,7 +282,7 @@ export default {
   beforeCreate() {
     // fetch data from firestore
     db.collection("users")
-
+      // .orderBy("createAt")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {

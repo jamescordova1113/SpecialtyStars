@@ -75,6 +75,8 @@ export default {
   name: "Login",
   data() {
     return {
+      isWorker: false,
+      isEmployer: false,
       email: null,
       password: null,
       feedback: null,
@@ -117,8 +119,8 @@ export default {
                         this.$store.commit("setCredentials", {
                           alias: doc.data().alias,
                           isLoggedIn: true,
-                          isWorker: true,
-                          isEmployer: true
+                          isWorker: doc.data().isWorker,
+                          isEmployer: doc.data().isEmployer
                         });
                         this.$router.push({ name: "SpecialistProfiles" });
                       }

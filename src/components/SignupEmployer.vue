@@ -14,6 +14,33 @@
     <v-card>
       <v-card-text>
         <v-form @submit="signup" class="card-panel">
+          
+          <v-text-field
+            type="Address"
+            v-model="address"
+            label="Business Address:"
+            required
+          ></v-text-field>
+          <v-text-field
+            type="Phone"
+            v-model="phone"
+            label="Phone Number:"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="license"
+            label="License number:"
+          ></v-text-field>
+          <v-text-field
+            v-model="bizName"
+            label="bizName:"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="alias"
+            label="Full Name:"
+            required
+          ></v-text-field>
           <v-text-field
             type="Email"
             v-model="email"
@@ -28,11 +55,15 @@
             required
           ></v-text-field>
           <v-text-field
-            type="alias"
-            v-model="alias"
-            label="First Name:"
-            required
-          ></v-text-field>
+    name="confirmPassword"
+    label="Confirm Password"
+    id="confirmPassword"
+    type="password"
+    :rules="[comparePasswords]"
+    v-model="passwordConfirm"
+    ></v-text-field>
+       
+          
           
           
 
@@ -56,8 +87,13 @@ export default {
   name: "Signup",
   data() {
     return {
+      address: "",
+      phone: "",
+      license: "",
+      bizName: "",
       email: null,
       password: null,
+      passwordConfirm: null,
       alias: null,
       feedback: null,
       slug: null,
@@ -96,8 +132,12 @@ export default {
                   .set({
                     isEmployer: this.isEmployer,
                     alias: this.alias,
-                    geolocation: null,
-                    user_id: cred.user.uid
+                    user_id: cred.user.uid,
+                    address: this.address,
+                    phone: this.phone,
+                    license: this.license,
+                    bizName: this.bizName,
+                    email: this.email
                   });
               })
               .then(() => {
@@ -126,6 +166,11 @@ export default {
       }
     }
   },
+  computed: {
+  comparePasswords () {
+    return this.password === this.passwordConfirm ? true : 'Passwords don\'t match'
+  }
+},
   beforeCreate() {
     firebase
       .auth()

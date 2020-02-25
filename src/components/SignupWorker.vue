@@ -28,6 +28,14 @@
             required
           ></v-text-field>
           <v-text-field
+    name="confirmPassword"
+    label="Confirm Password"
+    id="confirmPassword"
+    type="password"
+    :rules="[comparePasswords]"
+    v-model="passwordConfirm"
+    ></v-text-field>
+          <v-text-field
             type="alias"
             v-model="alias"
             label="First Name:"
@@ -58,10 +66,14 @@ export default {
     return {
       email: null,
       password: null,
+      passwordConfirm: null,
       alias: null,
       feedback: null,
       slug: null,
       isWorker: true,
+      zip: "",
+      specialty: "",
+      experience: "",
       myCred: null,
       // isWorker: [{ id: 1, name: "isWorker", checked: true }],
       // isEmployer: [{ id: 2, name: "isEmployer", checked: true }],
@@ -72,10 +84,11 @@ export default {
     };
   },
 
+
   methods: {
     signup() {
       if (
-        (this.alias && this.email && this.password && this.isWorker)
+        (this.alias && this.email && this.password && this.comparePasswords === true && this.isWorker)
         
       ) {
         this.slug = slugify(this.alias, {
@@ -99,7 +112,10 @@ export default {
                   .set({
                     isWorker: this.isWorker,
                     alias: this.alias,
-                    user_id: cred.user.uid
+                    user_id: cred.user.uid,
+                    zip: this.zip,
+                    specialty: this.specialty,
+                    experience: this.experience,
                   });
               })
               .then(() => {
@@ -134,6 +150,11 @@ export default {
       }
     }
   },
+  computed: {
+  comparePasswords () {
+    return this.password === this.passwordConfirm ? true : 'Passwords don\'t match'
+  }
+},
   beforeCreate() {
     firebase
       .auth()
