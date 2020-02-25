@@ -265,31 +265,24 @@ export default {
           location: this.users.location,
           user_id: this.users.user_id
         })
-        .then(() => {
-          if (this.imageUrl)
-            return firebase
-            .firestore()
-              .storage()
-              .ref("Images/" + this.filename)
-              .put(this.imageUrl);
+        .then( () => {
+          if (this.image)
+          return firebase.storage().ref('Images/' + this.filename).put(this.image)
         })
-        .then(() => {
-          if (this.imageUrl)
-            return firebase
-            .firestore()
-              .storage()
-              .ref("Images/" + this.filename)
-              .getDownloadURL();
+        .then( () => {
+          if (this.image)
+          return firebase.storage().ref('Images/' + this.filename).getDownloadURL()
         })
         .then(URL => {
           if (URL)
-            db.collection("Users").update({
-              imageUrl: URL
-            });
+          db.collection("users").doc(firebase.auth().currentUser.uid)
+          .update({
+            image: URL
+          })
         })
         .then(() => {
           this.$router.push({ name: "SpecialistProfiles" });
-        });
+        })
       // .catch(err => {});
     },
     onPickFile() {
@@ -308,7 +301,6 @@ export default {
       fileReader.readAsDataURL(files[0]);
       this.image = files[0];
       this.imageHeight = 150;
-
       // const ext = filename.slice(filename.lastIndexOf("."));
       // console.log('files', files[0]);
       // upload the file to firebase storage
@@ -320,11 +312,8 @@ export default {
     let ref = db
       .collection("users")
       .where("user_id", "==", firebase.auth().currentUser.uid);
-
-    // console.log("got Here");
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
-        // console.log('got a doc')
         this.users = doc.data();
         this.users.id = doc.id;
       });
