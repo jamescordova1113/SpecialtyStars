@@ -70,6 +70,13 @@
               </v-card-text>
           </v-col>
         </v-row>
+        <v-flex row>
+          <v-col class='text-center'>
+          <router-link to="/SignupEmployer">
+          <v-btn color="orange" tile dark>Signup to find workers</v-btn>
+          </router-link>
+          </v-col>
+        </v-flex>
       </v-flex>
     </div>
       

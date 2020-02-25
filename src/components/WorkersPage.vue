@@ -110,7 +110,7 @@
     <div>
       <v-flex text-xs-center>
         <v-row class="mb-0" justify="left" align="center" no-gutters>
-          <v-col>
+          <v-col cols="6">
             <!-- <v-card class="MainInfoCard"> -->
             <v-card-text>
               <v-flex text-xs-center>
@@ -133,7 +133,13 @@
                 <li>Wait for an employer to text or call you!</li>
               </ol>
             </v-card-text>
+            
             <!-- </v-card> -->
+          </v-col>
+          <v-col cols="6" class="text-center">
+            <router-link to="/SignupWorker">
+          <v-btn color="orange" tile dark> Signup now! </v-btn>
+            </router-link>
           </v-col>
         </v-row>
       </v-flex>
