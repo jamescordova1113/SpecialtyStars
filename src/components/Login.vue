@@ -122,7 +122,7 @@ export default {
                           isWorker: doc.data().isWorker,
                           isEmployer: doc.data().isEmployer
                         });
-                        this.$router.push({ name: "SpecialistProfiles" });
+                        this.$router.push({ name: "WorkerDashBoard" });
                       }
                     });
                 });

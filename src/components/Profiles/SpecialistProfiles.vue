@@ -193,7 +193,7 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
-     
+      valid: false,
       specialty: [
         "Agricultural",
         "Air Conditioning",
@@ -270,6 +270,7 @@ export default {
       return this.$store.state.user;
     },
     filteredProfiles: function() {
+      if (this.searchspec == "") return
       return this.pros.filter(pro => {
         return (
           pro.specialty.match(this.searchspec) &&
