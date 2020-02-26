@@ -25,6 +25,7 @@
               transportation
             )
           " -->
+          <img :src="users.image"/>
           <v-text-field
             v-model="users.alias"
             label="First Name:"
