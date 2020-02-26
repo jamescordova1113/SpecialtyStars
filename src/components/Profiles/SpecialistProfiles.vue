@@ -14,10 +14,10 @@
 
     <v-container class="my-4 proCards">
       <v-row justify="center">
-        <v-card class="filterCard" width="300px" height="300px">
-          <v-form ref="form" v-model="valid" lazy-validation>
+        <v-card class="filterCard" width="1024px">
+          <v-form class="filterForm" ref="form" v-model="valid" lazy-validation>
             <v-card-title>
-              Filter results
+              Search for Specialist
             </v-card-title>
             <v-select
               class="select"
@@ -41,14 +41,16 @@
               v-model="searchzip"
               placeholder="Search by zipcode"
             />
+            <br />
+           
 
-            <v-btn color="red" dark @click="reset"> Reset </v-btn>
+            <v-btn class="filterButton" color="red lighten-1" tile dark @click="reset"> Reset </v-btn>
           </v-form>
         </v-card>
         <div v-for="pro in filteredProfiles" :key="pro.id">
           <v-flex style="width: 350px">
             <v-card
-            v-if="pro.isWorkerProfile"
+              
               class="mx-auto profileCard"
               outlined
               width="300px"
@@ -60,8 +62,7 @@
                 >{{ pro.specialty }}</v-card-title
               >
               <v-avatar class="ml-5 mt-1" size="100px">
-                <v-img class="white--text" v-bind:src="`${pro.image}`">
-                </v-img>
+                <v-img class="white--text" v-bind:src="`${pro.image}`"> </v-img>
               </v-avatar>
               <v-card-text class="proCards">
                 <span class="event">City: {{ pro.location }}</span>
@@ -79,10 +80,11 @@
               <v-layout class="explorelist">
                 <v-flex>
                   <!-- modal -->
-                  <v-card-actions class="justify-center">
+                  <v-card-actions  class="justify-center">
                     <v-dialog v-model="dialog" width="500">
                       <template v-slot:activator="{ on }">
                         <v-btn
+                        
                           class="explorebutton"
                           color="primary lighten-2"
                           v-on="on"
@@ -100,7 +102,7 @@
                           class="headline primary lighten-2 white--text"
                           primary-title
                         >
-                          Profile: {{ pro.specialty }}
+                          {{ pro.specialty }}
                         </v-card-title>
 
                         <v-avatar class="avatar" size="100px">
@@ -115,9 +117,7 @@
                             <h3>General Info</h3>
                           </div>
 
-                          <div class="event">
-                            First Name: {{ pro.alias }}
-                          </div>
+                          <div class="event">First Name: {{ pro.alias }}</div>
                           <div class="event">
                             Specialty: {{ pro.specialty }}
                           </div>
@@ -128,7 +128,7 @@
                           <div class="event">
                             My minimum per hour: {{ pro.minperhour }}
                           </div>
-                         
+
                           <h3>Trade specific Info:</h3>
                           <div class="event">
                             Have own tools: {{ pro.tools }}
@@ -267,23 +267,22 @@ export default {
     }
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
-    filteredProfiles: function() {
-      if (this.searchspec == "") return
+    // user() {
+    //   return this.$store.state.user;
+    // },
+    filteredProfiles() {
       return this.pros.filter(pro => {
         return (
-          pro.specialty.match(this.searchspec) &&
-          pro.experience.match(this.searchexp) &&
-          pro.zip.match(this.searchzip)
+          pro.specialty.match(this.searchspec) 
+          && pro.experience.match(this.searchexp)
+          && pro.zip.match(this.searchzip)
         );
       });
     }
   },
   beforeCreate() {
     // fetch data from firestore
-    db.collection("users")
+    db.collection("specialistProfile")
       // .orderBy("createAt")
       .get()
       .then(snapshot => {
@@ -298,6 +297,12 @@ export default {
 </script>
 
 <style>
+.filterCard {
+  margin: 10px;
+}
+.filterButton {
+  margin: 5px;
+}
 .avatar {
   margin-left: 10px;
 }

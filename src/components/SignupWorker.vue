@@ -41,6 +41,20 @@
             label="First Name:"
             required
           ></v-text-field>
+           <v-select
+            v-model="specialty"
+            :items="items"
+            label="Specialty"
+            data-vv-name="items"
+            required
+          ></v-select>
+          <v-select
+            v-model="experience"
+            :items="experiences"
+            label="Experience:"
+            data-vv-name="experience"
+            required
+          ></v-select>
           
           
 
@@ -76,6 +90,55 @@ export default {
       specialty: "",
       experience: "",
       myCred: null,
+      experiences: ["Laborer", "Apprentice", "Journeyman"],
+      items: [
+        "Agricultural",
+        "Air Conditioning",
+        "Auto Paint & Body",
+        "Auto Mechanics",
+        "Auto Detailing",
+        "Brick Pavers",
+        "Brick & Block Masonry",
+        "Carpentry (rough and finish)",
+        "Cabinetry",
+        "Construction Cleaning",
+        "Concrete Cutting and Drilling",
+        "Concrete Placing & Finishing",
+        "Dishwashing",
+        "Demolition",
+        "Delivery/Driver",
+        "Drywall",
+        "Electrical",
+        "Flooring",
+        "Fence",
+        "Fire & Security Alarm",
+        "Fire Protection",
+        "Glass & Windows",
+        "General Construction",
+        "Granite & Stone Fabrication",
+        "Golf Course and Greens keeper",
+        "Handyman",
+        "Home Remodeling",
+        "Housekeeping/ Maid service",
+        "Irrigation/Sprinkler",
+        "Insulation",
+        "Janitorial",
+        "Landscaping",
+        "Marine",
+        "Mechanical Systems",
+        "Moving",
+        "Painting",
+        "Paving & Roadwork",
+        "Pest Control",
+        "Plumbing",
+        "Pool Service",
+        "Pool & Spa installation",
+        "Roofing",
+        "Stucco & Plastering",
+        "Tile & Marble",
+        "Tree Work",
+        "Warehouse"
+      ],
       // isWorker: [{ id: 1, name: "isWorker", checked: true }],
       // isEmployer: [{ id: 2, name: "isEmployer", checked: true }],
       emailRules: [
@@ -111,6 +174,7 @@ export default {
                 db.collection("users")
                   .doc(cred.user.uid)
                   .set({
+                    email: this.email,
                     isWorker: this.isWorker,
                     alias: this.alias,
                     user_id: cred.user.uid,
@@ -119,7 +183,20 @@ export default {
                     experience: this.experience,
                     isWorkerProfile: this.isWorkerProfile
                   });
+                  db.collection("specialistProfile")
+                  .doc(cred.user.uid)
+                  .set({
+                    email: this.email,
+                    isWorker: this.isWorker,
+                    alias: this.alias,
+                    user_id: cred.user.uid,
+                    zip: this.zip,
+                    specialty: this.specialty,
+                    experience: this.experience,
+                    isWorkerProfile: this.isWorkerProfile
+              });
               })
+      
               .then(() => {
                 this.myCred.user
                   .sendEmailVerification()

@@ -44,10 +44,12 @@
             label="Phone#:"
             required
           ></v-text-field>
-          <v-text-field
+        <v-text-field
+            type="email "
             v-model="users.email"
+            label="Email:"
             :rules="emailRules"
-            label="E-mail:"
+            required
           ></v-text-field>
           <v-select
             v-model="users.experience"
@@ -135,7 +137,6 @@ export default {
       valid: false,
         phone: "",
         minperhour: "",
-        email: "",
         preferredContact: "",
         canContact: "",
         location: "",
@@ -147,10 +148,11 @@ export default {
         experience: null,
         transportation: null,
         isWorkerProfile: true,
+        email: "",
       users: {
         alias: null,
         user_id: null,
-        email: null
+        isWorkerProfile: true
         },
       image: null,
       imageHeight: 0,
@@ -242,19 +244,18 @@ export default {
 
   firestore() {
     return {
-      Profile: db.collection("users").orderBy("createdAt")
+      Profile: db.collection("specialistProfile").orderBy("createdAt")
     };
   },
   methods: {
     update() {
       
-      db.collection("users")
+      db.collection("specialistProfile")
       .doc(this.users.id)
         .set({
           createdAt: new Date(),
           alias: this.users.alias,
           phone: this.users.phone,
-          email: this.users.email,
           minperhour: this.users.minperhour,
           specialty: this.users.specialty,
           experience: this.users.experience,
@@ -265,7 +266,9 @@ export default {
           transportation: this.users.transportation,
           location: this.users.location,
           user_id: this.users.user_id,
-          isWorkerProfile: this.users.isWorkerProfile
+          isWorkerProfile: this.users.isWorkerProfile,
+          email: this.users.isWorkerProfile,
+          isWorker: this.users.isWorker
         })
         .then( () => {
           if (this.image)
@@ -277,7 +280,7 @@ export default {
         })
         .then(URL => {
           if (URL)
-          db.collection("users").doc(firebase.auth().currentUser.uid)
+          db.collection("specialistProfile").doc(firebase.auth().currentUser.uid)
           .update({
             image: URL
           })
@@ -312,7 +315,7 @@ export default {
   created() {
     console.log(firebase.auth().currentUser.uid);
     let ref = db
-      .collection("users")
+      .collection("specialistProfile")
       .where("user_id", "==", firebase.auth().currentUser.uid);
     ref.get().then(snapshot => {
       snapshot.forEach(doc => {
