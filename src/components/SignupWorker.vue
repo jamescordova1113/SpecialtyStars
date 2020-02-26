@@ -71,6 +71,7 @@ export default {
       feedback: null,
       slug: null,
       isWorker: true,
+      isWorkerProfile: false,
       zip: "",
       specialty: "",
       experience: "",
@@ -116,6 +117,7 @@ export default {
                     zip: this.zip,
                     specialty: this.specialty,
                     experience: this.experience,
+                    isWorkerProfile: this.isWorkerProfile
                   });
               })
               .then(() => {

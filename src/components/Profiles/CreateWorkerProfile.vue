@@ -145,6 +145,7 @@ export default {
         imageUrl: null,
         experience: null,
         transportation: null,
+        isWorkerProfile: true,
       users: {
         alias: null,
         user_id: null,
@@ -259,11 +260,11 @@ export default {
           zip: this.users.zip,
           preferredContact: this.users.preferredContact,
           canContact: this.users.canContact,
-          imageUrl: this.imageUrl,
           tools: this.users.tools,
           transportation: this.users.transportation,
           location: this.users.location,
-          user_id: this.users.user_id
+          user_id: this.users.user_id,
+          isWorkerProfile: this.users.isWorkerProfile
         })
         .then( () => {
           if (this.image)
