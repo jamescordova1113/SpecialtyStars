@@ -48,6 +48,7 @@
         <div v-for="pro in filteredProfiles" :key="pro.id">
           <v-flex style="width: 350px">
             <v-card
+            v-if="pro.isWorkerProfile"
               class="mx-auto profileCard"
               outlined
               width="300px"
@@ -59,7 +60,7 @@
                 >{{ pro.specialty }}</v-card-title
               >
               <v-avatar class="ml-5 mt-1" size="100px">
-                <v-img class="white--text" v-bind:src="`${pro.imageUrl}`">
+                <v-img class="white--text" v-bind:src="`${pro.image}`">
                 </v-img>
               </v-avatar>
               <v-card-text class="proCards">
@@ -105,7 +106,7 @@
                         <v-avatar class="avatar" size="100px">
                           <v-img
                             class="white--text"
-                            v-bind:src="`${pro.imageUrl}`"
+                            v-bind:src="`${pro.image}`"
                           >
                           </v-img>
                         </v-avatar>
