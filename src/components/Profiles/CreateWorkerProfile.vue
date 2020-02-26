@@ -268,7 +268,7 @@ export default {
           user_id: this.users.user_id,
           isWorkerProfile: this.users.isWorkerProfile,
           email: this.users.isWorkerProfile,
-          isWorker: this.users.isWorker
+          isWorker: this.users.isWorker,
         })
         .then( () => {
           if (this.image)
@@ -313,7 +313,7 @@ export default {
   },
 
   created() {
-    console.log(firebase.auth().currentUser.uid);
+    // console.log(firebase.auth().currentUser.uid);
     let ref = db
       .collection("specialistProfile")
       .where("user_id", "==", firebase.auth().currentUser.uid);

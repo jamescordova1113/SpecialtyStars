@@ -35,12 +35,6 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="../Profiles/CreateEmployerProfile">
-          <v-btn text small>
-              My Profile
-            </v-btn>
-          </router-link>
-          <v-spacer />
           <router-link to="../Profiles/Dashboard/MakeAPayment">
           <v-btn text small>
               Make A Payment

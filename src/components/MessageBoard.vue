@@ -1,6 +1,6 @@
 <template>
   <div class="Messages container">
-    <p>Message Board</p>
+    <h2>Message Board</h2>
     <v-row>
       <v-col xs-1 lg-4>
         <div

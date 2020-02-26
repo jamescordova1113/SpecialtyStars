@@ -57,7 +57,7 @@
               height="370px"
             >
               <v-card-title
-                class="headline primary lighten-2 white--text"
+                class="headline primary lighten-2 white--text justify-center"
                 primary-title
                 >{{ pro.specialty }}</v-card-title
               >
@@ -77,20 +77,18 @@
                   >Min cost per hour: ${{ pro.minperhour }}</span
                 >
               </v-card-text>
-              <v-layout class="explorelist">
-                <v-flex>
-                  <!-- modal -->
-                  <v-card-actions  class="justify-center">
+              
+                  
+                  <v-card-actions class="align-center">
+                    <!-- modal -->
                     <v-dialog v-model="dialog" width="500">
                       <template v-slot:activator="{ on }">
                         <v-btn
-                        
                           class="explorebutton"
                           color="primary lighten-2"
                           v-on="on"
                           dark
-                          tile
-                          right
+                          tile    
                           @click.stop="dialog = true"
                         >
                           View Profile
@@ -102,7 +100,7 @@
                           class="headline primary lighten-2 white--text"
                           primary-title
                         >
-                          {{ pro.specialty }}
+                          Worker Profile {{pro.alias}}
                         </v-card-title>
 
                         <v-avatar class="avatar" size="100px">
@@ -167,7 +165,7 @@
                               color="primary lighten-2"
                               dark
                               tile
-                              v-bind:href="`${pro.contact}`"
+                              
                               >[ Message Me ]
                             </v-btn>
                           </div>
@@ -175,8 +173,6 @@
                       </v-card>
                     </v-dialog>
                   </v-card-actions>
-                </v-flex>
-              </v-layout>
 
               <!-- modal end -->
             </v-card>
@@ -254,6 +250,7 @@ export default {
       ],
       slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       pros: [],
+      
       myIcon: "mdi-account-card-details-outline",
       dialog: false,
       searchzip: "",
@@ -267,9 +264,9 @@ export default {
     }
   },
   computed: {
-    // user() {
-    //   return this.$store.state.user;
-    // },
+    user() {
+      return this.$store.state.user;
+    },
     filteredProfiles() {
       return this.pros.filter(pro => {
         return (
@@ -283,7 +280,8 @@ export default {
   beforeCreate() {
     // fetch data from firestore
     db.collection("specialistProfile")
-      // .orderBy("createAt")
+      .orderBy("createdAt")
+            
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {

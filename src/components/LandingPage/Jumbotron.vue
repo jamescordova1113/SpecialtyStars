@@ -34,7 +34,6 @@
     <div class="buttons text-center">
       <router-link to="/WorkersPage">
         <v-btn
-          @click="setCookie('worker')"
           class="ma-2"
           tile
           color="primary lighten-3"
@@ -44,7 +43,6 @@
       </router-link>
       <router-link to="/NeedWorkers">
         <v-btn
-          @click="setCookie('employer')"
           class="ma-2"
           tile
           color="primary lighten-3"

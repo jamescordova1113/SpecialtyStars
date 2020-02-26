@@ -55,6 +55,12 @@
             data-vv-name="experience"
             required
           ></v-select>
+          <v-text-field
+            type="number"
+            v-model="zip"
+            label="Zip Code:"
+            required
+          ></v-text-field>
           
           
 
@@ -181,7 +187,7 @@ export default {
                     zip: this.zip,
                     specialty: this.specialty,
                     experience: this.experience,
-                    isWorkerProfile: this.isWorkerProfile
+                    isWorkerProfile: this.isWorkerProfile,
                   });
                   db.collection("specialistProfile")
                   .doc(cred.user.uid)
@@ -193,7 +199,8 @@ export default {
                     zip: this.zip,
                     specialty: this.specialty,
                     experience: this.experience,
-                    isWorkerProfile: this.isWorkerProfile
+                    isWorkerProfile: this.isWorkerProfile,
+
               });
               })
       

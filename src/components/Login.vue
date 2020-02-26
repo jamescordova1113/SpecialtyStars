@@ -24,16 +24,19 @@
               ></v-text-field>
               <p class="red-text text-center" v-if="feedback">{{ feedback }}</p>
               <br />
-              <div>
-                <a> Forgot your password? </a>
-              </div>
               <br />
               <v-card-actions class="text-center">
                 <!-- <div class="flex-grow-1"></div> -->
                 <v-btn @click="login" color="orange" dark tile null="true">
                   Log Me In!
                 </v-btn>
-              </v-card-actions>
+                </v-card-actions>
+                <div class="forgotPass text-center">
+                <v-btn text color="primary" @click="resetPassword">
+                  Forgot your password?
+                </v-btn>
+                <p> Enter your email and a password reset will be sent to your email.</p>
+              </div>
             </v-col>
           </v-row>
         </v-form>
@@ -92,6 +95,18 @@ export default {
     }
   },
   methods: {
+    resetPassword() {
+      const auth = firebase.auth();
+      auth.sendPasswordResetEmail(this.email)
+        .then(() => {
+          // Email sent.
+          console.log('Email Sent');
+        })
+        .catch((err) => {
+          console.log(err)
+         
+        });
+    },
     login() {
       if (this.email && this.password) {
         // console.log("trying to log in")
@@ -122,7 +137,7 @@ export default {
                           isWorker: doc.data().isWorker,
                           isEmployer: doc.data().isEmployer
                         });
-                        this.$router.push({ name: "WorkerDashBoard" });
+                        this.$router.push({ name: "MessageBoard" });
                       }
                     });
                 });
@@ -146,6 +161,9 @@ export default {
 </script>
 
 <style>
+.forgotPass {
+  margin-top: 10px;
+}
 .login {
   max-width: 400px;
   margin-top: 60px;
@@ -154,7 +172,7 @@ export default {
   font-size: 2.4em;
 }
 .login .field {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .loginTitle {
   margin-top: 0px;
