@@ -176,7 +176,7 @@ export default {
   },
 
   created() {
-    console.log(firebase.auth().currentUser.uid);
+    // console.log(firebase.auth().currentUser.uid);
     let ref = db
       .collection("users")
       .where("user_id", "==", firebase.auth().currentUser.uid);

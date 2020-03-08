@@ -8,7 +8,7 @@
           class="field ingredient"
           :key="message.id"
         >
-          <v-card class="myCard" color="#26c6da" dark max-width="400">
+          <v-card class="myCard" light max-width="400">
             <v-card-title>
               <v-icon large left>{{ myIcon }}</v-icon>
               <span class="title font-weight-light">{{

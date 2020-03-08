@@ -32,10 +32,15 @@ import Notifications from "@/components/Profiles/Dashboard/Notifications";
 import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
 import Preferences from "@/components/Profiles/Dashboard/Preferences";
 import SavedMessages from "@/components/Profiles/Dashboard/SavedMessages";
+import ForumBoard from "@/components/ForumBoard";
 import SentMessages from "@/components/Profiles/Dashboard/SentMessages";
-
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
+import QandAForum from "@/components/Forum/QandAForum";
+import GeneralForum from "@/components/Forum/GeneralForum";
+import ISOForum from "@/components/Forum/ISOForum";
+
+
 
 import firebase from "firebase";
 
@@ -222,6 +227,26 @@ const router = new Router({
       path: "/Profiles/SpecialistProfiles",
       name: "SpecialistProfiles",
       component: SpecialistProfiles
+    },
+    {
+      path: "/ForumBoard",
+      name: "ForumBoard",
+      component: ForumBoard
+    },
+    {
+      path: "/Forum/QandAForum",
+      name: "QandAForum",
+      component: QandAForum
+    },
+    {
+      path: "/Forum/GeneralForum",
+      name: "GeneralForum",
+      component: GeneralForum
+    },
+    {
+      path: "/Forum/ISOForum",
+      name: "ISOForum",
+      component: ISOForum
     }
   ]
 });

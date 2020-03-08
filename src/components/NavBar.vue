@@ -176,6 +176,7 @@ export default {
         { text: "Specialties", route: "/Specialties" },
         { text: "Employer", route: "/NeedWorkers" },
         { text: "Worker", route: "/WorkersPage" },
+        { text: "Forum", route: "/ForumBoard"},
         {
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"

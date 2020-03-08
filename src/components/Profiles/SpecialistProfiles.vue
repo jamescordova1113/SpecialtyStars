@@ -50,7 +50,7 @@
         <div v-for="pro in filteredProfiles" :key="pro.id">
           <v-flex style="width: 350px">
             <v-card
-              
+              tile
               class="mx-auto profileCard"
               outlined
               width="300px"
@@ -79,7 +79,7 @@
               </v-card-text>
               
                   
-                  <v-card-actions class="align-center">
+                  <v-card-actions class="justify-center">
                     <!-- modal -->
                     <v-dialog v-model="dialog" width="500">
                       <template v-slot:activator="{ on }">

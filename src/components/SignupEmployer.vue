@@ -33,7 +33,7 @@
           ></v-text-field>
           <v-text-field
             v-model="bizName"
-            label="bizName:"
+            label="Business Name:"
             required
           ></v-text-field>
           <v-text-field
