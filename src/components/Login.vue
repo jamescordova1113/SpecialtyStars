@@ -98,14 +98,14 @@ export default {
     resetPassword() {
       const auth = firebase.auth();
       auth.sendPasswordResetEmail(this.email)
-        .then(() => {
-          // Email sent.
-          console.log('Email Sent');
-        })
-        .catch((err) => {
-          console.log(err)
+        // .then(() => {
+        //   // Email sent.
+        //   console.log('Email Sent');
+        // })
+        // .catch((err) => {
+        //    console.log(err)
          
-        });
+        // });
     },
     login() {
       if (this.email && this.password) {
