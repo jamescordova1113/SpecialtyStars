@@ -137,7 +137,7 @@ export default {
                           isWorker: doc.data().isWorker,
                           isEmployer: doc.data().isEmployer
                         });
-                        this.$router.push({ name: "MessageBoard" });
+                        this.$router.push({ name: "GeneralForum" });
                       }
                     });
                 });

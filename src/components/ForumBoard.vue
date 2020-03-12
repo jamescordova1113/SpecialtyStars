@@ -21,7 +21,7 @@
           </router-link>
           <br /> -->
           <router-link to="/Forum/GeneralForum">
-            <v-btn text light class="forums">Message Baord</v-btn>
+            <v-btn text light class="forums">Message Board</v-btn>
           </router-link>
           <br />
           <!-- <router-link to="/Forum/ISOForum">
@@ -43,11 +43,6 @@ export default {
     };
   },
 
-  methods: {
-    enterChat() {
-      console.log(this.name);
-    }
-  }
 };
 </script>
 
