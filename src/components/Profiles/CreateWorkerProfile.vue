@@ -8,23 +8,7 @@
     <v-card class="loginTitle">
       <v-card-text>
         <v-form ref="form" lazy-validation v-model="valid">
-          <!-- @click="
-            update(
-              createdAt,
-              alias,
-              specialty,
-              phone,
-              email,
-              experience,
-              minperhour,
-              preferredContact,
-              canContact,
-              city,
-              zip,
-              tools,
-              transportation
-            )
-          " -->
+         
           <img :src="users.image"/>
           <v-text-field
             v-model="users.alias"

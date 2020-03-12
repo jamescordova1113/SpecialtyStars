@@ -15,21 +15,19 @@
     <div class="NameForm mt-10">
       <v-card>
         <ul>
-          <li>
-          <router-link to="/Forum/QandAForum">
+          
+          <!-- <router-link to="/Forum/QandAForum">
             <v-btn text light class="forums">Question and Answer</v-btn>
           </router-link>
-          </li>
-          <li>
+          <br /> -->
           <router-link to="/Forum/GeneralForum">
-            <v-btn text light class="forums">General</v-btn>
+            <v-btn text light class="forums">Message Baord</v-btn>
           </router-link>
-          </li>
-          <li>
-          <router-link to="/Forum/ISOForum">
+          <br />
+          <!-- <router-link to="/Forum/ISOForum">
             <v-btn text light class="forums">In Search of</v-btn>
           </router-link>
-          </li>
+           -->
         </ul>
       </v-card>
     </div>
