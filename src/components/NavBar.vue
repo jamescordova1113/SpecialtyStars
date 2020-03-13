@@ -176,7 +176,7 @@ export default {
         { text: "Specialties", route: "/Specialties" },
         { text: "Employer", route: "/NeedWorkers" },
         { text: "Worker", route: "/WorkersPage" },
-        { text: "Forum", route: "/ForumBoard"},
+        { text: "Forum", route: "/Forum/GeneralForum"},
         {
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"
@@ -185,7 +185,7 @@ export default {
           text: "Login",
           route: "/login"
         },
-        { text: "Help", route: "/Help" }
+        { text: "Help", route: "/Contact" }
       ],
       workerLinks: [
         {
@@ -230,12 +230,7 @@ export default {
           this.$router.push({ name: "Login" });
         });
     }
-    //    setCookie(userType) {
-    //     if (userType == 'employer') {
-    //       document.cookie = 'userType=employer; expires=Fri, 31 Dec 9999 23:59:59 GMT"'
-    //     } else {
-    //       document.cookie = 'userType=worker; expires=Fri, 31 Dec 9999 23:59:59 GMT'
-    //     }
+    
   },
 
   computed: {

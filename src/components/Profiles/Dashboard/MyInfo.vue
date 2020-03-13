@@ -117,12 +117,12 @@ export default {
       db.collection("users")
       .doc(this.users.id)
         .set({
-          createdAt: new Date(),
+          
           alias: this.users.alias,
           phone: this.users.phone,
           address: this.users.address,
           license: this.users.license,
-          bizName: this.user.bizName,
+          bizName: this.users.bizName,
           user_id: this.users.user_id
         })
         .then(() => {
@@ -148,7 +148,7 @@ export default {
             });
         })
         .then(() => {
-          this.$router.push({ name: "SpecialistProfiles" });
+          this.$router.push({ name: "EmployerDashBoard" });
         });
       // .catch(err => {});
     },

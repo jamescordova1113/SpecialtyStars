@@ -35,9 +35,9 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="../Profiles/Dashboard/MakeAPayment">
+          <router-link to="../Profiles/Dashboard/Payment">
           <v-btn text small>
-              Make A Payment
+              Billing
             </v-btn>
           </router-link>
           <v-spacer />

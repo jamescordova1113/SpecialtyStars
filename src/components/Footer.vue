@@ -65,7 +65,7 @@
           <v-col cols="2"> </v-col>
           <v-col cols="3">
             <h2>Help</h2>
-            <router-link to="../FooterLinks/HelpCenter">
+            <router-link to="../Help">
               <v-btn text small>
                 Help Center
               </v-btn>

@@ -8,16 +8,13 @@ import Contact from "@/components/Contact";
 import CreateWorkerProfile from "@/components/Profiles/CreateWorkerProfile";
 import WorkerDashBoard from "@/components/Profiles/WorkerDashBoard";
 import EmployerDashBoard from "@/components/Profiles/EmployerDashBoard";
-import MessageBoard from "@/components/MessageBoard";
 import WorkersPage from "@/components/WorkersPage";
-import WhatsYourSpec from "@/components/LandingPage/WhatsYourSpec";
 import NeedWorkers from "@/components/NeedWorkers";
 import Help from "@/components/Help";
 import Advertising from "@/components/FooterLinks/Advertising";
 import CookiePolicy from "@/components/FooterLinks/CookiePolicy";
 import Events from "@/components/FooterLinks/Events";
 import Guidlines from "@/components/FooterLinks/Guidlines";
-import HelpCenter from "@/components/FooterLinks/HelpCenter";
 import JoinTheTeam from "@/components/FooterLinks/JoinTheTeam";
 import Press from "@/components/FooterLinks/Press";
 import PrivacyPolicy from "@/components/FooterLinks/PrivacyPolicy";
@@ -26,20 +23,15 @@ import Safety from "@/components/FooterLinks/Safety";
 import SuperStars from "@/components/FooterLinks/SuperStars";
 import TermsOfUse from "@/components/FooterLinks/TermsOfUse";
 import History from "@/components/Profiles/Dashboard/History";
-import MakeAPayment from "@/components/Profiles/Dashboard/MakeAPayment";
 import MyInfo from "@/components/Profiles/Dashboard/MyInfo";
 import Notifications from "@/components/Profiles/Dashboard/Notifications";
 import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
 import Preferences from "@/components/Profiles/Dashboard/Preferences";
 import SavedMessages from "@/components/Profiles/Dashboard/SavedMessages";
-import ForumBoard from "@/components/ForumBoard";
 import SentMessages from "@/components/Profiles/Dashboard/SentMessages";
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
-import QandAForum from "@/components/Forum/QandAForum";
 import GeneralForum from "@/components/Forum/GeneralForum";
-import ISOForum from "@/components/Forum/ISOForum";
-
 
 
 import firebase from "firebase";
@@ -79,11 +71,6 @@ const router = new Router({
       component: Contact
     },
     {
-      path: "/MessageBoard",
-      name: "MessageBoard",
-      component: MessageBoard
-    },
-    {
       path: "/Profiles/CreateWorkerProfile",
       name: "CreateWorkerProfile",
       component: CreateWorkerProfile
@@ -102,11 +89,6 @@ const router = new Router({
       path: "/WorkersPage",
       name: "WorkersPage",
       component: WorkersPage
-    },
-    {
-      path: "/LandingPage/WhatsYourSpec",
-      name: "WhatsYourSpec",
-      component: WhatsYourSpec
     },
     {
       path: "/NeedWorkers",
@@ -137,11 +119,6 @@ const router = new Router({
       path: "/FooterLinks/Guidlines",
       name: "Guidlines",
       component: Guidlines
-    },
-    {
-      path: "/FooterLinks/HelpCenter",
-      name: "HelpCenter",
-      component: HelpCenter
     },
     {
       path: "/FooterLinks/JoinTheTeam",
@@ -184,11 +161,6 @@ const router = new Router({
       component: History
     },
     {
-      path: "/Profiles/Dashboard/MakeAPayment",
-      name: "MakeAPayment",
-      component: MakeAPayment
-    },
-    {
       path: "/Profiles/Dashboard/MyInfo",
       name: "MyInfo",
       component: MyInfo
@@ -228,26 +200,13 @@ const router = new Router({
       name: "SpecialistProfiles",
       component: SpecialistProfiles
     },
-    {
-      path: "/ForumBoard",
-      name: "ForumBoard",
-      component: ForumBoard
-    },
-    {
-      path: "/Forum/QandAForum",
-      name: "QandAForum",
-      component: QandAForum
-    },
+    
     {
       path: "/Forum/GeneralForum",
       name: "GeneralForum",
       component: GeneralForum
-    },
-    {
-      path: "/Forum/ISOForum",
-      name: "ISOForum",
-      component: ISOForum
     }
+   
   ]
 });
 
