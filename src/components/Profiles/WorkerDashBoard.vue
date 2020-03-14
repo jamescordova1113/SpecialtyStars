@@ -11,27 +11,27 @@
       <v-col cols="12">
         <v-card>
           <v-card-text><h3 class="text-center">My Account</h3></v-card-text>
-          
+
           <router-link to="../Profiles/CreateWorkerProfile">
-          <v-btn text small>
+            <v-btn text small>
               My Profile
             </v-btn>
           </router-link>
           <v-spacer />
           <router-link to="../Profiles/Dashboard/History">
-          <v-btn text small>
+            <v-btn text small>
               History
             </v-btn>
           </router-link>
           <v-spacer />
           <router-link to="../Profiles/Dashboard/Preferences">
-          <v-btn text small>
+            <v-btn text small>
               My Preferences
             </v-btn>
           </router-link>
           <v-spacer />
           <router-link to="../Profiles/Dashboard/Notifications">
-          <v-btn text small>
+            <v-btn text small>
               Notifications
             </v-btn>
           </router-link>
@@ -40,7 +40,7 @@
         </v-card>
       </v-col>
     </v-row>
-  <v-row class="mb-5" justify="center" align="center" no-gutters>
+    <v-row class="mb-5" justify="center" align="center" no-gutters>
       <v-col cols="12">
         <v-card>
           <v-card-text><h3 class="text-center">My Messages</h3></v-card-text>
@@ -51,7 +51,7 @@
           </router-link>
           <v-spacer />
           <router-link to="../Profiles/Dashboard/SentMessages">
-          <v-btn text small>
+            <v-btn text small>
               Sent Messages
             </v-btn>
           </router-link>
@@ -59,16 +59,17 @@
           <br />
         </v-card>
       </v-col>
-  </v-row>
-   <v-row class="mb-5" justify="center" align="center" no-gutters>
+    </v-row>
+    <v-row class="mb-5" justify="center" align="center" no-gutters>
       <v-col cols="12">
         <v-card>
-          <v-card-text><h3 class="mb-10 text-center">My Contacts</h3></v-card-text>
+          <v-card-text
+            ><h3 class="mb-10 text-center">My Contacts</h3></v-card-text
+          >
           <br />
         </v-card>
       </v-col>
-  </v-row>
-
+    </v-row>
   </v-container>
 </template>
 

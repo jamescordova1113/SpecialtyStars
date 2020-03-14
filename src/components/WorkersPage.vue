@@ -7,7 +7,7 @@
         </h2>
       </v-row>
     </v-flex>
-    
+
     <div class="carousel">
       <v-carousel
         cycle
@@ -25,19 +25,19 @@
       </v-carousel>
     </div>
     <div>
-    <v-row class="mt-6" justify="center" align="center no-gutters">
-      <p>
-        Welcome to “Specialty Stars” a new and convenient resource for hard
-        working people and their employers to connect. Specialty Stars is
-        tailored for people in the Construction, Home services, and other labor
-        generated industries. Hard working people can easily find work by
-        showcasing their skills in an online profile, meanwhile, employers can
-        browse those profiles and quickly find who they’re looking for. Whether
-        you need work or you need workers, Specialty Stars connects you faster
-        and easier than ever before. It’s free to sign up, and free to browse
-        profiles, all from your phone. Sign up for free today!
-      </p>
-    </v-row>
+      <v-row class="mt-6" justify="center" align="center no-gutters">
+        <p>
+          Welcome to “Specialty Stars” a new and convenient resource for hard
+          working people and their employers to connect. Specialty Stars is
+          tailored for people in the Construction, Home services, and other
+          labor generated industries. Hard working people can easily find work
+          by showcasing their skills in an online profile, meanwhile, employers
+          can browse those profiles and quickly find who they’re looking for.
+          Whether you need work or you need workers, Specialty Stars connects
+          you faster and easier than ever before. It’s free to sign up, and free
+          to browse profiles, all from your phone. Sign up for free today!
+        </p>
+      </v-row>
     </div>
     <div>
       <v-flex text-xs-center>
@@ -64,7 +64,7 @@
                 are new to South Florida, need a job, but don’t know many
                 people. Showcase your skills on Specialty Stars and let the work
                 find you! If you are a hard worker, employers need you.
-                Introduce yourself on Specialty Stars, Get found today! 
+                Introduce yourself on Specialty Stars, Get found today!
                 Specialty Stars lets you advertise to the people who are looking
                 for you! Whether you just started in your field or you have many
                 years experience; Whether you have a job or not, Why not see
@@ -133,12 +133,12 @@
                 <li>Wait for an employer to text or call you!</li>
               </ol>
             </v-card-text>
-            
+
             <!-- </v-card> -->
           </v-col>
           <v-col cols="6" class="text-center">
             <router-link to="/SignupWorker">
-          <v-btn color="orange" tile dark> Signup now! </v-btn>
+              <v-btn color="orange" tile dark> Signup now! </v-btn>
             </router-link>
           </v-col>
         </v-row>

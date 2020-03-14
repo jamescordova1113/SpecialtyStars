@@ -30,7 +30,7 @@
             <v-select
               class="select"
               v-model="searchexp"
-              :items="experience"
+              :items="experiences"
               label="Experience"
               data-vv-name="select"
             >
@@ -42,9 +42,16 @@
               placeholder="Search by zipcode"
             />
             <br />
-           
 
-            <v-btn class="filterButton" color="red lighten-1" tile dark @click="reset"> Reset </v-btn>
+            <v-btn
+              class="filterButton"
+              color="red lighten-1"
+              tile
+              dark
+              @click="reset"
+            >
+              Reset
+            </v-btn>
           </v-form>
         </v-card>
         <div v-for="pro in filteredProfiles" :key="pro.id">
@@ -77,102 +84,120 @@
                   >Min cost per hour: ${{ pro.minperhour }}</span
                 >
               </v-card-text>
-              
-                  
-                  <v-card-actions class="justify-center">
-                    <!-- modal -->
-                    <v-dialog v-model="dialog" width="500">
-                      <template v-slot:activator="{ on }">
-                        <v-btn
-                          class="explorebutton"
-                          color="primary lighten-2"
-                          v-on="on"
-                          dark
-                          tile    
-                          @click.stop="dialog = true"
-                        >
-                          View Profile
-                        </v-btn>
-                      </template>
 
-                      <v-card>
-                        <v-card-title
-                          class="headline primary lighten-2 white--text"
-                          primary-title
-                        >
-                          Worker Profile {{pro.alias}}
-                        </v-card-title>
+              <v-card-actions class="justify-center">
+                <!-- modal -->
+                <v-dialog v-model="dialog" width="500">
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      class="explorebutton"
+                      color="primary lighten-2"
+                      v-on="on"
+                      dark
+                      tile
+                      @click.stop="dialog = true"
+                    >
+                      View Profile
+                    </v-btn>
+                  </template>
 
-                        <v-avatar class="avatar" size="100px">
-                          <v-img
-                            class="white--text"
-                            v-bind:src="`${pro.image}`"
+                  <v-card>
+                    <v-card-title
+                      class="headline primary lighten-2 white--text"
+                      primary-title
+                    >
+                      Worker Profile {{ pro.alias }}
+                    </v-card-title>
+
+                    <v-avatar class="avatar" size="100px">
+                      <v-img class="white--text" v-bind:src="`${pro.image}`">
+                      </v-img>
+                    </v-avatar>
+                    <v-card-text>
+                      <div>
+                        <h2>General Info</h2>
+                      </div>
+
+                      <div class="event">First Name: {{ pro.alias }}</div>
+                      <div class="event">
+                        <h3>Specialty:</h3>
+                        {{ pro.specialty }}
+                      </div>
+                      <div class="event">
+                        <h3>Transportion to work:</h3>
+                        {{ pro.transportation }}
+                      </div>
+                      <div class="event">
+                        <h3>How far are you willing to travel for work:</h3>
+                        {{ pro.travel }}
+                      </div>
+                      <div class="event">
+                        <h3>I Live in:</h3>
+                        {{ pro.location }}
+                      </div>
+                      <div class="event">
+                        <h3>My minimum per hour:</h3>
+                        {{ pro.minperhour }}
+                      </div>
+
+                      <h2>Trade specific Info:</h2>
+
+                      <div class="event">
+                        <h3>Have own tools:</h3>
+                        {{ pro.tools }}
+                      </div>
+                      <div class="event">
+                        <h3>What are your Strenghts:</h3>
+                        {{ pro.strenghts }}
+                      </div>
+                      <div class="event">
+                        <h3>What are your Skills:</h3>
+                        {{ pro.skills }}
+                      </div>
+                      <div class="event">
+                        <h3>Experience with Equipment:</h3>
+                        {{ pro.equipment }}
+                      </div>
+
+                      <br />
+                      <div class="carousel">
+                        <v-carousel
+                          cycle
+                          height="350"
+                          hide-delimiter-background
+                          show-arrows-on-hover
+                        >
+                          <v-carousel-item
+                            v-for="(slide, i) in slides"
+                            :key="i"
                           >
-                          </v-img>
-                        </v-avatar>
-                        <v-card-text>
-                          <div>
-                            <h3>General Info</h3>
-                          </div>
-
-                          <div class="event">First Name: {{ pro.alias }}</div>
-                          <div class="event">
-                            Specialty: {{ pro.specialty }}
-                          </div>
-                          <div class="event">
-                            Transportion to work: {{ pro.transportation }}
-                          </div>
-                          <div class="event">I Live in: {{ pro.location }}</div>
-                          <div class="event">
-                            My minimum per hour: {{ pro.minperhour }}
-                          </div>
-
-                          <h3>Trade specific Info:</h3>
-                          <div class="event">
-                            Have own tools: {{ pro.tools }}
-                          </div>
-
-                          <br />
-                          <div class="carousel">
-                            <v-carousel
-                              cycle
-                              height="350"
-                              hide-delimiter-background
-                              show-arrows-on-hover
-                            >
-                              <v-carousel-item
-                                v-for="(slide, i) in slides"
-                                :key="i"
+                            <v-sheet :color="colors[i]" height="100%">
+                              <v-row
+                                class="fill-height"
+                                align="center"
+                                justify="center"
                               >
-                                <v-sheet :color="colors[i]" height="100%">
-                                  <v-row
-                                    class="fill-height"
-                                    align="center"
-                                    justify="center"
-                                  >
-                                    <div class="display-3">
-                                      {{ slide }} Slide
-                                    </div>
-                                  </v-row>
-                                </v-sheet>
-                              </v-carousel-item>
-                            </v-carousel>
-                          </div>
-                          <br />
-                          <div class="text--center">
-                            <v-btn
-                              class="explore"
-                              color="primary lighten-2"
-                              dark
-                              tile
-                              
-                              >[ Message Me ]
-                            </v-btn>
-                          </div>
-                        </v-card-text>
-                      </v-card>
-                    </v-dialog>
-                  </v-card-actions>
+                                <div class="display-3">{{ slide }} Slide</div>
+                              </v-row>
+                            </v-sheet>
+                          </v-carousel-item>
+                        </v-carousel>
+                      </div>
+                      <br />
+                      <div class="text--center">
+                        <v-btn
+                          class="explore"
+                          color="primary lighten-2"
+                          dark
+                          tile
+                          @click="showContactInfo;"
+                          >[ Show Contact Info ]
+                        </v-btn>
+                      </div>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
+              </v-card-actions>
 
               <!-- modal end -->
             </v-card>
@@ -190,6 +215,11 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
+      specialistProfile: {
+        prefferedContact: null,
+        phone: null,
+        email: null
+      },
       valid: false,
       specialty: [
         "Agricultural",
@@ -239,7 +269,14 @@ export default {
         "Tree Work",
         "Warehouse"
       ],
-      experience: ["Laborer", "Apprentice", "Journeyman"],
+      workDurs: ["Full Time", "Part Time"],
+      experiences: [
+        "Helper",
+        "Apprentice",
+        "Journeyman",
+        "Master",
+        "Supervisor"
+      ],
       location: ["Woodinville", "CDA", "Boise"],
       colors: [
         "indigo",
@@ -250,7 +287,7 @@ export default {
       ],
       slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       pros: [],
-      
+
       myIcon: "mdi-account-card-details-outline",
       dialog: false,
       searchzip: "",
@@ -261,6 +298,13 @@ export default {
   methods: {
     reset() {
       this.$refs.form.reset();
+    },
+    showContactInfo() {
+      if (this.specialistProfile.prefferedContact === "Phone") {
+        console.log(this.specialistProfile.phone);
+      } else {
+        console.log(this.specialistProfile.email);
+      }
     }
   },
   computed: {
@@ -270,9 +314,9 @@ export default {
     filteredProfiles() {
       return this.pros.filter(pro => {
         return (
-          pro.specialty.match(this.searchspec) 
-          && pro.experience.match(this.searchexp)
-          && pro.zip.match(this.searchzip)
+          pro.specialty.match(this.searchspec) &&
+          pro.experience.match(this.searchexp) &&
+          pro.zip.match(this.searchzip)
         );
       });
     }
@@ -281,7 +325,7 @@ export default {
     // fetch data from firestore
     db.collection("specialistProfile")
       .orderBy("createdAt")
-            
+
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -306,7 +350,7 @@ export default {
 }
 .event {
   margin-left: 5px;
-  color: darkslategray;
+  color: slategray;
 }
 .filterButton {
   margin-top: 10px;

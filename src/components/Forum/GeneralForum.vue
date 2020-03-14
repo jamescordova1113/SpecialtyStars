@@ -14,33 +14,32 @@
     <v-card class="messages" v-chat-scroll>
       <!-- <h3 inset v-if="!user.isLoggedIn">Login to view Forum</h3>
       <div inset v-if="user.isLoggedIn"> -->
-        <v-card-text>
-          <div v-for="message in messages" :key="message.id">
-            <v-card class="forumCard">
+      <v-card-text>
+        <div v-for="message in messages" :key="message.id">
+          <v-card class="forumCard">
             <span class="orange--text">{{ message.alias }} </span>
-            <span class="grey--text text--darken-3">{{ message.content }} </span>
+            <span class="grey--text text--darken-3"
+              >{{ message.content }}
+            </span>
             <span class="time grey--text ml-2 ">{{ message.timestamp }}</span>
-            </v-card>
-            <br />
-          </div>
-      <!-- </div> -->
-      <v-card>
-      <v-card-actions>
-        
-          <NewMessGeneral />
-        
-      </v-card-actions>
-      </v-card>
-        </v-card-text>
-        
+          </v-card>
+          <br />
+        </div>
+        <!-- </div> -->
+        <v-card>
+          <v-card-actions>
+            <NewMessGeneral />
+          </v-card-actions>
+        </v-card>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
 import db from "@/firebase/init";
-import NewMessGeneral from '@/components/Forum/NewMessGeneral'
-import moment from 'moment'
+import NewMessGeneral from "@/components/Forum/NewMessGeneral";
+import moment from "moment";
 export default {
   name: "GeneralForum",
   components: {
@@ -61,26 +60,20 @@ export default {
     }
   },
   created() {
-
-    let ref = db
-      .collection("genForum")
-      .orderBy('timestamp')
-      ref.onSnapshot(snapshot => {
-        snapshot.docChanges()
-        .forEach(change => {
-          if(change.type == 'added') {
-            let doc = change.doc
-            this.messages.push({
-              id: doc.id,
-              alias: doc.data().alias,
-              content: doc.data().content,
-              timestamp: moment(doc.data().timestamp).format('lll')
-
-            })
-          }
-        })
-      })
-
+    let ref = db.collection("genForum").orderBy("timestamp");
+    ref.onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type == "added") {
+          let doc = change.doc;
+          this.messages.push({
+            id: doc.id,
+            alias: doc.data().alias,
+            content: doc.data().content,
+            timestamp: moment(doc.data().timestamp).format("lll")
+          });
+        }
+      });
+    });
   }
 };
 </script>
@@ -102,12 +95,12 @@ export default {
   overflow: auto;
 }
 .messages::-webkit-scrollbar {
-  width: 3px
+  width: 3px;
 }
 .messages::-webkit-scrollbar-track {
-  background: orange
+  background: orange;
 }
 .messages::-webkit-scrollbar-thumb {
-  background: lightblue
+  background: lightblue;
 }
 </style>

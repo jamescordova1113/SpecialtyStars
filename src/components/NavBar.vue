@@ -53,13 +53,9 @@
               this.loginText
             }}</v-btn>
           </router-link>
-          <v-btn
-            v-if="user.isWorker || user.isEmployer"
-            
-            text
-            @click="logout"
-            >{{ this.logoutText }}</v-btn
-          >
+          <v-btn v-if="user.isWorker || user.isEmployer" text @click="logout">{{
+            this.logoutText
+          }}</v-btn>
           <div class="text-center">
             <v-menu transition="slide-x-transition" bottom right>
               <template v-slot:activator="{ on }">
@@ -114,9 +110,7 @@
         <v-subheader inset v-if="!user.isLoggedIn"
           >Login For More Options</v-subheader
         >
-        <v-subheader inset v-if="user.isLoggedIn"
-          >Client Area</v-subheader
-        >
+        <v-subheader inset v-if="user.isLoggedIn">Client Area</v-subheader>
         <div v-if="user.isEmployer">
           <v-list-item
             v-for="link in employerLinks"
@@ -136,7 +130,7 @@
             </v-list-item-content>
           </v-list-item>
         </div>
-         <div v-if="user.isWorker">
+        <div v-if="user.isWorker">
           <v-list-item
             v-for="link in workerLinks"
             :key="link.text"
@@ -176,7 +170,7 @@ export default {
         { text: "Specialties", route: "/Specialties" },
         { text: "Employer", route: "/NeedWorkers" },
         { text: "Worker", route: "/WorkersPage" },
-        { text: "Forum", route: "/Forum/GeneralForum"},
+        { text: "Forum", route: "/Forum/GeneralForum" },
         {
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"
@@ -230,7 +224,6 @@ export default {
           this.$router.push({ name: "Login" });
         });
     }
-    
   },
 
   computed: {

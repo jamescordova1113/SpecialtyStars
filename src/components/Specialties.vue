@@ -66,25 +66,17 @@
           </v-flex>
         </v-row>
         <div class="buttons text-center">
-      <router-link to="/WorkersPage">
-        <v-btn
-          class="callbutton"
-          tile
-          color="primary lighten-3"
-        >
-          I'm looking for work
-        </v-btn>
-      </router-link>
-      <router-link to="/NeedWorkers">
-        <v-btn
-          class="callbutton"
-          tile
-          color="primary lighten-3"
-        >
-          I'm looking for workers
-        </v-btn>
-      </router-link>
-    </div>
+          <router-link to="/WorkersPage">
+            <v-btn class="callbutton" tile color="primary lighten-3">
+              I'm looking for work
+            </v-btn>
+          </router-link>
+          <router-link to="/NeedWorkers">
+            <v-btn class="callbutton" tile color="primary lighten-3">
+              I'm looking for workers
+            </v-btn>
+          </router-link>
+        </div>
       </div>
     </v-card>
   </container>

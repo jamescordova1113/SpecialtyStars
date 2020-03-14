@@ -31,14 +31,16 @@ export default {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        alert('ErrorCode: ' + errorCode +'\n' + 'ErrorMessage: ' + errorMessage)
+        alert(
+          "ErrorCode: " + errorCode + "\n" + "ErrorMessage: " + errorMessage
+        );
       });
   },
   created() {
     var userType = this.readCookie("userType");
 
-    if (userType){
-      if (userType == 'worker') {
+    if (userType) {
+      if (userType == "worker") {
         this.$router.push({ name: "WorkersPage" });
       } else {
         this.$router.push({ name: "NeedWorkers" });

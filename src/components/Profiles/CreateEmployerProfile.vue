@@ -8,7 +8,6 @@
     <v-card class="loginTitle">
       <v-card-text>
         <v-form ref="form" lazy-validation v-model="valid">
-          
           <v-text-field
             type="Address"
             v-model="users.address"
@@ -35,8 +34,7 @@
             label="Full Name:"
             required
           ></v-text-field>
-       
-         
+
           <v-flex class="xs12 sm6 mt-5 offset-sm1">
             <v-btn color="success" class="mr-4" @click="update"
               >Post Profile</v-btn
@@ -61,8 +59,8 @@ export default {
   data() {
     return {
       valid: false,
-        phone: "",
-        email: "",
+      phone: "",
+      email: "",
       users: {
         alias: null,
         user_id: null,
@@ -71,8 +69,8 @@ export default {
         phone: null,
         license: null,
         bizName: null
-        },
-     
+      },
+
       date: new Date().toISOString().substr(0, 10),
       titleRules: [
         v => !!v || "Title is required",
@@ -113,9 +111,8 @@ export default {
   },
   methods: {
     update() {
-      
       db.collection("users")
-      .doc(this.users.id)
+        .doc(this.users.id)
         .set({
           createdAt: new Date(),
           alias: this.users.alias,
@@ -128,7 +125,7 @@ export default {
         .then(() => {
           if (this.imageUrl)
             return firebase
-            .firestore()
+              .firestore()
               .storage()
               .ref("Images/" + this.filename)
               .put(this.imageUrl);
@@ -136,7 +133,7 @@ export default {
         .then(() => {
           if (this.imageUrl)
             return firebase
-            .firestore()
+              .firestore()
               .storage()
               .ref("Images/" + this.filename)
               .getDownloadURL();

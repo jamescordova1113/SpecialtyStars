@@ -8,8 +8,7 @@
     <v-card class="loginTitle">
       <v-card-text>
         <v-form ref="form" lazy-validation v-model="valid">
-         
-          <img :src="users.image"/>
+          <img :src="users.image" />
           <v-text-field
             v-model="users.alias"
             label="First Name:"
@@ -28,7 +27,7 @@
             label="Phone#:"
             required
           ></v-text-field>
-        <v-text-field
+          <v-text-field
             type="email "
             v-model="users.email"
             label="Email:"
@@ -38,7 +37,7 @@
           <v-select
             v-model="users.experience"
             :items="experiences"
-            label="Experience:"
+            label="You experience level:"
             data-vv-name="experience"
             required
           ></v-select>
@@ -64,7 +63,7 @@
           ></v-select>
           <v-text-field
             v-model="users.location"
-            label="City:"
+            label="Whay city do you live in?:"
             required
           ></v-text-field>
           <v-text-field
@@ -75,11 +74,33 @@
           ></v-text-field>
           <v-text-field
             v-model="users.tools"
-            label="Do you have your own tools?:"
+            label="Do you have your own tools and/or safety equipment?:"
           ></v-text-field>
           <v-text-field
             v-model="users.transportation"
             label="Do you have dependable transportation?:"
+          ></v-text-field>
+          <v-select
+            v-model="users.workDur"
+            :items="workDurs"
+            label="What duration of work are looking for?:"
+            data-vv-name="workDurs"
+          ></v-select>
+          <v-text-field
+            v-model="users.travel"
+            label="How far are you willing to travel?:"
+          ></v-text-field>
+          <v-text-field
+            v-model="users.equipment"
+            label="Do you have experience with a equipment need for your specialty? and if so what kind?:"
+          ></v-text-field>
+          <v-text-field
+            v-model="users.skills"
+            label="Got skills in your specialty what are they?:"
+          ></v-text-field>
+          <v-text-field
+            v-model="users.strenghts"
+            label="In your own words what are your strenghts and experience in your specialty any certification?:"
           ></v-text-field>
 
           <v-flex class="xs12 sm6 mb-2">
@@ -119,28 +140,40 @@ export default {
   data() {
     return {
       valid: false,
-        phone: "",
-        minperhour: "",
-        preferredContact: "",
-        canContact: "",
-        location: "",
-        city: "",
-        zip: "",
-        specialty: null,
-        tools: null,
-        imageUrl: null,
-        experience: null,
-        transportation: null,
-        isWorkerProfile: true,
-        email: "",
+      phone: "",
+      minperhour: "",
+      preferredContact: "",
+      canContact: "",
+      location: "",
+      city: "",
+      zip: "",
+      specialty: null,
+      tools: null,
+      imageUrl: null,
+      experience: null,
+      workDur: null,
+      strenghts: null,
+      skills: null,
+      equipment: null,
+      travel: null,
+      transportation: null,
+      isWorkerProfile: true,
+      email: "",
       users: {
         alias: null,
         user_id: null,
         isWorkerProfile: true
-        },
+      },
       image: null,
       imageHeight: 0,
-      experiences: ["Laborer", "Apprentice", "Journeyman"],
+      workDurs: ["Full Time", "Part Time"],
+      experiences: [
+        "Helper",
+        "Apprentice",
+        "Journeyman",
+        "Master",
+        "Supervisor"
+      ],
       items: [
         "Agricultural",
         "Air Conditioning",
@@ -193,7 +226,7 @@ export default {
       uploadValue: 0,
       date: new Date().toISOString().substr(0, 10),
       contact: ["Message", "Email", "Phone Call", "Text"],
-      contacts: ["Homeowners", "Employers"],
+      contacts: ["Homeowners", "Employers", "Both"],
       titleRules: [
         v => !!v || "Title is required",
         v => (v && v.length <= 10) || "Title must be less than 50 characters"
@@ -233,9 +266,8 @@ export default {
   },
   methods: {
     update() {
-      
       db.collection("specialistProfile")
-      .doc(this.users.id)
+        .doc(this.users.id)
         .set({
           createdAt: new Date(),
           alias: this.users.alias,
@@ -243,6 +275,11 @@ export default {
           minperhour: this.users.minperhour,
           specialty: this.users.specialty,
           experience: this.users.experience,
+          workDur: this.users.workDur,
+          strenghts: this.users.strenghts,
+          equipment: this.users.equipment,
+          travel: this.users.travel,
+          skills: this.users.skills,
           zip: this.users.zip,
           preferredContact: this.users.preferredContact,
           canContact: this.users.canContact,
@@ -251,27 +288,34 @@ export default {
           location: this.users.location,
           user_id: this.users.user_id,
           isWorkerProfile: this.users.isWorkerProfile,
-          email: this.users.isWorkerProfile,
-          isWorker: this.users.isWorker,
+          email: this.users.email,
+          isWorker: this.users.isWorker
         })
-        .then( () => {
+        .then(() => {
           if (this.image)
-          return firebase.storage().ref('Images/' + this.filename).put(this.image)
+            return firebase
+              .storage()
+              .ref("Images/" + this.filename)
+              .put(this.image);
         })
-        .then( () => {
+        .then(() => {
           if (this.image)
-          return firebase.storage().ref('Images/' + this.filename).getDownloadURL()
+            return firebase
+              .storage()
+              .ref("Images/" + this.filename)
+              .getDownloadURL();
         })
         .then(URL => {
           if (URL)
-          db.collection("specialistProfile").doc(firebase.auth().currentUser.uid)
-          .update({
-            image: URL
-          })
+            db.collection("specialistProfile")
+              .doc(firebase.auth().currentUser.uid)
+              .update({
+                image: URL
+              });
         })
         .then(() => {
           this.$router.push({ name: "SpecialistProfiles" });
-        })
+        });
       // .catch(err => {});
     },
     onPickFile() {

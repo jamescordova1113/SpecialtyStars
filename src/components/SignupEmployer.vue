@@ -14,7 +14,6 @@
     <v-card>
       <v-card-text>
         <v-form @submit="signup" class="card-panel">
-          
           <v-text-field
             type="Address"
             v-model="address"
@@ -55,22 +54,19 @@
             required
           ></v-text-field>
           <v-text-field
-    name="confirmPassword"
-    label="Confirm Password"
-    id="confirmPassword"
-    type="password"
-    :rules="[comparePasswords]"
-    v-model="passwordConfirm"
-    ></v-text-field>
-       
-          
-          
-          
+            name="confirmPassword"
+            label="Confirm Password"
+            id="confirmPassword"
+            type="password"
+            :rules="[comparePasswords]"
+            v-model="passwordConfirm"
+          ></v-text-field>
 
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
             <div class="flex-grow-1"></div>
-            <v-btn @click="signup" color="primary lighten-2"> Submit </v-btn>
+            <v-btn @click="signup" color="orange" dark tile> Submit </v-btn>
+            <!-- <v-btn @click="signupWithGoolge" color="primary lighten-2" dark tile> Signup with Google </v-btn> -->
           </v-card-actions>
         </v-form>
       </v-card-text>
@@ -107,10 +103,14 @@ export default {
   },
 
   methods: {
+    // signupWithGoolge() {
+    //   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    //   .then(function(response) {
+    //     console.log(response)
+    //   })
+    // },
     signup() {
-      if (
-        (this.alias && this.email && this.password && this.isEmployer)
-      ) {
+      if (this.alias && this.email && this.password && this.isEmployer) {
         this.slug = slugify(this.alias, {
           replacement: "-",
           remove: /[$*_+~.()'"!\-:@]/g,
@@ -167,10 +167,12 @@ export default {
     }
   },
   computed: {
-  comparePasswords () {
-    return this.password === this.passwordConfirm ? true : 'Passwords don\'t match'
-  }
-},
+    comparePasswords() {
+      return this.password === this.passwordConfirm
+        ? true
+        : "Passwords don't match";
+    }
+  },
   beforeCreate() {
     firebase
       .auth()

@@ -28,20 +28,20 @@
             required
           ></v-text-field>
           <v-text-field
-    name="confirmPassword"
-    label="Confirm Password"
-    id="confirmPassword"
-    type="password"
-    :rules="[comparePasswords]"
-    v-model="passwordConfirm"
-    ></v-text-field>
+            name="confirmPassword"
+            label="Confirm Password"
+            id="confirmPassword"
+            type="password"
+            :rules="[comparePasswords]"
+            v-model="passwordConfirm"
+          ></v-text-field>
           <v-text-field
             type="alias"
             v-model="alias"
             label="First Name:"
             required
           ></v-text-field>
-           <v-select
+          <v-select
             v-model="specialty"
             :items="items"
             label="Specialty"
@@ -61,13 +61,12 @@
             label="Zip Code:"
             required
           ></v-text-field>
-          
-          
 
           <p class="red--text text-center" v-if="feedback">{{ feedback }}</p>
           <v-card-actions class="text-center">
             <div class="flex-grow-1"></div>
-            <v-btn @click="signup" color="primary lighten-2"> Submit </v-btn>
+            <v-btn @click="signup" color="orange" dark tile> Submit </v-btn>
+            <!-- <v-btn @click="signupWithGoolge" color="primary lighten-2" dark tile> Signup With Google </v-btn> -->
           </v-card-actions>
         </v-form>
       </v-card-text>
@@ -95,6 +94,11 @@ export default {
       zip: "",
       specialty: "",
       experience: "",
+      workDur: "",
+      strenghts: "",
+      skills: "",
+      equipment: "",
+      travel: "",
       myCred: null,
       experiences: ["Laborer", "Apprentice", "Journeyman"],
       items: [
@@ -154,12 +158,20 @@ export default {
     };
   },
 
-
   methods: {
+    // signupWithGoogle() {
+    //   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    //   .then(function(response) {
+    //     console.log(response)
+    //   })
+    // },
     signup() {
       if (
-        (this.alias && this.email && this.password && this.comparePasswords === true && this.isWorker)
-        
+        this.alias &&
+        this.email &&
+        this.password &&
+        this.comparePasswords === true &&
+        this.isWorker
       ) {
         this.slug = slugify(this.alias, {
           replacement: "-",
@@ -187,9 +199,9 @@ export default {
                     zip: this.zip,
                     specialty: this.specialty,
                     experience: this.experience,
-                    isWorkerProfile: this.isWorkerProfile,
+                    isWorkerProfile: this.isWorkerProfile
                   });
-                  db.collection("specialistProfile")
+                db.collection("specialistProfile")
                   .doc(cred.user.uid)
                   .set({
                     email: this.email,
@@ -199,11 +211,10 @@ export default {
                     zip: this.zip,
                     specialty: this.specialty,
                     experience: this.experience,
-                    isWorkerProfile: this.isWorkerProfile,
-
-              });
+                    isWorkerProfile: this.isWorkerProfile
+                  });
               })
-      
+
               .then(() => {
                 this.myCred.user
                   .sendEmailVerification()
@@ -225,22 +236,24 @@ export default {
               });
           }
         });
-      // } 
-      // .then (() => {
-      //   firebase 
-      //   .firestore()
-      //   createSpecialistProfile(this.users.user_id)
-      // }
-        } else {
+        // }
+        // .then (() => {
+        //   firebase
+        //   .firestore()
+        //   createSpecialistProfile(this.users.user_id)
+        // }
+      } else {
         this.feedback = "Please enter data in all fields";
       }
     }
   },
   computed: {
-  comparePasswords () {
-    return this.password === this.passwordConfirm ? true : 'Passwords don\'t match'
-  }
-},
+    comparePasswords() {
+      return this.password === this.passwordConfirm
+        ? true
+        : "Passwords don't match";
+    }
+  },
   beforeCreate() {
     firebase
       .auth()

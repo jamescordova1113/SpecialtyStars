@@ -25,17 +25,29 @@
               <p class="red-text text-center" v-if="feedback">{{ feedback }}</p>
               <br />
               <br />
-              <v-card-actions class="text-center">
-                <!-- <div class="flex-grow-1"></div> -->
+              <div class="buttons text-center">
                 <v-btn @click="login" color="orange" dark tile null="true">
                   Log Me In!
                 </v-btn>
-                </v-card-actions>
-                <div class="forgotPass text-center">
+                <!-- <v-btn
+                    @click="loginWithGoogle"
+                    color="primary lighten-3"
+                    dark
+                    tile
+                    null="true"
+                  >
+                    Login with Google
+                  </v-btn> -->
+              </div>
+
+              <div class="forgotPass text-center">
                 <v-btn text color="primary" @click="resetPassword">
                   Forgot your password?
                 </v-btn>
-                <p> Enter your email and a password reset will be sent to your email.</p>
+                <p>
+                  Enter your email and a password reset will be sent to your
+                  email.
+                </p>
               </div>
             </v-col>
           </v-row>
@@ -95,17 +107,24 @@ export default {
     }
   },
   methods: {
+    // loginWithGoogle() {
+    //   firebase
+    //     .auth()
+    //     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    //     .then(function(response) {
+    //       console.log(response);
+    //     });
+    // },
     resetPassword() {
       const auth = firebase.auth();
-      auth.sendPasswordResetEmail(this.email)
-        .then(() => {
-          // Email sent.
-          alert('Email Sent');
-        })
-        // .catch((err) => {
-        //    console.log(err)
-         
-        // });
+      auth.sendPasswordResetEmail(this.email).then(() => {
+        // Email sent.
+        alert("Email Sent");
+      });
+      // .catch((err) => {
+      //    console.log(err)
+
+      // });
     },
     login() {
       if (this.email && this.password) {
@@ -161,6 +180,9 @@ export default {
 </script>
 
 <style>
+.buttons {
+  padding: 10px;
+}
 .forgotPass {
   margin-top: 10px;
 }

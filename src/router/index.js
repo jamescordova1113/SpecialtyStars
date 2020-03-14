@@ -73,7 +73,7 @@ const router = new Router({
     {
       path: "/Profiles/CreateWorkerProfile",
       name: "CreateWorkerProfile",
-      component: CreateWorkerProfile
+      component: CreateWorkerProfile,
     },
     {
       path: "/Profiles/WorkerDashBoard",
@@ -219,7 +219,7 @@ router.beforeEach((to, from, next) => {
       next();
     } else {
       // no user signed in redirect to login
-      next({ name: "Login" });
+      next('/Login');
     }
   } else {
     next();

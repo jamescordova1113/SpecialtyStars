@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
       alias: "guest",
       isLoggedIn: false,
       isWorker: false,
-      isEmployer: false
+      isEmployer: false,
+      isWorkerProfile: false
     },
     config: {
       contactEmail: null,
@@ -24,7 +25,6 @@ export const store = new Vuex.Store({
       contact: '',
       image: '',
       minperhour: '',
-      specialty: '',
       title: '',
       yrsexperience: '',
       email: '',
@@ -33,10 +33,23 @@ export const store = new Vuex.Store({
       experience: '',
       featured: '',
       name: '',
+      canContact: '',
+      createdAt: '',
+      equipment: '',
+      isWorker: '',
+      isWorkerProfile: '',
+      skills: '',
+      specialty: '',
+      strenghts: '',
+      tools: '',
+      transportaion: '',
+      travel: '',
+      workDur: '',
       preferredContact: '',
       phone: '',
       role: '',
       user_id: '',
+
  }
  },
   mutations: {
