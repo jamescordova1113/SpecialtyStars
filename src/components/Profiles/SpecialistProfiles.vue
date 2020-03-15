@@ -299,13 +299,13 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    showContactInfo() {
-      if (this.specialistProfile.prefferedContact === "Phone") {
-        console.log(this.specialistProfile.phone);
-      } else {
-        console.log(this.specialistProfile.email);
-      }
-    }
+    // showContactInfo() {
+    //   if (this.specialistProfile.prefferedContact === "Phone") {
+    //     console.log(this.specialistProfile.phone);
+    //   } else {
+    //     console.log(this.specialistProfile.email);
+    //   }
+    // }
   },
   computed: {
     user() {

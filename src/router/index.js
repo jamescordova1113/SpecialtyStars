@@ -22,11 +22,9 @@ import Resources from "@/components/FooterLinks/Resources";
 import Safety from "@/components/FooterLinks/Safety";
 import SuperStars from "@/components/FooterLinks/SuperStars";
 import TermsOfUse from "@/components/FooterLinks/TermsOfUse";
-import History from "@/components/Profiles/Dashboard/History";
 import MyInfo from "@/components/Profiles/Dashboard/MyInfo";
 import Notifications from "@/components/Profiles/Dashboard/Notifications";
 import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
-import Preferences from "@/components/Profiles/Dashboard/Preferences";
 import SavedMessages from "@/components/Profiles/Dashboard/SavedMessages";
 import SentMessages from "@/components/Profiles/Dashboard/SentMessages";
 import Specialties from "@/components/Specialties";
@@ -156,11 +154,6 @@ const router = new Router({
       component: TermsOfUse
     },
     {
-      path: "/Profiles/Dashboard/History",
-      name: "History",
-      component: History
-    },
-    {
       path: "/Profiles/Dashboard/MyInfo",
       name: "MyInfo",
       component: MyInfo
@@ -174,11 +167,6 @@ const router = new Router({
       path: "/Profiles/Dashboard/PaymentInfo",
       name: "PaymentInfo",
       component: PaymentInfo
-    },
-    {
-      path: "/Profiles/Dashboard/Preferences",
-      name: "Preferences",
-      component: Preferences
     },
     {
       path: "/Profiles/Dashboard/SavedMessages",

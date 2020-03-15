@@ -102,9 +102,36 @@
             v-model="users.strenghts"
             label="In your own words what are your strenghts and experience in your specialty any certification?:"
           ></v-text-field>
-
-          <v-flex class="xs12 sm6 mb-2">
-            <v-btn class="primary" raised @click="onPickFile"
+          <ol class="profileHelp">
+            <span class="helpTitle grey--text text--darken-3 text-center"> Profile Help </span>
+            <li class="helpText">
+              Keep it Real! The most important thing is to be honest. If you
+              don’t have a certain Skillset, you should not state you do. Your
+              best chance of success on Specialty Stars is to accurately
+              describe your skillset.
+            </li>
+            <li class="helpText">
+              Post Pics and Video! Employers want to see you! They want to
+              see how you do your work, what you wear, your tools, your
+              technique, etc. Upload a video for your BEST chance of success on
+              Specialty Stars.
+            </li>
+            <li class="helpText">
+              Post a reasonable rate of Compensation. If your rate of
+              compensation does not match your experience level, No one will
+              contact you. Remember that once you have shown your employer what
+              you can do, you can always ask for more money. It’s best to get
+              your foot in the door!
+            </li>
+            <li class="helpText">
+              Keep the baggage to a minimum! Remember that employers want to
+              hire you and only you! If you’re only available 1 day a week and
+              you need to bring your brother and your cousin with you, Don’t be
+              surprised if no one wants to hire you!
+            </li>
+          </ol>
+          <v-flex class="xs12 sm6 mb-2 pt-4">
+            <v-btn class="primary" tile raised @click="onPickFile"
               >Add Profile Picture</v-btn
             >
             <input
@@ -116,13 +143,13 @@
             />
           </v-flex>
           <img :src="imageUrl" :height="imageHeight" />
-          <v-flex class="xs12 sm6 mt-5 offset-sm1">
-            <v-btn color="success" class="mr-4" @click="update"
+          <v-flex class="text-center">
+            <v-btn color="success" tile @click="update"
               >Post Profile</v-btn
             >
 
             <router-link :to="{ name: 'Index' }">
-              <v-btn color="error" class="mr-4">Cancel</v-btn>
+              <v-btn color="error" tile class="mr-4">Cancel</v-btn>
             </router-link>
           </v-flex>
           <!-- <p class="red--text text-center" v-if="feedback">{{ feedback }}</p> -->
@@ -356,6 +383,17 @@ export default {
 </script>
 
 <style scoped>
+
+.helpText {
+  font-size: 1.2em;
+}
+li {
+  margin: 10px;
+}
+.helpTitle {
+  margin: 10px;
+  font-size: 1.8em;
+}
 img.preview {
   width: 150px;
 }

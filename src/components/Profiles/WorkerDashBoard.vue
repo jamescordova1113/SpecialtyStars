@@ -18,18 +18,6 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="../Profiles/Dashboard/History">
-            <v-btn text small>
-              History
-            </v-btn>
-          </router-link>
-          <v-spacer />
-          <router-link to="../Profiles/Dashboard/Preferences">
-            <v-btn text small>
-              My Preferences
-            </v-btn>
-          </router-link>
-          <v-spacer />
           <router-link to="../Profiles/Dashboard/Notifications">
             <v-btn text small>
               Notifications
