@@ -8,19 +8,15 @@
       </v-row>
     </v-flex>
 
-    <div class="carousel">
+    <div class="carousel" >
       <v-carousel
         cycle
         height="350"
         hide-delimiter-background
         show-arrows-on-hover
       >
-        <v-carousel-item v-for="(slide, i) in slides" :key="i">
-          <v-sheet :color="colors[i]" height="100%">
-            <v-row class="fill-height" align="center" justify="center">
-              <div class="display-3">{{ slide }} Slide</div>
-            </v-row>
-          </v-sheet>
+        <v-carousel-item v-for="slide in slides" :src="slide.image" :key="slide.id">
+          
         </v-carousel-item>
       </v-carousel>
     </div>
@@ -160,19 +156,26 @@
 </template>
 
 <script>
+import db from "@/./firebase/init";
+
 export default {
   name: "WorkersPage",
   data() {
     return {
-      colors: [
-        "indigo",
-        "warning",
-        "pink darken-2",
-        "red lighten-1",
-        "deep-purple accent-4"
-      ],
-      slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+      slides: []
     };
+  },
+   beforeCreate() {
+    // fetch data from firestore
+    db.collection("Slides")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let slide = doc.data();
+          slide.id = doc.id;
+          this.slides.push(slide);
+        });
+      });
   }
 };
 </script>

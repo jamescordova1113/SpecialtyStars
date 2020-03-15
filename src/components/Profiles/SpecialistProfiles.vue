@@ -190,7 +190,7 @@
                           color="primary lighten-2"
                           dark
                           tile
-                          @click="showContactInfo;"
+                          @click="showContactInfo"
                           >[ Show Contact Info ]
                         </v-btn>
                       </div>
@@ -216,9 +216,9 @@ export default {
   data() {
     return {
       specialistProfile: {
-        prefferedContact: null,
-        phone: null,
-        email: null
+        prefferedContact: "null",
+        phone: "null",
+        email: "null"
       },
       valid: false,
       specialty: [
@@ -299,13 +299,24 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    // showContactInfo() {
-    //   if (this.specialistProfile.prefferedContact === "Phone") {
-    //     console.log(this.specialistProfile.phone);
-    //   } else {
-    //     console.log(this.specialistProfile.email);
-    //   }
-    // }
+    showContactInfo() {
+      
+      db.collection("specialistProfile")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let pro = doc.data();
+          if (pro.preferredContact == "Email") {
+        alert(pro.email)
+      } else {
+        alert(pro.phone);
+        }
+        });
+      });
+      
+    }
+      
+    
   },
   computed: {
     user() {
