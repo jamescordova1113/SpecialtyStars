@@ -25,8 +25,7 @@ import TermsOfUse from "@/components/FooterLinks/TermsOfUse";
 import MyInfo from "@/components/Profiles/Dashboard/MyInfo";
 import Notifications from "@/components/Profiles/Dashboard/Notifications";
 import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
-import SavedMessages from "@/components/Profiles/Dashboard/SavedMessages";
-import SentMessages from "@/components/Profiles/Dashboard/SentMessages";
+import Messages from "@/components/Profiles/Dashboard/Messages";
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
 import GeneralForum from "@/components/Forum/GeneralForum";
@@ -59,7 +58,7 @@ const router = new Router({
       component: SignupEmployer
     },
     {
-      path: "/login",
+      path: "/Login",
       name: "Login",
       component: Login
     },
@@ -72,16 +71,37 @@ const router = new Router({
       path: "/Profiles/CreateWorkerProfile",
       name: "CreateWorkerProfile",
       component: CreateWorkerProfile,
+      beforeEnter: (to, from, next) => {
+        if (!firebase.auth().currentUser) {
+            next("/Login");
+        } else {
+            next();
+        }
+    }
     },
     {
       path: "/Profiles/WorkerDashBoard",
       name: "WorkerDashBoard",
-      component: WorkerDashBoard
+      component: WorkerDashBoard,
+      beforeEnter: (to, from, next) => {
+        if (!firebase.auth().currentUser) {
+            next("/Login");
+        } else {
+            next();
+        }
+    }
     },
     {
       path: "/Profiles/EmployerDashBoard",
       name: "EmployerDashBoard",
-      component: EmployerDashBoard
+      component: EmployerDashBoard,
+      beforeEnter: (to, from, next) => {
+        if (!firebase.auth().currentUser) {
+            next("/Login");
+        } else {
+            next();
+        }
+    }
     },
     {
       path: "/WorkersPage",
@@ -156,28 +176,51 @@ const router = new Router({
     {
       path: "/Profiles/Dashboard/MyInfo",
       name: "MyInfo",
-      component: MyInfo
+      component: MyInfo,
+      beforeEnter: (to, from, next) => {
+        if (!firebase.auth().currentUser) {
+            next("/Login");
+        } else {
+            next();
+        }
+    }
     },
     {
       path: "/Profiles/Dashboard/Notifications",
       name: "Notifications",
-      component: Notifications
+      component: Notifications,
+      beforeEnter: (to, from, next) => {
+        if (!firebase.auth().currentUser) {
+            next("/Login");
+        } else {
+            next();
+        }
+    }
     },
     {
       path: "/Profiles/Dashboard/PaymentInfo",
       name: "PaymentInfo",
-      component: PaymentInfo
+      component: PaymentInfo,
+      beforeEnter: (to, from, next) => {
+        if (!firebase.auth().currentUser) {
+            next("/Login");
+        } else {
+            next();
+        }
+    }
     },
     {
-      path: "/Profiles/Dashboard/SavedMessages",
-      name: "SavedMessages",
-      component: SavedMessages
-    },
-    {
-      path: "/Profiles/Dashboard/SentMessages",
-      name: "SentMessages",
-      component: SentMessages
-    },
+      path: "/Profiles/Dashboard/Messages",
+      name: "Messages",
+      component: Messages,
+      beforeEnter: (to, from, next) => {
+        if (!firebase.auth().currentUser) {
+            next("/Login");
+        } else {
+            next();
+        }
+    }
+    },  
     {
       path: "/Specialties",
       name: "Specialties",
@@ -198,20 +241,5 @@ const router = new Router({
   ]
 });
 
-// route guard
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(rec => rec.meta.requiresAuth)) {
-    let user = firebase.auth().currentUser;
-    if (user) {
-      // user signed in, proceed to router
-      next();
-    } else {
-      // no user signed in redirect to login
-      next('/Login');
-    }
-  } else {
-    next();
-  }
-});
 
 export default router;

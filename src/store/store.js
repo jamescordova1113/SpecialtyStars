@@ -11,105 +11,61 @@ export const store = new Vuex.Store({
       isLoggedIn: false,
       isWorker: false,
       isEmployer: false,
-      isWorkerProfile: false
+      isWorkerProfile: false,
+      currentUser: null,
+      currentChannel: null,
+      isPrivate: false
     },
     config: {
       contactEmail: null,
       eventEmail: null,
       sendVerify: false,
       newEmail: null,
-      newPassword: null,
+      newPassword: null
     },
-    loadedpros: {
-      location: '',
-      contact: '',
-      image: '',
-      minperhour: '',
-      title: '',
-      yrsexperience: '',
-      email: '',
-      zip: '',
-      alias: '',
-      experience: '',
-      featured: '',
-      name: '',
-      canContact: '',
-      createdAt: '',
-      equipment: '',
-      isWorker: '',
-      isWorkerProfile: '',
-      skills: '',
-      specialty: '',
-      strenghts: '',
-      tools: '',
-      transportaion: '',
-      travel: '',
-      workDur: '',
-      preferredContact: '',
-      phone: '',
-      role: '',
-      user_id: '',
-
- }
- },
+    
+  },
   mutations: {
-    setCredentials (state, payload) {
+    setCredentials(state, payload) {
       state.user.alias = payload.alias;
       state.user.isLoggedIn = payload.isLoggedIn;
       state.user.isWorker = payload.isWorker;
       state.user.isEmployer = payload.isEmployer;
     },
-    setConfig (state, payload) {
+    setConfig(state, payload) {
       state.config.contactEmail = payload.contactEmail;
       state.config.eventEmail = payload.eventEmail;
       state.config.sendVerify = payload.sendVerify;
       state.config.newEmail = payload.newEmail;
-      state.config.newPassword = payload.newPassword
+      state.config.newPassword = payload.newPassword;
     },
-    createPro (state, payload) {
-      state.loadPros.push(payload)
-    }
+    SET_USER(state, user) {
+      state.currentUser = user;
   },
-actions: {
-  // createPro ({commit}, payload) {
-  //   const pro = {
-  //     name: payload.name,
-  //     city: payload.city,
-  //     email: payload.email,
-  //     zip: payload.zip,
-  //     experience: payload.experience,
-  //     image: payload.image,
-  //     location: payload.location,
-  //     minperhour: payload.minperhour,
-  //     canContact: payload.canContact,
-  //     preferredContact: payload.preferredContact,
-  //     phone: payload.phone,
-  //     specialty: payload.specialty,
-  //     yrsexperience: payload.yrsexperience
-  //   }
-    // firebase.database().ref('specialistProfile').push(pro)
-    // .then((data) => {
-    //   console.log(data)
-    //   commit('createPro', pro)
-    // })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
-    // Reach out to firebase and store it
+
+  SET_CURRENT_CHANNEL(state, channel) {
+      state.currentChannel = channel;
   },
-  getters: {
-    loadedpros (state) {
-      return state.loadedpros.sort((proA, proB) => {
-        return proA.zip > proB.zip
-      })
-    },
-    loadedPro (state) {
-      return (proId) => {
-      return state.loadedPros.find((pro) => {
-        return pro.id === proId
-      })
-    }
-    }
+
+  SET_PRIVATE(state, isPrivate) {
+      state.isPrivate = isPrivate;
+  }
+
   },
-})
+  actions: {
+    setUser(state, user) {
+      state.commit('SET_USER', user);
+  },
+
+  setCurrentChannel({ commit }, channel) {
+      commit('SET_CURRENT_CHANNEL', channel);
+  },
+
+  setPrivate({ commit }, isPrivate) {
+      commit('SET_PRIVATE', isPrivate);
+  }
+  },
+  
+  
+});
 // })

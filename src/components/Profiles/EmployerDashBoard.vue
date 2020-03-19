@@ -37,15 +37,10 @@
       <v-col cols="12">
         <v-card>
           <v-card-text><h3 class="text-center">My Messages</h3></v-card-text>
-          <router-link to="../Profiles/Dashboard/SavedMessages">
-            <v-btn text small>
-              Saved Messages
-            </v-btn>
-          </router-link>
           <v-spacer />
-          <router-link to="../Profiles/Dashboard/SentMessages">
+          <router-link to="../Profiles/Dashboard/Messages">
             <v-btn text small>
-              Sent Messages
+              Messages
             </v-btn>
           </router-link>
           <v-spacer />

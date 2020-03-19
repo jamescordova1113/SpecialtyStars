@@ -170,7 +170,7 @@ export default {
         { text: "Specialties", route: "/Specialties" },
         { text: "Employer", route: "/NeedWorkers" },
         { text: "Worker", route: "/WorkersPage" },
-        { text: "Forum", route: "/Forum/GeneralForum" },
+       
         {
           text: "Find a Worker",
           route: "/Profiles/SpecialistProfiles"
@@ -200,7 +200,7 @@ export default {
 
         {
           text: "Message Board",
-          route: "/MessageBoard"
+          route: "/Forum/GeneralForum"
         }
       ],
 

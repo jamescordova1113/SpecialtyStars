@@ -90,6 +90,7 @@
                 <v-dialog v-model="dialog" width="500">
                   <template v-slot:activator="{ on }">
                     <v-btn
+                    right
                       class="explorebutton"
                       color="primary lighten-2"
                       v-on="on"
@@ -184,30 +185,61 @@
                         </v-carousel>
                       </div>
                       <br />
-                      <div class="text--center">
-                        <v-btn
-                          class="explore"
-                          color="primary lighten-2"
-                          dark
-                          tile
-                          @click="showContactInfo"
-                          >[ Show Contact Info ]
-                        </v-btn>
+                     
+                      <!-- Contact Card -->
+              <v-card-actions class="justify-center">
+                <!-- modal -->
+                <v-dialog v-model="dialog2" width="500">
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                    
+                    right
+                      class="explorebutton"
+                      color="primary lighten-2"
+                      v-on="on"
+                      dark
+                      tile
+                      @click.stop="dialog = true"
+                    >
+                      Contact
+                    </v-btn>
+                  </template>
+
+                  <v-card>
+                    <v-card-title
+                      class="headline primary lighten-2 white--text"
+                      primary-title
+                    >
+                      Contact {{ pro.alias }}
+                    </v-card-title>
+                    <v-card-text>
+                      <div>
+                        <h2 class="h2Contact"> Workers Preffered Contact {{ pro.prefferedContact }}</h2>
+                        <p> Email {{ pro.email }} </p>
+                        <p> Phone {{ pro.phone }} </p> 
+                        <v-btn @click="privateMessage()"> Message </v-btn>
                       </div>
+                    </v-card-text>
+            </v-card>
+                </v-dialog>
+              </v-card-actions>
                     </v-card-text>
                   </v-card>
                 </v-dialog>
               </v-card-actions>
+              
 
               <!-- modal end -->
+              
             </v-card>
+         
           </v-flex>
         </div>
       </v-row>
     </v-container>
   </v-container>
 </template>
-
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script>
 import db from "@/./firebase/init";
 
@@ -215,6 +247,8 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
+      isEmployer: false,
+      counter: 0,
       specialistProfile: {
         prefferedContact: "null",
         phone: "null",
@@ -287,9 +321,9 @@ export default {
       ],
       slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       pros: [],
-
       myIcon: "mdi-account-card-details-outline",
       dialog: false,
+      dialog2: false,
       searchzip: "",
       searchexp: "",
       searchspec: ""
@@ -299,25 +333,18 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    showContactInfo() {
-      
-      db.collection("specialistProfile")
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          let pro = doc.data();
-          if (pro.preferredContact == "Email") {
-        alert(pro.email)
-      } else {
-        alert(pro.phone);
-        }
-        });
-      });
-      
+    privateMessage() {
+
+    },
+
+    countContact() {
+      let inc = 0;
+      inc = inc + 1;
+      alert(inc);
     }
-      
     
   },
+
   computed: {
     user() {
       return this.$store.state.user;
@@ -350,6 +377,10 @@ export default {
 </script>
 
 <style>
+.h2Contact {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .filterCard {
   margin: 10px;
 }

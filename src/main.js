@@ -10,7 +10,9 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon }  from '@fortawesome/vue-fontawesome'
 import { store } from './store/store'
 import VueChatScroll from 'vue-chat-scroll'
+import Chat from 'vue-beautiful-chat'
 
+Vue.use(Chat)
 Vue.use(VueChatScroll)
 
 library.add(faUserSecret)
@@ -18,11 +20,13 @@ library.add(faUserSecret)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
-
-
-
 // wait for firebase auth to init before creating the app
-firebase.auth().onAuthStateChanged(() => {
+
+firebase.auth().onAuthStateChanged(user => {
+  // dispatch user
+  store.dispatch('setUser', user);
+
+
 
 new Vue({
   el: '#app',
