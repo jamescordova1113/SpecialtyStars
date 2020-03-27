@@ -64,7 +64,13 @@ export const store = new Vuex.Store({
   setPrivate({ commit }, isPrivate) {
       commit('SET_PRIVATE', isPrivate);
   }
+  
   },
+  getters: {
+    currentUser: state => state.currentUser,
+    currentChannel: state => state.currentChannel,
+    isPrivate: state => state.isPrivate
+}
   
   
 });

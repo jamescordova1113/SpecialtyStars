@@ -213,11 +213,19 @@
                       Contact {{ pro.alias }}
                     </v-card-title>
                     <v-card-text>
-                      <div>
+                      <div v-if="user.isEmployer">
                         <h2 class="h2Contact"> Workers Preffered Contact {{ pro.prefferedContact }}</h2>
                         <p> Email {{ pro.email }} </p>
                         <p> Phone {{ pro.phone }} </p> 
-                        <v-btn @click="privateMessage()"> Message </v-btn>
+                         <router-link :to="{ name: 'Messages' }">
+            <v-btn> Message </v-btn>
+          </router-link>
+                      </div>
+                      <div v-if="user.isWorker || !user.isLoggedIn" class="text-center mt-5">
+                        <p> Employer Login needed to view workers Contact info. </p>
+                        <router-link :to="{ name: 'Login' }">
+                        <v-btn color="orange" tile dark> Login </v-btn>
+                        </router-link>
                       </div>
                     </v-card-text>
             </v-card>

@@ -1,43 +1,29 @@
 <template>
-  <v-container class="chat">
-    <v-toolbar
-      color="primary lighten-3"
-      dark
-      justify="center"
-      max-width="450px"
-      flat
-    >
-      <v-row justify="space-around">
-        <v-toolbar-title><h1>Messages</h1></v-toolbar-title>
-      </v-row>
-    </v-toolbar>
-    <v-card class="messages" v-chat-scroll>
+  <v-container class="container-fluid">
+    <v-col class="col-md-3 sidebar">
+    <Sidebar />
+    </v-col>
+    <v-col class="col-md-6 content">
+    <v-card class="messages" min-height="500px" v-chat-scroll>
+      <Messages />
       <!-- <h3 inset v-if="!user.isLoggedIn">Login to view Forum</h3>
       <div inset v-if="user.isLoggedIn"> -->
-      <v-card-text>
-        <div v-for="message in messages" :key="message.id">
-          <v-card class="forumCard">
-            <span class="orange--text">{{ message.alias }} </span>
-            <span class="grey--text text--darken-3"
-              >{{ message.content }}
-            </span>
-            <span class="time grey--text ml-2 ">{{ message.timestamp }}</span>
-          </v-card>
-          <br />
-        </div>
-        <!-- </div> -->
-        
-      </v-card-text>
+     
     </v-card>
+    </v-col>
   </v-container>
 </template>
 
 <script>
+import Messages from './MessagesFirebase/Messages'
+import Sidebar from "./MessSidebar.vue"
 import db from "@/firebase/init";
 import moment from "moment";
 export default {
   name: "GeneralForum",
   components: {
+    Sidebar,
+    Messages
   },
   data() {
     return {
@@ -56,6 +42,25 @@ export default {
       return this.$store.state.user;
     }
   },
+  post() {
+      var Filter = require("bad-words"),
+        filter = new Filter();
+      if (this.newMessage) {
+        this.filteredMessage = filter.clean(this.newMessage);
+
+        db.collection("genForum").add({
+          content: this.filteredMessage,
+          alias: this.users.alias,
+          timestamp: Date.now(),
+          user_id: this.users.user_id,
+          email: this.users.email
+        });
+        this.newMessage = null;
+      } else {
+        this.feedback = "You Must enter a message in order to post one.";
+      }
+    },
+  
   created() {
     let ref = db.collection("Messages").orderBy("timestamp");
     ref.onSnapshot(snapshot => {
@@ -75,7 +80,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+    .sidebar {
+        width: 33.5%;
+        display: block;
+        float: left;
+        position: fixed;
+        height: 100%;
+        background: rgb(255, 255, 255);
+        padding-top: 2em;
+        overflow: scroll;
+    }
+    .content {
+        width: 66%;
+        display: block;
+        float: left;
+        margin-left: 34%;
+    }
 .forumCard {
   margin: 5px;
   padding: 15px;

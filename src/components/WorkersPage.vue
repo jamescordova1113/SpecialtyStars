@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-flex text-xs-center>
-      <v-row class="mb-0" justify="center" align="center" no-gutters>
+      <v-row class="mb-0" justify="center" no-gutters>
         <h2 class=" PageTitle ">
           Worker Home
         </h2>
@@ -21,7 +21,7 @@
       </v-carousel>
     </div>
     <div>
-      <v-row class="mt-6" justify="center" align="center no-gutters">
+      <v-row class="mt-6" no-gutters>
         <p>
           Welcome to “Specialty Stars” a new and convenient resource for hard
           working people and their employers to connect. Specialty Stars is
@@ -37,7 +37,7 @@
     </div>
     <div>
       <v-flex text-xs-center>
-        <v-row class="mb-0" justify="center" align="center" no-gutters>
+        <v-row class="mb-0" no-gutters>
           <v-col>
             <!-- <v-card class="MainInfoCard"> -->
             <v-card-text>
@@ -76,7 +76,7 @@
     </div>
     <div>
       <v-flex text-xs-center>
-        <v-row class="mb-0" justify="center" align="center" no-gutters>
+        <v-row class="mb-0" no-gutters>
           <v-col>
             <!-- <v-card class="MainInfoCard"> -->
             <v-card-text>
