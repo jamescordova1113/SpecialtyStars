@@ -87,7 +87,7 @@
 
               <v-card-actions class="justify-center">
                 <!-- modal -->
-                <v-dialog v-model="dialog" width="500">
+                <v-dialog v-model="dialog" transition="dialog-bottom-transition" max-width="600px">
                   <template v-slot:activator="{ on }">
                     <v-btn
                     right
@@ -108,83 +108,86 @@
                       primary-title
                     >
                       Worker Profile {{ pro.alias }}
+                     <v-flex text-end>
+                      <v-btn class="align-end" icon @click.native="dialog = false" dark >
+            <v-icon>X</v-icon> 
+          </v-btn>
+                     </v-flex>
                     </v-card-title>
 
-                    <v-avatar class="avatar" size="100px">
+                    <v-avatar class="avatar mt-2" size="100px">
                       <v-img class="white--text" v-bind:src="`${pro.image}`">
                       </v-img>
                     </v-avatar>
                     <v-card-text>
                       <div>
-                        <h2>General Info</h2>
+                        <h2>General Info:</h2>
+                        <v-divider></v-divider>
                       </div>
 
-                      <div class="event">First Name: {{ pro.alias }}</div>
+                      <div class="event"><h3><span class="question">First Name:</span> {{ pro.alias }}</h3></div>
                       <div class="event">
-                        <h3>Specialty:</h3>
-                        {{ pro.specialty }}
+                        <h3><span class="question">Specialty:</span> {{ pro.specialty }}</h3>
+                        
                       </div>
                       <div class="event">
-                        <h3>Transportion to work:</h3>
-                        {{ pro.transportation }}
+                        <h3><span class="question"> Transportion to work:</span> {{ pro.transportation }}</h3>
                       </div>
                       <div class="event">
-                        <h3>How far are you willing to travel for work:</h3>
-                        {{ pro.travel }}
+                        <h3><span class="question">How far are you willing to travel for work:</span> {{ pro.travel }}</h3>
+                        
                       </div>
                       <div class="event">
-                        <h3>I Live in:</h3>
-                        {{ pro.location }}
+                        <h3><span class="question">I Live in:</span> {{ pro.location }}</h3>
+                        
                       </div>
                       <div class="event">
-                        <h3>My minimum per hour:</h3>
-                        {{ pro.minperhour }}
+                        <h3><span class="question">My minimum per hour:</span> {{ pro.minperhour }}</h3>
+                        
                       </div>
 
                       <h2>Trade specific Info:</h2>
+                        <v-divider></v-divider>
 
                       <div class="event">
-                        <h3>Have own tools:</h3>
-                        {{ pro.tools }}
+                        <h3><span class="question">Have own tools:</span> {{ pro.tools }}</h3>
+                        
                       </div>
                       <div class="event">
-                        <h3>What are your Strenghts:</h3>
-                        {{ pro.strenghts }}
+                        <h3><span class="question">What are your Strenghts:</span> {{ pro.strenghts }}</h3>
+                        
                       </div>
                       <div class="event">
-                        <h3>What are your Skills:</h3>
-                        {{ pro.skills }}
+                        <h3><span class="question">What are your Skills:</span> {{ pro.skills }}</h3>
+                        
                       </div>
                       <div class="event">
-                        <h3>Experience with Equipment:</h3>
-                        {{ pro.equipment }}
+                        <h3><span class="question">Experience with Equipment:</span> {{ pro.equipment }}</h3>
+                        
                       </div>
 
                       <br />
-                      <div class="carousel">
-                        <v-carousel
-                          cycle
-                          height="350"
-                          hide-delimiter-background
-                          show-arrows-on-hover
-                        >
-                          <v-carousel-item
-                            v-for="(slide, i) in slides"
-                            :key="i"
-                          >
-                            <v-sheet :color="colors[i]" height="100%">
-                              <v-row
-                                class="fill-height"
-                                align="center"
-                                justify="center"
-                              >
-                                <div class="display-3">{{ slide }} Slide</div>
-                              </v-row>
-                            </v-sheet>
-                          </v-carousel-item>
-                        </v-carousel>
+                        <div class="event">
+                          <div style="text-align:center">
+          <v-btn class="mb-2" color="primary lighten-3" v-on:click="playPause()">Play/Pause</v-btn>
+          <center>
+            <video id="video" width="450px" autoplay>
+              <source
+              v-bind:src="`${pro.video}`"
+                type="video/mp4"
+              />
+              <source src="movie.ogg" type="video/ogg" />
+              Your browser does not support the video tag.
+            </video>
+          </center>
+        </div>
+        <v-img class="white--text" v-bind:src="`${pro.image1}`"> </v-img>
+        <v-img class="white--text" v-bind:src="`${pro.image2}`"> </v-img>
+        <v-img class="white--text" v-bind:src="`${pro.image3}`"> </v-img>
+        <v-img class="white--text" v-bind:src="`${pro.image4}`"> </v-img>
+                         
+
                       </div>
-                      <br />
                      
                       <!-- Contact Card -->
               <v-card-actions class="justify-center">
@@ -214,7 +217,7 @@
                     </v-card-title>
                     <v-card-text>
                       <div v-if="user.isEmployer">
-                        <h2 class="h2Contact"> Workers Preffered Contact {{ pro.prefferedContact }}</h2>
+                        <h2 class="h2Contact"> Workers Preffered Contact <h3>{{ pro.preferredContact }}</h3></h2>
                         <p> Email {{ pro.email }} </p>
                         <p> Phone {{ pro.phone }} </p> 
                          <router-link :to="{ name: 'Messages' }">
@@ -247,21 +250,25 @@
     </v-container>
   </v-container>
 </template>
+
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script>
 import db from "@/./firebase/init";
 
 export default {
   name: "SpecialistProfile",
+  
   data() {
     return {
+     
       isEmployer: false,
       counter: 0,
       specialistProfile: {
-        prefferedContact: "null",
-        phone: "null",
-        email: "null"
+        preferredContact: "",
+        phone: "",
+        email: "",
       },
+      dialog: false,
       valid: false,
       specialty: [
         "Agricultural",
@@ -334,10 +341,16 @@ export default {
       dialog2: false,
       searchzip: "",
       searchexp: "",
-      searchspec: ""
+      searchspec: "",
+      image: ''
     };
   },
   methods: {
+    playPause() {
+      var myVideo = document.getElementById("video");
+      if (myVideo.paused) myVideo.play();
+      else myVideo.pause();
+    },
     reset() {
       this.$refs.form.reset();
     },
@@ -385,9 +398,11 @@ export default {
 </script>
 
 <style>
-.h2Contact {
-  margin-top: 10px;
-  margin-bottom: 10px;
+h3 {
+  font-size: 1.5rem;
+}
+h2 {
+  margin-top: 15px;
 }
 .filterCard {
   margin: 10px;
@@ -398,9 +413,13 @@ export default {
 .avatar {
   margin-left: 10px;
 }
+.question {
+  color: darkgrey;
+}
 .event {
   margin-left: 5px;
   color: slategray;
+  font-size: 1.2rem;
 }
 .filterButton {
   margin-top: 10px;

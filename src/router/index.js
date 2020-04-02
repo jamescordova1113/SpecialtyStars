@@ -29,6 +29,9 @@ import Messages from "@/components/Profiles/Dashboard/Messages";
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
 import GeneralForum from "@/components/Forum/GeneralForum";
+// import CreateWorkerPort from "@/components/Profiles/CreateWorkerPort";
+
+
 
 
 import firebase from "firebase";
@@ -108,6 +111,11 @@ const router = new Router({
       name: "WorkersPage",
       component: WorkersPage
     },
+    // {
+    //   path: "/Profiles/CreateWorkerPort",
+    //   name: "CreateWorkerPort",
+    //   component: CreateWorkerPort
+    // },
     {
       path: "/NeedWorkers",
       name: "NeedWorkers",

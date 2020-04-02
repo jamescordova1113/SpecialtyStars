@@ -8,7 +8,7 @@
     <v-card class="loginTitle">
       <v-card-text>
         <v-form ref="form" lazy-validation v-model="valid">
-          <img :src="users.image" />
+          <img :src="users.image" width="250px" />
           <v-text-field
             v-model="users.alias"
             label="First Name:"
@@ -103,7 +103,9 @@
             label="In your own words what are your strenghts and experience in your specialty any certification?:"
           ></v-text-field>
           <ol class="profileHelp">
-            <span class="helpTitle grey--text text--darken-3 text-center"> Profile Help </span>
+            <span class="helpTitle grey--text text--darken-3 text-center">
+              Profile Help
+            </span>
             <li class="helpText">
               Keep it Real! The most important thing is to be honest. If you
               don’t have a certain Skillset, you should not state you do. Your
@@ -111,10 +113,10 @@
               describe your skillset.
             </li>
             <li class="helpText">
-              Post Pics and Video! Employers want to see you! They want to
-              see how you do your work, what you wear, your tools, your
-              technique, etc. Upload a video for your BEST chance of success on
-              Specialty Stars.
+              Post Pics and Video! Employers want to see you! They want to see
+              how you do your work, what you wear, your tools, your technique,
+              etc. Upload a video for your BEST chance of success on Specialty
+              Stars.
             </li>
             <li class="helpText">
               Post a reasonable rate of Compensation. If your rate of
@@ -143,10 +145,57 @@
             />
           </v-flex>
           <img :src="imageUrl" :height="imageHeight" />
+          <div class="form-group">
+            <label for="project_image">Portfolio Video</label>
+            <input type="file" @change="uploadVideo" class="form-control" />
+          </div>
+
+          <div class="form-group d-flex">
+            <div class="p-1">
+              <div class="img-wrapp">
+                <img :src="users.video" alt="" width="80px" class="mb-5" />
+                <v-btn icon @click="deleteVideo" dark>
+                  <v-icon>X</v-icon>
+                </v-btn>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="project_image">Portfolio Images</label>
+            <input type="file" @change="uploadImage" class="form-control" />
+          </div>
+          <div class="form-group d-flex">
+            <div class="p-1">
+              <div class="img-wrapp">
+                <img :src="users.image1" width="100px" class="mb-5"/>
+                <v-btn icon @click="deleteImage" dark>
+                  <v-icon>X</v-icon>
+                </v-btn>
+                <input type="file" @change="uploadImage2" class="form-control" />
+          
+                <img :src="users.image2" width="100px" class="mb-5"/>
+                <v-btn icon @click="deleteImage" dark>
+                  <v-icon>X</v-icon>
+                </v-btn>
+              
+           <input type="file" @change="uploadImage3" class="form-control" />
+          
+                <img :src="users.image3" width="100px" class="mb-5"/>
+                <v-btn icon @click="deleteImage" dark>
+                  <v-icon>X</v-icon>
+                </v-btn>
+            
+           <input type="file" @change="uploadImage4" class="form-control" />
+          
+                <img :src="users.image4" width="100px" class="mb-5"/>
+                <v-btn icon @click="deleteImage" dark>
+                  <v-icon>X</v-icon>
+                </v-btn>
+              </div>
+          </div>
+          </div>
           <v-flex class="text-center">
-            <v-btn color="success" tile @click="update"
-              >Post Profile</v-btn
-            >
+            <v-btn color="success" tile @click="update">Post Profile</v-btn>
 
             <router-link :to="{ name: 'Index' }">
               <v-btn color="error" tile class="mr-4">Cancel</v-btn>
@@ -162,6 +211,7 @@
 <script>
 import db from "@/firebase/init";
 import firebase from "firebase";
+import { VueEditor } from "vue2-editor";
 export default {
   name: "CreateWorkerProfile",
   data() {
@@ -186,12 +236,26 @@ export default {
       transportation: null,
       isWorkerProfile: true,
       email: "",
+      video: "",
+
       users: {
         alias: null,
         user_id: null,
-        isWorkerProfile: true
+        isWorkerProfile: true,
+        image1URL: null,
+        videoURL: null,
+        image: null,
+        image1: null,
+        image2: null,
+        image3: null,
+        image4: null,
+        image5: null,
+        image6: null,
+        images: [],
+        video: ""
       },
       image: null,
+      images: [],
       imageHeight: 0,
       workDurs: ["Full Time", "Part Time"],
       experiences: [
@@ -292,6 +356,178 @@ export default {
     };
   },
   methods: {
+    deleteImage(img, index) {
+      let image = firebase.storage().refFromURL(img);
+      this.users.images.splice(index, 1);
+      image
+        .delete()
+        .then(function() {
+          console.log("image deleted");
+        })
+        .catch(function(error) {
+          // Uh-oh, an error occurred!
+          console.log("an error occurred");
+        });
+    },
+    deleteVideo() {
+      let video = firebase.storage().refFromURL(img);
+      this.users.video.splice(index, 1);
+      video
+        .delete()
+        .then(function() {
+          console.log("video deleted");
+        })
+        .catch(function(error) {
+          // Uh-oh, an error occurred!
+          console.log("an error occurred");
+        });
+    },
+    uploadImage(e) {
+      if (e.target.files[0]) {
+        let file = e.target.files[0];
+
+        var storageRef = firebase
+          .storage()
+          .ref("projects/" + Math.random() + "_" + file.name);
+
+        let uploadTask = storageRef.put(file);
+
+        uploadTask.on(
+          "state_changed",
+          snapshot => {},
+          error => {
+            // Handle unsuccessful uploads
+          },
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+
+            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+              if (URL)
+                db.collection("specialistProfile")
+                  .doc(firebase.auth().currentUser.uid)
+                  .update({
+                    image1: URL
+                  });
+
+              //   this.images.push(downloadURL);
+              // });
+            });
+          }
+        );
+      }
+    },
+    uploadImage2(e) {
+      if (e.target.files[0]) {
+        let file = e.target.files[0];
+        var storageRef = firebase
+          .storage()
+          .ref("projects/" + Math.random() + "_" + file.name);
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {},
+          error => {         
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+              if (URL)
+                db.collection("specialistProfile")
+                  .doc(firebase.auth().currentUser.uid)
+                  .update({
+                    image2: URL
+                  });
+            });
+          }
+        );
+      }
+    },
+    uploadImage3(e) {
+      if (e.target.files[0]) {
+        let file = e.target.files[0];
+        var storageRef = firebase
+          .storage()
+          .ref("projects/" + Math.random() + "_" + file.name);
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {},
+          error => {         
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+              if (URL)
+                db.collection("specialistProfile")
+                  .doc(firebase.auth().currentUser.uid)
+                  .update({
+                    image3: URL
+                  });
+            });
+          }
+        );
+      }
+    },
+    uploadImage4(e) {
+      if (e.target.files[0]) {
+        let file = e.target.files[0];
+        var storageRef = firebase
+          .storage()
+          .ref("projects/" + Math.random() + "_" + file.name);
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {},
+          error => {         
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+              if (URL)
+                db.collection("specialistProfile")
+                  .doc(firebase.auth().currentUser.uid)
+                  .update({
+                    image4: URL
+                  });
+            });
+          }
+        );
+      }
+    },
+
+    uploadVideo(e) {
+      if (e.target.files[0]) {
+        let file = e.target.files[0];
+
+        var storageRef = firebase
+          .storage()
+          .ref("videos/" + Math.random() + "_" + file.name);
+
+        let uploadTask = storageRef.put(file);
+
+        uploadTask.on(
+          "state_changed",
+          snapshot => {},
+          error => {
+            // Handle unsuccessful uploads
+          },
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+
+            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+              if (URL)
+                db.collection("specialistProfile")
+                  .doc(firebase.auth().currentUser.uid)
+                  .update({
+                    video: URL
+                  });
+              //   this.images.push(downloadURL);
+              // });
+            });
+          }
+        );
+      }
+    },
+
     update() {
       db.collection("specialistProfile")
         .doc(this.users.id)
@@ -340,6 +576,14 @@ export default {
                 image: URL
               });
         })
+        // .then(() => {
+        //   this.$firestore.specialistProfile.doc(this.users.id).add(this.images);
+
+        //   Toast.fire({
+        //     type: 'success',
+        //     title: 'Project created successfully'
+        //   })
+        // })
         .then(() => {
           this.$router.push({ name: "SpecialistProfiles" });
         });
@@ -383,7 +627,6 @@ export default {
 </script>
 
 <style scoped>
-
 .helpText {
   font-size: 1.2em;
 }
