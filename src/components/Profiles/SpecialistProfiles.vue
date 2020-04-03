@@ -54,6 +54,10 @@
             </v-btn>
           </v-form>
         </v-card>
+      </v-row>
+    </v-container>
+        <v-container fluid >
+          <v-layout  row>
         <div v-for="pro in filteredProfiles" :key="pro.id">
           <v-flex style="width: 350px">
             <v-card
@@ -86,34 +90,15 @@
               </v-card-text>
 
               <v-card-actions class="justify-center">
+                <b-button v-b-modal.modal-1 class="primary lighten-2">View Profile</b-button>
                 <!-- modal -->
-                <v-dialog v-model="dialog" transition="dialog-bottom-transition" max-width="600px">
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                    right
-                      class="explorebutton"
-                      color="primary lighten-2"
-                      v-on="on"
-                      dark
-                      tile
-                      @click.stop="dialog = true"
-                    >
-                      View Profile
-                    </v-btn>
-                  </template>
+                <b-modal id="modal-1" title="Worker Profile" >
+                  
+                   
+                 
 
                   <v-card>
-                    <v-card-title
-                      class="headline primary lighten-2 white--text"
-                      primary-title
-                    >
-                      Worker Profile {{ pro.alias }}
-                     <v-flex text-end>
-                      <v-btn class="align-end" icon @click.native="dialog = false" dark >
-            <v-icon>X</v-icon> 
-          </v-btn>
-                     </v-flex>
-                    </v-card-title>
+                   
 
                     <v-avatar class="avatar mt-2" size="100px">
                       <v-img class="white--text" v-bind:src="`${pro.image}`">
@@ -121,7 +106,7 @@
                     </v-avatar>
                     <v-card-text>
                       <div>
-                        <h2>General Info:</h2>
+                        <h2>General Info: </h2>
                         <v-divider></v-divider>
                       </div>
 
@@ -167,11 +152,10 @@
                       </div>
 
                       <br />
-                        <div class="event">
                           <div style="text-align:center">
-          <v-btn class="mb-2" color="primary lighten-3" v-on:click="playPause()">Play/Pause</v-btn>
+          <b-button class="mb-2" color="primary lighten-3" v-on:click="playPause()">Play/Pause</b-button>
           <center>
-            <video id="video" width="450px" autoplay>
+            <video id="video" width="435px" autoplay>
               <source
               v-bind:src="`${pro.video}`"
                 type="video/mp4"
@@ -180,7 +164,6 @@
               Your browser does not support the video tag.
             </video>
           </center>
-        </div>
         <v-img class="white--text" v-bind:src="`${pro.image1}`"> </v-img>
         <v-img class="white--text" v-bind:src="`${pro.image2}`"> </v-img>
         <v-img class="white--text" v-bind:src="`${pro.image3}`"> </v-img>
@@ -192,21 +175,11 @@
                       <!-- Contact Card -->
               <v-card-actions class="justify-center">
                 <!-- modal -->
-                <v-dialog v-model="dialog2" width="500">
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                    
-                    right
-                      class="explorebutton"
-                      color="primary lighten-2"
-                      v-on="on"
-                      dark
-                      tile
-                      @click.stop="dialog = true"
-                    >
-                      Contact
-                    </v-btn>
-                  </template>
+                <b-button v-b-modal.modal-2 class="primary lighten-2">Contact</b-button>
+                <b-modal id="modal-2" >
+                  <p class="my-4"></p>
+
+                  
 
                   <v-card>
                     <v-card-title
@@ -232,23 +205,22 @@
                       </div>
                     </v-card-text>
             </v-card>
-                </v-dialog>
+                </b-modal>
               </v-card-actions>
                     </v-card-text>
                   </v-card>
-                </v-dialog>
+                </b-modal>
               </v-card-actions>
               
 
               <!-- modal end -->
-              
             </v-card>
-         
-          </v-flex>
-        </div>
-      </v-row>
+            </v-flex>
+            </div>
+            </v-layout>
+        </v-container>
     </v-container>
-  </v-container>
+    
 </template>
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -263,12 +235,6 @@ export default {
      
       isEmployer: false,
       counter: 0,
-      specialistProfile: {
-        preferredContact: "",
-        phone: "",
-        email: "",
-      },
-      dialog: false,
       valid: false,
       specialty: [
         "Agricultural",
@@ -326,23 +292,12 @@ export default {
         "Master",
         "Supervisor"
       ],
-      location: ["Woodinville", "CDA", "Boise"],
-      colors: [
-        "indigo",
-        "warning",
-        "pink darken-2",
-        "red lighten-1",
-        "deep-purple accent-4"
-      ],
-      slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       pros: [],
       myIcon: "mdi-account-card-details-outline",
-      dialog: false,
-      dialog2: false,
+     
       searchzip: "",
       searchexp: "",
       searchspec: "",
-      image: ''
     };
   },
   methods: {
@@ -357,13 +312,6 @@ export default {
     privateMessage() {
 
     },
-
-    countContact() {
-      let inc = 0;
-      inc = inc + 1;
-      alert(inc);
-    }
-    
   },
 
   computed: {
@@ -383,8 +331,7 @@ export default {
   beforeCreate() {
     // fetch data from firestore
     db.collection("specialistProfile")
-      .orderBy("createdAt")
-
+      .orderBy("createdAt", "desc")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {

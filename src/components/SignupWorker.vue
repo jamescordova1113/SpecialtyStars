@@ -213,18 +213,6 @@ export default {
                     experience: this.experience,
                     isWorkerProfile: this.isWorkerProfile
                   });
-                  db.collection("projects")
-                  .doc(cred.user.uid)
-                  .set({
-                    email: this.email,
-                    isWorker: this.isWorker,
-                    alias: this.alias,
-                    user_id: cred.user.uid,
-                    zip: this.zip,
-                    specialty: this.specialty,
-                    experience: this.experience,
-                    isWorkerProfile: this.isWorkerProfile                                      
-                  });
               })
 
               .then(() => {

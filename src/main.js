@@ -11,9 +11,11 @@ import { FontAwesomeIcon }  from '@fortawesome/vue-fontawesome'
 import { store } from './store/store'
 import VueChatScroll from 'vue-chat-scroll'
 import Chat from 'vue-beautiful-chat'
+import { BootstrapVue } from 'bootstrap-vue'
 
 Vue.use(Chat)
 Vue.use(VueChatScroll)
+Vue.use(BootstrapVue)
 
 library.add(faUserSecret)
 
