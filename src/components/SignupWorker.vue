@@ -8,7 +8,7 @@
       flat
     >
       <v-row justify="space-around">
-        <v-toolbar-title><h1>Signup For Worker</h1></v-toolbar-title>
+        <v-toolbar-title><h1>Signup For Workers</h1></v-toolbar-title>
       </v-row>
     </v-toolbar>
     <v-card>
@@ -100,7 +100,13 @@ export default {
       equipment: "",
       travel: "",
       myCred: null,
-      experiences: ["Laborer", "Apprentice", "Journeyman"],
+      experiences: [
+        "Helper",
+        "Apprentice",
+        "Journeyman",
+        "Master",
+        "Supervisor"
+        ],
       items: [
         "Agricultural",
         "Air Conditioning",

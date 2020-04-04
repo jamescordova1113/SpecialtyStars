@@ -58,5 +58,7 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "WorkerDashBoard"
+};
 </script>

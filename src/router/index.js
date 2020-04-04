@@ -26,6 +26,7 @@ import MyInfo from "@/components/Profiles/Dashboard/MyInfo";
 import Notifications from "@/components/Profiles/Dashboard/Notifications";
 import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
 import Messages from "@/components/Profiles/Dashboard/Messages";
+import DashBoard from "@/components/Profiles/Dashboard/DashBoard";
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
 import GeneralForum from "@/components/Forum/GeneralForum";
@@ -181,6 +182,11 @@ const router = new Router({
       name: "TermsOfUse",
       component: TermsOfUse
     },
+    {
+    path: "/Profiles/Dashboard/DashBoard",
+      name: "DashBoard",
+      component: DashBoard,
+  },
     {
       path: "/Profiles/Dashboard/MyInfo",
       name: "MyInfo",

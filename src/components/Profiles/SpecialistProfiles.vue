@@ -1,238 +1,259 @@
 <template>
-  <v-container class="profileTitle">
-    <v-toolbar
-      color="primary lighten-2"
-      dark
-      flat
-      justify="center"
-      max-width="350px"
-    >
-      <v-row justify="center">
-        <v-toolbar-title><h3>Search for Specialist</h3></v-toolbar-title>
-      </v-row>
-    </v-toolbar>
+<div>
+  <v-container>
+    <v-row justify="center">
+      <v-card class="filterCard" width="600px">
+        <v-form class="filterForm" ref="form" v-model="valid" lazy-validation>
+          <v-card-title>
+            Search for Specialist
+          </v-card-title>
+          <v-select
+            class="select"
+            v-model="searchspec"
+            :items="specialty"
+            label="Specialty"
+            data-vv-name="select"
+          >
+          </v-select>
+          <v-select
+            class="select"
+            v-model="searchexp"
+            :items="experiences"
+            label="Experience"
+            data-vv-name="select"
+          >
+          </v-select>
+          <input
+            class="ml-5"
+            type="text"
+            v-model="searchzip"
+            placeholder="Search by zipcode"
+          />
+          <br />
 
-    <v-container class="my-4 proCards">
-      <v-row justify="center">
-        <v-card class="filterCard" width="1024px">
-          <v-form class="filterForm" ref="form" v-model="valid" lazy-validation>
-            <v-card-title>
-              Search for Specialist
-            </v-card-title>
-            <v-select
-              class="select"
-              v-model="searchspec"
-              :items="specialty"
-              label="Specialty"
-              data-vv-name="select"
-            >
-            </v-select>
-            <v-select
-              class="select"
-              v-model="searchexp"
-              :items="experiences"
-              label="Experience"
-              data-vv-name="select"
-            >
-            </v-select>
-            <input
-              class="ml-5"
-              type="text"
-              v-model="searchzip"
-              placeholder="Search by zipcode"
-            />
-            <br />
+          <v-btn
+            class="filterButton"
+            color="red lighten-1"
+            tile
+            dark
+            @click="reset"
+          >
+            Reset
+          </v-btn>
+        </v-form>
+      </v-card>
+    </v-row>
 
-            <v-btn
-              class="filterButton"
-              color="red lighten-1"
-              tile
-              dark
-              @click="reset"
-            >
-              Reset
-            </v-btn>
-          </v-form>
-        </v-card>
-      </v-row>
-    </v-container>
-        <v-container fluid >
-          <v-layout  row>
-        <div v-for="pro in filteredProfiles" :key="pro.id">
-          <v-flex style="width: 350px">
-            <v-card
-              tile
-              class="mx-auto profileCard"
-              outlined
-              width="300px"
-              height="370px"
-            >
-              <v-card-title
-                class="headline primary lighten-2 white--text justify-center"
-                primary-title
-                >{{ pro.specialty }}</v-card-title
+    <v-row justify="space-around">
+    <div v-for="evt in filteredProfiles" :key="evt.id">
+     
+          <v-card tile class="profileCard" outlined width="350px">
+            <v-container  fluid>
+              <v-card-title class="headline" primary-title>{{
+                evt.specialty
+              }}</v-card-title>
+              <v-img
+                class="cardImage white--text"
+                v-bind:src="`${evt.image}`"
+                height="130px"
+                width="240px"
               >
-              <v-avatar class="ml-5 mt-1" size="100px">
-                <v-img class="white--text" v-bind:src="`${pro.image}`"> </v-img>
-              </v-avatar>
+              </v-img>
               <v-card-text class="proCards">
-                <span class="event">City: {{ pro.location }}</span>
+                <span class="event">City: {{ evt.location }}</span>
                 <br />
-                <span class="event">Zip Code: {{ pro.zip }}</span>
+                <span class="event">Zip Code: {{ evt.zip }}</span>
                 <br />
-                <span class="event"> Specialty: {{ pro.specialty }}</span>
+                <span class="event"> Specialty: {{ evt.specialty }}</span>
                 <br />
-                <span class="event">Experience: {{ pro.experience }} </span>
+                <span class="event">Experience: {{ evt.experience }} </span>
                 <br />
                 <span class="event"
-                  >Min cost per hour: ${{ pro.minperhour }}</span
+                  >Min cost per hour: ${{ evt.minperhour }}</span
                 >
               </v-card-text>
 
-              <v-card-actions class="justify-center">
-                <b-button v-b-modal.modal-1 class="primary lighten-2">View Profile</b-button>
-                <!-- modal -->
-                <b-modal id="modal-1" title="Worker Profile" >
-                  
-                   
-                 
-
-                  <v-card>
-                   
-
-                    <v-avatar class="avatar mt-2" size="100px">
-                      <v-img class="white--text" v-bind:src="`${pro.image}`">
-                      </v-img>
-                    </v-avatar>
-                    <v-card-text>
-                      <div>
-                        <h2>General Info: </h2>
-                        <v-divider></v-divider>
-                      </div>
-
-                      <div class="event"><h3><span class="question">First Name:</span> {{ pro.alias }}</h3></div>
-                      <div class="event">
-                        <h3><span class="question">Specialty:</span> {{ pro.specialty }}</h3>
-                        
-                      </div>
-                      <div class="event">
-                        <h3><span class="question"> Transportion to work:</span> {{ pro.transportation }}</h3>
-                      </div>
-                      <div class="event">
-                        <h3><span class="question">How far are you willing to travel for work:</span> {{ pro.travel }}</h3>
-                        
-                      </div>
-                      <div class="event">
-                        <h3><span class="question">I Live in:</span> {{ pro.location }}</h3>
-                        
-                      </div>
-                      <div class="event">
-                        <h3><span class="question">My minimum per hour:</span> {{ pro.minperhour }}</h3>
-                        
-                      </div>
-
-                      <h2>Trade specific Info:</h2>
-                        <v-divider></v-divider>
-
-                      <div class="event">
-                        <h3><span class="question">Have own tools:</span> {{ pro.tools }}</h3>
-                        
-                      </div>
-                      <div class="event">
-                        <h3><span class="question">What are your Strenghts:</span> {{ pro.strenghts }}</h3>
-                        
-                      </div>
-                      <div class="event">
-                        <h3><span class="question">What are your Skills:</span> {{ pro.skills }}</h3>
-                        
-                      </div>
-                      <div class="event">
-                        <h3><span class="question">Experience with Equipment:</span> {{ pro.equipment }}</h3>
-                        
-                      </div>
-
-                      <br />
-                          <div style="text-align:center">
-          <b-button class="mb-2" color="primary lighten-3" v-on:click="playPause()">Play/Pause</b-button>
-          <center>
-            <video id="video" width="435px" autoplay>
-              <source
-              v-bind:src="`${pro.video}`"
-                type="video/mp4"
-              />
-              <source src="movie.ogg" type="video/ogg" />
-              Your browser does not support the video tag.
-            </video>
-          </center>
-        <v-img class="white--text" v-bind:src="`${pro.image1}`"> </v-img>
-        <v-img class="white--text" v-bind:src="`${pro.image2}`"> </v-img>
-        <v-img class="white--text" v-bind:src="`${pro.image3}`"> </v-img>
-        <v-img class="white--text" v-bind:src="`${pro.image4}`"> </v-img>
-                         
-
-                      </div>
-                     
-                      <!-- Contact Card -->
-              <v-card-actions class="justify-center">
-                <!-- modal -->
-                <b-button v-b-modal.modal-2 class="primary lighten-2">Contact</b-button>
-                <b-modal id="modal-2" >
-                  <p class="my-4"></p>
-
-                  
-
-                  <v-card>
-                    <v-card-title
-                      class="headline primary lighten-2 white--text"
-                      primary-title
+              <!-- modal -->
+              <v-dialog v-model="dialog" width="500">
+                <template v-slot:activator="{ on }">
+                  <v-flex class="text-center">
+                    <v-btn
+                      right
+                      class="detailsButton"
+                      color="primary lighten-2"
+                      v-on="on"
+                      dark
+                      @click.stop="dialog = true"
                     >
-                      Contact {{ pro.alias }}
-                    </v-card-title>
-                    <v-card-text>
-                      <div v-if="user.isEmployer">
-                        <h2 class="h2Contact"> Workers Preffered Contact <h3>{{ pro.preferredContact }}</h3></h2>
-                        <p> Email {{ pro.email }} </p>
-                        <p> Phone {{ pro.phone }} </p> 
-                         <router-link :to="{ name: 'Messages' }">
-            <v-btn> Message </v-btn>
-          </router-link>
-                      </div>
-                      <div v-if="user.isWorker || !user.isLoggedIn" class="text-center mt-5">
-                        <p> Employer Login needed to view workers Contact info. </p>
-                        <router-link :to="{ name: 'Login' }">
+                      More Info
+                    </v-btn>
+                  </v-flex>
+                </template>
+
+                <v-card>
+                  <v-card-title class="headline grey lighten-2" primary-title>
+                    Specialist Details
+                  </v-card-title>
+                  <v-img
+                    class="cardImage white--text"
+                    v-bind:src="`${evt.image}`"
+                    height="100px"
+                    width="100px"
+                  >
+                  </v-img>
+                  <v-card-text>
+                    <div>
+                      <h2>General Info:</h2>
+                      <v-divider></v-divider>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question">First Name:</span>
+                        {{ evt.alias }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question">Specialty:</span>
+                        {{ evt.specialty }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question"> Transportion to work:</span>
+                        {{ evt.transportation }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question"
+                          >How far are you willing to travel for work:</span
+                        >
+                        {{ evt.travel }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question">I Live in:</span>
+                        {{ evt.location }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question">My minimum per hour:</span>
+                        {{ evt.minperhour }}
+                      </h3>
+                    </div>
+                    <h2>Trade specific Info:</h2>
+                    <v-divider></v-divider>
+
+                    <div class="event">
+                      <h3>
+                        <span class="question">Have own tools:</span>
+                        {{ evt.tools }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question">What are your Strenghts:</span>
+                        {{ evt.strenghts }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question">What are your Skills:</span>
+                        {{ evt.skills }}
+                      </h3>
+                    </div>
+                    <div class="event">
+                      <h3>
+                        <span class="question">Experience with Equipment:</span>
+                        {{ evt.equipment }}
+                      </h3>
+                    </div>
+
+                    <br />
+                  </v-card-text>
+                  <v-btn
+                    class="mb-2"
+                    color="primary lighten-3"
+                    v-on:click="playPause()"
+                    >Play/Pause</v-btn
+                  >
+                  <center>
+                    <video id="video" width="435px">
+                      <source v-bind:src="`${evt.video}`" type="video/mp4" />
+                      <source src="movie.ogg" type="video/ogg" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </center>
+                  <v-img class="white--text" v-bind:src="`${evt.image1}`">
+                  </v-img>
+                  <v-img class="white--text" v-bind:src="`${evt.image2}`">
+                  </v-img>
+                  <v-img class="white--text" v-bind:src="`${evt.image3}`">
+                  </v-img>
+                  <v-img class="white--text" v-bind:src="`${evt.image4}`">
+                  </v-img>
+                </v-card>
+                <v-card>
+                  <v-card-title
+                    class="headline primary lighten-2 white--text"
+                    primary-title
+                  >
+                    Contact: {{ evt.alias }}
+                  </v-card-title>
+                  <v-card-text>
+                    <div v-if="user.isEmployer">
+                      <h2 class="h2Contact">
+                        Workers Preffered Contact
+                        <h3>{{ evt.preferredContact }}</h3>
+                      </h2>
+                      <p>Email {{ evt.email }}</p>
+                      <p>Phone {{ evt.phone }}</p>
+                      <router-link :to="{ name: 'Messages' }">
+                        <v-btn> Message </v-btn>
+                      </router-link>
+                    </div>
+                    <div
+                      v-if="user.isWorker || !user.isLoggedIn"
+                      class="text-center mt-5"
+                    >
+                      <p>
+                        Employer Login needed to view workers Contact info.
+                      </p>
+                      <router-link :to="{ name: 'Login' }">
                         <v-btn color="orange" tile dark> Login </v-btn>
-                        </router-link>
-                      </div>
-                    </v-card-text>
-            </v-card>
-                </b-modal>
-              </v-card-actions>
-                    </v-card-text>
-                  </v-card>
-                </b-modal>
-              </v-card-actions>
-              
+                      </router-link>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-dialog>
 
               <!-- modal end -->
-            </v-card>
-            </v-flex>
-            </div>
-            </v-layout>
-        </v-container>
-    </v-container>
-    
+            </v-container>
+          </v-card>
+          
+    </div>
+    </v-row>
+  </v-container>
+  
+</div>
+
 </template>
 
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script>
 import db from "@/./firebase/init";
-
 export default {
-  name: "SpecialistProfile",
-  
+  name: "Events",
   data() {
     return {
-     
+      alignments: [
+        'start',
+        'center',
+        'end'
+      ],
+      evts: [],
       isEmployer: false,
       counter: 0,
       valid: false,
@@ -282,7 +303,7 @@ export default {
         "Stucco & Plastering",
         "Tile & Marble",
         "Tree Work",
-        "Warehouse"
+        "Warehouse",
       ],
       workDurs: ["Full Time", "Part Time"],
       experiences: [
@@ -290,16 +311,15 @@ export default {
         "Apprentice",
         "Journeyman",
         "Master",
-        "Supervisor"
+        "Supervisor",
       ],
-      pros: [],
       myIcon: "mdi-account-card-details-outline",
-     
       searchzip: "",
       searchexp: "",
       searchspec: "",
     };
   },
+
   methods: {
     playPause() {
       var myVideo = document.getElementById("video");
@@ -309,38 +329,35 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    privateMessage() {
-
-    },
+    privateMessage() {},
   },
-
   computed: {
     user() {
       return this.$store.state.user;
     },
     filteredProfiles() {
-      return this.pros.filter(pro => {
+      return this.evts.filter((evt) => {
         return (
-          pro.specialty.match(this.searchspec) &&
-          pro.experience.match(this.searchexp) &&
-          pro.zip.match(this.searchzip)
+          evt.specialty.match(this.searchspec) &&
+          evt.experience.match(this.searchexp) &&
+          evt.zip.match(this.searchzip)
         );
       });
-    }
+    },
   },
   beforeCreate() {
     // fetch data from firestore
     db.collection("specialistProfile")
       .orderBy("createdAt", "desc")
       .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          let pro = doc.data();
-          pro.id = doc.id;
-          this.pros.push(pro);
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          let evt = doc.data();
+          evt.id = doc.id;
+          this.evts.push(evt);
         });
       });
-  }
+  },
 };
 </script>
 

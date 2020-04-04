@@ -156,7 +156,8 @@ export default {
                           isWorker: doc.data().isWorker,
                           isEmployer: doc.data().isEmployer
                         });
-                        this.$router.push({ name: "GeneralForum" });
+                          this.$router.push({ name: "DashBoard" });
+                       
                       }
                     });
                 });

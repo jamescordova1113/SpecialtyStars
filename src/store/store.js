@@ -21,7 +21,8 @@ export const store = new Vuex.Store({
       eventEmail: null,
       sendVerify: false,
       newEmail: null,
-      newPassword: null
+      newPassword: null,
+      
     },
     
   },
