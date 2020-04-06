@@ -74,7 +74,7 @@
               </v-card-text>
 
               <!-- modal -->
-              <v-dialog v-model="dialog" width="500">
+              <v-dialog v-model="dialog" width="320">
                 <template v-slot:activator="{ on }">
                   <v-flex class="text-center">
                     <v-btn
@@ -181,7 +181,7 @@
                     >Play/Pause</v-btn
                   >
                   <center>
-                    <video id="video" width="435px">
+                    <video id="video" width="320px">
                       <source v-bind:src="`${evt.video}`" type="video/mp4" />
                       <source src="movie.ogg" type="video/ogg" />
                       Your browser does not support the video tag.

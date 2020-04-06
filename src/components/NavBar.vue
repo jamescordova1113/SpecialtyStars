@@ -31,7 +31,7 @@
               height="35"
             />
           </router-link>
-          <v-spacer class="d-none d-lg-block "></v-spacer>
+          <v-spacer class="d-none d-lg-block"></v-spacer>
           <div class="mr-4 d-none d-lg-block hidden-lg-and-down">
             <v-label> Welcome, {{ this.user.alias }} </v-label>
           </div>
@@ -49,7 +49,7 @@
             </router-link> -->
 
           <router-link :to="{ name: 'Login' }">
-            <v-btn text v-if="!user.isWorker || !user.isEmployer">{{
+            <v-btn class="hidden-lg-and-down" text v-if="!user.isWorker || !user.isEmployer">{{
               this.loginText
             }}</v-btn>
           </router-link>

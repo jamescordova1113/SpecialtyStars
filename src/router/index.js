@@ -23,9 +23,7 @@ import Safety from "@/components/FooterLinks/Safety";
 import SuperStars from "@/components/FooterLinks/SuperStars";
 import TermsOfUse from "@/components/FooterLinks/TermsOfUse";
 import MyInfo from "@/components/Profiles/Dashboard/MyInfo";
-import Notifications from "@/components/Profiles/Dashboard/Notifications";
 import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
-import Messages from "@/components/Profiles/Dashboard/Messages";
 import DashBoard from "@/components/Profiles/Dashboard/DashBoard";
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
@@ -199,18 +197,7 @@ const router = new Router({
         }
     }
     },
-    {
-      path: "/Profiles/Dashboard/Notifications",
-      name: "Notifications",
-      component: Notifications,
-      beforeEnter: (to, from, next) => {
-        if (!firebase.auth().currentUser) {
-            next("/Login");
-        } else {
-            next();
-        }
-    }
-    },
+   
     {
       path: "/Profiles/Dashboard/PaymentInfo",
       name: "PaymentInfo",
@@ -223,18 +210,7 @@ const router = new Router({
         }
     }
     },
-    {
-      path: "/Profiles/Dashboard/Messages",
-      name: "Messages",
-      component: Messages,
-      beforeEnter: (to, from, next) => {
-        if (!firebase.auth().currentUser) {
-            next("/Login");
-        } else {
-            next();
-        }
-    }
-    },  
+   
     {
       path: "/Specialties",
       name: "Specialties",

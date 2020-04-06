@@ -2,7 +2,7 @@
   <v-container class="contactCard">
     <v-toolbar color="orange" dark flat justify="center" max-width="450px">
       <v-row justify="center">
-        <v-toolbar-title><h1>Contact Specialty Stars</h1></v-toolbar-title>
+        <v-toolbar-title><h1>Contact Us</h1></v-toolbar-title>
       </v-row>
     </v-toolbar>
     <v-card class="contactForm">

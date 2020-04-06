@@ -35,17 +35,7 @@
     </v-row>
     <v-row class="mb-5" justify="center" align="center" no-gutters>
       <v-col cols="12">
-        <v-card>
-          <v-card-text><h3 class="text-center">My Messages</h3></v-card-text>
-          <v-spacer />
-          <router-link to="../Profiles/Dashboard/Messages">
-            <v-btn text small>
-              Messages
-            </v-btn>
-          </router-link>
-          <v-spacer />
-          <br />
-        </v-card>
+      
       </v-col>
     </v-row>
     <v-row class="mb-5" justify="center" align="center" no-gutters>
