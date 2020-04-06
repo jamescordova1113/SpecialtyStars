@@ -176,7 +176,7 @@
                   </v-card-text>
                   <v-btn
                     class="mb-2"
-                    color="primary lighten-3"
+                    color="primary lighten-2"
                     v-on:click="playPause()"
                     >Play/Pause</v-btn
                   >
@@ -211,9 +211,15 @@
                       </h2>
                       <p>Email {{ evt.email }}</p>
                       <p>Phone {{ evt.phone }}</p>
-                      <router-link :to="{ name: 'Messages' }">
-                        <v-btn> Message </v-btn>
-                      </router-link>
+                     <a v-bind:href="`${evt.whatsapp}`">  <v-img
+      src="@/assets/whatsapp.png"
+      
+      aspect-ratio="1"
+      class="grey lighten-2"
+      max-width="50 "
+      max-height="50"
+    ></v-img></a>
+                    
                     </div>
                     <div
                       v-if="user.isWorker || !user.isLoggedIn"
@@ -244,19 +250,27 @@
 
 <script>
 import db from "@/./firebase/init";
+import {mapGetters} from 'vuex'
+// import mixin from '../mixins'
+
 export default {
-  name: "Events",
+  name: "SpecialistProfile",
   data() {
     return {
+      name: '',
+      message: '',
+      contactInfo: '',
       alignments: [
         'start',
         'center',
         'end'
       ],
+      user_id: '',
       evts: [],
       isEmployer: false,
       counter: 0,
       valid: false,
+      valis1: false,
       specialty: [
         "Agricultural",
         "Air Conditioning",
@@ -317,6 +331,7 @@ export default {
       searchzip: "",
       searchexp: "",
       searchspec: "",
+      date: new Date().toISOString().substr(0, 10),
     };
   },
 
@@ -329,7 +344,39 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    privateMessage() {},
+    sendMessage() {
+      db.collection("Messages")
+        .doc(this.users.id)
+        .set({
+          createdAt: new Date(),
+          name: this.name,
+          message: this.message,
+          contactInfo: this.contactInfo,
+          user_id: this.user_id
+        });  
+    },
+  //  addChannel() {
+  //               this.errors = []
+  //               // get key to the newly creating channel
+  //               let key = this.channelsRef.push().key
+  //               console.log('newly creating channel key: ', key)
+  //               // minimum info needed to create a new channel
+  //               // id and name
+  //               let newChannel = {id: key, name: this.new_channel}
+  //               // create new channel
+  //               this.channelsRef.child(key).update(newChannel)
+  //               .then(() => {
+  //                   // dispatch setCurrentChannel when a new channel is added
+  //                   this.$store.dispatch("setCurrentChannel", newChannel)
+                    
+  //                   this.new_channel = ''
+  //                   $("#channelModal").modal('hide')
+  //               })
+  //               // error handling
+  //               .catch((error) => {
+  //                   this.errors.push(error.message)
+  //               })
+  //           },
   },
   computed: {
     user() {

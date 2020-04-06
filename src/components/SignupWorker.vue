@@ -83,6 +83,8 @@ export default {
   name: "Signup",
   data() {
     return {
+      name: null,
+      contactInfo: null,
       email: null,
       password: null,
       passwordConfirm: null,
@@ -218,6 +220,16 @@ export default {
                     specialty: this.specialty,
                     experience: this.experience,
                     isWorkerProfile: this.isWorkerProfile
+                  });
+                  db.collection("Messages")
+                  .doc(cred.user.uid)
+                  .set({
+                    ContactInfo: this.contactInfo,
+                    isWorker: this.isWorker,
+                    alias: this.alias,
+                    user_id: cred.user.uid,
+                    name: this.name,
+                    message: this.message
                   });
               })
 

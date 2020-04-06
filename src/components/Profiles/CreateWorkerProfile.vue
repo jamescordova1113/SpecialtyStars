@@ -28,6 +28,13 @@
             required
           ></v-text-field>
           <v-text-field
+            type="text "
+            v-model="users.whatsapp"
+            label="Whats app we address https://wa.me/1+whatsapp phone #:"
+            :rules="emailRules"
+            required
+          ></v-text-field>
+          <v-text-field
             type="email "
             v-model="users.email"
             label="Email:"
