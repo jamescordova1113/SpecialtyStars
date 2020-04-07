@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Index from "@/components/Index";
+import Index from "@/components/Index.vue";
 import SignupWorker from "@/components/SignupWorker";
 import SignupEmployer from "@/components/SignupEmployer";
 import Login from "@/components/Login";
@@ -12,22 +12,21 @@ import WorkersPage from "@/components/WorkersPage";
 import NeedWorkers from "@/components/NeedWorkers";
 import Help from "@/components/Help";
 import Advertising from "@/components/FooterLinks/Advertising";
-import CookiePolicy from "@/components/FooterLinks/CookiePolicy";
 import Events from "@/components/FooterLinks/Events";
 import Guidlines from "@/components/FooterLinks/Guidlines";
 import JoinTheTeam from "@/components/FooterLinks/JoinTheTeam";
 import Press from "@/components/FooterLinks/Press";
-import PrivacyPolicy from "@/components/FooterLinks/PrivacyPolicy";
 import Resources from "@/components/FooterLinks/Resources";
 import Safety from "@/components/FooterLinks/Safety";
 import SuperStars from "@/components/FooterLinks/SuperStars";
-import TermsOfUse from "@/components/FooterLinks/TermsOfUse";
 import MyInfo from "@/components/Profiles/Dashboard/MyInfo";
 import PaymentInfo from "@/components/Profiles/Dashboard/PaymentInfo";
 import DashBoard from "@/components/Profiles/Dashboard/DashBoard";
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
 import GeneralForum from "@/components/Forum/GeneralForum";
+import Checkout from "@/components/Checkout";
+
 // import CreateWorkerPort from "@/components/Profiles/CreateWorkerPort";
 
 
@@ -131,11 +130,6 @@ const router = new Router({
       component: Advertising
     },
     {
-      path: "/FooterLinks/CookiePolicy",
-      name: "CookiePolicy",
-      component: CookiePolicy
-    },
-    {
       path: "/FooterLinks/Events",
       name: "Events",
       component: Events
@@ -155,11 +149,7 @@ const router = new Router({
       name: "Press",
       component: Press
     },
-    {
-      path: "/FooterLinks/PrivacyPolicy",
-      name: "PrivacyPolicy",
-      component: PrivacyPolicy
-    },
+   
     {
       path: "/FooterLinks/Resources",
       name: "Resources",
@@ -175,11 +165,7 @@ const router = new Router({
       name: "SuperStars",
       component: SuperStars
     },
-    {
-      path: "/FooterLinks/TermsOfUse",
-      name: "TermsOfUse",
-      component: TermsOfUse
-    },
+  
     {
     path: "/Profiles/Dashboard/DashBoard",
       name: "DashBoard",
@@ -221,7 +207,11 @@ const router = new Router({
       name: "SpecialistProfiles",
       component: SpecialistProfiles
     },
-    
+    {
+      path:"/Checkout",
+      name: "Checkout",
+      component: Checkout
+    },
     {
       path: "/Forum/GeneralForum",
       name: "GeneralForum",

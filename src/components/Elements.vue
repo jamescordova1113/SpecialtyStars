@@ -7,7 +7,7 @@
       <slot name="card-errors">
         <div id="card-errors" role="alert"></div>
       </slot>
-      <button ref="submitButtonRef" type="submit"></button>
+      <v-btn ref="sv-btnRef" type="submit"></v-btn>
     </form>
   </div>
 </template>

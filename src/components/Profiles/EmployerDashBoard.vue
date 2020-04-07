@@ -11,21 +11,15 @@
       <v-col cols="12">
         <v-card>
           <v-card-text><h3 class="text-center">My Account</h3></v-card-text>
-          <router-link to="../Profiles/Dashboard/MyInfo">
+          <router-link to="MyInfo">
             <v-btn text small>
               My Info
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="../Profiles/Dashboard/PaymentInfo">
+          <router-link to="PaymentInfo">
             <v-btn text small>
               Payment Info
-            </v-btn>
-          </router-link>
-          <v-spacer />
-          <router-link to="../Profiles/Dashboard/Payment">
-            <v-btn text small>
-              Billing
             </v-btn>
           </router-link>
           <v-spacer />

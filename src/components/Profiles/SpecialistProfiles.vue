@@ -211,7 +211,7 @@
                       </h2>
                       <p>Email {{ evt.email }}</p>
                       <p>Phone {{ evt.phone }}</p>
-                     <a v-bind:href="`${evt.whatsapp}`">  <v-img
+                     <a class="hidden-md-and-up" v-bind:href="`${evt.whatsapp}`">  <v-img
       src="@/assets/whatsapp.png"
       
       aspect-ratio="1"

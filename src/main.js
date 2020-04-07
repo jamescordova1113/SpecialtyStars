@@ -12,6 +12,7 @@ import { store } from './store/store'
 import VueChatScroll from 'vue-chat-scroll'
 import Chat from 'vue-beautiful-chat'
 import { BootstrapVue } from 'bootstrap-vue'
+import { StripeCheckout } from 'vue-stripe'
 
 Vue.use(Chat)
 Vue.use(VueChatScroll)
@@ -20,9 +21,12 @@ Vue.use(BootstrapVue)
 library.add(faUserSecret)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('stripe-checkout', StripeCheckout);
+
 
 Vue.config.productionTip = false
 // wait for firebase auth to init before creating the app
+
 
 firebase.auth().onAuthStateChanged(user => {
   // dispatch user

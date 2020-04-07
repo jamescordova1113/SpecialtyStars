@@ -1,4 +1,5 @@
 export const STRIPE_CHECKOUT_URL = 'https://js.stripe.com';
+var stripe = Stripe('pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw')
 
 export const SUPPORTED_LANGS = [
   'auto',

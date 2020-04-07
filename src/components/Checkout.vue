@@ -1,106 +1,85 @@
 <template>
-  <div>
-    <form id="payment-form">
-      <slot name="card-element">
-        <div id="card-element"></div>
-      </slot>
-      <slot name="card-errors">
-        <div id="card-errors" role="alert"></div>
-      </slot>
-      <button ref="submitButtonRef" type="submit"></button>
-    </form>
+  <div class="chekout">
+       <Navbar></Navbar>
+
+        <div class="container mt-5 pt-5">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    <h4 class="py-4">Employer Subscription</h4>
+                     <ul>
+                        <li v-for="item in this.$store.state.cart" :key="item.id" class="media">
+                        <img :src="item.productImage" width="80px" class="align-self-center mr-3" alt="">
+                        <div class="media-body">
+                            <h5 class="mt-0">{{item.productName}}
+
+                                <span class='float-right' @click="$store.commit('removeFromCart',item)">X</span>
+
+                            </h5>
+                            <p class="mt-0">{{item.productPrice | currency}}</p>
+                            <p class="mt-0">Quantity : {{item.productQuantity }}</p>
+                        </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        Total Price : {{ this.$store.getters.totalPrice | currency }}
+                    </p>
+
+                   
+
+                    <card class='stripe-card'
+                        :class='{ complete }'
+                        stripe='pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw'
+                        :options='stripeOptions'
+                        @change='complete = $event.complete'
+                        />
+
+                        <button class='pay-with-stripe btn btn-primary mt-4' @click='pay' :disabled='!complete'>Pay with credit card</button>
+                    
+                    </form>
+                </div>
+            </div>
+
+        </div>
   </div>
 </template>
 
 <script>
-import { loadStripeCheckout } from './load-checkout';
+import { Card, createToken } from 'vue-stripe-elements-plus';
 export default {
-  props: {
-    pk: {
-      type: String,
-      required: true
-    },
-    amount: {
-      type: Number,
-      required: true
-    }
-  },
-  data () {
+    data () {
     return {
-      loading: false,
-      stripe: null,
-      elements: null,
-      card: null
+      complete: false,
+      stripeOptions: {
+        // see https://stripe.com/docs/stripe.js#element-options for details
+      }
     }
   },
-  computed: {
-    style () {
-      return {
-        base: {
-          color: '#32325d',
-          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-          fontSmoothing: 'antialiased',
-          fontSize: '16px',
-          '::placeholder': {
-            color: '#aab7c4'
-          }
-        },
-        invalid: {
-          color: '#fa755a',
-          iconColor: '#fa755a'
-        }
-      };
-    },
-    form () {
-      return document.getElementById('payment-form');
-    }
-  },
+  components: { Card },
   methods: {
-    submit () {
-      this.$refs.submitButtonRef.click();
+    pay () {
+      // createToken returns a Promise which resolves in a result object with
+      // either a token or an error key.
+      // See https://stripe.com/docs/api#tokens for the token object.
+      // See https://stripe.com/docs/api#errors for the error object.
+      // More general https://stripe.com/docs/stripe.js#stripe-create-token.
+      createToken().then(data => console.log(data.token))
     }
-  },
-  mounted () {
-    loadStripeCheckout(this.pk, 'v3', () => {
-      this.stripe = window.Stripe(this.pk);
-      this.elements = this.stripe.elements();
-      this.card = this.elements.create('card', { style: this.style });
-      this.card.mount('#card-element');
-      this.card.addEventListener('change', ({ error }) => {
-        const displayError = document.getElementById('card-errors');
-        if (error) {
-          displayError.textContent = error.message;
-        } else {
-          displayError.textContent = '';
-        }
-      });
-      
-      this.form.addEventListener('submit', async (event) => {
-        try {
-          this.$emit('loading', true);
-          event.preventDefault();
-          const { token, error } = await this.stripe.createToken({ ...this.card, amount: this.amount })
-          if (error) {
-            const errorElement = document.getElementById('card-errors');
-            errorElement.textContent = error.message;
-            console.error(error);
-            this.$emit('error 1', error);
-          } else {
-            this.$emit('token', token);
-          }
-        } catch (error) {
-          console.error(error);
-          this.$emit('error 2', error);
-        } finally {
-          this.$emit('loading', false);
-        }
-      });
-    });
   }
 }
 </script>
 
-<style scoped>
+
+
+<style>
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
 .StripeElement {
   box-sizing: border-box;
   height: 40px;
