@@ -364,9 +364,8 @@ export default {
       db.collection("Contacts")
       .doc(this.users.id)
       .collection("contacts")
-      .add.doc(AutoID)
-      .doc()
-      .set({
+      .doc(AutoID)
+      .add({
         name: this.evt.alias,
         specialty: this.evt.specialty,
         phone: this.evt.phone,
