@@ -14,7 +14,8 @@ export const store = new Vuex.Store({
       isWorkerProfile: false,
       currentUser: null,
       currentChannel: null,
-      isPrivate: false
+      isPrivate: false,
+      user_id: null
     },
     config: {
       contactEmail: null,
@@ -32,6 +33,7 @@ export const store = new Vuex.Store({
       state.user.isLoggedIn = payload.isLoggedIn;
       state.user.isWorker = payload.isWorker;
       state.user.isEmployer = payload.isEmployer;
+      state.user.user_id = payload.user_id
     },
     setConfig(state, payload) {
       state.config.contactEmail = payload.contactEmail;

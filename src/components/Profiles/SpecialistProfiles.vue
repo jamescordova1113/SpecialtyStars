@@ -207,10 +207,10 @@
                     <div v-if="user.isEmployer">
                       <h2 class="h2Contact">
                         Workers Preffered Contact
-                        <h3>{{ evt.preferredContact }}</h3>
+                        <span class="contact"> <h3>[{{ evt.preferredContact }}]</h3></span>
                       </h2>
-                      <p>Email {{ evt.email }}</p>
-                      <p>Phone {{ evt.phone }}</p>
+                      <p>Email: {{ evt.email }}</p>
+                      <p>Phone: {{ evt.phone }}</p>
                      <a class="hidden-md-and-up" v-bind:href="`${evt.whatsapp}`">  <v-img
       src="@/assets/whatsapp.png"
       
@@ -219,6 +219,7 @@
       max-width="50 "
       max-height="50"
     ></v-img></a>
+    <v-btn class="success lighten-2" tile dark @click="saveContact"> Save Contact </v-btn>
                     
                     </div>
                     <div
@@ -257,14 +258,18 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
+      email: '',
       name: '',
-      message: '',
+      phone: '',
       contactInfo: '',
       alignments: [
         'start',
         'center',
         'end'
       ],
+      users: {
+        user_id: null
+      },
       user_id: '',
       evts: [],
       isEmployer: false,
@@ -344,17 +349,31 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    sendMessage() {
-      db.collection("Messages")
-        .doc(this.users.id)
-        .set({
-          createdAt: new Date(),
-          name: this.name,
-          message: this.message,
-          contactInfo: this.contactInfo,
-          user_id: this.user_id
-        });  
-    },
+    // sendMessage() {
+    //   db.collection("Messages")
+    //     .doc(this.users.id)
+    //     .set({
+    //       createdAt: new Date(),
+    //       name: this.name,
+    //       message: this.message,
+    //       contactInfo: this.contactInfo,
+    //       user_id: this.user_id
+    //     });  
+    // },
+    saveContact() {
+      db.collection("Contacts")
+      .doc(this.users.id)
+      .collection("contacts")
+      .add.doc(AutoID)
+      .doc()
+      .set({
+        name: this.evt.alias,
+        specialty: this.evt.specialty,
+        phone: this.evt.phone,
+        email: this.evt.email
+       
+      },{ merge: true });
+    }
   //  addChannel() {
   //               this.errors = []
   //               // get key to the newly creating channel
@@ -458,5 +477,8 @@ h2 {
 .select {
   margin-left: 20px;
   margin-right: 20px;
+}
+.contact {
+  color: rgb(25, 207, 25);
 }
 </style>

@@ -25,7 +25,6 @@ import DashBoard from "@/components/Profiles/Dashboard/DashBoard";
 import Specialties from "@/components/Specialties";
 import SpecialistProfiles from "@/components/Profiles/SpecialistProfiles";
 import GeneralForum from "@/components/Forum/GeneralForum";
-import Checkout from "@/components/Checkout";
 
 // import CreateWorkerPort from "@/components/Profiles/CreateWorkerPort";
 
@@ -207,11 +206,7 @@ const router = new Router({
       name: "SpecialistProfiles",
       component: SpecialistProfiles
     },
-    {
-      path:"/Checkout",
-      name: "Checkout",
-      component: Checkout
-    },
+  
     {
       path: "/Forum/GeneralForum",
       name: "GeneralForum",

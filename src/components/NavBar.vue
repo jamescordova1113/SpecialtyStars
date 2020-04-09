@@ -37,19 +37,8 @@
           </div>
           <v-spacer></v-spacer>
 
-          <!-- <router-link to="/WorkersPage">
-              <v-btn color="white" @click="setCookie('worker')">
-                <span class="text-center">Need Work</span>
-              </v-btn>
-            </router-link>
-            <router-link to="/NeedWorkers">
-              <v-btn color="white" @click="setCookie('employer')">
-                <span class="text-center">Need Worker</span>
-              </v-btn>
-            </router-link> -->
-
           <router-link :to="{ name: 'Login' }">
-            <v-btn class="hidden-md-and-down" text v-if="!user.isWorker || !user.isEmployer">{{
+            <v-btn class="hidden-sm-and-down" text v-if="!user.isWorker || !user.isEmployer">{{
               this.loginText
             }}</v-btn>
           </router-link>
