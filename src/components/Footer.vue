@@ -24,31 +24,31 @@
             <v-col cols="5">
               <h2 class="hidden-lg-and-up">Community</h2>
               <h1 class="hidden-md-and-down">Community</h1>
-              <router-link to="../FooterLinks/Guidlines">
-                <span><a> GUIDELINES </a></span>
+              <router-link :to="{ name: 'Guidlines' }">
+                <span> GUIDELINES </span>
               </router-link>
               <v-spacer />
-              <router-link to="../FooterLinks/Events">
-                <span><a> EVENTS </a></span>
+              <router-link :to="{ name: 'Events' }">
+                <span> EVENTS </span>
               </router-link>
               <v-spacer />
-              <router-link to="../FooterLinks/SuperStars">
-                <span><a> SUPER STARS </a></span>
+              <router-link :to="{ name: 'SuperStars' }">
+                <span> SUPER STARS </span>
               </router-link>
               <v-spacer />
 
               <h2 class="hidden-lg-and-up">Company</h2>
               <h1 class="hidden-md-and-down">Company</h1>
-              <router-link to="../FooterLinks/Advertising">
-                <span><a> ADVERTISING </a></span>
+              <router-link :to="{ name: 'Advertising' }">
+                <span> ADVERTISING </span>
               </router-link>
               <v-spacer />
-              <router-link to="../FooterLinks/Press">
-                <span><a> PRESS </a></span>
+              <router-link :to="{ name: 'Press' }">
+                <span> PRESS </span>
               </router-link>
               <v-spacer />
-              <router-link to="../FooterLinks/JoinTheTeam">
-                <span><a> JOIN THE TEAM</a></span>
+              <router-link :to="{ name: 'JoinTheTeam' }">
+                <span> JOIN THE TEAM</span>
               </router-link>
               <v-spacer />
             </v-col>
@@ -57,17 +57,17 @@
               <h2 class="hidden-lg-and-up">Help</h2>
               <h1 class="hidden-md-and-down">Help</h1>
               <router-link to="../Help">
-                <span><a> HELP CENTER </a></span>
+                <span> HELP CENTER </span>
               </router-link>
               <v-spacer />
 
               <v-spacer />
-              <router-link to="../FooterLinks/Resources">
-                <span><a> RESOURCES </a></span>
+              <router-link :to="{ name: 'Resources' }">
+                <span> RESOURCES </span>
               </router-link>
               <v-spacer />
-              <router-link to="../FooterLinks/Safety">
-                <span><a> SAFTEY </a></span>
+              <router-link :to="{ name: 'Safety' }">
+                <span> SAFTEY </span>
               </router-link>
               <v-spacer />
 
@@ -75,40 +75,43 @@
                 <h2 class="hidden-lg-and-up">Legal</h2>
                 <h1 class="hidden-md-and-down">Legal</h1>
               </h2>
-              <span class="span"
-                ><a
+     
+           <a
                   text
                   small
                   href="https://www.iubenda.com/terms-and-conditions/39705548"
                   class="iubenda-white iubenda-embed"
                   title="Terms and Conditions "
-                  >TERMS AND CONDITIONS
+                  ><span> TERMS AND CONDITIONS</span>
+                  
                 </a>
-              </span>
+              
               <v-spacer />
 
-              <span class="span"
-                ><a
+              
+                <a
                   text
                   small
                   href="https://www.iubenda.com/privacy-policy/39705548"
                   class="iubenda-white no-brand iubenda-embed"
-                  title="Privacy Policy "
-                  >PRIVACY POLICY
-                </a></span
-              >
+                  title="Privacy Policy"
+                  ><span>PRIVACY POLICY</span>
+                </a>
+              
               <v-spacer />
 
-              <span class="span"
-                ><a
+              
+                
+                 <a 
                   text
                   small
                   href="https://www.iubenda.com/privacy-policy/39705548/cookie-policy"
                   class="iubenda-white no-brand iubenda-embed"
-                  title="Cookie Policy "
-                  >COOKIE POLICY
-                </a></span
-              >
+                  title="Cookie Policy" 
+                  ><span >COOKIE POLICY></span
+                  >
+                </a>
+              
             </v-col>
           </v-row>
         </v-flex>
@@ -149,9 +152,12 @@ h2 {
 }
 span {
   font-size: 0.6rem;
-  color: blue;
+  color: white;
 }
 a {
   color: inherit;
+}
+NavLink {
+  color: white;
 }
 </style>

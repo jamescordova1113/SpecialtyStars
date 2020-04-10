@@ -32,25 +32,36 @@
     </v-row>
     <v-row class="mb-5" justify="center" align="center" no-gutters>
       <v-col cols="12">
-        <v-card>
+        <v-card class="contacts">
           <v-card-text
             ><h3 class="mb-10 text-center">My Contacts</h3></v-card-text
           >
           <br />
           <v-row>
             <v-col>
-              <v-card class="ml-3" width="170px">
-                <div class="contacts" v-for="contact in contacts" :key="contact.id" >
-                  <span> <p class="ml-2 pt-2">Name: {{ contact.name }}</p> </span>
+              <div v-for="contact in contacts"
+                  :key="contact.id">
+              <v-card class="ml-3">
+                
+                  <span>
+                    <p class="ml-2 pt-2">Name: {{ contact.alias }}</p>
+                  </span>
                   <v-spacer />
-                  <span> <p class="ml-2">Email: {{ contact.email }}</p> </span>
+                  <span>
+                    <p class="ml-2">Email: {{ contact.email }}</p>
+                  </span>
                   <v-spacer />
-                  <span> <p class="ml-2">Phone: {{ contact.phone }}</p> </span>
+                  <span>
+                    <p class="ml-2">Phone: {{ contact.phone }}</p>
+                  </span>
                   <v-spacer />
-                  <span> <p class="ml-2 pb-2">Specialty: {{ contact.specialty }}</p> </span>
+                  <span>
+                    <p class="ml-2 pb-2">Specialty: {{ contact.specialty }}</p>
+                  </span>
                   <v-spacer />
-                </div>
               </v-card>
+                              </div>
+
             </v-col>
           </v-row>
         </v-card>
@@ -68,7 +79,7 @@ export default {
   data() {
     return {
       contacts: [],
-      user_id: null
+      user_id: null,
     };
   },
   computed: {
@@ -77,16 +88,14 @@ export default {
     },
   },
   created() {
-    console.log(firebase.auth().currentUser.uid);
+    // console.log(firebase.auth().currentUser.uid);
+    
       db.collection("Contacts")
       .where("user_id", "==", firebase.auth().currentUser.uid)
-      .collection("contacts")
       .get()
-      .then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
-        this.contact = doc.data();
-        this.contact.id = doc.id;
-        this.contacts.push(contact);
+      .then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+         console.log(doc.id, " => ", doc.data());
       });
     });
   },

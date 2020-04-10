@@ -168,7 +168,7 @@ export default {
           text: "Login",
           route: "/login"
         },
-        { text: "Help", route: "/Contact" }
+        { text: "Contact", route: "/Contact" }
       ],
       workerLinks: [
         {
@@ -189,7 +189,7 @@ export default {
 
         {
           text: "Message Board",
-          route: "/Forum/GeneralForum"
+          route: "/MessageBoard"
         }
       ],
 
@@ -224,35 +224,7 @@ export default {
 </script>
 
 <style>
-@import url(https://fonts.googleapis.com/css?family=Lato);
 
-.shimmer {
-  display: inline-block;
-  color: white;
-  background: #585858 -webkit-gradient(linear, 100% 0, 0 0, from(#aaa9a9), color-stop(0.5, #aaaaaa), to(#6b6b6b));
-  background-position: -4rem top; /*50px*/
-  background-repeat: no-repeat;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-animation-name: shimmer;
-  -webkit-animation-duration: 2.2s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-background-size: 4rem 100%; /*50px*/
-}
-
-@-webkit-keyframes shimmer {
-  0% {
-    background-position: -4rem top; /*50px*/
-  }
-
-  70% {
-    background-position: 12.5rem top; /*200px*/
-  }
-
-  100% {
-    background-position: 12.5rem top; /*200px*/
-  }
-}
 .titleSpan {
   color: darkslategrey;
   margin-right: 10px;

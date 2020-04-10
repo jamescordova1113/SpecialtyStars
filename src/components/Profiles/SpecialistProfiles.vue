@@ -250,6 +250,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import db from "@/./firebase/init";
 import {mapGetters} from 'vuex'
 // import mixin from '../mixins'
@@ -258,6 +259,7 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
+      
       email: '',
       name: '',
       phone: '',
@@ -267,9 +269,7 @@ export default {
         'center',
         'end'
       ],
-      users: {
-        user_id: null
-      },
+      users: [],
       user_id: '',
       evts: [],
       isEmployer: false,
@@ -339,7 +339,7 @@ export default {
       date: new Date().toISOString().substr(0, 10),
     };
   },
-
+ 
   methods: {
     playPause() {
       var myVideo = document.getElementById("video");
@@ -361,42 +361,21 @@ export default {
     //     });  
     // },
     saveContact() {
-      db.collection("Contacts")
-      .doc(this.users.id)
-      .collection("contacts")
-      .doc(AutoID)
-      .add({
-        name: this.evt.alias,
+      console.log(this.user_id)
+       db.collection("Contacts")
+        .doc(this.user_id)
+        .collection()
+        .add({
+        alias: this.evt.alias,
         specialty: this.evt.specialty,
         phone: this.evt.phone,
         email: this.evt.email
        
-      },{ merge: true });
-    }
-  //  addChannel() {
-  //               this.errors = []
-  //               // get key to the newly creating channel
-  //               let key = this.channelsRef.push().key
-  //               console.log('newly creating channel key: ', key)
-  //               // minimum info needed to create a new channel
-  //               // id and name
-  //               let newChannel = {id: key, name: this.new_channel}
-  //               // create new channel
-  //               this.channelsRef.child(key).update(newChannel)
-  //               .then(() => {
-  //                   // dispatch setCurrentChannel when a new channel is added
-  //                   this.$store.dispatch("setCurrentChannel", newChannel)
-                    
-  //                   this.new_channel = ''
-  //                   $("#channelModal").modal('hide')
-  //               })
-  //               // error handling
-  //               .catch((error) => {
-  //                   this.errors.push(error.message)
-  //               })
-  //           },
+      })
+  }
   },
   computed: {
+   
     user() {
       return this.$store.state.user;
     },
@@ -412,6 +391,15 @@ export default {
   },
   beforeCreate() {
     // fetch data from firestore
+    db.collection("users")
+    .get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          let user = doc.data();
+          user.id = doc.id;
+          this.users.push(user);
+        });
+      });
     db.collection("specialistProfile")
       .orderBy("createdAt", "desc")
       .get()
@@ -422,8 +410,9 @@ export default {
           this.evts.push(evt);
         });
       });
-  },
-};
+  }
+}
+
 </script>
 
 <style>

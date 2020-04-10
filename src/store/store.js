@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
       state.user.isLoggedIn = payload.isLoggedIn;
       state.user.isWorker = payload.isWorker;
       state.user.isEmployer = payload.isEmployer;
-      state.user.user_id = payload.user_id
+      state.user.user_id = payload.user_id;
     },
     setConfig(state, payload) {
       state.config.contactEmail = payload.contactEmail;
