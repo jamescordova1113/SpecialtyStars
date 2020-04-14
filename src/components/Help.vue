@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="class guidlines">
       <v-col cols="">
-        <h2><span class="helpTitle grey--text text--darken-3 text-center">
+        <h2 class="helpTitle"><span class="helpTitle grey--text text--darken-3 text-center">
             Employer tip for success
           </span></h2>
         <v-card class="guidlinesCard">
@@ -18,9 +18,12 @@ Actually hired them. The whole purpose of Specialty Stars is to establish a good
 workers and employers by giving employers a chance to screen workers first.
           </li>
         </ol>
-         <h2><span class="helpTitle grey--text text--darken-3 text-center">
+        </v-card>
+        
+         <h2 class="helpTitle"><span class="helpTitle grey--text text--darken-3 text-center">
             Worker tips for success
           </span></h2>
+          <v-card class="guidlinesCard">
         <ol>
           <li class="helpText">
               Post Pics and Video! Employers want to see you! They want to see
@@ -53,3 +56,14 @@ workers and employers by giving employers a chance to screen workers first.
 export default {
 }
 </script>
+
+<style scoped>
+.guidlinesCard {
+  margin: 15px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+.helpTitle {
+  padding: 15px;
+}
+</style>

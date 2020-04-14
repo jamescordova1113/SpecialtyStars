@@ -108,7 +108,7 @@
                   href="https://www.iubenda.com/privacy-policy/39705548/cookie-policy"
                   class="iubenda-white no-brand iubenda-embed"
                   title="Cookie Policy" 
-                  ><span >COOKIE POLICY></span
+                  ><span >COOKIE POLICY</span
                   >
                 </a>
               

@@ -23,11 +23,12 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="Help">
+          <router-link to="../help">
             <v-btn text small>
               Help
             </v-btn>
           </router-link>
+          <v-spacer />
           <br />
         </v-card>
       </v-col>
