@@ -23,6 +23,11 @@
             </v-btn>
           </router-link>
           <v-spacer />
+          <router-link to="Help">
+            <v-btn text small>
+              Help
+            </v-btn>
+          </router-link>
           <br />
         </v-card>
       </v-col>
@@ -39,10 +44,8 @@
           <br />
           <v-row>
             <v-col>
-              <div v-for="contact in contacts"
-                  :key="contact.id">
-              <v-card class="ml-3">
-                
+              <div v-for="contact in contacts" :key="contact.id">
+                <v-card class="ml-3">
                   <span>
                     <p class="ml-2 pt-2">Name: {{ contact.alias }}</p>
                   </span>
@@ -59,9 +62,8 @@
                     <p class="ml-2 pb-2">Specialty: {{ contact.specialty }}</p>
                   </span>
                   <v-spacer />
-              </v-card>
-                              </div>
-
+                </v-card>
+              </div>
             </v-col>
           </v-row>
         </v-card>
@@ -88,16 +90,16 @@ export default {
     },
   },
   created() {
-    // console.log(firebase.auth().currentUser.uid);
-    
-      db.collection("Contacts")
-      .where("user_id", "==", firebase.auth().currentUser.uid)
+    var user_id = firebase.auth().currentUser.uid;
+
+    db.collection("Contacts")
+    doc(user_id).collection("contacts")
       .get()
-      .then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-         console.log(doc.id, " => ", doc.data());
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          console.log(doc.id, " => ", doc.data());
+        });
       });
-    });
   },
 };
 </script>

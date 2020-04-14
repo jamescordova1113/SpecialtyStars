@@ -1,54 +1,53 @@
 <template>
-<div>
-  <v-container>
-    <v-row justify="center">
-      <v-card class="filterCard" width="600px">
-        <v-form class="filterForm" ref="form" v-model="valid" lazy-validation>
-          <v-card-title>
-            Search for Specialist
-          </v-card-title>
-          <v-select
-            class="select"
-            v-model="searchspec"
-            :items="specialty"
-            label="Specialty"
-            data-vv-name="select"
-          >
-          </v-select>
-          <v-select
-            class="select"
-            v-model="searchexp"
-            :items="experiences"
-            label="Experience"
-            data-vv-name="select"
-          >
-          </v-select>
-          <input
-            class="ml-5"
-            type="text"
-            v-model="searchzip"
-            placeholder="Search by zipcode"
-          />
-          <br />
+  <div>
+    <v-container>
+      <v-row justify="center">
+        <v-card class="filterCard" width="600px">
+          <v-form class="filterForm" ref="form" v-model="valid" lazy-validation>
+            <v-card-title>
+              Search for Specialist
+            </v-card-title>
+            <v-select
+              class="select"
+              v-model="searchspec"
+              :items="specialty"
+              label="Specialty"
+              data-vv-name="select"
+            >
+            </v-select>
+            <v-select
+              class="select"
+              v-model="searchexp"
+              :items="experiences"
+              label="Experience"
+              data-vv-name="select"
+            >
+            </v-select>
+            <input
+              class="ml-5"
+              type="text"
+              v-model="searchzip"
+              placeholder="Search by zipcode"
+            />
+            <br />
 
-          <v-btn
-            class="filterButton"
-            color="red lighten-1"
-            tile
-            dark
-            @click="reset"
-          >
-            Reset
-          </v-btn>
-        </v-form>
-      </v-card>
-    </v-row>
+            <v-btn
+              class="filterButton"
+              color="red lighten-1"
+              tile
+              dark
+              @click="reset"
+            >
+              Reset
+            </v-btn>
+          </v-form>
+        </v-card>
+      </v-row>
 
-    <v-row justify="space-around">
-    <div v-for="evt in filteredProfiles" :key="evt.id">
-     
+      <v-row justify="space-around">
+        <div v-for="evt in filteredProfiles" :key="evt.id">
           <v-card tile class="profileCard" outlined width="350px">
-            <v-container  fluid>
+            <v-container fluid>
               <v-card-title class="headline" primary-title>{{
                 evt.specialty
               }}</v-card-title>
@@ -74,7 +73,7 @@
               </v-card-text>
 
               <!-- modal -->
-              <v-dialog v-model="dialog" width="320">
+              <v-dialog v-model="dialog" width="350">
                 <template v-slot:activator="{ on }">
                   <v-flex class="text-center">
                     <v-btn
@@ -207,20 +206,32 @@
                     <div v-if="user.isEmployer">
                       <h2 class="h2Contact">
                         Workers Preffered Contact
-                        <span class="contact"> <h3>[{{ evt.preferredContact }}]</h3></span>
+                        <span class="contact">
+                          <h3>[{{ evt.preferredContact }}]</h3></span
+                        >
                       </h2>
                       <p>Email: {{ evt.email }}</p>
                       <p>Phone: {{ evt.phone }}</p>
-                     <a class="hidden-md-and-up" v-bind:href="`${evt.whatsapp}`">  <v-img
-      src="@/assets/whatsapp.png"
-      
-      aspect-ratio="1"
-      class="grey lighten-2"
-      max-width="50 "
-      max-height="50"
-    ></v-img></a>
-    <v-btn class="success lighten-2" tile dark @click="saveContact"> Save Contact </v-btn>
-                    
+                      <a
+                        class="hidden-md-and-up"
+                        v-bind:href="`${evt.whatsapp}`"
+                      >
+                        <v-img
+                          src="@/assets/whatsapp.png"
+                          aspect-ratio="1"
+                          class="grey lighten-2"
+                          max-width="50 "
+                          max-height="50"
+                        ></v-img
+                      ></a>
+                      <v-btn
+                        class="success lighten-2"
+                        tile
+                        dark
+                        @click="saveContact"
+                      >
+                        Save Contact
+                      </v-btn>
                     </div>
                     <div
                       v-if="user.isWorker || !user.isLoggedIn"
@@ -240,37 +251,29 @@
               <!-- modal end -->
             </v-container>
           </v-card>
-          
-    </div>
-    </v-row>
-  </v-container>
-  
-</div>
-
+        </div>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
 import firebase from "firebase";
 import db from "@/./firebase/init";
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
 // import mixin from '../mixins'
 
 export default {
   name: "SpecialistProfile",
   data() {
     return {
-      
-      email: '',
-      name: '',
-      phone: '',
-      contactInfo: '',
-      alignments: [
-        'start',
-        'center',
-        'end'
-      ],
+      email: "",
+      name: "",
+      phone: "",
+      contactInfo: "",
+      alignments: ["start", "center", "end"],
       users: [],
-      user_id: '',
+      user_id: "",
       evts: [],
       isEmployer: false,
       counter: 0,
@@ -339,7 +342,7 @@ export default {
       date: new Date().toISOString().substr(0, 10),
     };
   },
- 
+
   methods: {
     playPause() {
       var myVideo = document.getElementById("video");
@@ -358,24 +361,19 @@ export default {
     //       message: this.message,
     //       contactInfo: this.contactInfo,
     //       user_id: this.user_id
-    //     });  
+    //     });
     // },
     saveContact() {
-      console.log(this.user_id)
-       db.collection("Contacts")
-        .doc(this.user_id)
-        .collection()
-        .add({
+      console.log(this.user_id);
+      db.collection("Contacts").doc(this.user_id).collection().add({
         alias: this.evt.alias,
         specialty: this.evt.specialty,
         phone: this.evt.phone,
-        email: this.evt.email
-       
-      })
-  }
+        email: this.evt.email,
+      });
+    },
   },
   computed: {
-   
     user() {
       return this.$store.state.user;
     },
@@ -392,8 +390,8 @@ export default {
   beforeCreate() {
     // fetch data from firestore
     db.collection("users")
-    .get()
-    .then((snapshot) => {
+      .get()
+      .then((snapshot) => {
         snapshot.forEach((doc) => {
           let user = doc.data();
           user.id = doc.id;
@@ -410,9 +408,8 @@ export default {
           this.evts.push(evt);
         });
       });
-  }
-}
-
+  },
+};
 </script>
 
 <style>
