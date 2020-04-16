@@ -1,10 +1,18 @@
 <template>
-  <div class="justify-center" justify="center">
-    <section class="row payment-form" justify="center">
+  <div class="paymentCard">
+    <v-row>
+      <v-col cols="xs-12">
+        <h3 class=" text-center"> Membership is a monthly subscription  </h3>
+        <p class=" text-center"> Payments are securley processed through Stripe </p>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col class="xs12" >
+    <section class="row payment-form text-center" >
       <v-col cols="2"> </v-col>
-      <v-col cols="8">
+      <v-col cols="xs-12 md-8">
         <h5 class="#e0e0e0 grey lighten-4">
-          Employer Subscrition unlimited contacts
+          Employer Subscription unlimited contacts for
           <span class="right">${{amount}}</span>
         </h5>
 
@@ -37,6 +45,9 @@
       </v-col>
       <v-col cols="2"> </v-col>
     </section>
+  
+      </v-col>
+      </v-row>
   </div>
 </template>
 
@@ -50,7 +61,7 @@ export default {
             cardExpiryElement: null,
             cardCVCElement: null,
             stripeValidationError: "",
-            amount:25
+            amount:10
         };
     },
     mounted() {
@@ -109,11 +120,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+body {
+  display: grid;
+  place-items: center;
+  height: auto;
+}
 .payment-form {
   max-width: 500px;
   margin: 20px auto;
   border: 1px solid #ececec;
+  display: flex;
+ 
+
+ 
 }
 .payment-form h5 {
   margin: 0;
