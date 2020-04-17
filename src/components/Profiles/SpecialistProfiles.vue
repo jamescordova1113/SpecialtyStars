@@ -364,13 +364,17 @@ export default {
     //     });
     // },
     saveContact() {
-      console.log(this.user_id);
-      db.collection("Contacts").doc(this.user_id).collection().add({
-        alias: this.evt.alias,
-        specialty: this.evt.specialty,
-        phone: this.evt.phone,
-        email: this.evt.email,
-      });
+      const contactsRef = db.collection("Contacts");
+      const pushId = contactsRef.doc().id;
+      db.collection("Contacts")
+        .doc(this.user_id)
+        .collection(pushId)
+        .add({
+          alias: this.evt.alias,
+          specialty: this.evt.specialty,
+          phone: this.evt.phone,
+          email: this.evt.email,
+        });
     },
   },
   computed: {

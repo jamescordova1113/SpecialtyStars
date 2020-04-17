@@ -56,6 +56,8 @@ import firebase from 'firebase'
 export default {
     data() {
         return {
+          isPaidEmployer: true,
+            user_id: null,
             stripe: null,
             cardNumberElement: null,
             cardExpiryElement: null,
@@ -65,7 +67,7 @@ export default {
         };
     },
     mounted() {
-        this.stripe = Stripe("pk_test_******************");
+        this.stripe = Stripe("pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw");
         this.createAndMountFormElements();
     },
     methods: {
@@ -99,9 +101,13 @@ export default {
         },
         saveDataToFireStore(stripeObject) {
             const db = firebase.firestore()
-            const chargesRef = db.collection("charges")
+            const chargesRef = db.collection("charges ")
             const pushId = chargesRef.doc().id
-            db.collection("charges").doc(pushId).set(stripeObject)
+            db.collection("charges").doc(pushId)
+            .set({
+            stripeObject,
+            isPaidEmployer: this.isPaidEmployer,
+            user_id: this.user_id})
             chargesRef.doc(pushId).onSnapshot(snapShot => {
                  const charge = snapShot.data();
                         if (charge.error) {
@@ -116,7 +122,19 @@ export default {
                         }
             })
         }
-    }
+    },
+    created() {
+    // console.log(firebase.auth().currentUser.uid);
+    let ref = db
+      .collection("charges")
+      .where("user_id", "==", firebase.auth().currentUser.uid);
+    ref.get().then(snapshot => {
+      snapshot.forEach(doc => {
+        this.users = doc.data();
+        this.users.id = doc.id;
+      });
+    });
+  }
 };
 </script>
 

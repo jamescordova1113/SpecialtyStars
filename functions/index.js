@@ -1,5 +1,7 @@
+'use strict';
+
 const functions = require('firebase-functions');
-const stripe = require('stripe')('pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw')
+const stripe = require('stripe')('sk_test_iacpLjiiby0UAWEkRmfdtzkP00i7lHeKwN')
 exports.createStripeCharge = functions.firestore
     .document('charges/{pushId}')
     .onCreate(async (snap, context) => {
