@@ -94,7 +94,7 @@ export default {
     var user_id = firebase.auth().currentUser.uid;
 
     db.collection("Contacts")
-    doc(user_id).collection("contacts")
+    .doc(firebase.auth().currentUser.uid).collection("contacts")
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
