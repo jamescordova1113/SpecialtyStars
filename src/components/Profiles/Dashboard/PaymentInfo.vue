@@ -57,7 +57,10 @@ export default {
     data() {
         return {
           isPaidEmployer: true,
-            user_id: null,
+          Users: {
+                        user_id: null,
+          },
+        
             stripe: null,
             cardNumberElement: null,
             cardExpiryElement: null,
@@ -66,6 +69,11 @@ export default {
             amount:10
         };
     },
+    firestore() {
+    return {
+      Users: db.collection("users").orderBy("createdAt")
+    };
+  },
     mounted() {
         this.stripe = Stripe("pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw");
         this.createAndMountFormElements();
@@ -101,13 +109,9 @@ export default {
         },
         saveDataToFireStore(stripeObject) {
             const db = firebase.firestore()
-            const chargesRef = db.collection("charges ")
+            const chargesRef = db.collection("charges")
             const pushId = chargesRef.doc().id
-            db.collection("charges").doc(pushId)
-            .set({
-            stripeObject,
-            isPaidEmployer: this.isPaidEmployer,
-            user_id: this.user_id})
+            db.collection("charges").doc(pushId).set(stripeObject)
             chargesRef.doc(pushId).onSnapshot(snapShot => {
                  const charge = snapShot.data();
                         if (charge.error) {
@@ -122,19 +126,8 @@ export default {
                         }
             })
         }
-    },
-    created() {
-    // console.log(firebase.auth().currentUser.uid);
-    let ref = db
-      .collection("charges")
-      .where("user_id", "==", firebase.auth().currentUser.uid);
-    ref.get().then(snapshot => {
-      snapshot.forEach(doc => {
-        this.users = doc.data();
-        this.users.id = doc.id;
-      });
-    });
-  }
+    }
+   
 };
 </script>
 
