@@ -228,7 +228,7 @@
                         class="success lighten-2"
                         tile
                         dark
-                        @click="saveContact"
+                        @click="saveContact(evt)"
                       >
                         Save Contact
                       </v-btn>
@@ -369,16 +369,15 @@ export default {
     //       user_id: this.user_id
     //     });
     // },
-    saveContact() {
-     
+    saveContact(myContact) {
       db.collection("Contacts")
         .doc(firebase.auth().currentUser.uid)
         .collection("contacts")
         .add({
-          alias: this.evt.alias,
-          specialty: this.evt.specialty,
-          phone: this.evt.phone,
-          email: this.evt.email,
+          alias: myContact.alias,
+          specialty: myContact.specialty,
+          phone: myContact.phone,
+          email: myContact.email,
         });
     },
   },
