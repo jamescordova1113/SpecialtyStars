@@ -275,10 +275,10 @@ export default {
       users: [],
       user_id: "",
       evt: {
-        alias: null,
-        phone: null,
-        email: null,
-        specialty: null
+        alias: "",
+        phone: "",
+        email: "",
+        specialty: ""
       },
       evts: [],
       isEmployer: false,

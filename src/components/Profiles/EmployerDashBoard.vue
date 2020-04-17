@@ -96,9 +96,11 @@ export default {
     db.collection("Contacts")
     .doc(firebase.auth().currentUser.uid).collection("contacts")
       .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          console.log(doc.id, " => ", doc.data());
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          let contact = doc.data();
+          contact.id = doc.id;
+          this.contacts.push(contact);
         });
       });
   },
