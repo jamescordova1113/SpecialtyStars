@@ -267,13 +267,19 @@ export default {
   name: "SpecialistProfile",
   data() {
     return {
+      uid: null,
       email: "",
-      name: "",
       phone: "",
       contactInfo: "",
       alignments: ["start", "center", "end"],
       users: [],
       user_id: "",
+      evt: {
+        alias: null,
+        phone: null,
+        email: null,
+        specialty: null
+      },
       evts: [],
       isEmployer: false,
       counter: 0,
@@ -364,11 +370,10 @@ export default {
     //     });
     // },
     saveContact() {
-      const contactsRef = db.collection("Contacts");
-      const pushId = contactsRef.doc().id;
+     
       db.collection("Contacts")
-        .doc(this.user_id)
-        .collection(pushId)
+        .doc(firebase.auth().currentUser.uid)
+        .collection("contacts")
         .add({
           alias: this.evt.alias,
           specialty: this.evt.specialty,
@@ -377,6 +382,7 @@ export default {
         });
     },
   },
+
   computed: {
     user() {
       return this.$store.state.user;
@@ -392,16 +398,6 @@ export default {
     },
   },
   beforeCreate() {
-    // fetch data from firestore
-    db.collection("users")
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          let user = doc.data();
-          user.id = doc.id;
-          this.users.push(user);
-        });
-      });
     db.collection("specialistProfile")
       .orderBy("createdAt", "desc")
       .get()
