@@ -173,18 +173,19 @@
 
                     <br />
                   </v-card-text>
-                  <v-btn
-                    class="mb-2"
-                    color="primary lighten-2"
-                    v-on:click="playPause()"
-                    >Play/Pause</v-btn
-                  >
+                
                   <center>
                     <video id="video" width="320px">
                       <source v-bind:src="`${evt.video}`" type="video/mp4" />
                       <source src="movie.ogg" type="video/ogg" />
                       Your browser does not support the video tag.
                     </video>
+                      <v-btn
+                    class="mb-2"
+                    color="primary lighten-2"
+                    v-on:click="playPause(evt)"
+                    >Play/Pause</v-btn
+                  >
                   </center>
                   <v-img class="white--text" v-bind:src="`${evt.image1}`">
                   </v-img>
@@ -212,6 +213,7 @@
                       </h2>
                       <p>Email: {{ evt.email }}</p>
                       <p>Phone: {{ evt.phone }}</p>
+                      <center>
                       <a
                         class="hidden-md-and-up"
                         v-bind:href="`${evt.whatsapp}`"
@@ -219,19 +221,20 @@
                         <v-img
                           src="@/assets/whatsapp.png"
                           aspect-ratio="1"
-                          class="grey lighten-2"
+                          class="mr-2 grey lighten-2"
                           max-width="50 "
                           max-height="50"
                         ></v-img
                       ></a>
                       <v-btn
-                        class="success lighten-2"
+                        class="mt-2 success lighten-2"
                         tile
                         dark
                         @click="saveContact(evt)"
                       >
                         Save Contact
                       </v-btn>
+                      </center>
                     </div>
                     <div
                       v-if="user.isWorker || !user.isLoggedIn"
@@ -358,17 +361,7 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    // sendMessage() {
-    //   db.collection("Messages")
-    //     .doc(this.users.id)
-    //     .set({
-    //       createdAt: new Date(),
-    //       name: this.name,
-    //       message: this.message,
-    //       contactInfo: this.contactInfo,
-    //       user_id: this.user_id
-    //     });
-    // },
+ 
     saveContact(myContact) {
       db.collection("Contacts")
         .doc(firebase.auth().currentUser.uid)

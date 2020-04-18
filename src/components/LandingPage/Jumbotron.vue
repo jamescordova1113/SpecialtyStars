@@ -12,13 +12,15 @@
         </h3>
       </v-col>
     </v-row>
+    <!-- Mobile landing page -->
+    <div class="mobileLanding">
     <v-row class="align-center">
       <v-col cols="xs-12 md-4">
         <div style="text-align:center" class="justify-center">
           <img
             class="ml-5 "
             src="https://firebasestorage.googleapis.com/v0/b/specialtystars.appspot.com/o/Jumbo%20icons%2Fhowto1.png?alt=media&token=f1c9dbec-9c96-4a6d-8433-9be993f70d94"
-            width="400"
+            width="320"
           />
         </div>
       </v-col>
@@ -27,7 +29,7 @@
           
           <button v-on:click="playPause()">Pause</button>
           <center>
-            <video id="video1" width="380" autoplay>
+            <video id="video1" width="320" autoplay>
               <source
                 src="https://firebasestorage.googleapis.com/v0/b/specialtystars.appspot.com/o/Videos%2FSpecialty%20Stars%20version%204-4-20.mp4?alt=media&token=79f13071-aa13-4ee6-9929-a1aebd802466"
                 type="video/mp4"
@@ -42,11 +44,12 @@
         <div style="text-align:center" class="justify-center">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/specialtystars.appspot.com/o/Jumbo%20icons%2Fhowto2.png?alt=media&token=67bd0231-0d7d-4b10-a399-f052cb13204b"
-            width="400"
+            width="320"
           />
         </div>
       </v-col>
     </v-row>
+    </div>
     <v-row class="mt-10" justify="center" align="center" no-gutters>
       <v-col cols="xs-12">
         <div style="text-align:center" class="justify-center">
@@ -79,6 +82,15 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: 'Specialty Stais Main Page',
+    titleTemplate: 'Sign up for specialty stars and start earning today find work and find workers.',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
+
   name: "App",
 
   methods: {

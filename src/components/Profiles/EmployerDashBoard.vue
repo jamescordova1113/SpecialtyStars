@@ -23,6 +23,14 @@
             </v-btn>
           </router-link>
           <v-spacer />
+          </router-link>
+          <v-spacer />
+          <router-link to="/Profiles/SpecialistProfiles">
+            <v-btn text small>
+              Find a Worker
+            </v-btn>
+          </router-link>
+          <v-spacer />
           <router-link to="../help">
             <v-btn text small>
               Help
@@ -47,22 +55,15 @@
             <v-col>
               <div v-for="contact in contacts" :key="contact.id">
                 <v-card class="ml-3">
-                  <span>
-                    <p class="ml-2 pt-2">Name: {{ contact.alias }}</p>
-                  </span>
-                  <v-spacer />
-                  <span>
+                  
+                    <p class="ml-2 pt-2">Name: <span class="contactName">{{ contact.alias }}</span></p>
+                  
                     <p class="ml-2">Email: {{ contact.email }}</p>
-                  </span>
-                  <v-spacer />
-                  <span>
+                  
                     <p class="ml-2">Phone: {{ contact.phone }}</p>
-                  </span>
-                  <v-spacer />
-                  <span>
+                  
                     <p class="ml-2 pb-2">Specialty: {{ contact.specialty }}</p>
-                  </span>
-                  <v-spacer />
+                  
                 </v-card>
               </div>
             </v-col>
@@ -78,6 +79,14 @@ import db from "@/./firebase/init";
 import firebase from "firebase";
 
 export default {
+  metaInfo: {
+    title: 'Specialty Stais Employer Dashboard',
+    titleTemplate: 'Everything you need to find and hire a worker for home owners and contactors.',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+      },
   name: "EmployerDashBoard",
   data() {
     return {
@@ -106,3 +115,10 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+.contactName {
+  font-size: 1.4rem;
+}
+</style>
