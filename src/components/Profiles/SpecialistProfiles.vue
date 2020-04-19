@@ -175,7 +175,7 @@
                   </v-card-text>
                 
                   <center>
-                    <video id="video" width="320px">
+                    <video v-bind:id="`${evt.id}`" width="320px">
                       <source v-bind:src="`${evt.video}`" type="video/mp4" />
                       <source src="movie.ogg" type="video/ogg" />
                       Your browser does not support the video tag.
@@ -183,7 +183,7 @@
                       <v-btn
                     class="mb-2"
                     color="primary lighten-2"
-                    v-on:click="playPause(evt)"
+                    v-on:click="playPause(evt.id)"
                     >Play/Pause</v-btn
                   >
                   </center>
@@ -353,8 +353,9 @@ export default {
   },
 
   methods: {
-    playPause() {
-      var myVideo = document.getElementById("video");
+    playPause(eventID) {
+      console.log(eventID)
+      var myVideo = document.getElementById(eventID);
       if (myVideo.paused) myVideo.play();
       else myVideo.pause();
     },
