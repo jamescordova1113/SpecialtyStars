@@ -17,12 +17,10 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="PaymentInfo">
+          <router-link to="Dashboard/PaymentInfo">
             <v-btn text small>
               Payment Info
             </v-btn>
-          </router-link>
-          <v-spacer />
           </router-link>
           <v-spacer />
           <router-link to="/Profiles/SpecialistProfiles">

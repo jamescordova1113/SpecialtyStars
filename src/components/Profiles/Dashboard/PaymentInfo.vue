@@ -1,9 +1,31 @@
 <template>
-  <div class="paymentCard">
+<div>
+  <center>
+     <v-row>
+       <v-col cols="2">
+       </v-col>
+      <v-col class="text-center xs-8" fluid>
+        <h3 class=" text-center"> Membership is a monthly subscription  </h3>
+        <p class=" text-center"> Payments are securley processed using Stripe </p>
+        <p class="text-center"> The Employer Membership gives you  Direct contact to workers via contact if of whatsapp for just $10 a month for unlimited contacts. No refunds on current month unsubcribe per request see<a href="https://www.iubenda.com/terms-and-conditions/39705548">Terms and Conditions</a>for more information.</p>
+      </v-col>
+      <v-col cols="2">
+      </v-col>
+    </v-row>
+  <form action="/process-payment" method="POST">
+    <stripe-checkout
+        stripe-key="pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw"
+        product="product">
+        token={this.onToken}
+    </stripe-checkout>
+</form>
+  </center>
+</div>
+  <!-- <div class="paymentCard">
     <v-row>
       <v-col cols="xs-12">
         <h3 class=" text-center"> Membership is a monthly subscription  </h3>
-        <p class=" text-center"> Payments are securley processed through Stripe </p>
+        <p class=" text-center"> Payments are securley processed using Stripe </p>
       </v-col>
     </v-row>
     <v-row>
@@ -48,7 +70,7 @@
   
       </v-col>
       </v-row>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -56,6 +78,12 @@ import firebase from 'firebase'
 export default {
     data() {
         return {
+          product: {
+    name: 'Employer unlimited contacts',
+    description: 'Specialty Stars Subscription',
+    amount: 1000,
+    subscription: si_H7bCWOejHSRseu
+},
           isPaidEmployer: true,
           Users: {
                         user_id: null,
@@ -66,7 +94,8 @@ export default {
             cardExpiryElement: null,
             cardCVCElement: null,
             stripeValidationError: "",
-            amount:10
+            amount:10,
+          
         };
     },
     firestore() {
@@ -74,6 +103,7 @@ export default {
       Users: db.collection("users").orderBy("createdAt")
     };
   },
+  
     mounted() {
         this.stripe = Stripe("pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw");
         this.createAndMountFormElements();
@@ -101,7 +131,7 @@ export default {
                 } else {
                     var stripeObject = {
                         amount: this.amount,
-                        source: result.token
+                        source: result.token,
                     };
                     this.saveDataToFireStore(stripeObject);
                 }
@@ -121,7 +151,7 @@ export default {
                             .delete();
                             return;
                         }
-                        if (charge.status && charge.status == "succeeded") {
+                        if (charge.status && charge.status == "Payment succeeded") {
                             alert(charge.status);
                         }
             })
@@ -132,7 +162,7 @@ export default {
 </script>
 
 <style scoped>
-
+ 
 body {
   display: grid;
   place-items: center;
