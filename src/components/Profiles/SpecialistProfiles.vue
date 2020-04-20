@@ -173,20 +173,29 @@
 
                     <br />
                   </v-card-text>
-                
-                  <center>
-                    <video v-bind:id="`${evt.id}`" width="320px">
-                      <source v-bind:src="`${evt.video}`" type="video/mp4" />
-                      <source src="movie.ogg" type="video/ogg" />
-                      Your browser does not support the video tag.
-                    </video>
+                  <div v-if="evt.video != null">
+                    <center>
+                      <video v-bind:id="`${evt.id}`" width="320px">
+                        <source v-bind:src="`${evt.video}`" type="video/mp4" />
+                        <source src="movie.ogg" type="video/ogg" />
+                        Your browser does not support the video tag.
+                      </video>
                       <v-btn
-                    class="mb-2"
-                    color="primary lighten-2"
-                    v-on:click="playPause(evt.id)"
-                    >Play/Pause</v-btn
-                  >
-                  </center>
+                        class="mb-2"
+                        color="primary lighten-2"
+                        v-on:click="play(evt.id)"
+                        >Play</v-btn
+                      >
+                      <v-btn
+                        class="mb-2"
+                        color="primary lighten-2"
+                        v-on:click="pause(evt.id)"
+                        >Pause</v-btn
+                      >
+                    </center>
+                  </div>
+                </v-card>
+                <v-card>
                   <v-img class="white--text" v-bind:src="`${evt.image1}`">
                   </v-img>
                   <v-img class="white--text" v-bind:src="`${evt.image2}`">
@@ -214,26 +223,26 @@
                       <p>Email: {{ evt.email }}</p>
                       <p>Phone: {{ evt.phone }}</p>
                       <center>
-                      <a
-                        class="hidden-md-and-up"
-                        v-bind:href="`${evt.whatsapp}`"
-                      >
-                        <v-img
-                          src="@/assets/whatsapp.png"
-                          aspect-ratio="1"
-                          class="mr-2 grey lighten-2"
-                          max-width="50 "
-                          max-height="50"
-                        ></v-img
-                      ></a>
-                      <v-btn
-                        class="mt-2 success lighten-2"
-                        tile
-                        dark
-                        @click="saveContact(evt)"
-                      >
-                        Save Contact
-                      </v-btn>
+                        <a
+                          class="hidden-md-and-up"
+                          v-bind:href="`${evt.whatsapp}`"
+                        >
+                          <v-img
+                            src="@/assets/whatsapp.png"
+                            aspect-ratio="1"
+                            class="mr-2 grey lighten-2"
+                            max-width="50 "
+                            max-height="50"
+                          ></v-img
+                        ></a>
+                        <v-btn
+                          class="mt-2 success lighten-2"
+                          tile
+                          dark
+                          @click="saveContact(evt)"
+                        >
+                          Save Contact
+                        </v-btn>
                       </center>
                     </div>
                     <div
@@ -281,7 +290,7 @@ export default {
         alias: "",
         phone: "",
         email: "",
-        specialty: ""
+        specialty: "",
       },
       evts: [],
       isEmployer: false,
@@ -353,16 +362,20 @@ export default {
   },
 
   methods: {
-    playPause(eventID) {
-      console.log(eventID)
+    play(eventID) {
+      console.log(eventID);
       var myVideo = document.getElementById(eventID);
-      if (myVideo.paused) myVideo.play();
-      else myVideo.pause();
+      myVideo.play();
+    },
+    pause(eventID) {
+      console.log(eventID);
+      var myVideo = document.getElementById(eventID);
+      myVideo.pause();
     },
     reset() {
       this.$refs.form.reset();
     },
- 
+
     saveContact(myContact) {
       db.collection("Contacts")
         .doc(firebase.auth().currentUser.uid)

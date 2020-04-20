@@ -2,7 +2,6 @@
 
 const functions = require('firebase-functions');
 const stripe = require('stripe')('sk_test_iacpLjiiby0UAWEkRmfdtzkP00i7lHeKwN')
-var stripe = require('stripe')('sk_test_iacpLjiiby0UAWEkRmfdtzkP00i7lHeKwN');
 
 // exports.createStripeCharge = functions.firestore
 //     .document('charges/{pushId}')
