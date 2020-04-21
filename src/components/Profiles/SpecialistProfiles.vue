@@ -276,6 +276,14 @@ import { mapGetters } from "vuex";
 // import mixin from '../mixins'
 
 export default {
+   metaInfo: {
+    title: 'Check out Specialist Profiles find work and get jobs on SpecialtyStars.com.',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "SpecialistProfile",
   data() {
     return {

@@ -41,6 +41,14 @@ import db from "@/firebase/init";
 import NewMessGeneral from "@/components/Forum/NewMessGeneral";
 import moment from "moment";
 export default {
+  metaInfo: {
+    title: 'Specialty Stairs Genreal Forum talking about working with SpecialtyStars.com',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "GeneralForum",
   components: {
     NewMessGeneral

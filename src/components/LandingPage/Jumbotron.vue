@@ -83,8 +83,8 @@
 <script>
 export default {
   metaInfo: {
-    title: 'Specialty Stais Main Page',
-    titleTemplate: 'Sign up for specialty stars and start earning today find work and find workers.',
+    title: 'Specialty Stairs Main Page Sign up free and start working tomorrow!',
+    titleTemplate: 'Specialty Stars',
      htmlAttrs: {
         lang: 'en',
         amp: true

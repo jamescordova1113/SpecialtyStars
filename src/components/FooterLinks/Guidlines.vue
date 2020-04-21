@@ -33,6 +33,14 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: 'Our Guildlines for using Specialty Stars!',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "Guidlines"
 };
 </script>

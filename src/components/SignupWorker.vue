@@ -80,6 +80,14 @@ import slugify from "slugify";
 import firebase from "firebase";
 
 export default {
+  metaInfo: {
+    title: 'Need Work Sign up now at Specialty Stars and start working tomorrow!',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "Signup",
   data() {
     return {

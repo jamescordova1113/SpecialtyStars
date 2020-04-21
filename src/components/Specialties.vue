@@ -84,6 +84,14 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: 'Specialty Stairs What Specialty do you have, What Specialty are you looking to hire?',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "Specialties"
 };
 </script>

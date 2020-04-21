@@ -55,6 +55,14 @@
 import db from "@/firebase/init";
 import firebase from "firebase";
 export default {
+  metaInfo: {
+    title: 'Create an Employer Profile work with SpecialtyStars.com to hire your next worker.',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "CreateWorkerProfile",
   data() {
     return {

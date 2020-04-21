@@ -47,6 +47,14 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: 'Specailty Stars contact page contact us today',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "ContactForm",
   computed: {
     config() {

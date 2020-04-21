@@ -79,6 +79,14 @@
 import db from "@/./firebase/init";
 
 export default {
+  metaInfo: {
+    title: 'Need Workers sign up today at Specialty Stars.',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "NeedWorkers",
   data() {
     return {

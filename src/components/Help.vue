@@ -54,6 +54,14 @@ workers and employers by giving employers a chance to screen workers first.
 
 <script>
 export default {
+  metaInfo: {
+    title: 'Specialty Stairs Help page for workers and employers',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
 }
 </script>
 

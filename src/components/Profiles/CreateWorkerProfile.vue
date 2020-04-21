@@ -220,6 +220,14 @@ import db from "@/firebase/init";
 import firebase from "firebase";
 import { VueEditor } from "vue2-editor";
 export default {
+  metaInfo: {
+    title: 'Create a worker profile on SpecialtyStars.com to land your next job',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "CreateWorkerProfile",
   data() {
     return {

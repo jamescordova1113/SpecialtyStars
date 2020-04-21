@@ -6,5 +6,13 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: 'Advertise on Specialty Stars!',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
 }
 </script>

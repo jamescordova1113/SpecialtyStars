@@ -78,8 +78,8 @@ import firebase from "firebase";
 
 export default {
   metaInfo: {
-    title: 'Specialty Stais Employer Dashboard',
-    titleTemplate: 'Everything you need to find and hire a worker for home owners and contactors.',
+    title: 'Specialty Stairs Employer Dashboard. Everything you need to find and hire a worker for home owners and contactors.',
+    titleTemplate: 'Specialty Stars',
      htmlAttrs: {
         lang: 'en',
         amp: true

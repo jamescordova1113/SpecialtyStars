@@ -87,6 +87,14 @@
 import firebase from "firebase";
 import db from "@/firebase/init";
 export default {
+  metaInfo: {
+    title: 'Specialty Stairs Log in for employers and workers. Find Work or find a worker today.',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "Login",
   data() {
     return {

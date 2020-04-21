@@ -54,7 +54,15 @@
 </template>
 
 <script>
-export default {
+export default { 
+  metaInfo: {
+    title: 'Everything you need to get work on SpecialtyStars.com.',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "WorkerDashBoard"
 };
 </script>

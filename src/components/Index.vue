@@ -1,9 +1,7 @@
 <template>
   <div class="home">
     <Jumbotron msg="Welcome to Your Vue.js App" />
-    <!-- <Whatis />
-    <HowImg />
-    <HowText /> -->
+    
   </div>
 </template>
 
@@ -11,17 +9,20 @@
 // @ is an alias to /src
 import firebase from "firebase";
 import Jumbotron from "@/components/LandingPage/Jumbotron.vue";
-// import Whatis from "@/components/LandingPage/Whatis.vue";
-// import HowImg from "@/components/LandingPage/HowImg.vue";
-// import HowText from "@/components/LandingPage/HowText.vue";
 
 export default {
+  metaInfo: {
+    title: 'Specialty Stairs Main Page Sign up free and start working tomorrow!',
+    titleTemplate: 'Specialty Stars',
+     htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
+  },
   name: "home",
   components: {
     Jumbotron
-    // Whatis,
-    // HowImg,
-    // HowText
+  
   },
   beforeCreate() {
     firebase
