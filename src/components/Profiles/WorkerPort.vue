@@ -14,14 +14,7 @@
           </center>
         </div>
                      
-                        <div
-              class="form-group d-flex"
-              v-for="(image, index) in port.images" :key="users.id"
-            >
-              <div class="img-wrapp">
-                <img :src="image" alt="" width="80px" />
-                      </div>
-                        </div>
+                  
 </v-container> 
 </template>
 
