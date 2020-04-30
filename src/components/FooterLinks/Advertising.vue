@@ -1,7 +1,30 @@
 <template>
-  <h1> 
-    Advertising Page
-  </h1>
+<v-container>
+  <div class="text-center mt-10">
+  <h2><span class="helpTitle grey--text text--darken-3 text-center">
+            Advertising
+          </span></h2>
+          <p> Thinking about advertising with Specialty Stars.com?  Our users are a culturally
+Diverse group of hard-working people who log in an average of two times a day. Men and
+Women of all ages who perform the back breaking jobs of the South Florida community. You
+Can find plumbers, tile setters, landscapers, painters, car detailers and much more on our app!
+If you would like to find out more about advertising with us<router-link to="../Contact">click here. </router-link></p>
+</div>
+  <div>
+
+  <v-card class="elementsCard mt-10">
+    <h3> Essiential Elements </h3>
+    <ul>
+      <li>Statistics about your site </li>
+      <li>Info about your audience </li>
+      <li>Description of the advertising options </li>
+      <li>List of current and past sponsors </li>
+      <li>Pricing </li>
+      <li>Multiple in-app links to advertising page</li>
+    </ul>
+  </v-card>
+  </div>
+  </v-container>
 </template>
 
 <script>
@@ -16,3 +39,11 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.elementsCard {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 3px;
+}
+</style>
