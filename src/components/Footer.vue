@@ -75,43 +75,37 @@
                 <h2 class="hidden-lg-and-up">Legal</h2>
                 <h1 class="hidden-md-and-down">Legal</h1>
               </h2>
-     
-           <a
-                  text
-                  small
-                  href="https://www.iubenda.com/terms-and-conditions/39705548"
-                  class="iubenda-white iubenda-embed"
-                  title="Terms and Conditions "
-                  ><span> TERMS AND CONDITIONS</span>
-                  
-                </a>
-              
+
+              <a
+                text
+                small
+                href="https://www.iubenda.com/terms-and-conditions/39705548"
+                class="iubenda-white iubenda-embed"
+                title="Terms and Conditions "
+                ><span> TERMS AND CONDITIONS</span>
+              </a>
+
               <v-spacer />
 
-              
-                <a
-                  text
-                  small
-                  href="https://www.iubenda.com/privacy-policy/39705548"
-                  class="iubenda-white no-brand iubenda-embed"
-                  title="Privacy Policy"
-                  ><span>PRIVACY POLICY</span>
-                </a>
-              
+              <a
+                text
+                small
+                href="https://www.iubenda.com/privacy-policy/39705548"
+                class="iubenda-white no-brand iubenda-embed"
+                title="Privacy Policy"
+                ><span>PRIVACY POLICY</span>
+              </a>
+
               <v-spacer />
 
-              
-                
-                 <a 
-                  text
-                  small
-                  href="https://www.iubenda.com/privacy-policy/39705548/cookie-policy"
-                  class="iubenda-white no-brand iubenda-embed"
-                  title="Cookie Policy" 
-                  ><span >COOKIE POLICY</span
-                  >
-                </a>
-              
+              <a
+                text
+                small
+                href="https://www.iubenda.com/privacy-policy/39705548/cookie-policy"
+                class="iubenda-white no-brand iubenda-embed"
+                title="Cookie Policy"
+                ><span>COOKIE POLICY</span>
+              </a>
             </v-col>
           </v-row>
         </v-flex>
@@ -128,11 +122,14 @@ export default {
   name: "S3Footer",
   data: () => ({
     icons: [
-      { name: "fab fa-facebook", url: "https://www.facebook.com" },
-      { name: "fab fa-twitter", url: "https://www.twitter.com" },
-      { name: "fab fa-tumblr", url: "https://tumblr.com" },
-      { name: "fab fa-linkedin", url: "https://www.linkedin.com" },
-      { name: "fab fa-instagram", url: "https://www.instagram.com" },
+      {
+        name: "fab fa-facebook",
+        url: "https://www.facebook.com/specialtystars",
+      },
+      // { name: "fab fa-twitter", url: "https://www.twitter.com" },
+      // { name: "fab fa-tumblr", url: "https://tumblr.com" },
+      // { name: "fab fa-linkedin", url: "https://www.linkedin.com" },
+      // { name: "fab fa-instagram", url: "https://www.instagram.com" },
     ],
   }),
   methods: {

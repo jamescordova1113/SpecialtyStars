@@ -53,15 +53,15 @@
             <v-col>
               <div v-for="contact in contacts" :key="contact.id">
                 <v-card class="ml-3">
-                  
-                    <p class="ml-2 pt-2">Name: <span class="contactName">{{ contact.alias }}</span></p>
-                  
-                    <p class="ml-2">Email: {{ contact.email }}</p>
-                  
-                    <p class="ml-2">Phone: {{ contact.phone }}</p>
-                  
-                    <p class="ml-2 pb-2">Specialty: {{ contact.specialty }}</p>
-                  
+                  <p class="ml-2 pt-2">
+                    Name: <span class="contactName">{{ contact.alias }}</span>
+                  </p>
+
+                  <p class="ml-2">Email: {{ contact.email }}</p>
+
+                  <p class="ml-2">Phone: {{ contact.phone }}</p>
+
+                  <p class="ml-2 pb-2">Specialty: {{ contact.specialty }}</p>
                 </v-card>
               </div>
             </v-col>
@@ -78,13 +78,14 @@ import firebase from "firebase";
 
 export default {
   metaInfo: {
-    title: 'Specialty Stairs Employer Dashboard. Everything you need to find and hire a worker for home owners and contactors.',
-    titleTemplate: 'Specialty Stars',
-     htmlAttrs: {
-        lang: 'en',
-        amp: true
-      }
-      },
+    title:
+      "Specialty Stairs Employer Dashboard. Everything you need to find and hire a worker for home owners and contactors.",
+    titleTemplate: "Specialty Stars",
+    htmlAttrs: {
+      lang: "en",
+      amp: true,
+    },
+  },
   name: "EmployerDashBoard",
   data() {
     return {
@@ -101,7 +102,8 @@ export default {
     var user_id = firebase.auth().currentUser.uid;
 
     db.collection("Contacts")
-    .doc(firebase.auth().currentUser.uid).collection("contacts")
+      .doc(firebase.auth().currentUser.uid)
+      .collection("contacts")
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
@@ -113,7 +115,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .contactName {

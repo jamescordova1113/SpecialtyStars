@@ -1,26 +1,34 @@
 <template>
-<div>
-  <center>
-     <v-row>
-       <v-col cols="2">
-       </v-col>
-      <v-col class="text-center xs-8" fluid>
-        <h3 class=" text-center"> Membership is a monthly subscription  </h3>
-        <p class=" text-center"> Payments are securley processed using Stripe </p>
-        <p class="text-center"> The Employer Membership gives you  Direct contact to workers via contact if of whatsapp for just $10 a month for unlimited contacts. No refunds on current month unsubcribe per request see<a href="https://www.iubenda.com/terms-and-conditions/39705548">Terms and Conditions</a>for more information.</p>
-      </v-col>
-      <v-col cols="2">
-      </v-col>
-    </v-row>
-  <form action="/process-payment" method="POST">
-    <stripe-checkout
-        stripe-key="pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw"
-        product="product">
-        token={this.onToken}
-    </stripe-checkout>
-</form>
-  </center>
-</div>
+  <div>
+    <center>
+      <v-row>
+        <v-col cols="2"> </v-col>
+        <v-col class="text-center xs-8" fluid>
+          <h3 class=" text-center">Membership is a monthly subscription</h3>
+          <p class=" text-center">
+            Payments are securley processed using Stripe
+          </p>
+          <p class="text-center">
+            The Employer Membership gives you Direct contact to workers via
+            contact if of whatsapp for just $10 a month for unlimited contacts.
+            No refunds on current month unsubcribe per request see<a
+              href="https://www.iubenda.com/terms-and-conditions/39705548"
+              >Terms and Conditions</a
+            >for more information.
+          </p>
+        </v-col>
+        <v-col cols="2"> </v-col>
+      </v-row>
+      <form action="/process-payment" method="POST">
+        <stripe-checkout
+          stripe-key="pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw"
+          product="product"
+        >
+          token={this.onToken}
+        </stripe-checkout>
+      </form>
+    </center>
+  </div>
   <!-- <div class="paymentCard">
     <v-row>
       <v-col cols="xs-12">
@@ -74,95 +82,92 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from "firebase";
 export default {
-    data() {
-        return {
-          product: {
-    name: 'Employer unlimited contacts',
-    description: 'Specialty Stars Subscription',
-    amount: 1000,
-    subscription: si_H7bCWOejHSRseu
-},
-          isPaidEmployer: true,
-          Users: {
-                        user_id: null,
-          },
-        
-            stripe: null,
-            cardNumberElement: null,
-            cardExpiryElement: null,
-            cardCVCElement: null,
-            stripeValidationError: "",
-            amount:10,
-          
-        };
-    },
-    firestore() {
+  data() {
     return {
-      Users: db.collection("users").orderBy("createdAt")
+      product: {
+        name: "Employer unlimited contacts",
+        description: "Specialty Stars Subscription",
+        amount: 1000,
+        subscription: si_H7bCWOejHSRseu,
+      },
+      isPaidEmployer: true,
+      Users: {
+        user_id: null,
+      },
+
+      stripe: null,
+      cardNumberElement: null,
+      cardExpiryElement: null,
+      cardCVCElement: null,
+      stripeValidationError: "",
+      amount: 10,
     };
   },
-  
-    mounted() {
-        this.stripe = Stripe("pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw");
-        this.createAndMountFormElements();
+  firestore() {
+    return {
+      Users: db.collection("users").orderBy("createdAt"),
+    };
+  },
+
+  mounted() {
+    this.stripe = Stripe("pk_test_En90iQenaRlLeWqZQhKA5Urs00CcluZKIw");
+    this.createAndMountFormElements();
+  },
+  methods: {
+    createAndMountFormElements() {
+      var elements = this.stripe.elements();
+      this.cardNumberElement = elements.create("cardNumber");
+      this.cardNumberElement.mount("#card-number-element");
+      this.cardExpiryElement = elements.create("cardExpiry");
+      this.cardExpiryElement.mount("#card-expiry-element");
+      this.cardCvcElement = elements.create("cardCvc");
+      this.cardCvcElement.mount("#card-cvc-element");
+      this.cardNumberElement.on("change", this.setValidationError);
+      this.cardExpiryElement.on("change", this.setValidationError);
+      this.cardCvcElement.on("change", this.setValidationError);
     },
-    methods: {
-        createAndMountFormElements() {
-            var elements = this.stripe.elements();
-            this.cardNumberElement = elements.create("cardNumber");
-            this.cardNumberElement.mount("#card-number-element");
-            this.cardExpiryElement = elements.create("cardExpiry");
-            this.cardExpiryElement.mount("#card-expiry-element");
-            this.cardCvcElement = elements.create("cardCvc");
-            this.cardCvcElement.mount("#card-cvc-element");
-            this.cardNumberElement.on("change", this.setValidationError);
-            this.cardExpiryElement.on("change", this.setValidationError);
-            this.cardCvcElement.on("change", this.setValidationError);
-        },
-        setValidationError(event) {
-            this.stripeValidationError = event.error ? event.error.message : "";
-        },
-        placeOrderButtonPressed() {
-            this.stripe.createToken(this.cardNumberElement).then(result => {
-                if (result.error) {
-                    this.stripeValidationError = result.error.message;
-                } else {
-                    var stripeObject = {
-                        amount: this.amount,
-                        source: result.token,
-                    };
-                    this.saveDataToFireStore(stripeObject);
-                }
-            });
-        },
-        saveDataToFireStore(stripeObject) {
-            const db = firebase.firestore()
-            const chargesRef = db.collection("charges")
-            const pushId = chargesRef.doc().id
-            db.collection("charges").doc(pushId).set(stripeObject)
-            chargesRef.doc(pushId).onSnapshot(snapShot => {
-                 const charge = snapShot.data();
-                        if (charge.error) {
-                            alert(charge.error);
-                            chargesRef
-                            .doc(pushId)
-                            .delete();
-                            return;
-                        }
-                        if (charge.status && charge.status == "Payment succeeded") {
-                            alert(charge.status);
-                        }
-            })
+    setValidationError(event) {
+      this.stripeValidationError = event.error ? event.error.message : "";
+    },
+    placeOrderButtonPressed() {
+      this.stripe.createToken(this.cardNumberElement).then((result) => {
+        if (result.error) {
+          this.stripeValidationError = result.error.message;
+        } else {
+          var stripeObject = {
+            amount: this.amount,
+            source: result.token,
+          };
+          this.saveDataToFireStore(stripeObject);
         }
-    }
-   
+      });
+    },
+    saveDataToFireStore(stripeObject) {
+      const db = firebase.firestore();
+      const chargesRef = db.collection("charges");
+      const pushId = chargesRef.doc().id;
+      db.collection("charges")
+        .doc(pushId)
+        .set(stripeObject);
+      chargesRef.doc(pushId).onSnapshot((snapShot) => {
+        const charge = snapShot.data();
+        if (charge.error) {
+          alert(charge.error);
+          chargesRef.doc(pushId).delete();
+          return;
+        }
+        if (charge.status && charge.status == "Payment succeeded") {
+          alert(charge.status);
+        }
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
- 
 body {
   display: grid;
   place-items: center;
@@ -173,9 +178,6 @@ body {
   margin: 20px auto;
   border: 1px solid #ececec;
   display: flex;
- 
-
- 
 }
 .payment-form h5 {
   margin: 0;

@@ -174,32 +174,44 @@
           <div class="form-group d-flex">
             <div class="p-1">
               <div class="img-wrapp">
-                <img :src="users.image1" width="100px" class="mb-5"/>
+                <img :src="users.image1" width="100px" class="mb-5" />
                 <v-btn icon @click="deleteImage" dark>
                   <v-icon>X</v-icon>
                 </v-btn>
-                <input type="file" @change="uploadImage2" class="form-control" />
-          
-                <img :src="users.image2" width="100px" class="mb-5"/>
+                <input
+                  type="file"
+                  @change="uploadImage2"
+                  class="form-control"
+                />
+
+                <img :src="users.image2" width="100px" class="mb-5" />
                 <v-btn icon @click="deleteImage" dark>
                   <v-icon>X</v-icon>
                 </v-btn>
-              
-           <input type="file" @change="uploadImage3" class="form-control" />
-          
-                <img :src="users.image3" width="100px" class="mb-5"/>
+
+                <input
+                  type="file"
+                  @change="uploadImage3"
+                  class="form-control"
+                />
+
+                <img :src="users.image3" width="100px" class="mb-5" />
                 <v-btn icon @click="deleteImage" dark>
                   <v-icon>X</v-icon>
                 </v-btn>
-            
-           <input type="file" @change="uploadImage4" class="form-control" />
-          
-                <img :src="users.image4" width="100px" class="mb-5"/>
+
+                <input
+                  type="file"
+                  @change="uploadImage4"
+                  class="form-control"
+                />
+
+                <img :src="users.image4" width="100px" class="mb-5" />
                 <v-btn icon @click="deleteImage" dark>
                   <v-icon>X</v-icon>
                 </v-btn>
               </div>
-          </div>
+            </div>
           </div>
           <v-flex class="text-center">
             <v-btn color="success" tile @click="update">Post Profile</v-btn>
@@ -221,12 +233,13 @@ import firebase from "firebase";
 import { VueEditor } from "vue2-editor";
 export default {
   metaInfo: {
-    title: 'Create a worker profile on SpecialtyStars.com to land your next job',
-    titleTemplate: 'Specialty Stars',
-     htmlAttrs: {
-        lang: 'en',
-        amp: true
-      }
+    title:
+      "Create a worker profile on SpecialtyStars.com to land your next job",
+    titleTemplate: "Specialty Stars",
+    htmlAttrs: {
+      lang: "en",
+      amp: true,
+    },
   },
   name: "CreateWorkerProfile",
   data() {
@@ -267,7 +280,7 @@ export default {
         image5: null,
         image6: null,
         images: [],
-        video: ""
+        video: "",
       },
       image: null,
       images: [],
@@ -278,7 +291,7 @@ export default {
         "Apprentice",
         "Journeyman",
         "Master",
-        "Supervisor"
+        "Supervisor",
       ],
       items: [
         "Agricultural",
@@ -326,7 +339,7 @@ export default {
         "Stucco & Plastering",
         "Tile & Marble",
         "Tree Work",
-        "Warehouse"
+        "Warehouse",
       ],
       imageData: null,
       uploadValue: 0,
@@ -334,40 +347,42 @@ export default {
       contact: ["Message", "Email", "Phone Call", "Text"],
       contacts: ["Homeowners", "Employers", "Both"],
       titleRules: [
-        v => !!v || "Title is required",
-        v => (v && v.length <= 10) || "Title must be less than 50 characters"
+        (v) => !!v || "Title is required",
+        (v) => (v && v.length <= 10) || "Title must be less than 50 characters",
       ],
       descRules: [
-        v => !!v || "Description is required",
-        v =>
+        (v) => !!v || "Description is required",
+        (v) =>
           (v && v.length <= 150) ||
-          "Description must be less than 150 characters"
+          "Description must be less than 150 characters",
       ],
       dateRules: [
-        v => !!v || "Event Date is required",
-        v =>
-          (v && v.length <= 50) || "Event Date must be less than 50 characters"
+        (v) => !!v || "Event Date is required",
+        (v) =>
+          (v && v.length <= 50) || "Event Date must be less than 50 characters",
       ],
       locationRules: [
-        v => !!v || "Location is required",
-        v => (v && v.length <= 50) || "Location must be less than 50 characters"
+        (v) => !!v || "Location is required",
+        (v) =>
+          (v && v.length <= 50) || "Location must be less than 50 characters",
       ],
       buttonRules: [
-        v => !!v || "Button Text is required",
-        v =>
-          (v && v.length <= 15) || "Button Text must be less than 15 characters"
+        (v) => !!v || "Button Text is required",
+        (v) =>
+          (v && v.length <= 15) ||
+          "Button Text must be less than 15 characters",
       ],
       emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
-      specialistProfile: null
+      specialistProfile: null,
     };
   },
 
   firestore() {
     return {
-      Profile: db.collection("specialistProfile").orderBy("createdAt")
+      Profile: db.collection("specialistProfile").orderBy("createdAt"),
     };
   },
   methods: {
@@ -409,20 +424,20 @@ export default {
 
         uploadTask.on(
           "state_changed",
-          snapshot => {},
-          error => {
+          (snapshot) => {},
+          (error) => {
             // Handle unsuccessful uploads
           },
           () => {
             // Handle successful uploads on complete
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
 
-            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+            uploadTask.snapshot.ref.getDownloadURL().then((URL) => {
               if (URL)
                 db.collection("specialistProfile")
                   .doc(firebase.auth().currentUser.uid)
                   .update({
-                    image1: URL
+                    image1: URL,
                   });
 
               //   this.images.push(downloadURL);
@@ -441,16 +456,15 @@ export default {
         let uploadTask = storageRef.put(file);
         uploadTask.on(
           "state_changed",
-          snapshot => {},
-          error => {         
-          },
+          (snapshot) => {},
+          (error) => {},
           () => {
-            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+            uploadTask.snapshot.ref.getDownloadURL().then((URL) => {
               if (URL)
                 db.collection("specialistProfile")
                   .doc(firebase.auth().currentUser.uid)
                   .update({
-                    image2: URL
+                    image2: URL,
                   });
             });
           }
@@ -466,16 +480,15 @@ export default {
         let uploadTask = storageRef.put(file);
         uploadTask.on(
           "state_changed",
-          snapshot => {},
-          error => {         
-          },
+          (snapshot) => {},
+          (error) => {},
           () => {
-            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+            uploadTask.snapshot.ref.getDownloadURL().then((URL) => {
               if (URL)
                 db.collection("specialistProfile")
                   .doc(firebase.auth().currentUser.uid)
                   .update({
-                    image3: URL
+                    image3: URL,
                   });
             });
           }
@@ -491,16 +504,15 @@ export default {
         let uploadTask = storageRef.put(file);
         uploadTask.on(
           "state_changed",
-          snapshot => {},
-          error => {         
-          },
+          (snapshot) => {},
+          (error) => {},
           () => {
-            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+            uploadTask.snapshot.ref.getDownloadURL().then((URL) => {
               if (URL)
                 db.collection("specialistProfile")
                   .doc(firebase.auth().currentUser.uid)
                   .update({
-                    image4: URL
+                    image4: URL,
                   });
             });
           }
@@ -520,20 +532,20 @@ export default {
 
         uploadTask.on(
           "state_changed",
-          snapshot => {},
-          error => {
+          (snapshot) => {},
+          (error) => {
             // Handle unsuccessful uploads
           },
           () => {
             // Handle successful uploads on complete
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
 
-            uploadTask.snapshot.ref.getDownloadURL().then(URL => {
+            uploadTask.snapshot.ref.getDownloadURL().then((URL) => {
               if (URL)
                 db.collection("specialistProfile")
                   .doc(firebase.auth().currentUser.uid)
                   .update({
-                    video: URL
+                    video: URL,
                   });
               //   this.images.push(downloadURL);
               // });
@@ -567,7 +579,7 @@ export default {
           user_id: this.users.user_id,
           isWorkerProfile: this.users.isWorkerProfile,
           email: this.users.email,
-          isWorker: this.users.isWorker
+          isWorker: this.users.isWorker,
         })
         .then(() => {
           if (this.image)
@@ -583,12 +595,12 @@ export default {
               .ref("Images/" + this.filename)
               .getDownloadURL();
         })
-        .then(URL => {
+        .then((URL) => {
           if (URL)
             db.collection("specialistProfile")
               .doc(firebase.auth().currentUser.uid)
               .update({
-                image: URL
+                image: URL,
               });
         })
         // .then(() => {
@@ -623,7 +635,7 @@ export default {
       // const ext = filename.slice(filename.lastIndexOf("."));
       // console.log('files', files[0]);
       // upload the file to firebase storage
-    }
+    },
   },
 
   created() {
@@ -631,13 +643,13 @@ export default {
     let ref = db
       .collection("specialistProfile")
       .where("user_id", "==", firebase.auth().currentUser.uid);
-    ref.get().then(snapshot => {
-      snapshot.forEach(doc => {
+    ref.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
         this.users = doc.data();
         this.users.id = doc.id;
       });
     });
-  }
+  },
 };
 </script>
 

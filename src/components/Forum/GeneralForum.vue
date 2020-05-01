@@ -42,47 +42,48 @@ import NewMessGeneral from "@/components/Forum/NewMessGeneral";
 import moment from "moment";
 export default {
   metaInfo: {
-    title: 'Specialty Stairs Genreal Forum talking about working with SpecialtyStars.com',
-    titleTemplate: 'Specialty Stars',
-     htmlAttrs: {
-        lang: 'en',
-        amp: true
-      }
+    title:
+      "Specialty Stairs Genreal Forum talking about working with SpecialtyStars.com",
+    titleTemplate: "Specialty Stars",
+    htmlAttrs: {
+      lang: "en",
+      amp: true,
+    },
   },
   name: "GeneralForum",
   components: {
-    NewMessGeneral
+    NewMessGeneral,
   },
   data() {
     return {
       messages: [],
       alias: null,
       users: {
-        alias: null
-      }
+        alias: null,
+      },
     };
   },
   computed: {
     user() {
       return this.$store.state.user;
-    }
+    },
   },
   created() {
     let ref = db.collection("genForum").orderBy("timestamp");
-    ref.onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(change => {
+    ref.onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
         if (change.type == "added") {
           let doc = change.doc;
           this.messages.push({
             id: doc.id,
             alias: doc.data().alias,
             content: doc.data().content,
-            timestamp: moment(doc.data().timestamp).format("lll")
+            timestamp: moment(doc.data().timestamp).format("lll"),
           });
         }
       });
     });
-  }
+  },
 };
 </script>
 

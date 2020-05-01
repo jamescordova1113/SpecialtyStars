@@ -32,15 +32,13 @@
             label="Message:"
             required
           ></v-text-field>
-          
-            <v-btn color="success" tile @click="send"
-              >Send</v-btn
-            >
 
-            <router-link :to="{ name: 'Index' }">
-              <v-btn color="error" tile class="mr-4">Cancel</v-btn>
-            </router-link>
-          
+          <v-btn color="success" tile @click="send">Send</v-btn>
+
+          <router-link :to="{ name: 'Index' }">
+            <v-btn color="error" tile class="mr-4">Cancel</v-btn>
+          </router-link>
+
           <!-- <p class="red--text text-center" v-if="feedback">{{ feedback }}</p> -->
         </v-form>
       </v-card-text>
@@ -62,19 +60,19 @@ export default {
       users: {
         alias: null,
         user_id: null,
-        isWorkerProfile: true
+        isWorkerProfile: true,
       },
       date: new Date().toISOString().substr(0, 10),
       emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
     };
   },
 
   firestore() {
     return {
-      Profile: db.collection("specialistProfile").orderBy("createdAt")
+      Profile: db.collection("specialistProfile").orderBy("createdAt"),
     };
   },
   methods: {
@@ -103,12 +101,12 @@ export default {
               .ref("Images/" + this.filename)
               .getDownloadURL();
         })
-        .then(URL => {
+        .then((URL) => {
           if (URL)
             db.collection("specialistProfile")
               .doc(firebase.auth().currentUser.uid)
               .update({
-                image: URL
+                image: URL,
               });
         })
         .then(() => {
@@ -135,7 +133,7 @@ export default {
       // const ext = filename.slice(filename.lastIndexOf("."));
       // console.log('files', files[0]);
       // upload the file to firebase storage
-    }
+    },
   },
 
   created() {
@@ -143,18 +141,17 @@ export default {
     let ref = db
       .collection("specialistProfile")
       .where("user_id", "==", firebase.auth().currentUser.uid);
-    ref.get().then(snapshot => {
-      snapshot.forEach(doc => {
+    ref.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
         this.users = doc.data();
         this.users.id = doc.id;
       });
     });
-  }
+  },
 };
 </script>
 
 <style scoped>
-
 .helpText {
   font-size: 1.2em;
 }

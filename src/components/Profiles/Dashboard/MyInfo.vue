@@ -8,7 +8,6 @@
     <v-card class="loginTitle">
       <v-card-text>
         <v-form ref="form" lazy-validation v-model="valid">
-          
           <v-text-field
             type="Address"
             v-model="users.address"
@@ -35,8 +34,7 @@
             label="Full Name:"
             required
           ></v-text-field>
-       
-         
+
           <v-flex class="xs12 sm6 mt-5 offset-sm1">
             <v-btn color="primary lighten-2" class="mr-4" @click="update"
               >Update Info</v-btn
@@ -61,8 +59,8 @@ export default {
   data() {
     return {
       valid: false,
-        phone: "",
-        email: "",
+      phone: "",
+      email: "",
       users: {
         alias: null,
         user_id: null,
@@ -70,65 +68,65 @@ export default {
         address: null,
         phone: null,
         license: null,
-        bizName: null
-        },
-     
+        bizName: null,
+      },
+
       date: new Date().toISOString().substr(0, 10),
       titleRules: [
-        v => !!v || "Title is required",
-        v => (v && v.length <= 10) || "Title must be less than 50 characters"
+        (v) => !!v || "Title is required",
+        (v) => (v && v.length <= 10) || "Title must be less than 50 characters",
       ],
       descRules: [
-        v => !!v || "Description is required",
-        v =>
+        (v) => !!v || "Description is required",
+        (v) =>
           (v && v.length <= 150) ||
-          "Description must be less than 150 characters"
+          "Description must be less than 150 characters",
       ],
       dateRules: [
-        v => !!v || "Event Date is required",
-        v =>
-          (v && v.length <= 50) || "Event Date must be less than 50 characters"
+        (v) => !!v || "Event Date is required",
+        (v) =>
+          (v && v.length <= 50) || "Event Date must be less than 50 characters",
       ],
       locationRules: [
-        v => !!v || "Location is required",
-        v => (v && v.length <= 50) || "Location must be less than 50 characters"
+        (v) => !!v || "Location is required",
+        (v) =>
+          (v && v.length <= 50) || "Location must be less than 50 characters",
       ],
       buttonRules: [
-        v => !!v || "Button Text is required",
-        v =>
-          (v && v.length <= 15) || "Button Text must be less than 15 characters"
+        (v) => !!v || "Button Text is required",
+        (v) =>
+          (v && v.length <= 15) ||
+          "Button Text must be less than 15 characters",
       ],
       emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
-      specialistProfile: null
+      specialistProfile: null,
     };
   },
 
   firestore() {
     return {
-      Profile: db.collection("users").orderBy("createdAt")
+      Profile: db.collection("users").orderBy("createdAt"),
     };
   },
   methods: {
     update() {
-      
       db.collection("users")
-      .doc(this.users.id)
+        .doc(this.users.id)
         .set({
-          
           alias: this.users.alias,
           phone: this.users.phone,
           address: this.users.address,
           license: this.users.license,
           bizName: this.users.bizName,
-          user_id: this.users.user_id
+          user_id: this.users.user_id,
         })
         .then(() => {
           if (this.imageUrl)
             return firebase
-            .firestore()
+              .firestore()
               .storage()
               .ref("Images/" + this.filename)
               .put(this.imageUrl);
@@ -136,15 +134,15 @@ export default {
         .then(() => {
           if (this.imageUrl)
             return firebase
-            .firestore()
+              .firestore()
               .storage()
               .ref("Images/" + this.filename)
               .getDownloadURL();
         })
-        .then(URL => {
+        .then((URL) => {
           if (URL)
             db.collection("Users").update({
-              imageUrl: URL
+              imageUrl: URL,
             });
         })
         .then(() => {
@@ -172,7 +170,7 @@ export default {
       // const ext = filename.slice(filename.lastIndexOf("."));
       // console.log('files', files[0]);
       // upload the file to firebase storage
-    }
+    },
   },
 
   created() {
@@ -182,14 +180,14 @@ export default {
       .where("user_id", "==", firebase.auth().currentUser.uid);
 
     // console.log("got Here");
-    ref.get().then(snapshot => {
-      snapshot.forEach(doc => {
+    ref.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
         // console.log('got a doc')
         this.users = doc.data();
         this.users.id = doc.id;
       });
     });
-  }
+  },
 };
 </script>
 

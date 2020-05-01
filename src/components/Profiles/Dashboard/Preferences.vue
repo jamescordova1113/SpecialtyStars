@@ -1,10 +1,9 @@
 <template>
-  <h1> 
+  <h1>
     Preferences
   </h1>
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>

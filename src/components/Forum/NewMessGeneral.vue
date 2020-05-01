@@ -40,14 +40,14 @@ export default {
       users: {
         alias: null,
         user_id: null,
-        email: null
-      }
+        email: null,
+      },
     };
   },
   computed: {
     user() {
       return this.$store.state.user;
-    }
+    },
   },
 
   methods: {
@@ -66,25 +66,25 @@ export default {
           alias: this.users.alias,
           timestamp: Date.now(),
           user_id: this.users.user_id,
-          email: this.users.email
+          email: this.users.email,
         });
         this.newMessage = null;
       } else {
         this.feedback = "You Must enter a message in order to post one.";
       }
-    }
+    },
   },
   created() {
     // console.log(firebase.auth().currentUser.uid);
     let ref = db
       .collection("users")
       .where("user_id", "==", firebase.auth().currentUser.uid);
-    ref.get().then(snapshot => {
-      snapshot.forEach(doc => {
+    ref.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
         this.users = doc.data();
         this.users.id = doc.id;
       });
     });
-  }
+  },
 };
 </script>

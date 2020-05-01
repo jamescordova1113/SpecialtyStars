@@ -1,25 +1,19 @@
 <template>
-<v-container>
-   <div style="text-align:center">
-          <button v-on:click="playPause()">Pause</button>
-          <center>
-            <video id="video1" height="350" autoplay>
-              <source
-               v-bind:src="`${port.video}`"
-                type="video/mp4"
-              />
-              <source src="movie.ogg" type="video/ogg" />
-              Your browser does not support the video tag.
-            </video>
-          </center>
-        </div>
-                     
-                  
-</v-container> 
+  <v-container>
+    <div style="text-align:center">
+      <button v-on:click="playPause()">Pause</button>
+      <center>
+        <video id="video1" height="350" autoplay>
+          <source v-bind:src="`${port.video}`" type="video/mp4" />
+          <source src="movie.ogg" type="video/ogg" />
+          Your browser does not support the video tag.
+        </video>
+      </center>
+    </div>
+  </v-container>
 </template>
 
 <script>
-
 import db from "@/firebase/init";
 import firebase from "firebase";
 
@@ -28,27 +22,27 @@ export default {
   data() {
     return {
       users: [],
-   
-    users: {
+
+      users: {
         alias: null,
         user_id: null,
         isWorkerProfile: true,
-        images: []
+        images: [],
       },
-  }
-},
+    };
+  },
 
- beforeCreate() {
+  beforeCreate() {
     // fetch data from firestore
     db.collection("specialistProfile")
       .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
           let user = doc.data();
           user.id = doc.id;
           this.users.push(user);
         });
       });
-  }
-}
+  },
+};
 </script>

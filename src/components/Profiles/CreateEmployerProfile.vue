@@ -56,12 +56,13 @@ import db from "@/firebase/init";
 import firebase from "firebase";
 export default {
   metaInfo: {
-    title: 'Create an Employer Profile work with SpecialtyStars.com to hire your next worker.',
-    titleTemplate: 'Specialty Stars',
-     htmlAttrs: {
-        lang: 'en',
-        amp: true
-      }
+    title:
+      "Create an Employer Profile work with SpecialtyStars.com to hire your next worker.",
+    titleTemplate: "Specialty Stars",
+    htmlAttrs: {
+      lang: "en",
+      amp: true,
+    },
   },
   name: "CreateWorkerProfile",
   data() {
@@ -76,45 +77,47 @@ export default {
         address: null,
         phone: null,
         license: null,
-        bizName: null
+        bizName: null,
       },
 
       date: new Date().toISOString().substr(0, 10),
       titleRules: [
-        v => !!v || "Title is required",
-        v => (v && v.length <= 10) || "Title must be less than 50 characters"
+        (v) => !!v || "Title is required",
+        (v) => (v && v.length <= 10) || "Title must be less than 50 characters",
       ],
       descRules: [
-        v => !!v || "Description is required",
-        v =>
+        (v) => !!v || "Description is required",
+        (v) =>
           (v && v.length <= 150) ||
-          "Description must be less than 150 characters"
+          "Description must be less than 150 characters",
       ],
       dateRules: [
-        v => !!v || "Event Date is required",
-        v =>
-          (v && v.length <= 50) || "Event Date must be less than 50 characters"
+        (v) => !!v || "Event Date is required",
+        (v) =>
+          (v && v.length <= 50) || "Event Date must be less than 50 characters",
       ],
       locationRules: [
-        v => !!v || "Location is required",
-        v => (v && v.length <= 50) || "Location must be less than 50 characters"
+        (v) => !!v || "Location is required",
+        (v) =>
+          (v && v.length <= 50) || "Location must be less than 50 characters",
       ],
       buttonRules: [
-        v => !!v || "Button Text is required",
-        v =>
-          (v && v.length <= 15) || "Button Text must be less than 15 characters"
+        (v) => !!v || "Button Text is required",
+        (v) =>
+          (v && v.length <= 15) ||
+          "Button Text must be less than 15 characters",
       ],
       emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
-      specialistProfile: null
+      specialistProfile: null,
     };
   },
 
   firestore() {
     return {
-      Profile: db.collection("users").orderBy("createdAt")
+      Profile: db.collection("users").orderBy("createdAt"),
     };
   },
   methods: {
@@ -128,7 +131,7 @@ export default {
           address: this.users.address,
           license: this.users.license,
           bizName: this.user.bizName,
-          user_id: this.users.user_id
+          user_id: this.users.user_id,
         })
         .then(() => {
           if (this.imageUrl)
@@ -146,10 +149,10 @@ export default {
               .ref("Images/" + this.filename)
               .getDownloadURL();
         })
-        .then(URL => {
+        .then((URL) => {
           if (URL)
             db.collection("Users").update({
-              imageUrl: URL
+              imageUrl: URL,
             });
         })
         .then(() => {
@@ -177,7 +180,7 @@ export default {
       // const ext = filename.slice(filename.lastIndexOf("."));
       // console.log('files', files[0]);
       // upload the file to firebase storage
-    }
+    },
   },
 
   created() {
@@ -187,14 +190,14 @@ export default {
       .where("user_id", "==", firebase.auth().currentUser.uid);
 
     // console.log("got Here");
-    ref.get().then(snapshot => {
-      snapshot.forEach(doc => {
+    ref.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
         // console.log('got a doc')
         this.users = doc.data();
         this.users.id = doc.id;
       });
     });
-  }
+  },
 };
 </script>
 

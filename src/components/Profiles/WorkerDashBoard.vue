@@ -17,7 +17,7 @@
               My Profile
             </v-btn>
           </router-link>
-         
+
           <v-spacer />
           <router-link to="../Profiles/Dashboard/Notifications">
             <v-btn text small>
@@ -36,9 +36,7 @@
       </v-col>
     </v-row>
     <v-row class="mb-5" justify="center" align="center" no-gutters>
-      <v-col cols="12">
-     
-      </v-col>
+      <v-col cols="12"> </v-col>
     </v-row>
     <v-row class="mb-5" justify="center" align="center" no-gutters>
       <v-col cols="12">
@@ -54,15 +52,15 @@
 </template>
 
 <script>
-export default { 
+export default {
   metaInfo: {
-    title: 'Everything you need to get work on SpecialtyStars.com.',
-    titleTemplate: 'Specialty Stars',
-     htmlAttrs: {
-        lang: 'en',
-        amp: true
-      }
+    title: "Everything you need to get work on SpecialtyStars.com.",
+    titleTemplate: "Specialty Stars",
+    htmlAttrs: {
+      lang: "en",
+      amp: true,
+    },
   },
-  name: "WorkerDashBoard"
+  name: "WorkerDashBoard",
 };
 </script>

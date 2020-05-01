@@ -2,30 +2,40 @@
   <v-container>
     <v-row class="class guidlines">
       <v-col cols="">
-        <h2 class="helpTitle"><span class="helpTitle grey--text text--darken-3 text-center">
-            Employer tip for success
-          </span></h2>
+        <center>
+          <h2 class="helpTitle">
+            <span class="helpTitle grey--text text--darken-3 text-center">
+              Employer tip for success
+            </span>
+          </h2>
+        </center>
         <v-card class="guidlinesCard">
-        <ol class="profileHelp">
-          <li class="helpText">
-           Honesty is the best policy. If you want someone to take your job offering seriously, Be honest
-And up front about the details. If you have never hired someone with that particular skillset,
-Be respectful of their skills and don’t waste their time.
-          </li>
-          <li class="helpText">
-            Employers may post a review of workers either good or bad but should only do so if they have
-Actually hired them. The whole purpose of Specialty Stars is to establish a good fit between
-workers and employers by giving employers a chance to screen workers first.
-          </li>
-        </ol>
+          <ol class="profileHelp">
+            <li class="helpText">
+              Honesty is the best policy. If you want someone to take your job
+              offering seriously, Be honest And up front about the details. If
+              you have never hired someone with that particular skillset, Be
+              respectful of their skills and don’t waste their time.
+            </li>
+            <li class="helpText">
+              Employers may post a review of workers either good or bad but
+              should only do so if they have Actually hired them. The whole
+              purpose of Specialty Stars is to establish a good fit between
+              workers and employers by giving employers a chance to screen
+              workers first.
+            </li>
+          </ol>
         </v-card>
-        
-         <h2 class="helpTitle"><span class="helpTitle grey--text text--darken-3 text-center">
-            Worker tips for success
-          </span></h2>
-          <v-card class="guidlinesCard">
-        <ol>
-          <li class="helpText">
+        <center>
+          <h2 class="helpTitle">
+            <span class="helpTitle grey--text text--darken-3 text-center">
+              Worker tips for success
+            </span>
+          </h2>
+        </center>
+        <v-card class="guidlinesCard">
+          <ol>
+            <li class="helpText">
               Post Pics and Video! Employers want to see you! They want to see
               how you do your work, what you wear, your tools, your technique,
               etc. Upload a video for your BEST chance of success on Specialty
@@ -44,8 +54,7 @@ workers and employers by giving employers a chance to screen workers first.
               you need to bring your brother and your cousin with you, Don’t be
               surprised if no one wants to hire you!
             </li>
-
-        </ol>
+          </ol>
         </v-card>
       </v-col>
     </v-row>
@@ -55,21 +64,21 @@ workers and employers by giving employers a chance to screen workers first.
 <script>
 export default {
   metaInfo: {
-    title: 'Specialty Stairs Help page for workers and employers',
-    titleTemplate: 'Specialty Stars',
-     htmlAttrs: {
-        lang: 'en',
-        amp: true
-      }
+    title: "Specialty Stairs Help page for workers and employers",
+    titleTemplate: "Specialty Stars",
+    htmlAttrs: {
+      lang: "en",
+      amp: true,
+    },
   },
-}
+};
 </script>
 
 <style scoped>
 .guidlinesCard {
-  margin: 15px;
-  padding-top: 15px;
-  padding-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 .helpTitle {
   padding: 15px;
