@@ -10,20 +10,7 @@ Women of all ages who perform the back breaking jobs of the South Florida commun
 Can find plumbers, tile setters, landscapers, painters, car detailers and much more on our app!
 If you would like to find out more about advertising with us<router-link to="../Contact">click here. </router-link></p>
 </div>
-  <div>
-
-  <v-card class="elementsCard mt-10">
-    <h3> Essiential Elements </h3>
-    <ul>
-      <li>Statistics about your site </li>
-      <li>Info about your audience </li>
-      <li>Description of the advertising options </li>
-      <li>List of current and past sponsors </li>
-      <li>Pricing </li>
-      <li>Multiple in-app links to advertising page</li>
-    </ul>
-  </v-card>
-  </div>
+  
   </v-container>
 </template>
 

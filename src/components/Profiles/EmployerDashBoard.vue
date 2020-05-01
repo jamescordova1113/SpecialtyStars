@@ -11,7 +11,7 @@
       <v-col cols="12">
         <v-card>
           <v-card-text><h3 class="text-center">My Account</h3></v-card-text>
-          <router-link to="MyInfo">
+          <router-link to="Dashboard/MyInfo">
             <v-btn text small>
               My Info
             </v-btn>
