@@ -29,7 +29,7 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="../../Help">
+          <router-link to="/Help">
             <v-btn text small>
               Help
             </v-btn>
