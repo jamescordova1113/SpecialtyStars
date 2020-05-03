@@ -11,7 +11,7 @@
       <v-col cols="12">
         <v-card>
           <v-card-text><h3 class="text-center">My Account</h3></v-card-text>
-          <router-link to="DashBoard/MyInfo">
+          <router-link to="/Profiles/Dashboard/MyInfo">
             <v-btn text small>
               My Info
             </v-btn>
@@ -23,7 +23,7 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="SpecialistProfiles">
+          <router-link to="/Profiles/SpecialistProfiles">
             <v-btn text small>
               Find a Worker
             </v-btn>
