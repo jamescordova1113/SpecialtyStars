@@ -17,7 +17,7 @@
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="DashBoard/PaymentInfo">
+          <router-link to="/Profiles/Dashboard/PaymentInfo">
             <v-btn text small>
               Payment Info
             </v-btn>
