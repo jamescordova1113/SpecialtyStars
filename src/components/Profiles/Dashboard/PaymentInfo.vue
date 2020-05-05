@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <center>
       <v-row>
         <v-col cols="2"> </v-col>
@@ -28,8 +28,8 @@
         </stripe-checkout>
       </form>
     </center>
-  </div>
-  <!-- <div class="paymentCard">
+  </div> -->
+  <div class="paymentCard">
     <v-row>
       <v-col cols="xs-12">
         <h3 class=" text-center"> Membership is a monthly subscription  </h3>
@@ -78,7 +78,7 @@
   
       </v-col>
       </v-row>
-  </div> -->
+  </div>
 </template>
 
 <script>
@@ -137,7 +137,7 @@ export default {
           this.stripeValidationError = result.error.message;
         } else {
           var stripeObject = {
-            amount: this.amount,
+            amount: 1000,
             source: result.token,
           };
           this.saveDataToFireStore(stripeObject);
@@ -145,6 +145,7 @@ export default {
       });
     },
     saveDataToFireStore(stripeObject) {
+      console.log('Amount = ' + stripeObject.amount);
       const db = firebase.firestore();
       const chargesRef = db.collection("charges");
       const pushId = chargesRef.doc().id;
