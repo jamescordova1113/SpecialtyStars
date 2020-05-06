@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import db from "@/firebase/init";
 import firebase from "firebase";
 export default {
   data() {
@@ -128,7 +129,9 @@ export default {
       Users: {
         user_id: null,
       },
-
+      users: {
+      email: null,
+      },
       stripe: null,
       cardNumberElement: null,
       cardExpiryElement: null,
@@ -169,6 +172,7 @@ export default {
           this.stripeValidationError = result.error.message;
         } else {
           var stripeObject = {
+            email: this.users.email,
             subscription: "sub_H7bCnnzXV0SDOd",
             id: "plan_H7BLWIvX5Bxn7s",
             amount: 1000,
@@ -181,8 +185,8 @@ export default {
     saveDataToFireStore(stripeObject) {
       console.log("Amount = " + stripeObject.amount);
       const db = firebase.firestore();
-      const chargesRef = db.collection("users");
-      const pushId = chargesRef.doc(firebase.auth().currentUser.uid).id;
+      const chargesRef = db.collection("charges");
+      const pushId = chargesRef.doc().id;
       db.collection("charges")
         .doc(pushId)
         .set(stripeObject);
@@ -198,6 +202,21 @@ export default {
         }
       });
     },
+  },
+  created() {
+    // console.log(firebase.auth().currentUser.uid);
+    let ref = db
+      .collection("users")
+      .where("user_id", "==", firebase.auth().currentUser.uid);
+
+    // console.log("got Here");
+    ref.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        // console.log('got a doc')
+        this.users = doc.data();
+        this.users.id = doc.id;
+      });
+    });
   },
 };
 </script>
