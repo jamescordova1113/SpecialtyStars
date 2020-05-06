@@ -32,52 +32,53 @@
   <div class="paymentCard">
     <v-row>
       <v-col cols="xs-12">
-        <h3 class=" text-center"> Membership is a monthly subscription  </h3>
-        <p class=" text-center"> Payments are securley processed using Stripe </p>
+        <h3 class=" text-center">Membership is a monthly subscription</h3>
+        <p class=" text-center">Payments are securley processed using Stripe</p>
       </v-col>
     </v-row>
     <v-row>
-      <v-col class="xs12" >
-    <section class="row payment-form text-center" >
-      <v-col cols="2"> </v-col>
-      <v-col cols="xs-12 md-8">
-        <h5 class="#e0e0e0 grey lighten-4">
-          Employer Subscription unlimited contacts for
-          <span class="right">${{amount}}</span>
-        </h5>
+      <v-col class="xs12">
+        <section class="row payment-form text-center">
+          <v-col cols="2"> </v-col>
+          <v-col cols="xs-12 md-8">
+            <h5 class="#e0e0e0 grey lighten-4">
+              Employer Subscription unlimited contacts for
+              <span class="right">${{ amount }}</span>
+            </h5>
 
-        <div class="error red center-align white-text">{{stripeValidationError}}</div>
+            <div class="error red center-align white-text">
+              {{ stripeValidationError }}
+            </div>
 
-        <div class="col-12 card-element">
-          <label>Card Number</label>
-          <div id="card-number-element" class="input-value"></div>
-        </div>
+            <div class="col-12 card-element">
+              <label>Card Number</label>
+              <div id="card-number-element" class="input-value"></div>
+            </div>
 
-        <div class="col s6 card-element">
-          <label>Expiry Date</label>
-          <div id="card-expiry-element"></div>
-        </div>
+            <div class="col s6 card-element">
+              <label>Expiry Date</label>
+              <div id="card-expiry-element"></div>
+            </div>
 
-        <div class="col s6 card-element">
-          <label>CVC</label>
-          <div id="card-cvc-element"></div>
-        </div>
+            <div class="col s6 card-element">
+              <label>CVC</label>
+              <div id="card-cvc-element"></div>
+            </div>
 
-        <div class="col s12 place-order-button-block">
-          <v-btn
-            class="btn col s12 primary lighten-2"
-            tile
-            dark
-            @click="placeOrderButtonPressed"
-            >Place Order</v-btn
-          >
-        </div>
+            <div class="col s12 place-order-button-block">
+              <v-btn
+                class="btn col s12 primary lighten-2"
+                tile
+                dark
+                @click="placeOrderButtonPressed"
+                >Place Order</v-btn
+              >
+            </div>
+          </v-col>
+          <v-col cols="2"> </v-col>
+        </section>
       </v-col>
-      <v-col cols="2"> </v-col>
-    </section>
-  
-      </v-col>
-      </v-row>
+    </v-row>
   </div>
 </template>
 
@@ -86,11 +87,42 @@ import firebase from "firebase";
 export default {
   data() {
     return {
-      product: {
-        name: "Employer unlimited contacts",
-        description: "Specialty Stars Subscription",
-        amount: 1000,
-        subscription: si_H7bCWOejHSRseu,
+      stripeObject: {
+        id: "sub_H7bCnnzXV0SDOd",
+        object: "subscription",
+        collection_method: "charge_automatically",
+        customer: "",
+        items: {
+          object: "list",
+          data: [
+            {
+              id: "si_H7bCWOejHSRseu",
+              object: "subscription_item",
+              billing_thresholds: null,
+
+              plan: {
+                id: "plan_H7BLWIvX5Bxn7s",
+                object: "plan",
+                active: true,
+                aggregate_usage: null,
+                amount: 1000,
+                amount_decimal: "1000",
+                billing_scheme: "per_unit",
+                currency: "usd",
+                interval: "month",
+                nickname: "Monthly employer",
+                product: "prod_H7BKITXxHj7FR1",
+              },
+              quantity: 1,
+              subscription: "sub_H7bCnnzXV0SDOd",
+            },
+          ],
+        },
+        plan: {
+          id: "plan_H7BLWIvX5Bxn7s",
+          object: "plan",
+          active: true,
+        },
       },
       isPaidEmployer: true,
       Users: {
@@ -137,6 +169,8 @@ export default {
           this.stripeValidationError = result.error.message;
         } else {
           var stripeObject = {
+            subscription: "sub_H7bCnnzXV0SDOd",
+            id: "plan_H7BLWIvX5Bxn7s",
             amount: 1000,
             source: result.token,
           };
@@ -145,10 +179,10 @@ export default {
       });
     },
     saveDataToFireStore(stripeObject) {
-      console.log('Amount = ' + stripeObject.amount);
+      console.log("Amount = " + stripeObject.amount);
       const db = firebase.firestore();
-      const chargesRef = db.collection("charges");
-      const pushId = chargesRef.doc().id;
+      const chargesRef = db.collection("users");
+      const pushId = chargesRef.doc(firebase.auth().currentUser.uid);
       db.collection("charges")
         .doc(pushId)
         .set(stripeObject);
