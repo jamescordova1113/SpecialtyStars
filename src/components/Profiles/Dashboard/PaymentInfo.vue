@@ -182,7 +182,7 @@ export default {
       console.log("Amount = " + stripeObject.amount);
       const db = firebase.firestore();
       const chargesRef = db.collection("users");
-      const pushId = chargesRef.doc(firebase.auth().currentUser.uid);
+      const pushId = chargesRef.doc(firebase.auth().currentUser.uid).id;
       db.collection("charges")
         .doc(pushId)
         .set(stripeObject);
