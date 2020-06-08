@@ -88,7 +88,7 @@ export default {
         amp: true
       }
   },
-  name: "Signup",
+  name: "SignupEmployer",
   data() {
     return {
       address: "",

@@ -30,8 +30,7 @@
           <v-text-field
             type="text "
             v-model="users.whatsapp"
-            label="Whats app we address https://wa.me/1+whatsapp phone #:"
-            :rules="emailRules"
+            label="Whats app phone #:"
             required
           ></v-text-field>
           <v-text-field
@@ -265,6 +264,7 @@ export default {
       isWorkerProfile: true,
       email: "",
       video: "",
+      whatsapp: "",
 
       users: {
         alias: null,
@@ -281,6 +281,8 @@ export default {
         image6: null,
         images: [],
         video: "",
+        whatsapp: "",
+
       },
       image: null,
       images: [],
@@ -558,7 +560,7 @@ export default {
     update() {
       db.collection("specialistProfile")
         .doc(this.users.id)
-        .set({
+        .update({
           createdAt: new Date(),
           alias: this.users.alias,
           phone: this.users.phone,
@@ -577,9 +579,10 @@ export default {
           transportation: this.users.transportation,
           location: this.users.location,
           user_id: this.users.user_id,
-          isWorkerProfile: this.users.isWorkerProfile,
+          isWorkerProfile: true,
           email: this.users.email,
           isWorker: this.users.isWorker,
+          whatsapp: "https://wa.me/1"+this.users.whatsapp
         })
         .then(() => {
           if (this.image)

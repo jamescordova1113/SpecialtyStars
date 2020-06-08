@@ -11,6 +11,7 @@ import EmployerDashBoard from "@/components/Profiles/EmployerDashBoard";
 import WorkersPage from "@/components/WorkersPage";
 import NeedWorkers from "@/components/NeedWorkers";
 import Help from "@/components/Help";
+import Tips from "@/components/Tips";
 import Advertising from "@/components/FooterLinks/Advertising";
 import Events from "@/components/FooterLinks/Events";
 import Guidlines from "@/components/FooterLinks/Guidlines";
@@ -124,6 +125,11 @@ const router = new Router({
       path: "/Help",
       name: "Help",
       component: Help
+    },
+    {
+      path: "/Tips",
+      name: "Tips",
+      component: Tips
     },
     {
       path: "/FooterLinks/Advertising",

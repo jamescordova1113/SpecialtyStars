@@ -5,57 +5,54 @@
         <center>
           <h2 class="helpTitle">
             <span class="helpTitle grey--text text--darken-3 text-center">
-              Employer tip for success
+              Help Center
             </span>
           </h2>
         </center>
         <v-card class="guidlinesCard">
+          <h3> General info </h3>
           <ol class="profileHelp">
             <li class="helpText">
-              Honesty is the best policy. If you want someone to take your job
-              offering seriously, Be honest And up front about the details. If
-              you have never hired someone with that particular skillset, Be
-              respectful of their skills and don’t waste their time.
+              <a> Get Started </a>
             </li>
             <li class="helpText">
-              Employers may post a review of workers either good or bad but
-              should only do so if they have Actually hired them. The whole
-              purpose of Specialty Stars is to establish a good fit between
-              workers and employers by giving employers a chance to screen
-              workers first.
+            <a>How do  I post a profile? </a>
+            </li>
+            <li class="helpText">
+              <a>How do  I reset my password? </a>
+            </li>
+            <li class="helpText">
+               <a>How do  I managae my account? </a>
+            </li>
+            <li class="helpText">
+              <a>How do  I remove my account? </a>
+            </li>
+            <li class="helpText">
+              <a>How do  become and employer or worker? </a> you can have two account one worker and one employer (You must use seperate email addresses)
+            </li>
+            <li class="helpText">
+              <a>How do  Contact Specialty Stars </a>
             </li>
           </ol>
         </v-card>
-        <center>
-          <h2 class="helpTitle">
-            <span class="helpTitle grey--text text--darken-3 text-center">
-              Worker tips for success
-            </span>
-          </h2>
-        </center>
+       
         <v-card class="guidlinesCard">
-          <ol>
+          <router-link :to="{ name: 'Tips' }"> <h3> Tips for Success </h3> </router-link>
+        </v-card>
+         <v-card class="guidlinesCard">
+          <h3> Billing Questions </h3>
+          <ol class="profileHelp">
             <li class="helpText">
-              Post Pics and Video! Employers want to see you! They want to see
-              how you do your work, what you wear, your tools, your technique,
-              etc. Upload a video for your BEST chance of success on Specialty
-              Stars.
+            <a>How do  I set up my payment info? </a>
             </li>
             <li class="helpText">
-              Post a reasonable rate of Compensation. If your rate of
-              compensation does not match your experience level, No one will
-              contact you. Remember that once you have shown your employer what
-              you can do, you can always ask for more money. It’s best to get
-              your foot in the door!
+              <a>How do  I cancel my subscription? </a>
             </li>
             <li class="helpText">
-              Keep the baggage to a minimum! Remember that employers want to
-              hire you and only you! If you’re only available 1 day a week and
-              you need to bring your brother and your cousin with you, Don’t be
-              surprised if no one wants to hire you!
+              <a>How do I upgrade my subscription? </a>
             </li>
           </ol>
-        </v-card>
+         </v-card>
       </v-col>
     </v-row>
   </v-container>

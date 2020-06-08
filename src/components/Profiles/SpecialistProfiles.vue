@@ -46,7 +46,7 @@
 
       <v-row justify="space-around">
         <div v-for="evt in filteredProfiles" :key="evt.id">
-          <v-card tile class="profileCard" outlined width="350px">
+          <v-card tile class="profileCard" outlined width="350px" v-if="evt.isWorkerProfile">
             <v-container fluid>
               <v-card-title class="headline" primary-title>{{
                 evt.specialty

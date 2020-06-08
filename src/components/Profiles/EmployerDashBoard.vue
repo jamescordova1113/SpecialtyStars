@@ -11,27 +11,27 @@
       <v-col cols="12">
         <v-card>
           <v-card-text><h3 class="text-center">My Account</h3></v-card-text>
-          <router-link to="/Profiles/Dashboard/MyInfo">
+          <router-link :to="{ name: 'MyInfo' }">
             <v-btn text small>
               My Info
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="/Profiles/Dashboard/PaymentInfo">
+          <router-link :to="{ name: 'PaymentInfo' }">
             <v-btn text small>
               Payment Info
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="/Profiles/SpecialistProfiles">
+          <router-link :to="{ name: 'SpecialistProfiles' }">
             <v-btn text small>
               Find a Worker
             </v-btn>
           </router-link>
           <v-spacer />
-          <router-link to="/Help">
+          <router-link :to="{ name: 'Tips' }">
             <v-btn text small>
-              Help
+              Tips
             </v-btn>
           </router-link>
           <v-spacer />

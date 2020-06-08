@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Jumbotron msg="Welcome to Your Vue.js App" />
+    <Jumbotron />
     
   </div>
 </template>

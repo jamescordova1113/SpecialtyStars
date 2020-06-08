@@ -2,7 +2,7 @@
   <v-container class="loginCard">
     <v-toolbar color="orange" dark justify="center" max-width="450px" flat>
       <v-row justify="space-around">
-        <v-toolbar-title><h1>Specialty Stars:Login</h1></v-toolbar-title>
+        <v-toolbar-title><h1>Login</h1></v-toolbar-title>
       </v-row>
     </v-toolbar>
     <v-card class="loginTitle">
