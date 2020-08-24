@@ -135,6 +135,7 @@ export default {
       // });
     },
     login() {
+      
       if (this.email && this.password) {
         // console.log("trying to log in")
         firebase

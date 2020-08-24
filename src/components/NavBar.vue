@@ -38,14 +38,14 @@
           <v-spacer></v-spacer>
 
           <router-link :to="{ name: 'Login' }">
-            <v-btn class="hidden-sm-and-down" text v-if="!user.isWorker || !user.isEmployer">{{
+            <v-btn class="hidden-sm-and-down" text v-if="!user.isWorker && !user.isEmployer">{{
               this.loginText
             }}</v-btn>
           </router-link>
           <v-btn v-if="user.isWorker || user.isEmployer" text @click="logout">{{
             this.logoutText
           }}</v-btn>
-          <div class="text-center">
+          <div class="text-center" v-if="!user.isWorker && !user.isEmployer">
             <v-menu transition="slide-x-transition" bottom right>
               <template v-slot:activator="{ on }">
                 <v-btn color="orange" text v-on="on">
